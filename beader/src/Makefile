@@ -16,9 +16,9 @@ all: ${NAME}
 clean:
 	rm ${OBJS}
 
-fclean:
+fclean: clean
 	rm ${NAME}
 
-re: clean fclean all
+re: fclean all
 
 # fin
