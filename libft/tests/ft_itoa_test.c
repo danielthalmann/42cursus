@@ -30,9 +30,6 @@ int	main(int argc, char** argv)
 		i++;
 	}
 
-	ft_itoa_test(54321, "54321");
-	ft_itoa_test(-54321, "-54321");
-
 }
 
 void ft_itoa_test(int i, char *e)
