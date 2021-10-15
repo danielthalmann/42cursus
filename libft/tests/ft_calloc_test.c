@@ -29,6 +29,9 @@ void ft_calloc_test(unsigned int nb, unsigned int size)
 	char	*s2;
 	int		length;
 	int		i;
+
+	if (nb == 0)
+		nb = 1;
 	length = (size * nb);
 
 	s = ft_fake_repeat(length + 2, '#');

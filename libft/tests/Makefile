@@ -2,8 +2,8 @@
 NAME=test
 CC=gcc
 FUNCTIONS=ft_atoi ft_bzero ft_calloc ft_isalnum ft_isalpha ft_isascii \
-		  ft_isdigit ft_isprint ft_itoa #ft_memchr ft_memcmp ft_memcpy \
-		  ft_memmove ft_memset ft_putchar_fd ft_putendl_fd ft_putnbr_fd \
+		  ft_isdigit ft_isprint ft_itoa ft_memchr ft_memcmp ft_memcpy \
+		  # ft_memmove ft_memset ft_putchar_fd ft_putendl_fd ft_putnbr_fd \
 		  ft_split ft_strchr ft_strdup ft_striteri ft_strjoin ft_strlcat \
 		  ft_strlcpy ft_strlen ft_strmapi ft_strncmp ft_strnstr ft_strrchr \
 		  ft_strtrim ft_substr ft_tolower ft_toupper 
@@ -63,6 +63,22 @@ ft_itoa:
 	${NORMINETTE} ${SRC_FOLDER}ft_itoa.c
 	${CC} ${CONPILE_FLAG} ${SRC_FOLDER}ft_itoa.c ${SRC_FOLDER}ft_calloc.c ${SRC_FOLDER}ft_bzero.c ft_itoa_test.c faker.c -o ${NAME}
 	./test
+
+ft_memchr:
+	${NORMINETTE} ${SRC_FOLDER}ft_memchr.c
+	${CC} ${CONPILE_FLAG} ${SRC_FOLDER}ft_memchr.c ft_memchr_test.c faker.c -o ${NAME}
+	./test
+
+ft_memcmp:
+	${NORMINETTE} ${SRC_FOLDER}ft_memcmp.c
+	${CC} ${CONPILE_FLAG} ${SRC_FOLDER}ft_memcmp.c ft_memcmp_test.c faker.c -o ${NAME}
+	./test
+
+ft_memcpy:
+	${NORMINETTE} ${SRC_FOLDER}ft_memcpy.c
+	${CC} ${CONPILE_FLAG} ${SRC_FOLDER}ft_memcpy.c ft_memcpy_test.c faker.c -o ${NAME}
+	./test
+
 
 test: ${FUNCTIONS}
 
