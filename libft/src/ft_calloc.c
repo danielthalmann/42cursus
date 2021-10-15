@@ -12,7 +12,6 @@
 
 #include <stdlib.h>
 #include "libft.h"
-#include "stdio.h"
 
 /**
  * @brief allocates the requested memory and returns a pointer to it.
@@ -21,13 +20,15 @@
  * @param size This is the size of elements in byte
  * @return void* 
  */
-void	*ft_calloc(unsigned int nmemb, unsigned int size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*r;
 	int		length;
 
 	length = nmemb * size;
 	r = malloc(length);
+	if (!r)
+		return (0);
 	ft_bzero(r, length);
 	return (r);
 }

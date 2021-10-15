@@ -81,23 +81,23 @@ unsigned int	ft_convnum(const char *str)
  * @param str string pointer
  * @return int the value converted of the the string
  */
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *nptr)
 {
 	unsigned int	value;
 	int				sign;
 
-	if (*str == 0)
+	if (*nptr == 0)
 		return (0);
 	value = 0;
 	sign = 1;
-	while (*str && ft_isspace(*str))
-		str++;
-	if (*str && ft_issign(*str))
+	while (*nptr && ft_isspace(*nptr))
+		nptr++;
+	if (*nptr && ft_issign(*nptr))
 	{
-		if (*str == '-')
+		if (*nptr == '-')
 			sign = -sign;
-		str++;
+		nptr++;
 	}
-	value = ft_convnum(str);
+	value = ft_convnum(nptr);
 	return (sign * value);
 }
