@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
+#include <string.h>
 #include "../src/libft.h"
 #include "faker.h"
 
@@ -24,12 +26,11 @@ int	main(int argc, char** argv)
 void ft_calloc_test(unsigned int nb, unsigned int size)
 {
 	char	*s;
+	char	*s2;
 	int		length;
 	int		i;
 	length = (size * nb);
 
-s = ft_fake_repeat(length + 2, '#');
-free(s);
 	s = ft_fake_repeat(length + 2, '#');
 	printf("string [" ANSI_COLOR_GREEN "%-20s" ANSI_COLOR_RESET "]\t", s);
 	free(s);
@@ -40,16 +41,16 @@ free(s);
 	while (++i < length + 5)
 		printf("%x ", s[i]);
 	printf(ANSI_COLOR_RESET "]\t");	
-	free(s);
-
-	s = ft_fake_repeat(length, '#');
-	free(s);
-	s = ft_calloc(nb, size);
+	
+	s2 = ft_calloc(nb, size);
 	printf("obtain [" ANSI_COLOR_GREEN);
 	i = -1;
 	while (++i < length + 1)
-		printf("%x ", s[i]);
+		printf("%x ", s2[i]);
 	printf(ANSI_COLOR_RESET "]\n");
+	
+	assert(memcmp(s, s2, size) == 0);
 	free(s);
+	free(s2);
 }
 

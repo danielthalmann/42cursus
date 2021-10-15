@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "../src/libft.h"
 #include "faker.h"
+#include <assert.h>
 
 void ft_atoi_test(char *s);
 
@@ -40,5 +41,6 @@ void ft_atoi_test(char *s)
 	r = ft_atoi(s);
 	e = atoi(s);
 	printf("string [" ANSI_COLOR_GREEN "%11s" ANSI_COLOR_RESET "]\texpected [" ANSI_COLOR_GREEN "%11d" ANSI_COLOR_RESET "]\tobtain [" ANSI_COLOR_GREEN "%11d" ANSI_COLOR_RESET "]\n", s, e, r);
+	assert(r == e);
 }
 

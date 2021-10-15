@@ -18,7 +18,7 @@
  * @param c character
  * @return int return non-zero value if is a alphabetic character
  */
-int	isalpha(int c)
+int	ft_isalpha(int c)
 {
-	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }

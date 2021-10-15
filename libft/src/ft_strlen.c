@@ -17,10 +17,7 @@ int	ft_strlen(const char *str)
 	int	count;
 
 	count = 0;
-	while (*str != 0)
-	{
+	while (str[count])
 		count++;
-		str++;
-	}
 	return (count);
 }

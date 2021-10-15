@@ -5,7 +5,7 @@
 #include "../src/libft.h"
 #include "faker.h"
 
-void ft_isalnum_test(char c);
+void ft_isascii_test(char c);
 
 /**
  * @brief main test
@@ -22,24 +22,33 @@ int	main(int argc, char** argv)
 	s = ft_fake_printable(5);
 	i = -1;
 	while (s[++i])
-		ft_isalnum_test(s[i]);
+		ft_isascii_test(s[i]);
 	free(s);
 
 	s = ft_fake_punctuation(5);
 	i = -1;
 	while (s[++i])
-		ft_isalnum_test(s[i]);
+		ft_isascii_test(s[i]);
 	free(s);
 
+	s = ft_fake_alpha(5);
+	i = -1;
+	while (s[++i])
+		ft_isascii_test(s[i]);
+	free(s);
+
+	i = -1;
+	while (++i < 20)
+		ft_isascii_test(ft_fake_usint(255));
+	
 }
 
-void ft_isalnum_test(char c)
+void ft_isascii_test(char c)
 {
 	int r;
 	int e;
-	r = ft_isalnum(c);
-	e = isalnum(c);
+	r = ft_isascii(c);
+	e = isascii(c);
 	printf("string [" ANSI_COLOR_GREEN "%c" ANSI_COLOR_RESET "]\texpected [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\tobtain [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\n", c, e ? 1 : 0, r ? 1 : 0);
 	assert(r ? 1 : 0 == e ? 1 : 0 );
 }
-

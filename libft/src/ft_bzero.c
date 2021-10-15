@@ -23,10 +23,10 @@ void	ft_bzero(void *s, unsigned int n)
 {
 	unsigned int	i;
 
-	if(s)
+	if (s)
 	{
 		i = -1;
 		while (++i < n)
-			((char *)s)[i] = 0;		
+			((char *)s)[i] = 0;
 	}
 }

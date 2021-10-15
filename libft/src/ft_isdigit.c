@@ -16,7 +16,8 @@
  * @brief checks if the passed character is a decimal digit character.
  * 
  * @param c This is the character to be checked.
- * @return int This function returns non-zero value if c is a digit, else it returns 0.
+ * @return int This function returns non-zero value if c is a digit, 
+ * 		   else it returns 0.
  */
 int	ft_isdigit(int c)
 {

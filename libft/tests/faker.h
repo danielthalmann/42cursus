@@ -10,9 +10,13 @@
 # define ANSI_COLOR_CYAN    "\x1b[36m"
 # define ANSI_COLOR_RESET   "\x1b[0m"
 
+char			*ft_fake_alpha(unsigned int size);
+char			*ft_fake_digit(unsigned int size);
 int				ft_fake_int();
+char			*ft_fake_printable(unsigned int size);
+char			*ft_fake_punctuation(unsigned int size);
 char			*ft_fake_repeat(unsigned int size, char c);
-char			*ft_fake_strnum(unsigned int size);
+char			*ft_fake_strnum(int size);
 unsigned int	ft_fake_usint(unsigned int max);
 
 #endif
