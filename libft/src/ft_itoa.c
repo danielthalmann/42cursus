@@ -35,6 +35,12 @@ int	ft_len_itoa(int nb)
 	return (length);
 }
 
+/**
+ * @brief obtain a string of the number passed in parameter
+ * 
+ * @param nb 
+ * @return char* 
+ */
 char	*ft_itoa(int nb)
 {
 	char	*s;

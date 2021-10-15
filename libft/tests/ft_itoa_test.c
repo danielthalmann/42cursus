@@ -17,17 +17,28 @@ void ft_itoa_test(int i, char *e);
  */
 int	main(int argc, char** argv)
 {
-	char	*s;
-	int		i;
+
+	char *s;
+	int i;
+
+	i = -1;
+	while (i < 10)
+	{
+		s = ft_fake_strnum(i);
+		ft_itoa_test(atoi(s), s);
+		free(s);
+		i++;
+	}
 
 	ft_itoa_test(54321, "54321");
 	ft_itoa_test(-54321, "-54321");
+
 }
 
 void ft_itoa_test(int i, char *e)
 {
 	char *r;
 	r = ft_itoa(i);
-	printf("integer [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\texpected [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\tobtain [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\n", i, e, r );
+	printf("integer [" ANSI_COLOR_GREEN "%11d" ANSI_COLOR_RESET "]\texpected [" ANSI_COLOR_GREEN "%11s" ANSI_COLOR_RESET "]\tobtain [" ANSI_COLOR_GREEN "%11s" ANSI_COLOR_RESET "]\n", i, e, r );
 	assert(strcmp(r, e) == 0);
 }

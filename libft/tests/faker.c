@@ -172,7 +172,6 @@ char	*ft_fake_strnum(int size)
 		strncpy(s, "-2147483648", 12);
 		return (s);
 	}
-	sign = rand(); 
 	if (rand() < (RAND_MAX / 3))
 		sign = 1;
 	else
@@ -189,6 +188,8 @@ char	*ft_fake_strnum(int size)
 		i++;
 	}
 	s[size + sign] = 0;
+	if(s[sign] == '0')
+		s[sign] = '1';
 	return s;
 }
 
