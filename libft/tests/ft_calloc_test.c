@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "../src/libft.h"
+#include "faker.h"
+
+void ft_calloc_test(unsigned int nb, unsigned int size);
+
+/**
+ * @brief main test
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
+int	main(int argc, char** argv)
+{
+	int		i;
+
+	i = -1;
+	while (++i < 10)
+		ft_calloc_test(ft_fake_usint(10), ft_fake_usint(3));
+}
+
+void ft_calloc_test(unsigned int nb, unsigned int size)
+{
+	char	*s;
+	int		length;
+	int		i;
+	length = (size * nb);
+
+s = ft_fake_repeat(length + 2, '#');
+free(s);
+	s = ft_fake_repeat(length + 2, '#');
+	printf("string [" ANSI_COLOR_GREEN "%-20s" ANSI_COLOR_RESET "]\t", s);
+	free(s);
+	s = calloc(nb, size);
+	printf("size [" ANSI_COLOR_GREEN "%d, %d" ANSI_COLOR_RESET "] string [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\t", nb, size, s);
+	printf("expected [" ANSI_COLOR_GREEN);
+	i = -1;
+	while (++i < length + 5)
+		printf("%x ", s[i]);
+	printf(ANSI_COLOR_RESET "]\t");	
+	free(s);
+
+	s = ft_fake_repeat(length, '#');
+	free(s);
+	s = ft_calloc(nb, size);
+	printf("obtain [" ANSI_COLOR_GREEN);
+	i = -1;
+	while (++i < length + 1)
+		printf("%x ", s[i]);
+	printf(ANSI_COLOR_RESET "]\n");
+	free(s);
+}
+

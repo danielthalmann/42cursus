@@ -13,10 +13,12 @@
 #include "libft.h"
 
 /**
- * @brief check if the value is one of space character '\t', '\n', '\v','\f', '\r', ' '
+ * @brief check if the value is one of space character '\t', '\n', '\v',
+ * 													   '\f', '\r', ' '
  * 
  * @param c char value
- * @return int This function returns non-zero value if c is a space, else it returns 0. 
+ * @return int This function returns non-zero value if c is a space, 
+ * 		   else it returns 0. 
  */
 int	ft_isspace(char c)
 {
@@ -31,7 +33,8 @@ int	ft_isspace(char c)
  * @brief check if the value is a character sign '+' or '-'
  * 
  * @param c char value
- * @return int This function returns non-zero value if c is a sign, else it returns 0. 
+ * @return int This function returns non-zero value if c is a sign, else 
+ *         it returns 0. 
  */
 int	ft_issign(char c)
 {
@@ -41,12 +44,13 @@ int	ft_issign(char c)
 }
 
 /**
- * @brief Converts the string pointed to, by the argument str to an integer (type int).
+ * @brief Converts the string pointed to, by the argument str to an 
+ *        integer (type int).
  * 
  * @param str 
  * @return unsigned int 
  */
-unsigned int	ft_convnum(char *str)
+unsigned int	ft_convnum(const char *str)
 {
 	unsigned int	value;
 	int				first;
@@ -70,14 +74,14 @@ unsigned int	ft_convnum(char *str)
 	return (value);
 }
 
-
 /**
- * @brief Converts the string pointed to, by the argument str to an integer (type int).
+ * @brief Converts the string pointed to, by the argument str to 
+ *        an integer (type int).
  * 
  * @param str string pointer
  * @return int the value converted of the the string
  */
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
 	unsigned int	value;
 	int				sign;
@@ -88,7 +92,7 @@ int	ft_atoi(char *str)
 	sign = 1;
 	while (*str && ft_isspace(*str))
 		str++;
-	while (*str && ft_issign(*str))
+	if (*str && ft_issign(*str))
 	{
 		if (*str == '-')
 			sign = -sign;

@@ -13,18 +13,20 @@
 #include "libft.h"
 
 /**
- * @brief erases the data in the n bytes of the memory starting at the location pointed
+ * @brief erases the data in the n bytes of the memory starting at the location
+ *        pointed
  * 
  * @param s pointer of data
  * @param n size in byte to erase
  */
 void	ft_bzero(void *s, unsigned int n)
 {
-	unsigned int i;
+	unsigned int	i;
 
-	i = 0;
-	while (i < n)
+	if(s)
 	{
-		((char *)s)[i] = 0;
+		i = -1;
+		while (++i < n)
+			((char *)s)[i] = 0;		
 	}
 }
