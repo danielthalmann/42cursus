@@ -1,17 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/15 14:55:31 by dthalman          #+#    #+#             */
+/*   Updated: 2021/10/15 14:55:31 by dthalman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_str_is_printable(char *str)
+/**
+ * @brief checks for any printable character including space.
+ * 
+ * @param c 
+ * @return int 
+ */
+int	ft_isprint(int c)
 {
-	if (*str == 0)
-	{
-		return (1);
-	}
-	while (*str != 0)
-	{
-		if (!(*str >= ' ' && *str <= '~'))
-			return (0);
-		str++;
-	}
-	return (1);
+	return (c >= ' ' && c <= '~');
 }

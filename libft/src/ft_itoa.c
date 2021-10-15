@@ -1,81 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/15 15:20:01 by dthalman          #+#    #+#             */
+/*   Updated: 2021/10/15 15:20:01 by dthalman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-
-void	clear_array_ch(char *c, int size)
+/**
+ * @brief return the string length necessary to write number
+ * 
+ * @param nb 
+ * @return int 
+ */
+int	ft_len_itoa(int nb)
 {
-	int	i;
+	int	length;
 
-	i = 0;
-	while (i < size)
-	{
-		c[i] = 0;
-		i++;
-	}
-}
-
-void	print_c(char *c, int l)
-{
-	int	i;
-
-	if (c[0] == '-')
-	{
-		write(1, c, 1);
-		i = l - 1;
-		while (i > 0)
-		{
-			write(1, &c[i], 1);
-			i--;
-		}
-	}
-	else
-	{
-		i = l - 1;
-		while (i >= 0)
-		{
-			write(1, &c[i], 1);
-			i--;
-		}
-	}
-}
-
-int	exception(int nb)
-{
-	if (nb == 0)
-	{
-		write(1, "0", 1);
-		return (1);
-	}
-	if (nb == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return (1);
-	}
-	return (0);
-}
-
-void	ft_putnbr(int nb)
-{
-	char	c[12];
-	int		i;
-
-	if (exception(nb) == 1)
-	{
-		return ;
-	}
-	clear_array_ch(c, 12);
-	i = 0;
+	length = 0;
 	if (nb < 0)
 	{
-		c[i] = '-';
-		i++;
-		nb = -nb;
+		length++;
 	}
-	while (nb > 0 && i < 12)
+	while (nb)
 	{
-		c[i] = '0' + (nb % 10);
-		nb = nb / 10;
-		i++;
+		nb /= 10;
+		length++;
 	}
-	print_c(c, i);
+	return (length);
+}
+
+char	*ft_itoa(int nb)
+{
+	char	*s;
+	int		length;
+	int		i;
+	int		v;
+
+	length = ft_len_itoa(nb);
+	s = ft_calloc(length + 1, sizeof(char));
+	if (!s)
+		return (0);
+	i = length;
+	s[i] = 0;
+	i--;
+	if (nb < 0)
+		s[0] = '-';
+	while (nb && i > -1)
+	{
+		v = (nb % 10);
+		if (v < 0)
+			v = -v;
+		s[i] = '0' + v;
+		nb = nb / 10;
+		i--;
+	}
+	return (s);
 }
