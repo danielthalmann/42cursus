@@ -48,7 +48,6 @@ char	**ft_split(char const *s, char c)
 			ft_split_cpy(start, end, split[y++]);
 		}
 		start = end;
-		ft_putnbr_fd((-y), 1);
 	}
 	split[y] = 0;
 	return (split);
