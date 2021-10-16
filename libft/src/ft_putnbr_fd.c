@@ -1,81 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/16 22:31:39 by dthalman          #+#    #+#             */
+/*   Updated: 2021/10/16 22:31:39 by dthalman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include <unistd.h>
 #include "libft.h"
 
-
-void	clear_array_ch(char *c, int size)
+/**
+ * @brief write to file destination fd a string equal to the integer n
+ * 
+ * @param n 
+ * @param fd 
+ */
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	i;
+	char			c;
+	unsigned int	nb;
 
-	i = 0;
-	while (i < size)
+	if (n < 0)
 	{
-		c[i] = 0;
-		i++;
+		write(fd, "-", 1);
+		nb = -n;
 	}
-}
-
-void	print_c(char *c, int l)
-{
-	int	i;
-
-	if (c[0] == '-')
+	else
+		nb = n;
+	if (nb > 9)
 	{
-		write(1, c, 1);
-		i = l - 1;
-		while (i > 0)
-		{
-			write(1, &c[i], 1);
-			i--;
-		}
+		ft_putnbr_fd(nb / 10, fd);
+		ft_putnbr_fd(nb % 10, fd);
 	}
 	else
 	{
-		i = l - 1;
-		while (i >= 0)
-		{
-			write(1, &c[i], 1);
-			i--;
-		}
+		c = nb + '0';
+		write(fd, &c, 1);
 	}
-}
-
-int	exception(int nb)
-{
-	if (nb == 0)
-	{
-		write(1, "0", 1);
-		return (1);
-	}
-	if (nb == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return (1);
-	}
-	return (0);
-}
-
-void	ft_putnbr(int nb)
-{
-	char	c[12];
-	int		i;
-
-	if (exception(nb) == 1)
-	{
-		return ;
-	}
-	clear_array_ch(c, 12);
-	i = 0;
-	if (nb < 0)
-	{
-		c[i] = '-';
-		i++;
-		nb = -nb;
-	}
-	while (nb > 0 && i < 12)
-	{
-		c[i] = '0' + (nb % 10);
-		nb = nb / 10;
-		i++;
-	}
-	print_c(c, i);
 }

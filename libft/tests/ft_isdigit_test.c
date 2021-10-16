@@ -18,7 +18,9 @@ int	main(int argc, char** argv)
 {
 	char	*s;
 	int		i;
-
+	(void) argc;
+	(void) argv;
+	
 	s = ft_fake_printable(5);
 	i = -1;
 	while (s[++i])

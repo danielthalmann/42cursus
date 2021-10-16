@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/16 14:52:18 by dthalman          #+#    #+#             */
-/*   Updated: 2021/10/16 14:52:18 by dthalman         ###   ########.fr       */
+/*   Created: 2021/10/16 01:06:44 by dthalman          #+#    #+#             */
+/*   Updated: 2021/10/16 01:06:44 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+
 #include "libft.h"
 
 /**
- * @brief write to file destination fd a string terminated by '\n'
+ * @brief add new list content
  * 
- * @param s pointer to string
- * @param fd file index destination
+ * @param content value of content
+ * @return t_list* 
  */
-void	ft_putendl_fd(char *s, int fd)
+t_list	*ft_lstnew(void *content)
 {
-	if (!s)
-		return ;
-	while (*s)
-		write(fd, s++, 1);
-	write(fd, "\n", 1);
+	t_list	*list;
+
+	list = malloc(sizeof(t_list));
+	list->next = 0;
+	list->content = content;
+	return list;
 }

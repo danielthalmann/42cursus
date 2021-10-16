@@ -11,6 +11,7 @@
 # define ANSI_COLOR_RESET   "\x1b[0m"
 
 char			*ft_fake_alpha(unsigned int size);
+char			*ft_fake_alphanum(unsigned int size);
 char			*ft_fake_digit(unsigned int size);
 int				ft_fake_int();
 char			*ft_fake_printable(unsigned int size);

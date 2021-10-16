@@ -17,8 +17,9 @@ void ft_bzero_test(unsigned int size);
  */
 int	main(int argc, char** argv)
 {
-	char	*s;
 	int		i;
+	(void) argc;
+	(void) argv;
 
 	i = -1;
 	while (++i < 10)
@@ -30,7 +31,7 @@ void ft_bzero_test(unsigned int size)
 {
 	char	*s;
 	char	*s2;
-	int		i;
+	unsigned int		i;
 
 	s = ft_fake_repeat(size + 2, '#');
 	printf("size [%d] string [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\t", size, s);

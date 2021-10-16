@@ -17,7 +17,9 @@ void ft_calloc_test(unsigned int nb, unsigned int size);
 int	main(int argc, char** argv)
 {
 	int		i;
-
+	(void) argc;
+	(void) argv;
+	
 	i = -1;
 	while (++i < 10)
 		ft_calloc_test(ft_fake_usint(10), ft_fake_usint(3));

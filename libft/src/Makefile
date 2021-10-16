@@ -16,7 +16,7 @@ COMPILE_FLAG=-Wall -Wextra -Werror
 LINKED_FLAG=
 
 %.o: %.c
-	${CC} ${CONPILE_FLAG} -c $< -o $@
+	${CC} ${COMPILE_FLAG} -c $< -o $@
 
 ${NAME}: ${OBJS}
 	ar rsv $@ ${OBJS} 

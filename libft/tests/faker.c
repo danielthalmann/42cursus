@@ -14,22 +14,50 @@ int _uniq_random_value = 0;
  */
 char	*ft_fake_alpha(unsigned int size)
 {
-	int		i;
+	unsigned int		i;
 	int		pos;
 	char	*alpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	char	*s;
 
 	s = malloc((size + 1) * sizeof(char));
 	srand(time(NULL) + _uniq_random_value++);
-	i = -1;
-	while (++i < size)
+	i = 0;
+	while (i < size)
 	{
 		pos = (((float)rand() / RAND_MAX) * 52);
 		s[i] = alpha[pos];
+		i++;
 	}
 	s[size] = 0;
 	return s;
 }
+
+/**
+ * @brief generate a string with alpha and numeric caracter of length define in size
+ * 
+ * @param size length of string
+ * @return char* 
+ */
+char	*ft_fake_alphanum(unsigned int size)
+{
+	unsigned int	i;
+	int				pos;
+	char			*alpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	char			*s;
+
+	s = malloc((size + 1) * sizeof(char));
+	srand(time(NULL) + _uniq_random_value++);
+	i = 0;
+	while (i < size)
+	{
+		pos = (((float)rand() / RAND_MAX) * 62);
+		s[i] = alpha[pos];
+		i++;
+	}
+	s[size] = 0;
+	return s;
+}
+
 
 /**
  * @brief generate a string with digit caracter of length define in size
@@ -39,18 +67,19 @@ char	*ft_fake_alpha(unsigned int size)
  */
 char	*ft_fake_digit(unsigned int size)
 {
-	int		i;
-	int		pos;
-	char	*alpha = "0123456789";
-	char	*s;
+	unsigned int	i;
+	int				pos;
+	char			*alpha = "0123456789";
+	char			*s;
 
 	s = malloc((size + 1) * sizeof(char));
 	srand(time(NULL) + _uniq_random_value++);
-	i = -1;
-	while (++i < size)
+	i = 0;
+	while (i < size)
 	{
 		pos = (((float)rand() / RAND_MAX) * 10);
 		s[i] = alpha[pos];
+		i++;
 	}
 	s[size] = 0;
 	return s;
@@ -83,15 +112,17 @@ int	ft_fake_int()
  */
 char	*ft_fake_printable(unsigned int size)
 {
-	int		i;
-	int		sign;
-	char	*s;
+	unsigned int	i;
+	char			*s;
 
 	s = malloc((size + 1) * sizeof(char));
 	srand(time(NULL) + _uniq_random_value++);
-	i = -1;
-	while (++i < size)
+	i = 0;
+	while (i < size)
+	{
 		s[i] = ' ' + (((float)rand() / RAND_MAX) * ('~' - ' '));
+		++i;
+	}
 	s[size] = 0;
 	return s;
 }
@@ -104,18 +135,19 @@ char	*ft_fake_printable(unsigned int size)
  */
 char	*ft_fake_punctuation(unsigned int size)
 {
-	int		i;
-	int		pos;
-	char	*p = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-	char	*s;
+	unsigned int	i;
+	int				pos;
+	char			*p = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+	char			*s;
 
 	s = malloc((size + 1) * sizeof(char));
 	srand(time(NULL) + _uniq_random_value++);
-	i = -1;
-	while (++i < size)
+	i = 0;
+	while (i < size)
 	{
 		pos = (((float)rand() / RAND_MAX) * 32);
 		s[i] = p[pos];
+		i++;
 	}
 	s[size] = 0;
 	return s;
@@ -134,9 +166,12 @@ char	*ft_fake_repeat(unsigned int size, char c)
 	char			*s;
 
 	s = malloc((size + 1) * sizeof(char));
-	i = -1;
+	i = 0;
 	while (++i < size)
+	{
 		s[i] = c;
+		i++;
+	}
 	s[size] = 0;
 	return s;
 }
@@ -200,9 +235,6 @@ char	*ft_fake_strnum(int size)
  */
 unsigned int	ft_fake_usint(unsigned int max)
 {
-	int sign;
-	unsigned int value;
-
 	if(!max)
 		max = UINT_MAX;
 	srand(time(NULL) + _uniq_random_value++);

@@ -17,16 +17,6 @@ char	*ft_strcpy(char *dest, char *src)
 	return (ret);
 }
 
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (*(str++))
-		i++;
-	return (i);
-}
-
 char	*ft_strdup(char *src)
 {
 	int		length;

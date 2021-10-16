@@ -1,89 +1,99 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/16 23:20:09 by dthalman          #+#    #+#             */
+/*   Updated: 2021/10/16 23:20:09 by dthalman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-int	ft_is_separation(char c, char *charset)
+void	ft_split_move_forward(char const **s, char c, int not);
+char	**ft_split_allocate(char const *s, char c, int *count);
+void	ft_split_cpy(char const *start, char const *end, char *mem);
+
+/**
+ * @brief split string, with specified character as delimiter, 
+ * 		  into an array	of strings. The array is terminated by a NULL
+ * 
+ * @param s 
+ * @param c 
+ * @return char** 
+ */
+char	**ft_split(char const *s, char c)
 {
-	while (*charset)
+	char const	*start;
+	char const	*end;
+	char		**split;
+	int			y;
+	int			count;	
+
+	split = ft_split_allocate(s, c, &count);
+	start = s;
+	end = s;
+	y = 0;
+	while (*end && split && count)
 	{
-		if (c == *charset)
-			return (1);
-		charset++;
+		ft_split_move_forward(&start, c, 0);
+		end = start;
+		ft_split_move_forward(&end, c, 1);
+		if (end - start)
+		{
+			split[y] = malloc(end - start);
+			ft_split_cpy(start, end, split[y++]);
+		}
+		start = end;
+		ft_putnbr_fd((-y), 1);
 	}
-	return (0);
+	split[y] = 0;
+	return (split);
 }
 
-int	ft_count_to_next_separation(char *str, char *charset)
+void	ft_split_move_forward(char const **s, char c, int not)
 {
-	int	count;
-
-	count = 0;
-	while (*str && !ft_is_separation(*str, charset))
+	if (not)
 	{
-		count++;
-		str++;
+		while (**s && **s != c)
+			(*s)++;
 	}
-	return (count);
+	else
+	{
+		while (**s && **s == c)
+			(*s)++;
+	}
 }
 
-int	ft_count_separation(char *str, char *charset)
+char	**ft_split_allocate(char const *s, char c, int *count)
 {
-	int		count;
-	char	last;
-	char	*c;
+	char const	*str;
 
-	count = 0;
+	(*count) = 0;
+	str = s;
 	while (*str)
 	{
-		while (*str && ft_is_separation(*str, charset))
-			str++;
-		count++;
-		str++;
-		while (*str && !ft_is_separation(*str, charset))
-			str++;
-	}
-	return (count);
-}
-
-char	*ft_split_strcopy(char *dest, char *str, char *charset)
-{
-	int	j;
-
-	j = 0;
-	while (*str && !ft_is_separation(*str, charset))
-	{
-		dest[j++] = *str;
-		str++;
-	}
-	dest[j++] = 0;
-	return (str);
-}
-
-char	**ft_split(char *str, char *charset)
-{
-	char	**ret;
-	int		count;
-	int		i;
-	int		j;
-	int		str_len;
-
-	count = ft_count_separation(str, charset);
-	ret = malloc((count + 1) * sizeof(char *));
-	i = 0;
-	ret[i] = 0;
-	while (i < count)
-	{
-		while (*str && ft_is_separation(*str, charset))
-			str++;
-		str_len = ft_count_to_next_separation(str, charset);
-		if (str_len)
+		ft_split_move_forward(&str, c, 0);
+		if (*str)
 		{
-			ret[i] = malloc((str_len + 1) * sizeof(char));
-			str = ft_split_strcopy(ret[i], str, charset);
-			i++;
+			(*count)++;
 		}
-		str++;
+		ft_split_move_forward(&str, c, 1);
 	}
-	ret[i] = 0;
-	return (ret);
+	return (malloc(((*count) + 1) * sizeof(char *)));
+}
+
+void	ft_split_cpy(char const *start, char const *end, char *mem)
+{
+	int	x;
+
+	x = 0;
+	while (start != end && mem)
+	{
+		mem[x++] = *start;
+		start++;
+	}
 }

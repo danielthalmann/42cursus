@@ -18,8 +18,9 @@ int	main(int argc, char** argv)
 {
 
 	char	*s;
-	char	*s2;
 	int		i;
+	(void) argc;
+	(void) argv;
 
 	i = -1;
 	while (i < 10)
