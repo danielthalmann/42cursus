@@ -14,7 +14,7 @@
 #include "libft.h"
 
 void	ft_split_move_forward(char const **s, char c, int not);
-char	**ft_split_allocate(char const *s, char c, int *count);
+char	**ft_split_allocate(char const *s, char c);
 void	ft_split_cpy(char const *start, char const *end, char *mem);
 
 /**
@@ -31,13 +31,12 @@ char	**ft_split(char const *s, char c)
 	char const	*end;
 	char		**split;
 	int			y;
-	int			count;	
 
-	split = ft_split_allocate(s, c, &count);
+	split = ft_split_allocate(s, c);
 	start = s;
 	end = s;
 	y = 0;
-	while (*end && split && count)
+	while (*end && split)
 	{
 		ft_split_move_forward(&start, c, 0);
 		end = start;
@@ -67,22 +66,27 @@ void	ft_split_move_forward(char const **s, char c, int not)
 	}
 }
 
-char	**ft_split_allocate(char const *s, char c, int *count)
+char	**ft_split_allocate(char const *s, char c)
 {
 	char const	*str;
+	int			is_sep;
+	int			count;
 
-	(*count) = 0;
+	count = 0;
 	str = s;
+	is_sep = 1;
 	while (*str)
 	{
-		ft_split_move_forward(&str, c, 0);
-		if (*str)
+		if (is_sep && *str != c)
 		{
-			(*count)++;
+			is_sep = 0;
+			count++;
 		}
-		ft_split_move_forward(&str, c, 1);
+		else if (*str == c)
+			is_sep = 1;
+		str++;
 	}
-	return (malloc(((*count) + 1) * sizeof(char *)));
+	return (malloc((count + 1) * sizeof(char *)));
 }
 
 void	ft_split_cpy(char const *start, char const *end, char *mem)

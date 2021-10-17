@@ -114,6 +114,11 @@ ft_split:
 	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_split.c  ${SRC_FOLDER}ft_putnbr_fd.c ft_split_test.c faker.c -o ${NAME}
 	./test
 
+ft_strchr:
+	${NORMINETTE} ${SRC_FOLDER}ft_strchr.c
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strchr.c ft_strchr_test.c faker.c -o ${NAME}
+	./test
+
 test: ${FUNCTIONS}
 
 fclean: clean
