@@ -1,67 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/17 23:22:10 by dthalman          #+#    #+#             */
+/*   Updated: 2021/10/17 23:22:10 by dthalman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h> 
 #include "libft.h"
 
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (*(str++))
-		i++;
-	return (i);
-}
-
-//
-// copy string and return the end of string
-//
-char	*ft_strcpy(char *dest, char *src)
-{
-	while (*src != 0)
-	{	
-		*dest = *src;
-		dest++;
-		src++;
-	}
-	*dest = 0;
-	return (dest);
-}
-
-int	ft_joinlen(int size, char **strs, char *sep)
-{
-	int	i;
-	int	length;
-
-	length = 0;
-	i = -1;
-	if (size > 1)
-		length += ft_strlen(sep) * (size - 1);
-	while (++i < size)
-		length += ft_strlen(strs[i]);
-	return (length);
-}
-
-char	*ft_strjoin(int size, char **strs, char *sep)
+/**
+ * @brief Alloue (avec malloc()) et retourne une nouvelle chaine, 
+ * 	 	  résultat de la concaténation de s1 et s2.6
+ * 
+ * @param s1 
+ * @param s2 
+ * @return char* 
+ */
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		length;
+	char	*r;
 	int		i;
-	char	*s;
-	char	*ret;
 
-	length = 1;
-	if (strs && sep)
-		length += ft_joinlen(size, strs, sep);
-	else
-		size = 0;
-	s = malloc(length * sizeof(char));
-	ret = s;
-	i = -1;
-	while (++i < size)
-	{
-		s = ft_strcpy(s, strs[i]);
-		if (i < size - 1)
-			s = ft_strcpy(s, sep);
-	}
-	*s = 0;
-	return (ret);
+	length = ft_strlen(s1);
+	length += ft_strlen(s2);
+	r = malloc((length + 1) * sizeof(char));
+	if (!r)
+		return (0);
+	i = 0;
+	while (s1)
+		r[i++] = *(s1++);
+	while (s1)
+		r[i++] = *(s1++);
+	r[i] = 0;
+	return (r);
 }

@@ -119,6 +119,16 @@ ft_strchr:
 	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strchr.c ft_strchr_test.c faker.c -o ${NAME}
 	./test
 
+ft_strdup:
+	${NORMINETTE} ${SRC_FOLDER}ft_strdup.c
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strdup.c ${SRC_FOLDER}ft_strlen.c ft_strdup_test.c faker.c -o ${NAME}
+	./test
+
+ft_striteri:
+	${NORMINETTE} ${SRC_FOLDER}ft_striteri.c
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_striteri.c ft_striteri_test.c faker.c -o ${NAME}
+	./test
+
 test: ${FUNCTIONS}
 
 fclean: clean

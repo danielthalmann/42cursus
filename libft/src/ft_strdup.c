@@ -1,8 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/17 14:51:52 by dthalman          #+#    #+#             */
+/*   Updated: 2021/10/17 14:51:52 by dthalman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h> 
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, char *src)
+char	*ft_strcpy(char *dest, const char *src);
+
+/**
+ * @brief returns a pointer to a new string which is a duplicate 
+ * 		  of the string s.
+ * 
+ * @param s 
+ * @return char* 
+ */
+char	*ft_strdup(const char *s)
+{
+	int		length;
+	char	*dest;
+
+	length = ft_strlen(s);
+	dest = (malloc((length + 1) * sizeof (char)));
+	if (dest)
+		ft_strcpy(dest, s);
+	return (dest);
+}
+
+char	*ft_strcpy(char *dest, const char *src)
 {
 	char	*ret;
 
@@ -15,15 +47,4 @@ char	*ft_strcpy(char *dest, char *src)
 	}
 	*dest = 0;
 	return (ret);
-}
-
-char	*ft_strdup(char *src)
-{
-	int		length;
-	char	*dest;
-
-	length = ft_strlen(src);
-	dest = (malloc((length + 1) * sizeof (char)));
-	ft_strcpy(dest, src);
-	return (dest);
 }

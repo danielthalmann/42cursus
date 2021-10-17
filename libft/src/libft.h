@@ -41,6 +41,12 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
+void	ft_striteri(char *s, void (*f)(unsigned int,char*));
+char	*ft_strjoin(char const *s1, char const *s2);
+
+
+size_t	ft_strlen(const char *s);
 
 //bonus
 t_list	*ft_lstnew(void *content);
