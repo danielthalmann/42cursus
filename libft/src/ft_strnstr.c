@@ -1,43 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/18 17:14:29 by dthalman          #+#    #+#             */
+/*   Updated: 2021/10/18 17:14:29 by dthalman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
+int	ft_strcmp(const char *a, const char *b);
 
-int	compare(char a, char b)
+/**
+ * @brief locates the	first occurrence of the	null-termi-
+     nated string little in the	string big, where not more than	
+	 len characters
+     are searched
+ * 
+ * @param str 
+ * @param to_find 
+ * @param len 
+ * @return char* 
+ */
+char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 {
-	if (a == b)
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-	}
-}
+	size_t	i;
+	size_t	l;
 
-char	*ft_strstr(char *str, char *to_find)
-{
-	int	i;
-	int	same;
-
+	i = 0;
 	if (!*to_find)
-		return (str);
-	while (*str)
+		return ((char *)str);
+	l = ft_strlen(to_find);
+	while (*str && i++ < len)
 	{
-		i = 0;
-		same = 1;
-		while (to_find[i])
-		{
-			same = compare(to_find[i], str[i]);
-			if (!same)
-			{
-				break ;
-			}
-			i++;
-		}
-		if (same)
-		{
-			return (str);
-		}	
+		if (ft_strncmp(str, to_find, l) == 0)
+			return ((char *)str);
 		str++;
 	}
 	return (0);

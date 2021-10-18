@@ -46,7 +46,9 @@ void	ft_striteri(char *s, void (*f)(unsigned int,char*));
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 
-
+// to control
+int		ft_strncmp(const char *s1, const char *s2, unsigned int n);
+char	*ft_strnstr(const char *str, const char *to_find, size_t len);
 char	*ft_strrchr(const char *s, int c);
 
 int		ft_tolower(int c);
