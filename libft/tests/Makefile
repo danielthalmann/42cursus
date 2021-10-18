@@ -131,6 +131,10 @@ ft_striteri:
 
 
 
+ft_strrchr:
+	${NORMINETTE} ${SRC_FOLDER}ft_strrchr.c
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strrchr.c ft_strrchr_test.c faker.c -o ${NAME}
+	./test
 
 ft_tolower:
 	${NORMINETTE} ${SRC_FOLDER}ft_tolower.c

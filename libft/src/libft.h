@@ -47,6 +47,8 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 
 
+char	*ft_strrchr(const char *s, int c);
+
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 
