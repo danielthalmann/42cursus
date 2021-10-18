@@ -1,20 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/18 12:31:46 by dthalman          #+#    #+#             */
+/*   Updated: 2021/10/18 12:31:46 by dthalman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_toupper(char *str)
+int	ft_toupper(int c)
 {
-	char	*ret;
-	int		uplow;
-
-	uplow = 'a' - 'A';
-	ret = str;
-	while (*str != 0)
-	{
-		if (*str >= 'a' && *str <= 'z')
-		{
-			*str = *str - uplow;
-		}	
-		str++;
-	}
-	return (ret);
+	if (c >= 'a' && c <= 'z')
+		c = c - ('a' - 'A');
+	return (c);
 }

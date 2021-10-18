@@ -53,8 +53,9 @@ void ft_putnbr_fd_test(int i, char *s)
 	if(file_handle == -1)
 		return ;
 	buff = ft_fake_repeat(255, 0);
-	read(file_handle, buff, 255);
-	printf("expected [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\tobtain [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\n", i, buff);
+	int len = read(file_handle, buff, 255);
+	buff[len] = 0;
+	printf("len [%d] expected [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\tobtain [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\n", len, i, buff);
 	close(file_handle);
 	unlink("_test.txt");
 	
