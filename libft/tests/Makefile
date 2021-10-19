@@ -9,7 +9,14 @@ FUNCTIONS=ft_atoi ft_bzero ft_calloc ft_isalnum ft_isalpha ft_isascii \
 		  ft_strrchr ft_strtrim ft_substr ft_tolower ft_toupper 
 OBJS=${SRCS:.c=.o}
 SRC_FOLDER=../src/
-COMPILE_FLAG=-Wall -Wextra -Werror -lbsd -g
+COMPILE_FLAG=-Wall -Wextra -Werror -g
+COMPILE_BSD_FLAG=
+ifneq ($(OS),Windows_NT)
+	UNAME := $(shell uname)
+	ifeq ($(UNAME), Linux)
+		COMPILE_BSD_FLAG=-lbsd 
+	endif
+endif
 LINKED_FLAG=
 NORMINETTE=norminette
 
@@ -18,6 +25,9 @@ NORMINETTE=norminette
 
 all:
 	@echo 'specify the name of function to test or tape "make test" for testing all function'
+
+os: 
+	@echo $(shell uname -s)
 
 ft_atoi:
 	${NORMINETTE} ${SRC_FOLDER}ft_atoi.c
@@ -127,6 +137,16 @@ ft_strdup:
 ft_striteri:
 	${NORMINETTE} ${SRC_FOLDER}ft_striteri.c
 	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_striteri.c ft_striteri_test.c faker.c -o ${NAME}
+	./test
+
+ft_strjoin:
+	${NORMINETTE} ${SRC_FOLDER}ft_strjoin.c
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strjoin.c ${SRC_FOLDER}ft_strlen.c ft_strjoin_test.c faker.c -o ${NAME}
+	./test
+
+ft_strlcat:
+	${NORMINETTE} ${SRC_FOLDER}ft_strlcat.c
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strlcat.c ${SRC_FOLDER}ft_strlen.c ft_strlcat_test.c faker.c -o ${NAME} ${COMPILE_BSD_FLAG}
 	./test
 
 
