@@ -149,6 +149,15 @@ ft_strlcat:
 	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strlcat.c ${SRC_FOLDER}ft_strlen.c ft_strlcat_test.c faker.c -o ${NAME} ${COMPILE_BSD_FLAG}
 	./test
 
+ft_strlcpy:
+	${NORMINETTE} ${SRC_FOLDER}ft_strlcpy.c
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strlcpy.c ${SRC_FOLDER}ft_strlen.c ft_strlcpy_test.c faker.c -o ${NAME} ${COMPILE_BSD_FLAG}
+	./test
+
+ft_strlen:
+	${NORMINETTE} ${SRC_FOLDER}ft_strlen.c
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strlen.c ft_strlen_test.c faker.c -o ${NAME}
+	./test
 
 
 ft_strnstr:

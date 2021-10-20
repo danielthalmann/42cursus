@@ -7,7 +7,7 @@
 #include "../src/libft.h"
 #include "faker.h"
 
-void ft_strlcopy_test(char *s1, char *s2, size_t size);
+void ft_strlcpy_test(char *str2, size_t size);
 
 /**
  * @brief main test
@@ -23,25 +23,25 @@ int	main(int argc, char** argv)
 	char *f;
 
 	f = ft_fake_alphanum(4);
-	ft_strlcopy_test(f, " to cpy", 4);
+	ft_strlcpy_test(f, 4);
 	free(f);
-	ft_strlcopy_test("text", " to cpy", 7);
-	ft_strlcopy_test("text", " to cpy", 15);
-	ft_strlcopy_test("text", "", 15);
-	ft_strlcopy_test("", "hmm", 15);
+	ft_strlcpy_test("1234", 7);
+	ft_strlcpy_test("1234567890", 5);
+	ft_strlcpy_test("", 15);
+	ft_strlcpy_test("23849284", 15);
 	f = ft_fake_printable(5);
-	ft_strlcopy_test(f, "hmm", 15);
+	ft_strlcpy_test(f, 15);
 	free(f);
-	ft_strlcopy_test("1", "1234", 1);
-	ft_strlcopy_test("123", "12345", 1);
-	ft_strlcopy_test("123", "1234", 1);
-	ft_strlcopy_test("12", "1234", 1);
-	ft_strlcopy_test("text", "1234", 1);
+	ft_strlcpy_test("1234", 1);
+	ft_strlcpy_test("12345", 1);
+	ft_strlcpy_test("1234", 1);
+	ft_strlcpy_test("1234", 1);
+	ft_strlcpy_test("1234", 1);
 
 
 }
 
-void ft_strlcopy_test(char *str1, char *str2, size_t size)
+void ft_strlcpy_test(char *str2, size_t size)
 {
 	char	*se1;
 	char	*se2;
@@ -50,25 +50,21 @@ void ft_strlcopy_test(char *str1, char *str2, size_t size)
 
 	se1 = malloc(20);
 	memset(se1, '#', 20);
-	strcpy(se1, str1);
 	se2 = malloc(10);
 	memset(se2, '#', 10);
 	strcpy(se2, str2);
 
 	s1 = malloc(20);
 	memset(s1, '#', 20);
-	strcpy(s1, str1);
 	s2 = malloc(10);
 	memset(s2, '#', 10);
 	strcpy(s2, str2);
 
 	int	r;
 	int	e;
-	printf("size [" ANSI_COLOR_GREEN "%ld" ANSI_COLOR_RESET "] string [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\tstring [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\t", size, str1, str2);
-	e = strlcopy(se1, se2, size);
-
-
-	r = ft_strlcopy(s1, s2, size);
+	printf("size [" ANSI_COLOR_GREEN "%ld" ANSI_COLOR_RESET "]\tstring [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\t", size, str2);
+	e = strlcpy(se1, se2, size);
+	r = ft_strlcpy(s1, s2, size);
 	printf("expected string[" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\t ret [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\tobtain string [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\tret [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\n", se1, e, s1, r);
 	
 	assert(memcmp(se1, s1, 20) == 0);
