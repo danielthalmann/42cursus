@@ -3,7 +3,6 @@
 #include <assert.h>
 #include <ctype.h>
 #include <bsd/string.h>
-#include <ctype.h>
 #include "../src/libft.h"
 #include "faker.h"
 

@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <ctype.h>
-#include <bsd/string.h>
-#include <ctype.h>
 #include "../src/libft.h"
 #include "faker.h"
 
@@ -29,8 +27,6 @@ int	main(int argc, char** argv)
 		ft_strlen_test(f);
 		free(f);		
 	}
-
-
 
 }
 

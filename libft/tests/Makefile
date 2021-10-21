@@ -159,6 +159,10 @@ ft_strlen:
 	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strlen.c ft_strlen_test.c faker.c -o ${NAME}
 	./test
 
+ft_strmapi:
+	${NORMINETTE} ${SRC_FOLDER}ft_strmapi.c
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strmapi.c ${SRC_FOLDER}ft_toupper.c ${SRC_FOLDER}ft_strlen.c ft_strmapi_test.c faker.c -o ${NAME}
+	./test
 
 ft_strnstr:
 	${NORMINETTE} ${SRC_FOLDER}ft_strnstr.c
