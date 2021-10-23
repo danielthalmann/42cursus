@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-
-int	ft_strcmp(const char *a, const char *b);
 
 /**
  * @brief locates the	first occurrence of the	null-termi-

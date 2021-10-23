@@ -33,6 +33,7 @@ int	main(int argc, char** argv)
 	}
     ft_strrchr_test("dODsiPvuHFiCQjw", 'i');
 	ft_strrchr_test("dODsiPvuHFXCQjw", '~');
+	ft_strrchr_test("", 'i');
 }
 
 void ft_strrchr_test(char *s, int search)
@@ -43,8 +44,9 @@ void ft_strrchr_test(char *s, int search)
 	e = strrchr(s, search);
 	r = ft_strrchr(s, search);
 	printf("string [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\tsearch [" ANSI_COLOR_GREEN "%c" ANSI_COLOR_RESET "]\texpected [" ANSI_COLOR_GREEN "%11s" ANSI_COLOR_RESET "]\tobtain [" ANSI_COLOR_GREEN "%11s" ANSI_COLOR_RESET "]\n", s, search, e, r);
-	if (!e)
+	if (!e || !*e){
 		assert(memcmp(&r, &e, sizeof(char*)) == 0);
+	}
 	else
 		assert(strcmp(r, e) == 0);
 }

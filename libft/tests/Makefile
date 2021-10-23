@@ -4,7 +4,7 @@ CC=gcc
 FUNCTIONS=ft_atoi ft_bzero ft_calloc ft_isalnum ft_isalpha ft_isascii \
 		  ft_isdigit ft_isprint ft_itoa ft_memchr ft_memcmp ft_memcpy \
 		  ft_memmove ft_memset ft_putchar_fd ft_putendl_fd ft_putnbr_fd \
-		  ft_putstr_fd ft_split ft_strchr ft_strdup ft_striteri # ft_strjoin \
+		  ft_putstr_fd ft_split ft_strchr ft_strdup ft_striteri ft_strjoin \
 		  ft_strlcat ft_strlcpy ft_strlen ft_strmapi ft_strncmp ft_strnstr \
 		  ft_strrchr ft_strtrim ft_substr ft_tolower ft_toupper 
 OBJS=${SRCS:.c=.o}
@@ -174,9 +174,23 @@ ft_strncmp:
 	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strncmp.c ft_strncmp_test.c faker.c -o ${NAME}
 	./test
 
+ft_strnstr:
+	${NORMINETTE} ${SRC_FOLDER}ft_strnstr.c
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strnstr.c ${SRC_FOLDER}ft_strlen.c ${SRC_FOLDER}ft_strncmp.c ft_strnstr_test.c faker.c -o ${NAME} ${COMPILE_BSD_FLAG}
+	./test
+
 ft_strrchr:
 	${NORMINETTE} ${SRC_FOLDER}ft_strrchr.c
 	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strrchr.c ft_strrchr_test.c faker.c -o ${NAME}
+	./test
+
+ft_strtrim:
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strtrim.c ${SRC_FOLDER}ft_strlen.c ${SRC_FOLDER}ft_strrchr.c ${SRC_FOLDER}ft_strlcpy.c ft_strtrim_test.c faker.c -o ${NAME}
+	./test
+
+ft_substr:
+	${NORMINETTE} ${SRC_FOLDER}ft_substr.c
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_substr.c ${SRC_FOLDER}ft_strlen.c ${SRC_FOLDER}ft_strlcpy.c ft_substr_test.c faker.c -o ${NAME}
 	./test
 
 ft_tolower:
