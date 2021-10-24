@@ -164,11 +164,6 @@ ft_strmapi:
 	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strmapi.c ${SRC_FOLDER}ft_toupper.c ${SRC_FOLDER}ft_strlen.c ft_strmapi_test.c faker.c -o ${NAME}
 	./test
 
-ft_strnstr:
-	${NORMINETTE} ${SRC_FOLDER}ft_strnstr.c
-	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strnstr.c ${SRC_FOLDER}ft_strlen.c ${SRC_FOLDER}ft_strncmp.c ft_strnstr_test.c faker.c -o ${NAME}
-	./test
-
 ft_strncmp:
 	${NORMINETTE} ${SRC_FOLDER}ft_strncmp.c
 	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strncmp.c ft_strncmp_test.c faker.c -o ${NAME}

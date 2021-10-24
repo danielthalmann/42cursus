@@ -26,7 +26,7 @@ int	main(int argc, char** argv)
 	ft_substr_test("Bonjour", 0, 1, "B");
 	ft_substr_test("Bonjour", 5, 0, "");
 	ft_substr_test("", 5, 2, "");
-
+	
 }
 
 void ft_substr_test(char *s, int start, int len, char *e)

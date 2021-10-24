@@ -13,7 +13,11 @@ Fichiers de rendu
 -
 Paramètres
 
-#1. Le contenu du nouvel élément.Valeur de retourLe nouvel elementFonctionsex-ternes autoriséesmalloc
+#1. Le contenu du nouvel élément. Valeur de retour Le nouvel element 
+
+Fonctions ex-ternes autorisées
+
+malloc
 
 Description
 
@@ -31,8 +35,16 @@ Fichiers de rendu
 -
 Paramètres
 
-#1. L’adresse du pointeur vers le premier élémentde la liste.
-#2. L’adresse du pointeur vers l’élément à rajouterà la liste.Valeur de retourNoneFonctionsex-ternes autoriséesNone
+#1. L’adresse du pointeur vers le premier élément de la liste.
+#2. L’adresse du pointeur vers l’élément à rajouter à la liste.
+
+Valeur de retour 
+
+None 
+
+Fonctions ex-ternes autorisées
+
+None
 
 Description
 
@@ -50,7 +62,11 @@ Fichiers de rendu
 -
 Paramètres
 
-#1. Le début de la liste.Valeur de retourTaille de la liste.Fonctionsex-ternes autoriséesNone
+#1. Le début de la liste.Valeur de retourTaille de la liste.
+
+Fonctions ex-ternes autorisées
+
+None
 
 Description
 
@@ -68,12 +84,15 @@ Fichiers de rendu
 -
 Paramètres
 
-#1. Le début de la liste.Valeur de retourDernier élément de la listeFonctionsex-ternes autoriséesNone
+#1. Le début de la liste.Valeur de retourDernier élément de la liste
+
+Fonctions ex-ternes autorisées
+
+None
 
 Description
 
-Renvoie le dernier élément de la liste.11
-LibftTa propre bibliothèque à toi tout seul
+Renvoie le dernier élément de la liste
 
 Function name
 
@@ -88,7 +107,15 @@ Fichiers de rendu
 Paramètres
 
 #1. L’adresse du pointeur vers le premier élémentde la liste.
-#2. L’adresse du pointeur vers l’élément à rajouterà la liste.Valeur de retourNoneFonctionsex-ternes autoriséesNone
+#2. L’adresse du pointeur vers l’élément à rajouter à la liste. 
+
+Valeur de retour
+
+None
+
+Fonctions ex-ternes autorisées
+
+None
 
 Description
 
@@ -107,7 +134,15 @@ Fichiers de rendu
 Paramètres
 
 #1. L’élement à free
-#2. L’adresse de la fonction permettant desupprimer le contenu de l’élement.Valeur de retourNoneFonctionsex-ternes autoriséesfree
+#2. L’adresse de la fonction permettant desupprimer le contenu de l’élement.
+
+Valeur de retour
+
+None
+
+Fonctions ex-ternes autorisées
+
+free
 
 Description
 
@@ -126,12 +161,15 @@ Fichiers de rendu
 Paramètres
 
 #1. L’adresse du pointeur vers un élément.
-#2. L’adresse de la fonction permettant desupprimer le contenu d’un élément.Valeur de retourNoneFonctionsex-ternes autoriséesfree
+#2. L’adresse de la fonction permettant desupprimer le contenu d’un élément.Valeur de retourNone
+
+Fonctions ex-ternes autorisées
+
+free
 
 Description
 
-Supprime et libère la mémoire de l’élément passé en paramètre, et de tous les élements qui suivent, àl’aide de del et de free(3)Enfin, le pointeur initial doit être mis à NULL.12
-LibftTa propre bibliothèque à toi tout seul
+Supprime et libère la mémoire de l’élément passé en paramètre, et de tous les élements qui suivent, à l’aide de del et de free(3)Enfin, le pointeur initial doit être mis à NULL
 
 Function name
 
@@ -146,7 +184,11 @@ Fichiers de rendu
 Paramètres
 
 #1 L’adresse du pointeur vers un élément.
-#2. L’adresse de la fonction à appliquer.Valeur de retourNoneFonctionsex-ternes autoriséesNone
+#2. L’adresse de la fonction à appliquer.Valeur de retourNone
+
+Fonctions ex-ternes autorisées
+
+None
 
 Description
 
@@ -165,7 +207,11 @@ Fichiers de rendu
 Paramètres
 
 #1. L’adresse du pointeur vers un élément.
-#2. L’adresse de la fonction à appliquer.Valeur de retourLa nouvelle liste. NULL si l’allocation échoue.Fonctionsex-ternes autoriséesmalloc, free
+#2. L’adresse de la fonction à appliquer.Valeur de retourLa nouvelle liste. NULL si l’allocation échoue.
+
+Fonctions ex-ternes autorisées
+
+malloc, free
 
 Description
 
