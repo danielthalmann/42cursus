@@ -207,7 +207,11 @@ Fichiers de rendu
 Paramètres
 
 #1. L’adresse du pointeur vers un élément.
-#2. L’adresse de la fonction à appliquer.Valeur de retourLa nouvelle liste. NULL si l’allocation échoue.
+#2. L’adresse de la fonction à appliquer.
+
+Valeur de retour
+
+La nouvelle liste. NULL si l’allocation échoue.
 
 Fonctions ex-ternes autorisées
 
