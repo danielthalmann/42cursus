@@ -5,7 +5,7 @@
 #include "../src/libft.h"
 #include "faker.h"
 
-void ft_isprint_test(char c);
+void ft_isprint_test(int c);
 
 /**
  * @brief main test
@@ -31,7 +31,7 @@ int	main(int argc, char** argv)
 	ft_isprint_test('\n');
 }
 
-void ft_isprint_test(char c)
+void ft_isprint_test(int c)
 {
 	int r;
 	int e;

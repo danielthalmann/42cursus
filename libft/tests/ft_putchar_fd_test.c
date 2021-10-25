@@ -39,9 +39,10 @@ void ft_putchar_fd_test(char c)
 {
 	int file_handle;
 	char *buff;
+	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
 	buff = ft_fake_repeat(255, '#');
-	file_handle = open("_test.txt", O_WRONLY | O_APPEND | O_CREAT);
+	file_handle = open("_test.txt", O_WRONLY | O_CREAT, mode);
 	if(file_handle == -1)
 		return ;
 	ft_putchar_fd(c, file_handle);
@@ -58,6 +59,5 @@ void ft_putchar_fd_test(char c)
 	assert(c == *buff);
 
 	free(buff);
-
 	
 }

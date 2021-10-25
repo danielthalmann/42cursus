@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <ctype.h>
+#ifndef __APPLE__
 #include <bsd/string.h>
+#endif
 #include "../src/libft.h"
 #include "faker.h"
 
