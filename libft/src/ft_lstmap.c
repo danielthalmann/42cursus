@@ -13,8 +13,8 @@
 #include "libft.h"
 
 /**
- * @brief Itère sur la liste lst et applique la fonction f au contenu de chaque élément. 
- * Crée une nouvelle liste résultant des applications successives de f. 
+ * @brief Itère sur la liste lst et applique la fonction f au contenu de chaque 
+ * élément. Crée une nouvelle liste résultant des applications successives de f. 
  * la fonction del est la pour detruire le contenu d un element si necessaire
  * 
  * @param lst 
@@ -24,18 +24,29 @@
  */
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	void	*content;
-	t_list	*p;
+	t_list	*start;
+	t_list	*r;
 
+	r = 0;
+	start = 0;
 	while (lst)
 	{
-		p = lst;
-		lst = lst->next;
-		content = (*f)(lst->content);
-		if (!content)
+		if (!start)
 		{
-			lst = lst->next;
-			(*del)(p);
+			r = ft_lstnew((*f)(lst->content));
+			start = r;
 		}
+		else
+		{
+			r->next = ft_lstnew((*f)(lst->content));
+			r = r->next;
+		}
+		if (!r && start)
+		{
+			ft_lstclear(&start, (del));
+			break ;
+		}
+		lst = lst->next;
 	}
+	return (start);
 }

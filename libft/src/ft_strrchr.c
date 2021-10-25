@@ -29,9 +29,11 @@ char	*ft_strrchr(const char *s, int c)
 	str = (char *)s;
 	while (str && *str)
 	{
-		if (*str == c)
+		if (*str == (char)c)
 			r = str;
 		str++;
 	}
+	if (c == 0)
+		return (str);
 	return (r);
 }

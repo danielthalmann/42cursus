@@ -36,4 +36,4 @@ fclean: clean
 re: fclean all
 
 bonus: ${BONUS_OBJS}
-	ar rsv $@ ${BONUS_OBJS}
+	ar rsv ${NAME} ${BONUS_OBJS}

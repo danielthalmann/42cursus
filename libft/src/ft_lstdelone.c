@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <stdlib.h>
 #include "libft.h"
 
 /**
- * @brief Libère la mémoire de l’élément passé en argumenten utilisant la fonction 
- * del puis avec free(3). La mémoire de next ne doit pas être free.
+ * @brief Libère la mémoire de l’élément passé en argument en utilisant 
+ * la fonction del puis avec free(3). La mémoire de next ne doit pas être free.
  * 
  * @param lst 
  * @param del 

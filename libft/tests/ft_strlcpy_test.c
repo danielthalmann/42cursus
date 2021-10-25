@@ -35,10 +35,7 @@ int	main(int argc, char** argv)
 	free(f);
 	ft_strlcpy_test("1234", 1);
 	ft_strlcpy_test("12345", 1);
-	ft_strlcpy_test("1234", 1);
-	ft_strlcpy_test("1234", 1);
-	ft_strlcpy_test("1234", 1);
-
+	ft_strlcpy_test("1234", 0);
 
 }
 

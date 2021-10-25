@@ -32,6 +32,7 @@ int	main(int argc, char** argv)
 		i++;
 	}
 	ft_strchr_test("dODsiPvuHFXCQjw", '~');
+	ft_strchr_test("dODsiPvuHFXCQjw", 0);
 }
 
 void ft_strchr_test(char *s, int search)

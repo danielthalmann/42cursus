@@ -25,14 +25,12 @@
  */
 char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 {
-	size_t	i;
 	size_t	l;
 
-	i = 0;
 	if (!*to_find)
 		return ((char *)str);
 	l = ft_strlen(to_find);
-	while (*str && i++ < len)
+	while (*str && len--)
 	{
 		if (ft_strncmp(str, to_find, l) == 0)
 			return ((char *)str);

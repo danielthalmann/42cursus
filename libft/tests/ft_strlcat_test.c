@@ -23,6 +23,7 @@ int	main(int argc, char** argv)
 	(void) argv;
 	char *f;
 
+	ft_strlcat_test("text", " to cpy", 0);
 	f = ft_fake_alphanum(4);
 	ft_strlcat_test(f, " to cpy", 4);
 	free(f);
@@ -33,12 +34,16 @@ int	main(int argc, char** argv)
 	f = ft_fake_printable(5);
 	ft_strlcat_test(f, "hmm", 15);
 	free(f);
-	ft_strlcat_test("1", "1234", 1);
-	ft_strlcat_test("123", "12345", 1);
-	ft_strlcat_test("123", "1234", 1);
-	ft_strlcat_test("12", "1234", 1);
-	ft_strlcat_test("text", "1234", 1);
 
+	for(int i = 0; i < 6; i++)
+	{
+		ft_strlcat_test("1", "123", i);
+		ft_strlcat_test("12", "123", i);
+		ft_strlcat_test("123", "123", i);
+		ft_strlcat_test("1234", "123", i);
+		ft_strlcat_test("12345", "123", i);
+		ft_strlcat_test("123456", "123", i);
+	}
 
 }
 

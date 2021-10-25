@@ -205,3 +205,5 @@ fclean: clean
 	rm ${NAME}
 
 re: fclean all
+
+.PHONY: clean test ${FUNCTIONS}
