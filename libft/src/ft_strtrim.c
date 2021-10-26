@@ -12,7 +12,6 @@
 
 #include <stdlib.h>
 #include "libft.h"
-#include <stdio.h>
 
 /**
  * @brief Alloue (avec malloc(3)) et retourne une copie dela chaine ’s1’, 
@@ -32,14 +31,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	start = (char *)s1;
 	while (*start && ft_strrchr(set, *start))
-	{
-		printf("pointer : %p, value %d, %c\n", start, *start, *start);
 		start++;
-	}
 	end = start;
 	while (*end)
 		end++;
-	end--;
+	if (end != start)
+		end--;
 	while (*end && ft_strrchr(set, *end))
 		end--;
 	length = (end - start) + 1;
