@@ -31,6 +31,7 @@ int	main(int argc, char** argv)
 		free(s);
 		i++;
 	}
+	ft_itoa_test(0, "0");
 
 }
 
