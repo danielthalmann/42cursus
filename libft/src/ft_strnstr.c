@@ -11,12 +11,13 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 /**
- * @brief locates the	first occurrence of the	null-termi-
-     nated string little in the	string big, where not more than	
-	 len characters
-     are searched
+ * @brief locates the first occurrence of the null-terminated 
+ * string little in the	string big, where not more than	len characters
+ * are searched
+ * if the len of to_find is big as len of search str, the return is null
  * 
  * @param str 
  * @param to_find 
@@ -30,11 +31,12 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 	if (!*to_find)
 		return ((char *)str);
 	l = ft_strlen(to_find);
-	while (*str && len--)
+	while (*str && len)
 	{
-		if (ft_strncmp(str, to_find, l) == 0)
+		if (ft_strncmp(str, to_find, l) == 0 && len >= l)
 			return ((char *)str);
 		str++;
+		len--;
 	}
 	return (0);
 }

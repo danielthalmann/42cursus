@@ -171,7 +171,7 @@ ft_strncmp:
 
 ft_strnstr:
 	${NORMINETTE} ${SRC_FOLDER}ft_strnstr.c
-	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strnstr.c ${SRC_FOLDER}ft_strlen.c ${SRC_FOLDER}ft_strncmp.c ft_strnstr_test.c faker.c -o ${NAME} ${COMPILE_BSD_FLAG}
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strnstr.c ${SRC_FOLDER}ft_strlen.c ${SRC_FOLDER}ft_memcmp.c ${SRC_FOLDER}ft_strncmp.c ft_strnstr_test.c faker.c -o ${NAME} ${COMPILE_BSD_FLAG}
 	./test
 
 ft_strrchr:
