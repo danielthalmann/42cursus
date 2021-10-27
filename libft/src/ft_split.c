@@ -99,4 +99,5 @@ void	ft_split_cpy(char const *start, char const *end, char *mem)
 		mem[x++] = *start;
 		start++;
 	}
+	mem[x] = 0;
 }
