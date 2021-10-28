@@ -33,10 +33,10 @@ int	main(int argc, char** argv)
 	free(s);
 
 	s = ft_fake_alpha(15);
-    i = 0;
-	while (s[i])
+    i = -1;
+	while (i < 520)
 	{
-		ft_toupper_test(s[i]);
+		ft_toupper_test(i);
 		i++;
     }
 	free(s);

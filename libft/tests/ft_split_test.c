@@ -24,6 +24,8 @@ int	main(int argc, char** argv)
 	char *b[2] = { "test", 0 };
 	char *c[5] = { "at", "te", "st", "te", 0 };
 	char *d[3] = { "bon", "jour", 0 };
+	char *e[6] = { "split", "this", "for", "me", "!", 0 };
+	char *f[2] = { "olol", 0 };
 	
 
 	ft_split_test("|||", '|', a);
@@ -31,6 +33,8 @@ int	main(int argc, char** argv)
 	ft_split_test("at|te|st|te", '|', c);
 	ft_split_test("bon||jour|", '|', d);
 	ft_split_test("", '|', a);
+	ft_split_test("      split       this for   me  !       ", ' ', e);
+	ft_split_test("       olol", ' ', f);
 
 }
 
@@ -44,7 +48,7 @@ void ft_split_test(char *s, int sep, char **e)
 	r = ft_split(s, sep);
 
 	i = 0;
-	while (r && r[i])
+	while (r[i])
 	{
 		printf("expected [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\tresult [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\n", e[i], r[i]);
 		assert(strcmp(e[i], r[i]) == 0);
