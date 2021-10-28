@@ -62,5 +62,5 @@ void ft_memcmp_test(char *s, char *s2, int size)
 	r = ft_memcmp(s, s2, size);
 	printf("string [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\tstring2 [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\texpected [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\tobtain [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\n", s, s2, e, r);
 
-	assert(r == e );
+	assert(r ? 1 : 0 == e ? 1 : 0);
 }
