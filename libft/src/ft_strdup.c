@@ -30,21 +30,6 @@ char	*ft_strdup(const char *s)
 	length = ft_strlen(s);
 	dest = (malloc((length + 1) * sizeof (char)));
 	if (dest)
-		ft_strcpy(dest, s);
+		ft_strlcpy(dest, s, (length + 1));
 	return (dest);
-}
-
-char	*ft_strcpy(char *dest, const char *src)
-{
-	char	*ret;
-
-	ret = dest;
-	while (*src != 0)
-	{	
-		*dest = *src;
-		dest++;
-		src++;
-	}
-	*dest = 0;
-	return (ret);
 }

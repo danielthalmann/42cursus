@@ -41,4 +41,5 @@ void ft_itoa_test(int i, char *e)
 	r = ft_itoa(i);
 	printf("integer [" ANSI_COLOR_GREEN "%11d" ANSI_COLOR_RESET "]\texpected [" ANSI_COLOR_GREEN "%11s" ANSI_COLOR_RESET "]\tobtain [" ANSI_COLOR_GREEN "%11s" ANSI_COLOR_RESET "]\n", i, e, r );
 	assert(strcmp(r, e) == 0);
+	free(r);
 }

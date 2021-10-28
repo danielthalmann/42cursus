@@ -37,3 +37,7 @@ re: fclean all
 
 bonus: ${BONUS_OBJS}
 	ar rsv ${NAME} ${BONUS_OBJS}
+
+so:
+		$(CC) -nostartfiles -fPIC $(COMPILE_FLAGS) $(SRCS) $(BONUS)
+			gcc -nostartfiles -shared -o libft.so $(OBJS) $(BONUS_OBJS)

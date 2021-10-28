@@ -1,4 +1,3 @@
-
 NAME=test
 CC=gcc
 FUNCTIONS=ft_atoi ft_bzero ft_calloc ft_isalnum ft_isalpha ft_isascii \

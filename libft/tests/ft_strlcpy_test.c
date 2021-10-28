@@ -48,14 +48,16 @@ void ft_strlcpy_test(char *str2, size_t size)
 
 	se1 = malloc(20);
 	memset(se1, '#', 20);
-	se2 = malloc(10);
-	memset(se2, '#', 10);
+	se1[19] = 0;
+	se2 = malloc(11);
+	memset(se2, '#', 11);
 	strcpy(se2, str2);
 
 	s1 = malloc(20);
 	memset(s1, '#', 20);
-	s2 = malloc(10);
-	memset(s2, '#', 10);
+	s1[19] = 0;
+	s2 = malloc(11);
+	memset(s2, '#', 11);
 	strcpy(s2, str2);
 
 	int	r;
