@@ -55,7 +55,7 @@ void ft_memmove_test(char *s, int size)
 	strcpy(r, s);
 
 	e = memmove(e, e + d, size);
-	r = ft_memmove(r, s + d, size);
+	r = ft_memmove(r, r + d, size);
 	printf("string [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\texpected [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\tobtain [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\n", s, e, r);
 
 	assert(strcmp(r, e) == 0);

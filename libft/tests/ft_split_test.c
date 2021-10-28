@@ -48,6 +48,8 @@ void ft_split_test(char *s, int sep, char **e)
 	{
 		printf("expected [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\tresult [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\n", e[i], r[i]);
 		assert(strcmp(e[i], r[i]) == 0);
+		free(r[i]);
 		i++;
 	}
+	free(r);
 }

@@ -43,14 +43,14 @@ void ft_calloc_test(unsigned int nb, unsigned int size)
 	printf("size [" ANSI_COLOR_GREEN "%d, %d" ANSI_COLOR_RESET "] string [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\t", nb, size, s);
 	printf("expected [" ANSI_COLOR_GREEN);
 	i = -1;
-	while (++i < length + 5)
+	while (++i < length)
 		printf("%x ", s[i]);
 	printf(ANSI_COLOR_RESET "]\t");	
 	
 	s2 = ft_calloc(nb, size);
 	printf("obtain [" ANSI_COLOR_GREEN);
 	i = -1;
-	while (++i < length + 1)
+	while (++i < length)
 		printf("%x ", s2[i]);
 	printf(ANSI_COLOR_RESET "]\n");
 	

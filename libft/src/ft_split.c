@@ -43,7 +43,7 @@ char	**ft_split(char const *s, char c)
 		ft_split_move_forward(&end, c, 1);
 		if (end - start)
 		{
-			split[y] = malloc(end - start);
+			split[y] = malloc((end - start) + 1);
 			ft_split_cpy(start, end, split[y++]);
 		}
 		start = end;

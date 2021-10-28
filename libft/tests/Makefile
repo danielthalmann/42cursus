@@ -9,7 +9,7 @@ FUNCTIONS=ft_atoi ft_bzero ft_calloc ft_isalnum ft_isalpha ft_isascii \
 		  ft_strrchr ft_strtrim ft_substr ft_tolower ft_toupper 
 OBJS=${SRCS:.c=.o}
 SRC_FOLDER=../src/
-COMPILE_FLAG=-Wall -Wextra -Werror -g
+COMPILE_FLAG=-Wall -Wextra -Werror -g -fsanitize=address
 COMPILE_BSD_FLAG=
 ifneq ($(OS),Windows_NT)
 	UNAME := $(shell uname)
