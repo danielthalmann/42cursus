@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 17:31:00 by dthalman          #+#    #+#             */
-/*   Updated: 2021/10/29 17:40:42 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/10/29 22:09:08 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 char	*get_next_line(int fd)
 {
+	
 	(void) fd;
 	return (0);
 }
