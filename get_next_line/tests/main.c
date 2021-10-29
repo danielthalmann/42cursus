@@ -1,15 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <dthalman@student.42lausanne.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/29 17:31:13 by dthalman          #+#    #+#             */
-/*   Updated: 2021/10/29 17:31:15 by dthalman         ###   ########.fr       */
+/*   Created: 2021/10/29 17:32:24 by dthalman          #+#    #+#             */
+/*   Updated: 2021/10/29 17:41:03 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-char	*get_next_line(int fd);
-#endif
+#include "get_next_line.h"
+
+int	main()
+{
+
+}
