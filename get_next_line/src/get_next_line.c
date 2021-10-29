@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dthalman <dthalman@student.42lausanne.f    +#+  +:+       +#+        */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 17:31:00 by dthalman          #+#    #+#             */
 /*   Updated: 2021/10/29 17:40:42 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
+#include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
