@@ -33,6 +33,8 @@ char	**ft_split(char const *s, char c)
 	int			y;
 
 	split = ft_split_allocate(s, c);
+	if (!split)
+		return (0);
 	start = s;
 	end = s;
 	y = 0;

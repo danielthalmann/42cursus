@@ -47,6 +47,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	l = (en - st);
 	ret = malloc((l + 1) * sizeof(char));
-	ft_strlcpy(ret, st, (l + 1));
+	if (ret)
+		ft_strlcpy(ret, st, (l + 1));
 	return (ret);
 }

@@ -27,7 +27,7 @@ char	*ft_strrchr(const char *s, int c)
 
 	r = 0;
 	str = (char *)s;
-	while (str && *str)
+	while (*str)
 	{
 		if (*str == (char)c)
 			r = str;

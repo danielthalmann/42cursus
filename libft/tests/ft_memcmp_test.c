@@ -38,6 +38,7 @@ int	main(int argc, char** argv)
 	char	m2[] = {0, 0, 42, 0};
 	ft_memcmp_test(m, m2, 1);
 	ft_memcmp_test(m, m2, 4);
+	ft_memcmp_test(m, m2, 4);
 
 	i = -1;
 	while (i < 10)
@@ -60,7 +61,7 @@ void ft_memcmp_test(char *s, char *s2, int size)
 	e = 0;
 	e = memcmp(s, s2, size);
 	r = ft_memcmp(s, s2, size);
-	printf("string [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\tstring2 [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\texpected [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\tobtain [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\n", s, s2, e, r);
-
-	assert(r ? 1 : 0 == e ? 1 : 0);
+	if (s && s2)
+		printf("string [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\tstring2 [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\tmemcmp expected [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\tft_memcmp obtain [" ANSI_COLOR_GREEN "%d" ANSI_COLOR_RESET "]\n", s, s2, e, r);
+	assert(r  == e);
 }

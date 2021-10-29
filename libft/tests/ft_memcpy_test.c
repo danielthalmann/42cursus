@@ -41,7 +41,7 @@ void ft_memcpy_test(char *s, int size)
 	e = malloc(size);
 	r = malloc(size);
 
-	e = memcpy(e, s, size);
+	e = memcpy(r, s, size);
 	r = ft_memcpy(r, s, size);
 	printf("string [" ANSI_COLOR_GREEN "%15s" ANSI_COLOR_RESET "]\texpected [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\tobtain [" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "]\n", s, e, r);
 
