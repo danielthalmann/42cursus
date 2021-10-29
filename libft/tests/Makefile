@@ -130,7 +130,7 @@ ft_strchr:
 
 ft_strdup:
 	${NORMINETTE} ${SRC_FOLDER}ft_strdup.c
-	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strdup.c ${SRC_FOLDER}ft_strlen.c ft_strdup_test.c faker.c -o ${NAME}
+	${CC} ${COMPILE_FLAG} ${SRC_FOLDER}ft_strlcpy.c ${SRC_FOLDER}ft_strdup.c ${SRC_FOLDER}ft_strlen.c ft_strdup_test.c faker.c -o ${NAME}
 	./test
 
 ft_striteri:
