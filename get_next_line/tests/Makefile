@@ -3,14 +3,14 @@ NAME=test
 
 SRC_FOLDER=../src/
 
-BUFFER_SIZE=1000
+BUFFER_SIZE=10000000
 
 SRC=${SRC_FOLDER}get_next_line.c ${SRC_FOLDER}get_next_line_utils.c \
 	main.c
 OBJ=${SRC:.c=.o}
 
-CFLAG=-Wall -Wextra -Werror -I${SRC_FOLDER} -D BUFFER_SIZE=${BUFFER_SIZE}
-LFLAG=-L${SRC_FOLDER}
+CFLAG=-Wall -Wextra -Werror -I${SRC_FOLDER} -D BUFFER_SIZE=${BUFFER_SIZE} -g
+LFLAG=-L${SRC_FOLDER} -fsanitize=address
 
 NORMINETTE=ls
 
@@ -23,7 +23,7 @@ ${NAME}: ${OBJ}
 	${NORMINETTE} ${SRC}
 	${NORMINETTE} ${SRC_FOLDER}get_next_line.h
 	${CC} ${LFLAG} ${OBJ} -o ${NAME}
-	./${NAME}
+	./${NAME} "case00.txt" | cat -e
 
 all: ${NAME}
 
