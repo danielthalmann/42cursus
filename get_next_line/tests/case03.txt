@@ -1,6 +1,3 @@
 C'est ma ligne 1
 Et ensuite on passe 
-1234567890abcdefghi
-LeTroubleMobsedeEtJ
-eSUISGrosEnColerehi
-1234567890abcdefghi
+Et c'est ma ligne 3
