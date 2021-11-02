@@ -6,7 +6,7 @@ SRC_FOLDER=../src/
 BUFFER_SIZE=10000000
 
 SRC=${SRC_FOLDER}get_next_line.c ${SRC_FOLDER}get_next_line_utils.c \
-	main.c
+	get_next_line_test.c
 OBJ=${SRC:.c=.o}
 
 CFLAG=-Wall -Wextra -Werror -I${SRC_FOLDER} -D BUFFER_SIZE=${BUFFER_SIZE} -g
