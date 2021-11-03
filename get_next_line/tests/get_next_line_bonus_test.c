@@ -48,6 +48,8 @@ int	main(int argc, char **argv)
 	//len = argc - 1;
 	len = 2;
 
+ 	get_next_line(1000);
+
     if (len > 0)
     {
 		fd = malloc((len)* sizeof(int));

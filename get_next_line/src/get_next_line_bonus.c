@@ -108,7 +108,10 @@ int	ft_fill_buffer(int fd, char *buffer, t_buffer **list)
 	int	len;
 
 	len = read(fd, buffer, BUFFER_SIZE);
-	buffer[len] = 0;
+	if (len > -1)
+		buffer[len] = 0;
+	else
+		buffer[0] = 0;
 	if (len)
 		len = ft_strlen2(buffer, "\n");
 	else

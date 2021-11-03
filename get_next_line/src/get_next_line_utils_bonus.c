@@ -117,8 +117,12 @@ void	fd_release_buffer(int fd, t_buffer **list)
 			else
 				*list = c_list->next;
 			free(c_list);
+			break ;
 		}
-		c_last = c_list;
-		c_list = c_list->next;
+		else
+		{
+			c_last = c_list;
+			c_list = c_list->next;
+		}
 	}
 }
