@@ -1,5 +1,6 @@
 #include <stdarg.h>
 #include <unistd.h>
+#include "libftprintf.h"
 
 ft_print_format(char c, va_list *ap);
 ft_print_char(va_list *ap);
@@ -73,3 +74,44 @@ ft_print_string(va_list *ap)
 	}
 }
 
+ft_print_pointer(va_list *ap)
+{
+	unsigned long	ul;
+
+	c = (unsigned long) va_arg(*ap, void *);
+
+	write(1, &c, 1);
+}
+
+ft_print_decimal(va_list *ap)
+{
+	long	i;
+
+	i = (long) va_arg(*ap, long);
+
+	write(1, &c, 1);
+}
+
+ft_print_integer(va_list *ap)
+{
+	int	c;
+
+	c = (char) va_arg(*ap, int);
+	write(1, &c, 1);
+}
+
+ft_print_unsigned_dec(va_list *ap)
+{
+	char	c;
+
+	c = (char) va_arg(*ap, int);
+	write(1, &c, 1);
+}
+
+ft_print_hex(va_list *ap, char c)
+{
+	char	c;
+
+	c = (char) va_arg(*ap, int);
+	write(1, &c, 1);
+}
