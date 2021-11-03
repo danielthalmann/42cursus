@@ -1,3 +1,3 @@
 C'est ma ligne 1
-Et ensuite on passe 
+Et ensuite on passe
 Et c'est ma ligne 3

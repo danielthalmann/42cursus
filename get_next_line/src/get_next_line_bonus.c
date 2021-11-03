@@ -6,24 +6,25 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 17:31:00 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/02 18:03:34 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/03 14:34:32 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
-	static char		buffer[BUFFER_SIZE];
+	char			*buffer;
+	static t_buffer	*list;
 	char			*end;
 	unsigned int	len;
 	char			*out;
 
+	buffer = fd_load_buffer(fd, &list);
 	if (*buffer == 0)
-		len = ft_fill_buffer(fd, buffer);
+		len = ft_fill_buffer(fd, buffer, &list);
 	else
 		len = ft_strlen2(buffer, "\n");
 	if (!len)
@@ -34,7 +35,7 @@ char	*get_next_line(int fd)
 		return (0);
 	while (len && (*end != '\n' || len == 0))
 	{
-		len = ft_while_not_eol(fd, buffer, &out);
+		len = ft_while_not_eol(fd, buffer, &out, &list);
 		end = buffer + (len - 1);
 	}
 	if (len)
@@ -51,12 +52,12 @@ char	*get_next_line(int fd)
  * @param out 
  * @return int 
  */
-int	ft_while_not_eol(int fd, char *buffer, char **out)
+int	ft_while_not_eol(int fd, char *buffer, char **out, t_buffer **list)
 {
 	int		len;
 	char	*add;
 
-	len = ft_fill_buffer(fd, buffer);
+	len = ft_fill_buffer(fd, buffer, list);
 	if (!len)
 		return (0);
 	add = ft_allocate(buffer, len);
@@ -102,14 +103,16 @@ char	*ft_allocate(char *buffer, int len)
  * @param buffer 
  * @return int Si la valeur retourné est NULL, on a atteint la fin du fichier
  */
-int	ft_fill_buffer(int fd, char *buffer)
+int	ft_fill_buffer(int fd, char *buffer, t_buffer **list)
 {
 	int	len;
 
-	len = read(fd, buffer, BUFFER_SIZE - 1);
+	len = read(fd, buffer, BUFFER_SIZE);
 	buffer[len] = 0;
 	if (len)
 		len = ft_strlen2(buffer, "\n");
+	else
+		fd_release_buffer(fd, list);
 	return (len);
 }
 

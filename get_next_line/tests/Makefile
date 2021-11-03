@@ -50,3 +50,7 @@ norm_bonus:
 
 bonus: norm_bonus ${BONUS_OBJ} get_next_line_bonus_test.o
 	${CC} ${LFLAG} ${BONUS_OBJ} get_next_line_bonus_test.o -o ${NAME}
+	./${NAME} | cat -e
+
+rebonus: clean bonus
+	
