@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 17:32:24 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/02 22:30:50 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/03 14:47:33 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,16 @@
 int	main(int argc, char **argv)
 {
 
-    int     fd;
+    int     *fd;
     char    *l;
+	int		i,y;
+	int		len;
+	char	*files[] = {"case00.txt", "case03.txt"};
+	int		quit = 0;
 
+	(void) argv;
+	(void) argc;
+/*
     if (argc == 1)
     {
         l = get_next_line(1);
@@ -37,33 +44,67 @@ int	main(int argc, char **argv)
         free(l);
         return (0);
     }
+*/
+	//len = argc - 1;
+	len = 2;
 
-    if (argc == 2)
+    if (len > 0)
     {
+		fd = malloc((len)* sizeof(int));
 
-        fd = open(argv[1], O_RDONLY);
+		i = 0;
+		while (i < (len))
+		{
+			fd[i] = open(files[i], O_RDONLY);
+        	if (fd[i] == -1)
+			{
+				printf("%s", strerror(errno));
+				return (errno);
+			}
+			i++;
+		}
+		i = 0;
 
-        if (fd != -1)
+		while (i < (len) && !quit)
         {
+			if (fd[i])
+			{
+//				printf("fd[y] : %d\n", fd[i]);
+				l = get_next_line(fd[i]);
+				if (l)
+				{
+					printf("%s", l);
+					free(l);
+				}
+				else
+				{
+					close(fd[i]);
+					fd[i] = 0;
+				}
+			}
 
-            l = get_next_line(fd);
-            while(l)
-            {
-                printf("%s", l);
-                free(l);
-                l = get_next_line(fd);
-            }
-            free(l);
+			i++;
+			if (i == len)
+				i = 0;
+			
+			quit = 1;
+			y = 0;
+			while (y < (len))
+        	{
+//				printf("fd[y] : %d\n", fd[y]);
+				if (fd[y])
+					quit = 0;
+
+				y++;
+			}
         }
-        else 
-        {
-            printf("%s", strerror(errno));
-        }
 
-        close(fd);
-
+		i = 0;
+		while (i < (len))
+		{
+			close(fd[i]);
+			i++;
+		}
+		free(fd);
     }
-
 }
-
- 

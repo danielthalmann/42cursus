@@ -6,18 +6,17 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 17:31:00 by dthalman          #+#    #+#             */
-/*   Updated: 2021/10/31 18:57:59 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/03 14:22:49 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
-	static char		buffer[BUFFER_SIZE];
+	static char		buffer[BUFFER_SIZE + 1];
 	char			*end;
 	unsigned int	len;
 	char			*out;
@@ -106,7 +105,7 @@ int	ft_fill_buffer(int fd, char *buffer)
 {
 	int	len;
 
-	len = read(fd, buffer, BUFFER_SIZE - 1);
+	len = read(fd, buffer, BUFFER_SIZE);
 	buffer[len] = 0;
 	if (len)
 		len = ft_strlen2(buffer, "\n");
