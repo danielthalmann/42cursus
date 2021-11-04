@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 /**
  * @brief return the string length necessary to write number
@@ -34,35 +34,32 @@ int	ft_len_itoa(int nb)
 }
 
 /**
- * @brief obtain a string of the number passed in parameter
+ * @brief write a string of the number passed in parameter to file
+ * descriptor fd
  * 
  * @param nb 
  * @return char* 
  */
-char	*ft_itoa(int nb)
+void	ft_itoa_fd(int nb, int fd)
 {
-	char	*s;
-	int		length;
-	int		v;
+	char			c;
+	unsigned int	v;
 
-	length = ft_len_itoa(nb);
-	s = ft_calloc(length + 1, sizeof(char));
-	if (!s)
-		return (0);
-	s[length] = 0;
-	length--;
-	if (nb == 0)
-		s[length] = '0';
 	if (nb < 0)
-		s[0] = '-';
-	while (nb && length > -1)
 	{
-		v = (nb % 10);
-		if (v < 0)
-			v = -v;
-		s[length] = '0' + v;
-		nb = nb / 10;
-		length--;
+		write(fd, "-", 1);
+		v = -nb;
 	}
-	return (s);
+	else
+		v = nb;
+	if (v < 10)
+	{
+		c = '0' + v;
+		write(fd, &c, 1);
+	}
+	else
+	{
+		ft_itoa_fd(v / 10, fd);
+		ft_itoa_fd(v % 10, fd);
+	}		
 }

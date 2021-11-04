@@ -1,20 +1,21 @@
-#include <stdarg.h>
-#include <unistd.h>
-#include "libftprintf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/05 00:38:56 by dthalman          #+#    #+#             */
+/*   Updated: 2021/11/05 00:38:56 by dthalman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-ft_print_format(char c, va_list *ap);
-ft_print_char(va_list *ap);
-ft_print_string(va_list *ap);
-ft_print_pointer(va_list *ap);
-ft_print_decimal(va_list *ap);
-ft_print_integer(va_list *ap);
-ft_print_unsigned_dec(va_list *ap);
-ft_print_hex(va_list *ap, char c);
+#include "ft_printf.h"
 
-void ft_printf(const char *format, ...)
+void	ft_printf(const char *format, ...)
 {
-	va_list ap;
-	char c;
+	va_list		ap;
+	char		c;
 
 	va_start(ap, format);
 	while (*format)
@@ -22,96 +23,113 @@ void ft_printf(const char *format, ...)
 		c = *format;
 		format++;
 		if (c == '%')
-		{
-			c = *format;
-			if (*format)
-			{
-				format++;
-				ft_print_format(c, &ap);
-			}
-		}
+			format = ft_treat_type(&ap, (char *)format, 1);
+		else
+			write(1, &c, 1);
 	}
 	va_end(ap);
 }
 
-ft_print_format(char c, va_list *ap)
+char	*ft_treat_type(va_list *ap, char *format, int fd)
 {
-	if (c == 'c')
-		ft_print_char(&ap);
-	if (c == 's')
-		ft_print_string(&ap);
-	if (c == 'p')
-		ft_print_pointer(&ap);
-	if (c == 'd')
-		ft_print_decimal(&ap);
-	if (c == 'i')
-		ft_print_integer(&ap);
-	if (c == 'u')
-		ft_print_unsigned_dec(&ap);
-	if (c == 'x' || c == 'X')
-		ft_print_hex(&ap, c);
-	if (c == '%')
-		write(1, "%", 1);
+	t_format	f;
+
+	if (*format)
+	{
+		f.mod = 0;
+		if (ft_strchr("-0.# +", *format))
+			f.mod = *(format++);
+		f.margin = 0;
+		while ((*format >= '0' && *format <= '9'))
+			f.margin = (f.margin * 10) + (*(format++) - '0');
+		if (ft_strchr("cspdiuxX%", *format))
+		{
+			f.c = *format;
+			f.ap = ap;
+			f.fd = fd;
+			ft_print_format_fd(&f);
+			format++;
+		}
+		else
+			write(fd, "%", 1);
+	}
+	return (format);
 }
 
-ft_print_char(va_list *ap)
+void	ft_print_format_fd(t_format *format)
+{
+	if (format->c == 'c')
+		ft_print_char_fd(format);
+	else if (format->c == 's')
+		ft_print_string_fd(format);
+	else if (format->c == 'p')
+		ft_print_pointer_fd(format);
+	else if (format->c == 'i' || format->c == 'd')
+		ft_print_integer_fd(format);
+	else if (format->c == 'u')
+		ft_print_unsigned_dec_fd(format);
+	else if (format->c == 'x' || format->c == 'X')
+		ft_print_hex_fd(format);
+	else if (format->c == '%')
+		write(format->fd, "%", 1);
+}
+
+void	ft_print_char_fd(t_format *format)
 {
 	char	c;
 
-	c = (char) va_arg(*ap, int);
-	write(1, &c, 1);
+	c = (char) va_arg(*format->ap, int);
+	write(format->fd, &c, 1);
 }
 
-ft_print_string(va_list *ap)
+void	ft_print_string_fd(t_format *format)
 {
 	char	*s;
+	int		len;
 
-	s = (char *) va_arg(*ap, char *);
+	s = (char *) va_arg(*format->ap, char *);
+	len = format->margin - ft_strlen(s);
+	if (format->mod != '-')
+		while (len-- > 0)
+			write(format->fd, " ", 1);
 	while (*s)
-	{
-		write(1, s, 1);
-		s++;
-	}
+		write(format->fd, s++, 1);
+	if (format->mod == '-')
+		while (len-- > 0)
+			write(format->fd, " ", 1);
 }
 
-ft_print_pointer(va_list *ap)
+void	ft_print_pointer_fd(t_format *format)
 {
 	unsigned long	ul;
 
-	c = (unsigned long) va_arg(*ap, void *);
-
-	write(1, &c, 1);
+	ul = (unsigned long) va_arg(*format->ap, void *);
+	(void) ul;
+	write(format->fd, "?", 1);
 }
 
-ft_print_decimal(va_list *ap)
+void	ft_print_integer_fd(t_format *format)
 {
-	long	i;
+	int	i;
 
-	i = (long) va_arg(*ap, long);
-
-	write(1, &c, 1);
+	i = (int) va_arg(*format->ap, int);
+	ft_itoa_fd(i, format->fd);
 }
 
-ft_print_integer(va_list *ap)
+void	ft_print_unsigned_dec_fd(t_format *format)
 {
-	int	c;
+	unsigned int	ui;
 
-	c = (char) va_arg(*ap, int);
-	write(1, &c, 1);
+	ui = (unsigned int) va_arg(*format->ap, unsigned int);
+	(void) ui;
+	write(format->fd, "?", 1);
 }
 
-ft_print_unsigned_dec(va_list *ap)
+void	ft_print_hex_fd(t_format *format)
 {
-	char	c;
+	unsigned int	ui;
 
-	c = (char) va_arg(*ap, int);
-	write(1, &c, 1);
-}
-
-ft_print_hex(va_list *ap, char c)
-{
-	char	c;
-
-	c = (char) va_arg(*ap, int);
-	write(1, &c, 1);
+	ui = (unsigned int) va_arg(*format->ap, unsigned int);
+	(void) ui;
+	write(format->fd, "?", 1);
 }
