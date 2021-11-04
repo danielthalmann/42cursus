@@ -11,7 +11,7 @@ ft_print_integer(va_list *ap);
 ft_print_unsigned_dec(va_list *ap);
 ft_print_hex(va_list *ap, char c);
 
-ft_printf(const char *format, ...)
+void ft_printf(const char *format, ...)
 {
 	va_list ap;
 	char c;
