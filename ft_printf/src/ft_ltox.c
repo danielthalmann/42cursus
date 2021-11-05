@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_ltox.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,7 @@
 
 #include "ft_printf.h"
 
-/**
- * @brief return the string length necessary to write number
- * 
- * @param nb 
- * @return int 
- */
-int	ft_len_itoa(long nb)
+int	ft_len_ltox(unsigned long nb)
 {
 	int	length;
 
@@ -27,42 +21,42 @@ int	ft_len_itoa(long nb)
 		length++;
 	while (nb)
 	{
-		nb /= 10;
+		nb /= 16;
 		length++;
 	}
 	return (length);
 }
 
-/**
- * @brief write a string of the number passed in parameter to file
- * descriptor fd
- * 
- * @param nb 
- * @return char* 
- */
-void	ft_itoa_fd(int nb, int fd)
+void	ft_ltox_fd(unsigned long nb, int fd)
 {
-	if (nb < 0)
+	char	*s;
+
+	if (nb < 16)
 	{
-		write(fd, "-", 1);
-		ft_uitoa_fd(-nb, fd);
+		s = "0123456789abcdef";
+		s = s + nb;
+		write(fd, s, 1);
 	}
 	else
-		ft_uitoa_fd(nb, fd);
+	{
+		ft_ltox_fd(nb / (long)16, fd);
+		ft_ltox_fd(nb % (long)16, fd);
+	}
 }
 
-void	ft_uitoa_fd(unsigned int nb, int fd)
+void	ft_ltox_up_fd(unsigned long nb, int fd)
 {
-	char	c;
+	char	*s;
 
-	if (nb < 10)
+	if (nb < 16)
 	{
-		c = '0' + nb;
-		write(fd, &c, 1);
+		s = "0123456789ABCDEF";
+		s = s + nb;
+		write(fd, s, 1);
 	}
 	else
 	{
-		ft_itoa_fd(nb / 10, fd);
-		ft_itoa_fd(nb % 10, fd);
-	}		
+		ft_ltox_up_fd(nb / (long)16, fd);
+		ft_ltox_up_fd(nb % (long)16, fd);
+	}
 }

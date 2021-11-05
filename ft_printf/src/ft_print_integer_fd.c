@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_print_integer_fd.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,57 +12,25 @@
 
 #include "ft_printf.h"
 
-/**
- * @brief return the string length necessary to write number
- * 
- * @param nb 
- * @return int 
- */
-int	ft_len_itoa(long nb)
+void	ft_print_integer_fd(t_format *format)
 {
-	int	length;
+	int	i;
+	int	len;
 
-	length = 0;
-	if (nb <= 0)
-		length++;
-	while (nb)
+	i = (int) va_arg(*format->ap, int);
+	format->len = ft_len_itoa(i);
+	len = format->margin - format->len;
+	if (format->align_left && (format->space_sign || format->plus_sign))
+		len--;
+	ft_format_space(1, len, format);
+	if ((format->space_sign || format->plus_sign) && i > -1 && len < 1)
 	{
-		nb /= 10;
-		length++;
+		if (format->plus_sign)
+			write(format->fd, "+", 1);
+		else
+			write(format->fd, " ", 1);
+		format->len++;
 	}
-	return (length);
-}
-
-/**
- * @brief write a string of the number passed in parameter to file
- * descriptor fd
- * 
- * @param nb 
- * @return char* 
- */
-void	ft_itoa_fd(int nb, int fd)
-{
-	if (nb < 0)
-	{
-		write(fd, "-", 1);
-		ft_uitoa_fd(-nb, fd);
-	}
-	else
-		ft_uitoa_fd(nb, fd);
-}
-
-void	ft_uitoa_fd(unsigned int nb, int fd)
-{
-	char	c;
-
-	if (nb < 10)
-	{
-		c = '0' + nb;
-		write(fd, &c, 1);
-	}
-	else
-	{
-		ft_itoa_fd(nb / 10, fd);
-		ft_itoa_fd(nb % 10, fd);
-	}		
+	ft_itoa_fd(i, format->fd);
+	ft_format_space(0, len, format);
 }

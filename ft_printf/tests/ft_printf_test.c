@@ -17,13 +17,22 @@
 
 int main()
 {
+	int i;
+	int j;
 	char c;
-	c = 65;
-
-	printf   ("   printf(%%25c) -> \"%25c\" \n", c);
-	ft_printf("ft_printf(%%25c) -> \"%25c\" \n", c);
-
 	char *n;
+	
+	i = printf   ("   printf(%%x) -> \"%x\" \n", -1);
+	j = ft_printf("ft_printf(%%x) -> \"%x\" \n", -1);
+	printf("i : %d == j %d\n", i, j);
+
+	i = printf   ("   printf(%%X) -> \"%X\" \n", -1);
+	j = ft_printf("ft_printf(%%X) -> \"%X\" \n", -1);
+	printf("i : %d == j %d\n", i, j);
+
+
+return (0);
+
 	n = 0;
 
 	printf   ("   printf(%%p) -> \"%p\" \n", n);
@@ -35,7 +44,27 @@ int main()
 	ft_printf("ft_printf(%%p) -> \"%p\" \n", n);
 
 
-return (0);
+
+	i = printf   ("   printf(%%u) -> \"%u\" \n", 5);
+	j = ft_printf("ft_printf(%%u) -> \"%u\" \n", 5);
+	printf("i : %d == j %d\n", i, j);
+
+	
+	c = 65;
+
+	i = printf   ("   printf(%%25c) -> \"%25c\" \n", c);
+	j = ft_printf("ft_printf(%%25c) -> \"%25c\" \n", c);
+	printf("i : %d == j %d\n", i, j);
+
+
+	i = printf   ("   printf(%%x) -> \"%x\" \n", 105);
+	j = ft_printf("ft_printf(%%x) -> \"%x\" \n", 105);
+	printf("i : %d == j %d\n", i, j);
+	
+	i = printf   ("   printf(%%x) -> \"%X\" \n", 105);
+	j = ft_printf("ft_printf(%%x) -> \"%X\" \n", 105);
+	printf("i : %d == j %d\n", i, j);
+
 
 	n = 0;
 

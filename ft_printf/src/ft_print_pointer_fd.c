@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_print_pointer_fd.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,57 +12,24 @@
 
 #include "ft_printf.h"
 
-/**
- * @brief return the string length necessary to write number
- * 
- * @param nb 
- * @return int 
- */
-int	ft_len_itoa(long nb)
+void	ft_print_pointer_fd(t_format *format)
 {
-	int	length;
+	unsigned long	ul;
 
-	length = 0;
-	if (nb <= 0)
-		length++;
-	while (nb)
+	ul = (unsigned long) va_arg(*format->ap, void *);
+	if (!ul)
 	{
-		nb /= 10;
-		length++;
-	}
-	return (length);
-}
-
-/**
- * @brief write a string of the number passed in parameter to file
- * descriptor fd
- * 
- * @param nb 
- * @return char* 
- */
-void	ft_itoa_fd(int nb, int fd)
-{
-	if (nb < 0)
-	{
-		write(fd, "-", 1);
-		ft_uitoa_fd(-nb, fd);
-	}
-	else
-		ft_uitoa_fd(nb, fd);
-}
-
-void	ft_uitoa_fd(unsigned int nb, int fd)
-{
-	char	c;
-
-	if (nb < 10)
-	{
-		c = '0' + nb;
-		write(fd, &c, 1);
+		format->len = 5;
+		ft_format_space(1, format->margin - 5, format);
+		write(format->fd, "(nil)", 5);
+		ft_format_space(0, format->margin - 5, format);
 	}
 	else
 	{
-		ft_itoa_fd(nb / 10, fd);
-		ft_itoa_fd(nb % 10, fd);
-	}		
+		format->len = ft_len_ltox(ul) + 2;
+		ft_format_space(1, format->margin - format->len, format);
+		write(format->fd, "0x", 2);
+		ft_ltox_fd(ul, format->fd);
+		ft_format_space(0, format->margin - format->len, format);
+	}
 }
