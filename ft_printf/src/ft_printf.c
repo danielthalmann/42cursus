@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include<stdio.h>
+
 /**
  * @brief écrit dans la console le contenu de la chaine format et substituant
  * les valeurs %... par le contenu des variables supplémentaires passé en 

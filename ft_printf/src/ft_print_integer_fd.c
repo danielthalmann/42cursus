@@ -30,7 +30,11 @@ void	ft_print_integer_fd(t_format *format)
 		else
 			write(format->fd, " ", 1);
 		format->len++;
+		len++;
 	}
-	ft_itoa_fd(i, format->fd);
+	if (format->zero_fill)
+		ft_itoa_fd2(i, format->fd, len, format);
+	else
+		ft_itoa_fd(i, format->fd);
 	ft_format_space(0, len, format);
 }

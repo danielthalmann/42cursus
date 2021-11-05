@@ -14,6 +14,8 @@
 
 void	ft_repeat_char(int len, char c, t_format *format)
 {
+	if (!format->zero_fill)
+		return ;
 	while (len-- > 0)
 	{
 		write(format->fd, &c, 1);
@@ -25,27 +27,18 @@ void	ft_format_space(int left, int len, t_format *format)
 {
 	char c;
 
-	if (format->zero_fill && ft_strchr("uxX", format->c))
-		c = '0';
-	else
-		c = ' ';
+	if (format->zero_fill)
+		return ;
+	c = ' ';
 	if (left)
 	{
 		if (!format->align_left)
-		{
-
-		}
+			ft_repeat_char(len, c, format);
 	}
 	else
 	{
 		if (format->align_left)
-		{
-			while (len-- > 0)
-			{
-				write(format->fd, &c, 1);
-				format->len++;
-			}
-		}
+			ft_repeat_char(len, c, format);
 	}
 }
 

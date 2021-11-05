@@ -19,6 +19,7 @@ void	ft_print_unsigned_dec_fd(t_format *format)
 	ui = (unsigned int) va_arg(*format->ap, unsigned int);
 	format->len = ft_len_itoa(ui);
 	ft_format_space(1, format->margin - format->len, format);
+	ft_repeat_char(format->margin - format->len, '0', format);
 	ft_uitoa_fd(ui, format->fd);
 	ft_format_space(0, format->margin - format->len, format);
 }

@@ -19,9 +19,31 @@ int main()
 {
 	int i;
 	int j;
+	int v;
 	char c;
 	char *n;
-	
+
+	v = 9;
+	i = printf   ("   printf(%%04d, %d) => \"%04d\" \n", v, v);
+	j = ft_printf("ft_printf(%%04d, %d) => \"%04d\" \n", v, v);
+
+	v = 15;
+	i = printf   ("   printf(%%03d, %d) => \"%03d\" \n", v, v);
+	j = ft_printf("ft_printf(%%03d, %d) => \"%03d\" \n", v, v);
+
+	v = 9;
+	i = printf   ("   printf(%%02u, %d) => \"%02u\" \n", v, v);
+	j = ft_printf("ft_printf(%%02u, %d) => \"%02u\" \n", v, v);
+
+	v = 1;
+	i = printf   ("   printf(%%03x, %d) => \"%03x\" \n", v, v);
+	j = ft_printf("ft_printf(%%03x, %d) => \"%03x\" \n", v, v);
+
+
+
+return (0);
+
+
 	n = 0;
 
 	i = printf   ("   printf(%%05d) -> \"%05d\" \n", -15);

@@ -15,7 +15,7 @@
 # include <string.h>
 # include <stdarg.h>
 # include <unistd.h>
-
+# include<stdio.h>
 typedef struct s_format
 {
 	va_list	*ap;
@@ -34,11 +34,13 @@ int		ft_printf(const char *format, ...);
 int		ft_len_itoa(long nb);
 void	ft_uitoa_fd(unsigned int nb, int fd);
 void	ft_itoa_fd(int nb, int fd);
+void	ft_itoa_fd2(int nb, int fd, int len, t_format *format);
 void	ft_ltoa_fd(long nb, int fd);
 int		ft_len_ltox(unsigned long nb);
 void	ft_ltox_fd(unsigned long nb, int fd);
 void	ft_ltox_up_fd(unsigned long nb, int fd);
 size_t	ft_strlen(const char *s);
+void	ft_repeat_char(int len, char c, t_format *format);
 char	*ft_strchr(const char *s, int c);
 void	ft_format_space(int left, int len, t_format *format);
 void	ft_clear_type_format(va_list *ap, int fd, t_format *format);
