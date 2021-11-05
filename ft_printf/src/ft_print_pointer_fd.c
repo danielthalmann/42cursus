@@ -18,8 +18,8 @@ void	ft_print_pointer_fd(t_format *format)
 
 	ul = (unsigned long) va_arg(*format->ap, void *);
 	format->len = ft_len_ltox(ul) + 2;
-	ft_format_space(1, format->margin - format->len, format);
+	ft_margin_left(format->margin - format->len, format);
 	write(format->fd, "0x", 2);
 	ft_ltox_fd(ul, format->fd);
-	ft_format_space(0, format->margin - format->len, format);
+	ft_margin_right(format->margin - format->len, format);
 }

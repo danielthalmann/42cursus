@@ -20,7 +20,7 @@ void	ft_print_char_fd(t_format *format)
 	c = (char) va_arg(*format->ap, int);
 	format->len++;
 	len = format->margin - 1;
-	ft_format_space(1, len, format);
+	ft_margin_left(len, format);
 	write(format->fd, &c, 1);
-	ft_format_space(0, len, format);
+	ft_margin_right(len, format);
 }

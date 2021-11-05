@@ -15,7 +15,7 @@
 # include <string.h>
 # include <stdarg.h>
 # include <unistd.h>
-# include<stdio.h>
+
 typedef struct s_format
 {
 	va_list	*ap;
@@ -27,6 +27,7 @@ typedef struct s_format
 	int		space_sign;
 	int		zero_fill;
 	int		plus_sign;
+	int		decimal_point;
 	int		len;
 }	t_format;
 
@@ -41,8 +42,10 @@ void	ft_ltox_fd(unsigned long nb, int fd);
 void	ft_ltox_up_fd(unsigned long nb, int fd);
 size_t	ft_strlen(const char *s);
 void	ft_repeat_char(int len, char c, t_format *format);
+void	ft_zero_padded(int len, t_format *format);
 char	*ft_strchr(const char *s, int c);
-void	ft_format_space(int left, int len, t_format *format);
+void	ft_margin_left(int len, t_format *format);
+void	ft_margin_right(int len, t_format *format);
 void	ft_clear_type_format(va_list *ap, int fd, t_format *format);
 char	*ft_treat_percent(va_list *ap, char *s_format, t_format	*f, int fd);
 void	ft_read_modifier(char c, t_format *format);

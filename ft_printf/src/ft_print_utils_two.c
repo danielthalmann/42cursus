@@ -1,37 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_integer_fd.c                              :+:      :+:    :+:   */
+/*   ft_print_utils_two.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:20:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/10/15 15:20:01 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/05 07:48:57 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_print_integer_fd(t_format *format)
+void	ft_zero_padded(int len, t_format *format)
 {
-	int	i;
-	int	len;
+	if (!(format->zero_fill || format->decimal_point))
+		return ;
+	ft_repeat_char(len, '0', format);
+}
 
-	i = (int) va_arg(*format->ap, int);
-	format->len = ft_len_itoa(i);
-	len = format->margin - format->len;
-	if (format->align_left && (format->space_sign || format->plus_sign))
-		len--;
-	ft_margin_left(len, format);
-	if ((format->space_sign || format->plus_sign) && i > -1 && len < 1)
+void	ft_repeat_char(int len, char c, t_format *format)
+{
+	while (len-- > 0)
 	{
-		if (format->plus_sign)
-			write(format->fd, "+", 1);
-		else
-			write(format->fd, " ", 1);
+		write(format->fd, &c, 1);
 		format->len++;
-		len++;
 	}
-	ft_itoa_fd2(i, format->fd, len, format);
-	ft_margin_right(len, format);
+}
+
+void	ft_margin_left(int len, t_format *format)
+{
+	if (format->zero_fill || format->decimal_point)
+		return ;
+	if (!format->align_left)
+		ft_repeat_char(len, ' ', format);
+}
+
+void	ft_margin_right(int len, t_format *format)
+{
+	if (format->zero_fill || format->decimal_point)
+		return ;
+	if (format->align_left)
+		ft_repeat_char(len, ' ', format);
 }

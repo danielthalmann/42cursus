@@ -16,14 +16,23 @@ void	ft_print_string_fd(t_format *format)
 {
 	char	*s;
 	int		len;
+	int		length;
 
 	s = (char *) va_arg(*format->ap, char *);
 	if (!s)
 		s = "(null)";
-	format->len = ft_strlen(s);
-	len = format->margin - format->len;
-	ft_format_space(1, len, format);
-	while (*s)
-		write(format->fd, s++, 1);
-	ft_format_space(0, len, format);
+	len = format->margin - ft_strlen(s);
+	ft_margin_left(len, format);
+	if (format->decimal_point)
+	{
+		length = format->margin;
+		while (*s && (length--))
+			ft_repeat_char(1, *(s++), format);
+	}
+	else
+	{
+		while (*s)
+			ft_repeat_char(1, *(s++), format);
+	}
+	ft_margin_right(len, format);
 }

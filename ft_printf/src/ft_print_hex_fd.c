@@ -18,11 +18,11 @@ void	ft_print_hex_fd(t_format *format)
 
 	ui = (unsigned int) va_arg(*format->ap, unsigned int);
 	format->len = ft_len_ltox(ui);
-	ft_format_space(1, format->margin - format->len, format);
-	ft_repeat_char(format->margin - format->len, '0', format);
+	ft_margin_left(format->margin - format->len, format);
+	ft_zero_padded(format->margin - format->len, format);
 	if (format->c == 'X')
 		ft_ltox_up_fd(ui, format->fd);
 	else
 		ft_ltox_fd(ui, format->fd);
-	ft_format_space(0, format->margin - format->len, format);
+	ft_margin_right(format->margin - format->len, format);
 }

@@ -56,12 +56,12 @@ void	ft_itoa_fd2(int nb, int fd, int len, t_format *format)
 	if (nb < 0)
 	{
 		write(fd, "-", 1);
-		ft_repeat_char(len, '0', format);
+		ft_zero_padded(len + 1, format);
 		ft_uitoa_fd(-nb, fd);
 	}
 	else
 	{
-		ft_repeat_char(len, '0', format);
+		ft_zero_padded(len, format);
 		ft_uitoa_fd(nb, fd);
 	}
 }

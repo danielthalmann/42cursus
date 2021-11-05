@@ -22,6 +22,56 @@ int main()
 	int v;
 	char c;
 	char *n;
+	char *s;
+
+
+	s = " - ";
+	i = printf   ("   printf(%%.s, %s) => \"%.s\" \n", s, s);
+	j = ft_printf("ft_printf(%%.s, %s) => \"%.s\" \n", s, s);
+	printf("i : %d == j %d\n", i, j);
+
+
+return (0);
+
+	s = "-";
+	i = printf   ("   printf(%%.s, %s) => \"%.s\" \n", s, s);
+	j = ft_printf("ft_printf(%%.s, %s) => \"%.s\" \n", s, s);
+
+	s = "-";
+	i = printf   ("   printf(%%.1s, %s) => \"%.1s\" \n", s, s);
+	j = ft_printf("ft_printf(%%.1s, %s) => \"%.1s\" \n", s, s);
+	printf("i : %d == j %d\n", i, j);
+
+	v = -1;
+	i = printf   ("   printf(%%.1d, %d) => \"%.1d\" \n", v, v);
+	j = ft_printf("ft_printf(%%.1d, %d) => \"%.1d\" \n", v, v);
+	printf("i : %d == j %d\n", i, j);
+
+	v = 1;
+	i = printf   ("   printf(%%.2d, %d) => \"%.2d\" \n", v, v);
+	j = ft_printf("ft_printf(%%.2d, %d) => \"%.2d\" \n", v, v);
+	printf("i : %d == j %d\n", i, j);
+
+	v = -1;
+	i = printf   ("   printf(%%.2d, %d) => \"%.2d\" \n", v, v);
+	j = ft_printf("ft_printf(%%.2d, %d) => \"%.2d\" \n", v, v);
+	printf("i : %d == j %d\n", i, j);
+
+	v = 1;
+	i = printf   ("   printf(%%02d, %d) => \"%02d\" \n", v, v);
+	j = ft_printf("ft_printf(%%02d, %d) => \"%02d\" \n", v, v);
+	printf("i : %d == j %d\n", i, j);
+
+	v = 1;
+	i = printf   ("   printf(%%.5d, %d) => \"%.5d\" \n", v, v);
+	j = ft_printf("ft_printf(%%.5d, %d) => \"%.5d\" \n", v, v);
+	printf("i : %d == j %d\n", i, j);
+
+	v = 1;
+	i = printf   ("   printf(%%05d, %d) => \"%05d\" \n", v, v);
+	j = ft_printf("ft_printf(%%05d, %d) => \"%05d\" \n", v, v);
+	printf("i : %d == j %d\n", i, j);
+
 
 	v = 9;
 	i = printf   ("   printf(%%04d, %d) => \"%04d\" \n", v, v);
@@ -41,10 +91,7 @@ int main()
 
 
 
-return (0);
-
-
-	n = 0;
+    n = 0;
 
 	i = printf   ("   printf(%%05d) -> \"%05d\" \n", -15);
 	j = ft_printf("ft_printf(%%05d) -> \"%05d\" \n", -15);

@@ -12,36 +12,6 @@
 
 #include "ft_printf.h"
 
-void	ft_repeat_char(int len, char c, t_format *format)
-{
-	if (!format->zero_fill)
-		return ;
-	while (len-- > 0)
-	{
-		write(format->fd, &c, 1);
-		format->len++;
-	}
-}
-
-void	ft_format_space(int left, int len, t_format *format)
-{
-	char c;
-
-	if (format->zero_fill)
-		return ;
-	c = ' ';
-	if (left)
-	{
-		if (!format->align_left)
-			ft_repeat_char(len, c, format);
-	}
-	else
-	{
-		if (format->align_left)
-			ft_repeat_char(len, c, format);
-	}
-}
-
 /**
  * @brief Initialise les valeurs de la structure t_format qui
  * contient les modificateurs à appliquer sur le formatage
@@ -61,6 +31,7 @@ void	ft_clear_type_format(va_list *ap, int fd, t_format *format)
 	format->space_sign = 0;
 	format->plus_sign = 0;
 	format->zero_fill = 0;
+	format->decimal_point = 0;
 	format->len = 0;
 }
 
@@ -81,4 +52,6 @@ void	ft_read_modifier(char c, t_format *format)
 		format->plus_sign = 1;
 	if (c == '0')
 		format->zero_fill = 1;
+	if (c == '.')
+		format->decimal_point = 1;
 }
