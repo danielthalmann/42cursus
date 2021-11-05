@@ -42,24 +42,60 @@ int	ft_len_itoa(int nb)
  */
 void	ft_itoa_fd(int nb, int fd)
 {
-	char			c;
-	unsigned int	v;
-
 	if (nb < 0)
 	{
 		write(fd, "-", 1);
-		v = -nb;
+		ft_uitoa_fd(-nb, fd);
 	}
 	else
-		v = nb;
-	if (v < 10)
+		ft_uitoa_fd(nb, fd);
+}
+
+void	ft_uitoa_fd(unsigned int nb, int fd)
+{
+	char	c;
+
+	if (nb < 10)
 	{
-		c = '0' + v;
+		c = '0' + nb;
 		write(fd, &c, 1);
 	}
 	else
 	{
-		ft_itoa_fd(v / 10, fd);
-		ft_itoa_fd(v % 10, fd);
+		ft_itoa_fd(nb / 10, fd);
+		ft_itoa_fd(nb % 10, fd);
 	}		
+}
+
+void	ft_ltoa_fd(long nb, int fd)
+{
+	char	c;
+
+	if (nb < 10)
+	{
+		c = '0' + nb;
+		write(fd, &c, 1);
+	}
+	else
+	{
+		ft_ltoa_fd(nb / (long)10, fd);
+		ft_ltoa_fd(nb % (long)10, fd);
+	}
+}
+
+void	ft_ltox_fd(long nb, int fd)
+{
+	char	*s;
+
+	if (nb < 16)
+	{
+		s = "0123456789abcdef";
+		s = s + nb;
+		write(fd, s, 1);
+	}
+	else
+	{
+		ft_ltox_fd(nb / (long)16, fd);
+		ft_ltox_fd(nb % (long)16, fd);
+	}
 }

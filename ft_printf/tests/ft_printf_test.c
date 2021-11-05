@@ -17,16 +17,80 @@
 
 int main()
 {
-	ft_printf("ft_printf(%%25s) -> \"%25s\" \n", "mon texte");
-	printf   ("   printf(%%25s) -> \"%25s\" \n", "mon texte");
+	char c;
+	c = 65;
+
+	printf   ("   printf(%%25c) -> \"%25c\" \n", c);
+	ft_printf("ft_printf(%%25c) -> \"%25c\" \n", c);
+
+	char *n;
+	n = 0;
+
+	printf   ("   printf(%%p) -> \"%p\" \n", n);
+	ft_printf("ft_printf(%%p) -> \"%p\" \n", n);
+
+	n = "test";
+
+	printf   ("   printf(%%p) -> \"%p\" \n", n);
+	ft_printf("ft_printf(%%p) -> \"%p\" \n", n);
+
+
+return (0);
+
+	n = 0;
+
+	printf   ("   printf(%%25s) -> \"%25s\" \n", n);
+	ft_printf("ft_printf(%%25s) -> \"%25s\" \n", n);
+
+	printf   ("   printf(%%.25s) -> \"%.25s\" \n", n);
+	ft_printf("ft_printf(%%.25s) -> \"%.25s\" \n", n);
+
+	printf   ("   printf(%% i) -> \"% i\" \n", INT_MAX);
+	ft_printf("ft_printf(%% i) -> \"% i\" \n", INT_MAX);
+
+	printf   ("   printf(%% 12i) -> \"% 12i\" \n", INT_MAX);
+	ft_printf("ft_printf(%% 12i) -> \"% 12i\" \n", INT_MAX);
+
+	printf   ("   printf(%% 12i) -> \"% 12i\" \n", INT_MAX);
+	ft_printf("ft_printf(%% 12i) -> \"% 12i\" \n", INT_MAX);
+
+	printf   ("   printf(%% -11i) -> \"% -11i\" \n", INT_MAX);
+	ft_printf("ft_printf(%% -11i) -> \"% -11i\" \n", INT_MAX);
+
+	printf   ("   printf(%%+-11i) -> \"%+-11i\" \n", INT_MAX);
+	ft_printf("ft_printf(%%+-11i) -> \"%+-11i\" \n", INT_MAX);
+
+	printf   ("   printf(%%+i) -> \"%+i\" \n", INT_MAX);
+	ft_printf("ft_printf(%%+i) -> \"%+i\" \n", INT_MAX);
+
+	printf   ("   printf(%%+i) -> \"%+i\" \n", 0);
+	ft_printf("ft_printf(%%+i) -> \"%+i\" \n", 0);
+
+	printf   ("\n");
+
 	ft_printf("ft_printf(%%10s) -> \"%10s\" \n", "mon texte");
 	printf   ("   printf(%%10s) -> \"%10s\" \n", "mon texte");
+
+	printf   ("\n");
+	
 	ft_printf("ft_printf(%%-10s) -> \"%-10s\" \n", "mon texte");
 	printf   ("   printf(%%-10s) -> \"%-10s\" \n", "mon texte");
+	printf   ("\n");
 	ft_printf("ft_printf(%%z) -> \"%z\" \n", "mon texte");
+	printf("ft_printf(%%-+i) -> \"%+-20i\" \n", INT_MAX);
 	printf("ft_printf(%%-+i) -> \"%+-20i\" \n", INT_MAX);
 
 return (0);
+
+    printf("size of int : %ld\n",sizeof(int));
+    printf("size of signed int : %ld\n",sizeof(signed int));
+    printf("size of unsigned long : %ld\n",sizeof(long));
+	printf("size of pointer : %ld\n",sizeof(void *));
+
+	ft_printf("ft_printf(%%i) -> \"%i\" \n", INT_MIN);
+	printf   ("   printf(%%i) -> \"%i\" \n", INT_MIN);
+
+
 	ft_printf("ft_printf(%%s) -> \"%s\" \n", "mon texte");
 	printf   ("   printf(%%s) -> \"%s\" \n", "mon texte");
 
