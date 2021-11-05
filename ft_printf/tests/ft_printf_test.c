@@ -22,6 +22,17 @@ int main()
 	char c;
 	char *n;
 	
+	n = 0;
+
+	i = printf   ("   printf(%%05d) -> \"%05d\" \n", -15);
+	j = ft_printf("ft_printf(%%05d) -> \"%05d\" \n", -15);
+	printf("i : %d == j %d\n", i, j);
+
+
+	i = printf   ("   printf(%%p %%p) -> \"%p %p\" \n", n, n);
+	j = ft_printf("ft_printf(%%p %%p) -> \"%p %p\" \n", n, n);
+	printf("i : %d == j %d\n", i, j);
+
 	i = printf   ("   printf(%%x) -> \"%x\" \n", -1);
 	j = ft_printf("ft_printf(%%x) -> \"%x\" \n", -1);
 	printf("i : %d == j %d\n", i, j);

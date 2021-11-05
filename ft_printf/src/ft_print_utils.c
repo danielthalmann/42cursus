@@ -6,23 +6,34 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:20:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/10/15 15:20:01 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/05 07:48:57 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+void	ft_repeat_char(int len, char c, t_format *format)
+{
+	while (len-- > 0)
+	{
+		write(format->fd, &c, 1);
+		format->len++;
+	}
+}
+
 void	ft_format_space(int left, int len, t_format *format)
 {
+	char c;
+
+	if (format->zero_fill && ft_strchr("uxX", format->c))
+		c = '0';
+	else
+		c = ' ';
 	if (left)
 	{
 		if (!format->align_left)
 		{
-			while (len-- > 0)
-			{
-				write(format->fd, " ", 1);
-				format->len++;
-			}
+
 		}
 	}
 	else
@@ -31,7 +42,7 @@ void	ft_format_space(int left, int len, t_format *format)
 		{
 			while (len-- > 0)
 			{
-				write(format->fd, " ", 1);
+				write(format->fd, &c, 1);
 				format->len++;
 			}
 		}
