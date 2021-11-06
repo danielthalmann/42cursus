@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 17:20:46 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/06 16:52:32 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/06 09:54:46 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	*fd_load_buffer(int fd, t_buffer **list)
 	return (c_list->next->buf);
 }
 
-void	fd_release_buffer(int fd, t_buffer **list)
+long	fd_release_buffer(int fd, t_buffer **list)
 {
 	t_buffer		*c_list;
 	t_buffer		*c_last;
@@ -125,4 +125,5 @@ void	fd_release_buffer(int fd, t_buffer **list)
 			c_list = c_list->next;
 		}
 	}
+	return (0);
 }

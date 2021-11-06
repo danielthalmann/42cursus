@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 17:19:59 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/06 16:52:27 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/06 09:54:38 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ char			*ft_allocate(char *buffer, int len);
 int				ft_while_not_eol(int fd, char *b, char **out, t_buffer **list);
 void			ft_strmov(char *to, char *s, int len);
 char			*fd_load_buffer(int fd, t_buffer **list);
-void			fd_release_buffer(int fd, t_buffer **list);
+long			fd_release_buffer(int fd, t_buffer **list);
 #endif

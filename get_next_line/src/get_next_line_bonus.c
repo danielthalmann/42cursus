@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 17:31:00 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/06 16:52:13 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/06 09:53:59 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ char	*get_next_line(int fd)
 		len = ft_fill_buffer(fd, buffer, &list);
 	else
 		len = ft_strlen2(buffer, "\n");
-	if (!len)
-		return (0);
+	if (len == 0)
+		return ((char *)fd_release_buffer(fd, &list));
 	end = buffer + (len - 1);
 	out = ft_allocate(buffer, len);
 	if (!out)
@@ -115,7 +115,7 @@ int	ft_fill_buffer(int fd, char *buffer, t_buffer **list)
 	if (len)
 		len = ft_strlen2(buffer, "\n");
 	else
-		fd_release_buffer(fd, list);
+		return (fd_release_buffer(fd, list));
 	return (len);
 }
 
