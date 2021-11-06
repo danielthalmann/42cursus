@@ -60,3 +60,38 @@ void	ft_ltox_up_fd(unsigned long nb, int fd)
 		ft_ltox_up_fd(nb % (long)16, fd);
 	}
 }
+
+void	ft_uitox_fd(unsigned int nb, int fd)
+{
+	char	*s;
+
+	if (nb < 16)
+	{
+		s = "0123456789abcdef";
+		s = s + nb;
+		write(fd, s, 1);
+	}
+	else
+	{
+		ft_uitox_fd(nb / (long)16, fd);
+		ft_uitox_fd(nb % (long)16, fd);
+	}
+}
+
+void	ft_uitox_up_fd(unsigned int nb, int fd)
+{
+	char	*s;
+
+	if (nb < 16)
+	{
+		s = "0123456789ABCDEF";
+		s = s + nb;
+		write(fd, s, 1);
+	}
+	else
+	{
+		ft_uitox_up_fd(nb / (long)16, fd);
+		ft_uitox_up_fd(nb % (long)16, fd);
+	}
+}
+

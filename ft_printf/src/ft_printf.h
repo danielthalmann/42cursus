@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 00:38:38 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/06 09:43:16 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/06 07:32:15 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	ft_ltoa_fd(long nb, int fd);
 int		ft_len_ltox(unsigned long nb);
 void	ft_ltox_fd(unsigned long nb, int fd);
 void	ft_ltox_up_fd(unsigned long nb, int fd);
+void	ft_uitox_fd(unsigned int nb, int fd);
+void	ft_uitox_up_fd(unsigned int nb, int fd);
 size_t	ft_strlen(const char *s);
 void	ft_repeat_char(int len, char c, t_format *format);
 void	ft_zero_padded(int len, t_format *format);

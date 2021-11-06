@@ -25,11 +25,18 @@ int main()
 	char *s;
 	int x;
 
+
 	x = -1;
+	i = printf   ("   printf(%%.2d, %d) => \"%.2d\" \n", x, x);
+	j = ft_printf("ft_printf(%%.2d, %d) => \"%.2d\" \n", x, x);
+	printf("i : %d == j %d\n", i, j);
+
+	x = 0;
 	i = printf   ("   printf(%%#x, %x) => \"%#x\" \n", x, x);
 	j = ft_printf("ft_printf(%%#x, %x) => \"%#x\" \n", x, x);
 	printf("i : %d == j %d\n", i, j);
 
+// TEST(2, print(" %02d ", -1));
 
 	s = " - ";
 	i = printf   ("   printf(%%.s, %s) => \"%.s\" \n", s, s);
