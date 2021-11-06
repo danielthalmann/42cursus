@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 00:38:38 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/05 00:38:38 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/06 09:32:49 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_format
 	int		plus_sign;
 	int		decimal_point;
 	int		len;
+	int		sharp;
 }	t_format;
 
 int		ft_printf(const char *format, ...);

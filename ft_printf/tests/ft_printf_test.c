@@ -23,6 +23,12 @@ int main()
 	char c;
 	char *n;
 	char *s;
+	int x;
+
+	x = -1;
+	i = printf   ("   printf(%%#x, %x) => \"%#x\" \n", x, x);
+	j = ft_printf("ft_printf(%%#x, %x) => \"%#x\" \n", x, x);
+	printf("i : %d == j %d\n", i, j);
 
 
 	s = " - ";

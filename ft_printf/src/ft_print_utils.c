@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:20:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/05 07:48:57 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/06 09:32:43 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_clear_type_format(va_list *ap, int fd, t_format *format)
 	format->zero_fill = 0;
 	format->decimal_point = 0;
 	format->len = 0;
+	format->sharp = 0;
 }
 
 /**
@@ -54,4 +55,6 @@ void	ft_read_modifier(char c, t_format *format)
 		format->zero_fill = 1;
 	if (c == '.')
 		format->decimal_point = 1;
+	if (c == '#')
+		format->sharp = 1;
 }
