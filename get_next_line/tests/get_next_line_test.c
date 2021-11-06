@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_test.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dthalman <dthalman@student.42lausanne.f    +#+  +:+       +#+        */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 17:32:24 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/03 12:43:40 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/06 16:53:37 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
