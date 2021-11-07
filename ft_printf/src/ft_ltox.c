@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:20:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/06 08:38:52 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/07 10:51:35 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,3 @@ void	ft_uitox_up_fd(unsigned int nb, int fd)
 		ft_uitox_up_fd(nb % (long)16, fd);
 	}
 }
-
