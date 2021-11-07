@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 15:20:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/06 07:30:35 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/07 10:51:59 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_print_hex_fd(t_format *format)
 	format->len = ft_len_ltox(ul);
 	ft_margin_left(format->margin - format->len, format);
 	ft_zero_padded(format->margin - format->len, format);
-	if(format->sharp && ul != 0)
+	if (format->sharp && ul != 0)
 	{
 		if (format->c == 'X')
 			write(format->fd, "0X", 2);
@@ -34,4 +34,3 @@ void	ft_print_hex_fd(t_format *format)
 		ft_uitox_fd(ul, format->fd);
 	ft_margin_right(format->margin - format->len, format);
 }
-
