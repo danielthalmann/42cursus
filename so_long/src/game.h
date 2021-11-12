@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 22:49:09 by dthalman          #+#    #+#             */
-/*   Updated: 2021/10/14 22:49:09 by dthalman         ###   ########.fr       */
+/*   Created: 2021/11/12 13:20:02 by dthalman          #+#    #+#             */
+/*   Updated: 2021/11/12 13:20:02 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GAME_H
+# define GAME_H
+# include "mlx.h"
+# include "libft.h"
 
-/**
- * @brief erases the data in the n bytes of the memory starting at the location
- *        pointed
- * 
- * @param s pointer of data
- * @param n size in byte to erase
- */
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned int	i;
-
-	i = -1;
-	while (++i < n)
-		((char *)s)[i] = 0;
-}
+int	ft_game_loop();
+#endif
