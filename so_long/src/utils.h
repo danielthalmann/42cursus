@@ -12,6 +12,7 @@
 
 #ifndef UTILS_H
 # define UTILS_H
+# define SWAP_INT32(x) (((x) >> 24) | (((x) & 0x00FF0000) >> 8) | (((x) & 0x0000FF00) << 8) | ((x) << 24)) 
 
 typedef unsigned int	t_uint;
 typedef struct s_position
