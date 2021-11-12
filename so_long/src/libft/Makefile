@@ -16,7 +16,11 @@ SRCS=ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 	 ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 	 ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
 	 ft_lstmap.c \
-	 get_next_line.c ft_strlen2.c ft_strmov.c ft_strappend.c
+	 get_next_line.c ft_strlen2.c ft_strmov.c ft_strappend.c \
+	 ft_itoa_fd.c ft_ltoa.c ft_ltox.c ft_print_char_fd.c \
+     ft_print_hex_fd.c ft_print_integer_fd.c ft_print_pointer_fd.c \
+	 ft_print_string_fd.c ft_print_unsigned_dec_fd.c \
+	 ft_print_utils.c ft_print_utils_two.c ft_printf.c \
 
 OBJS=${SRCS:.c=.o}
 
