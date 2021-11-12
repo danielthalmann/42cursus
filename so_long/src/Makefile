@@ -1,6 +1,6 @@
 NAME=so_long
 
-SRC=main.c
+SRC=main.c game.c
 
 HEADER=${SRC:.c=.h}
 
