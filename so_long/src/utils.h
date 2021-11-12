@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:23:55 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/11 23:52:01 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/12 05:49:18 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,9 @@ typedef struct s_size
 	t_uint	width;
 	t_uint	height;
 }	t_size;
+typedef struct s_gl
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+}	t_gl;
 #endif

@@ -1,18 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 23:36:40 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/12 06:03:04 by dthalman         ###   ########.fr       */
+/*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
+/*   Updated: 2021/11/12 05:18:00 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
-# include "game.h"
-
-int	main(int argc, char **argv);
-#endif
+#include "player.h"

@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   input.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 23:36:40 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/12 02:17:38 by dthalman         ###   ########.fr       */
+/*   Created: 2021/11/12 13:26:14 by dthalman          #+#    #+#             */
+/*   Updated: 2021/11/12 13:26:14 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "input.h"
 
-int main(int argc, char **argv)
+int	ft_input_key(int key, void *param)
 {
-	(void)argc;
-	(void)argv;
+	t_game *game;
+	
+	(void)param;
+	game = ft_game();
 
-	ft_init_game();
+	if(key == KEY_ESC)
+	{
+		mlx_destroy_window(game->gl.mlx_ptr, game->gl.win_ptr);
+		exit(0);
+	}
+	if(key == KEY_ENTER)
+		mlx_string_put(game->gl.mlx_ptr, game->gl.win_ptr, 10, 10, 255, "ENTER");
+
+	ft_putnbr_fd(key, 1);
+	ft_putchar_fd(' ', 1);
 	return (0);
 }

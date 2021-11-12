@@ -14,6 +14,14 @@
 # define GAME_H
 # include "mlx.h"
 # include "libft.h"
-
-int	ft_game_loop();
+# include "utils.h"
+# include "input.h"
+typedef struct s_game
+{
+    int     is_init;
+    t_gl    gl;
+}   t_game;
+int	    ft_game_loop();
+int     ft_init_game();
+t_game	*ft_game();
 #endif

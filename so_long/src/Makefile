@@ -1,12 +1,12 @@
 NAME=so_long
 
-SRC=main.c game.c
+SRC=main.c game.c input.c player.c map.c
 
 HEADER=${SRC:.c=.h}
 
 OBJS=${SRC:.c=.o}
 
-CFLAGS=-Wall -Wextra -Wall -I${LIBMLX_PATH}
+CFLAGS=-Wall -Wextra -Wall -I${LIBFT_PATH} -I${LIBMLX_PATH}
 
 LDFLAGS=
 
