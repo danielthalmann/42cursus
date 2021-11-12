@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 00:38:56 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/12 22:25:07 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/12 13:50:28 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,42 +35,6 @@ int	ft_printf(const char *format, ...)
 		if (c == '%')
 		{
 			format = ft_treat_percent(&ap, (char *)format, &f, 1);
-			len += f.len;
-		}
-		else
-		{
-			write(1, &c, 1);
-			len++;
-		}
-		format++;
-	}
-	va_end(ap);
-	return (len);
-}
-
-/**
- * @brief écrit dans la console le contenu de la chaine format et substituant
- * les valeurs %... par le contenu des variables supplémentaires passé en 
- * paramètre de la fonction.
- * 
- * @param format chaine de caractère à formater
- * @param ... variables supplémentaires à introduire dans le formatage
- */
-int	ft_fprintf(int fd, const char *format, ...)
-{
-	va_list		ap;
-	char		c;
-	int			len;
-	t_format	f;
-
-	len = 0;
-	va_start(ap, format);
-	while (*format)
-	{
-		c = *format;
-		if (c == '%')
-		{
-			format = ft_treat_percent(&ap, (char *)format, &f, fd);
 			len += f.len;
 		}
 		else
