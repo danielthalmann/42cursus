@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 06:39:26 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/12 06:58:44 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:27:30 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 # define SPRITE_H
 # include "game.h"
 
-void    ft_load_image(char *filename);
+void	ft_load_image(char *filename);
 #endif

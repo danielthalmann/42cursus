@@ -14,14 +14,11 @@
 
 int	ft_game_loop()
 {
-/*
 	static int i;
 
-	ft_putstr_fd("loop\n", 1);
-
 	i++;
-	ft_putnbr_fd(i, 1);
-*/
+	//ft_printf("la valeur est %d\n", i);
+
 	return (0);
 }
 

@@ -16,13 +16,18 @@
 # include "libft.h"
 # include "utils.h"
 # include "input.h"
+# include "map.h"
+# include "player.h"
 # include "sprite.h"
 typedef struct s_game
 {
-    int     is_init;
-    t_gl    gl;
-}   t_game;
-int	    ft_game_loop();
-int     ft_init_game();
+	int		 	is_init;
+	t_gl		gl;
+	t_map	 	map;
+	t_player	player;
+}	t_game;
+
+int		ft_game_loop();
+int		ft_init_game();
 t_game	*ft_game();
 #endif

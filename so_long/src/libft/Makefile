@@ -21,7 +21,7 @@ SRCS=ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
      ft_print_hex_fd.c ft_print_integer_fd.c ft_print_pointer_fd.c \
 	 ft_print_string_fd.c ft_print_unsigned_dec_fd.c \
 	 ft_print_utils.c ft_print_utils_two.c ft_printf.c \
-	 fft_printf.c 
+	 ft_fprintf.c 
 
 OBJS=${SRCS:.c=.o}
 

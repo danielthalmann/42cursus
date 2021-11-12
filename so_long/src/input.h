@@ -48,5 +48,5 @@
 # define KEY_ENTER 36
 
 int	ft_input_key(int key, void *param);
-
+int	*ft_key_state();
 #endif

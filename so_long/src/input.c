@@ -12,6 +12,13 @@
 
 #include "input.h"
 
+int	*ft_key_state()
+{
+	static t_uint	state[125];
+
+	return (state);
+}
+
 int	ft_input_key(int key, void *param)
 {
 	t_game *game;
@@ -25,7 +32,10 @@ int	ft_input_key(int key, void *param)
 		exit(0);
 	}
 	if(key == KEY_ENTER)
+	{
+		mlx_clear_window(game->gl.mlx_ptr, game->gl.win_ptr);
 		mlx_string_put(game->gl.mlx_ptr, game->gl.win_ptr, 10, 10, 255, "ENTER");
+	}
 
 	ft_putnbr_fd(key, 1);
 	ft_putchar_fd(' ', 1);
