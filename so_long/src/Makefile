@@ -6,13 +6,13 @@ HEADER=${SRC:.c=.h}
 
 OBJS=${SRC:.c=.o}
 
-CFLAGS=-Wall -Wextra -Wall
+CFLAGS=-Wall -Wextra -Wall -I${LIBMLX_PATH}
 
 LDFLAGS=
 
 LOADLIBES=-L${LIBFT_PATH} -L${LIBMLX_PATH}
 
-LDLIBS=-lft -lmlx
+LDLIBS=-lft -lmlx -framework OpenGL -framework AppKit
 
 CC=gcc
 
