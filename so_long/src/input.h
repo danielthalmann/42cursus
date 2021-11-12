@@ -13,10 +13,7 @@
 #ifndef INPUT_H
 # define INPUT_H
 # include <stdlib.h>
-# include "mlx.h"
 # include "game.h"
-# include "utils.h"
-# include "libft.h"
 # define KEY_Q 12
 # define KEY_W 13
 # define KEY_E 14

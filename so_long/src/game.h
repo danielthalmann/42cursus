@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "utils.h"
 # include "input.h"
+# include "sprite.h"
 typedef struct s_game
 {
     int     is_init;

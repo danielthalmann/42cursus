@@ -1,6 +1,6 @@
 NAME=so_long
 
-SRC=main.c game.c input.c player.c map.c
+SRC=main.c game.c input.c player.c map.c sprite.c
 
 HEADER=${SRC:.c=.h}
 
@@ -12,7 +12,7 @@ LDFLAGS=
 
 LOADLIBES=-L${LIBFT_PATH} -L${LIBMLX_PATH}
 
-LDLIBS=-lft -lmlx -framework OpenGL -framework AppKit
+LDLIBS=-lft -lmlx -lz -framework OpenGL -framework AppKit
 
 CC=gcc
 

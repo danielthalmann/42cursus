@@ -42,6 +42,7 @@ int ft_init_game()
 	game->gl.win_ptr = mlx_new_window(game->gl.mlx_ptr, 500, 500, "so_long");
 	mlx_key_hook(game->gl.win_ptr, &ft_input_key, (void *)0);
 	mlx_loop_hook(game->gl.mlx_ptr, &ft_game_loop, (void *)0);
+	ft_load_image("media/player.png");
 	mlx_loop(game->gl.mlx_ptr);
 	return (0);
 }
