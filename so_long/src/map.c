@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "game.h"
 #include "map.h"
 
 int ft_load_map(char *filename, t_map *map)
@@ -20,9 +21,10 @@ int ft_load_map(char *filename, t_map *map)
 
 	fd = open(filename, O_RDONLY);
 	ft_printf("%s\n", filename);	
-	if(fd == -1)
+	if(fd == -1){
 		return (0);
-		//ft_printf("Impossible d'ouvrir le fichier (%s).\n", filename);
+		//ft_printf("Impossible d'ouvrir le fichier (%s).\n", filename);		
+	}
 	else
 	{
 		lines = 0;
@@ -41,8 +43,8 @@ int ft_load_map(char *filename, t_map *map)
 
 int	ft_Load_list_map(t_list *list, t_map *map)
 {
-	int	x;
-	int y;
+	t_uint	x;
+	t_uint	y;
 
 	if (!list)
 		return (0);
@@ -57,6 +59,7 @@ int	ft_Load_list_map(t_list *list, t_map *map)
 			
 		}
 	}
+	return (1);
 }
 
 /**

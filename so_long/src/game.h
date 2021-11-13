@@ -13,17 +13,18 @@
 #ifndef GAME_H
 # define GAME_H
 # include "mlx.h"
+# include "map.h"
 # include "libft.h"
 # include "utils.h"
 # include "input.h"
-# include "map.h"
 # include "player.h"
 # include "sprite.h"
+
 typedef struct s_game
 {
 	int		 	is_init;
 	t_gl		gl;
-	t_map	 	map;
+	t_map		map;
 	t_player	player;
 }	t_game;
 

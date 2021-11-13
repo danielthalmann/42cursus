@@ -12,16 +12,19 @@
 
 #ifndef MAP_H
 # define MAP_H
-# include "utils.h"
-# include "game.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include "utils.h"
+# include "libft.h"
+
 typedef struct s_map
 {
 	t_size	size;
 	t_uint	*coord;
 }	t_map;
+int	ft_load_map(char *filename, t_map *map);
+int	ft_Load_list_map(t_list *list, t_map *map);
+void	ft_free_list_map(t_list *list);
 
-int ft_load_map(char *filename, t_map *map);
 #endif

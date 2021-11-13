@@ -18,7 +18,7 @@
  * @param nb 
  * @return int 
  */
-int	ft_len_itoa(int nb)
+int	ft_len_itoa(long nb)
 {
 	int	length;
 

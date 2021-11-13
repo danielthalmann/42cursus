@@ -12,7 +12,7 @@
 
 #include "input.h"
 
-int	*ft_key_state()
+t_uint	*ft_key_state()
 {
 	static t_uint	state[125];
 
