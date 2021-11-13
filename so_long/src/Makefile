@@ -12,7 +12,19 @@ LDFLAGS=
 
 LOADLIBES=-L${LIBFT_PATH} -L${LIBMLX_PATH}
 
-LDLIBS=-lft -lmlx -lz -framework OpenGL -framework AppKit
+LDLIBS=
+
+ifeq ($(OS),Windows_NT)
+	LDLIBS=-lft -lmlx -lXext -lX11 -lz
+else
+	UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S),Linux)
+		LDLIBS=-lft -lmlx -lXext -lX11 -lz
+	endif
+	ifeq ($(UNAME_S),Darwin)
+		LDLIBS=-lft -lmlx -lz -framework OpenGL -framework AppKit
+	endif
+endif
 
 CC=gcc
 
@@ -25,6 +37,8 @@ LIBFT=${LIBFT_PATH}/libft.a
 
 LIBMLX_PATH=./minilibx_opengl
 LIBMLX=${LIBMLX_PATH}/libmlx.a
+
+
 
 ${NAME}: ${OBJS} ${LIBFT} ${LIBMLX}
 	$(CC) $(LDFLAGS) $(TARGET_ARCH) ${OBJS} $(LOADLIBES) $(LDLIBS) -o $@
