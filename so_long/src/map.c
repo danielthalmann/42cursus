@@ -21,7 +21,7 @@
  * @param map 
  * @return int 
  */
-int ft_load_map(char *filename, t_map *map)
+int	ft_load_map(char *filename, t_map *map)
 {
 	int		fd;
 	char	*l;
@@ -29,10 +29,9 @@ int ft_load_map(char *filename, t_map *map)
 	int		ret;
 
 	fd = open(filename, O_RDONLY);
-	ft_printf("%s\n", filename);	
-	if(fd == -1){
+	ft_printf("%s\n", filename);
+	if (fd == -1)
 		return (0);
-	}
 	else
 	{
 		lines = 0;
@@ -44,7 +43,7 @@ int ft_load_map(char *filename, t_map *map)
 		}
 	}
 	close(fd);
-	ret = ft_Load_list_map(lines, map);
+	ret = ft_load_list_map(lines, map);
 	ft_free_list_map(lines);
 	return (ret);
 }
@@ -56,23 +55,23 @@ int ft_load_map(char *filename, t_map *map)
  * @param map 
  * @return int 
  */
-int	ft_Load_list_map(t_list *list, t_map *map)
+int	ft_load_list_map(t_list *list, t_map *map)
 {
 	t_uint	x;
 	t_uint	y;
 
 	if (!list)
 		return (0);
-	map->size.height = ft_lstsize(list);
-	map->size.width = ft_map_count_width(list->content);
-	map->coord = malloc(sizeof(t_uint) * map->size.height * map->size.width);
+	map->size.h = ft_lstsize(list);
+	map->size.w = ft_map_count_width(list->content);
+	map->coord = malloc(sizeof(t_uint) * map->size.h * map->size.w);
 	y = -1;
-	while (++y < map->size.height)
+	while (++y < map->size.h)
 	{
 		x = -1;
-		if (ft_map_count_width(list->content) != map->size.width)
+		if (ft_map_count_width(list->content) != map->size.w)
 			return (0);
-		while (++x < map->size.width)
+		while (++x < map->size.w)
 			ft_set_map_pos(((char *)(list->content))[x], map, x, y);
 		list = list->next;
 	}
@@ -106,7 +105,6 @@ void	ft_free_map(t_map *map)
 {
 	free(map->coord);
 }
-
 
 t_uint	ft_map_count_width(char *s)
 {

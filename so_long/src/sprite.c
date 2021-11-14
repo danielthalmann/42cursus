@@ -14,31 +14,24 @@
 #include "utils.h"
 #include "render.h"
 
-void	ft_load_image(char *filename)
+void	ft_load_image(char *f)
 {
-	t_game	*game;
-	t_size	size;
-	void	*img_ptr;
+	t_game			*game;
+	t_size			s;
+	t_translation	tr;
+	void			*img_ptr;
+	void			*(*fn)();
 
-	size.width = 0;
-	size.height = 0;
+	fn = &mlx_png_file_to_image;
+	s.w = 0;
+	s.h = 0;
 	game = ft_game();
-	img_ptr = mlx_png_file_to_image(game->gl.mlx_ptr, filename, 
-		(int *)&(size.width), (int *)&(size.height));
-
-	t_pos src;
-	t_pos dest;
-	t_pos isize;
-
-	dest.x = 0;
-	dest.y = 0;
-
-	src.x = 0;
-	src.y = 0;
-
-	isize.x = 100;
-	isize.y = 100;
-
-	ft_draw_image(img_ptr, &(game->gl), src, dest, isize);
-
+	img_ptr = (*fn)(game->gl.mlx_ptr, f, (int *)&(s.w), (int *)&(s.h));
+	tr.dest.x = 0;
+	tr.dest.y = 0;
+	tr.src.x = 0;
+	tr.src.y = 0;
+	tr.size.x = 100;
+	tr.size.y = 100;
+	ft_draw_image(img_ptr, &(game->gl), tr);
 }

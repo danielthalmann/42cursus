@@ -22,8 +22,8 @@ typedef struct s_position
 }	t_pos;
 typedef struct s_size
 {
-	t_uint	width;
-	t_uint	height;
+	t_uint	w;
+	t_uint	h;
 }	t_size;
 typedef struct s_gl
 {

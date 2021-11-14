@@ -12,24 +12,22 @@
 
 #include "game.h"
 
-int	ft_game_loop()
+int	ft_game_loop(void)
 {
-	static int i;
+	static int	i;
 
 	i++;
-	//ft_printf("la valeur est %d\n", i);
-
 	return (0);
 }
 
-t_game	*ft_game()
+t_game	*ft_game(void)
 {
 	static t_game	game;
 
 	return (&game);
 }
 
-int ft_init_game()
+int	ft_init_game(void)
 {
 	t_game	*game;
 
@@ -42,7 +40,7 @@ int ft_init_game()
 	return (1);
 }
 
-void	ft_end_game()
+void	ft_end_game(void)
 {
 	t_game	*game;
 
@@ -50,5 +48,3 @@ void	ft_end_game()
 	ft_free_map(&(game->map));
 	exit(0);
 }
-
-

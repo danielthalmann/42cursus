@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "game.h"
 #include "map.h"
 
@@ -24,8 +23,8 @@
  */
 t_uint	ft_get_map_pos(t_map *map, t_uint x, t_uint y)
 {
-	if (x < map->size.width && y < map->size.height)
-		return (map->coord[(map->size.height * y) + x]);
+	if (x < map->size.w && y < map->size.h)
+		return (map->coord[(map->size.h * y) + x]);
 	return (0);
 }
 
@@ -39,6 +38,6 @@ t_uint	ft_get_map_pos(t_map *map, t_uint x, t_uint y)
  */
 void	ft_set_map_pos(t_uint v, t_map *map, t_uint x, t_uint y)
 {
-	if (x < map->size.width && y < map->size.height)
-		map->coord[(map->size.height * y) + x] = v;
+	if (x < map->size.w && y < map->size.h)
+		map->coord[(map->size.h * y) + x] = v;
 }
