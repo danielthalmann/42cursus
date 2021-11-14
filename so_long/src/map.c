@@ -6,13 +6,21 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:21:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/13 15:11:08 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/14 09:13:08 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #include "map.h"
+#include "map_utils.h"
 
+/**
+ * @brief Charge un fichier contenant les données d'une carte
+ * 
+ * @param filename 
+ * @param map 
+ * @return int 
+ */
 int ft_load_map(char *filename, t_map *map)
 {
 	int		fd;
@@ -41,6 +49,13 @@ int ft_load_map(char *filename, t_map *map)
 	return (1);
 }
 
+/**
+ * @brief Charge dans la structure de la carte les lignes du fichier
+ * 
+ * @param list 
+ * @param map 
+ * @return int 
+ */
 int	ft_Load_list_map(t_list *list, t_map *map)
 {
 	t_uint	x;
@@ -51,13 +66,15 @@ int	ft_Load_list_map(t_list *list, t_map *map)
 	map->size.height = ft_lstsize(list);
 	map->size.width = ft_strlen(list->content);
 	map->coord = malloc(sizeof(t_uint) * map->size.height * map->size.width);
-	while (y < map->size.height)
+	y = -1;
+	while (++y < map->size.height)
 	{
-		while (x < map->size.width)
-		{
-			map->coord= malloc(sizeof(t_uint) * map->size.height * map->size.width);
-			
-		}
+		x = -1;
+		if (ft_strlen(list->content) != map->size.width)
+			return (0);
+		while (++x < map->size.width)
+			ft_set_map_pos(((char *)(list->content))[x], map, x, y);
+		list = list->next;
 	}
 	return (1);
 }

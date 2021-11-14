@@ -6,11 +6,12 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 06:39:26 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/12 15:22:19 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/14 09:24:32 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sprite.h"
+#include "util.h"
 
 void	ft_load_image(char *filename)
 {
@@ -46,4 +47,14 @@ void	ft_load_image(char *filename)
 		}
 
 	//mlx_put_image_to_window  (game->gl.mlx_ptr, game->gl.win_ptr, img_ptr, 2, 2);
+}
+
+void	ft_draw_image(void *img_ptr, t_gl *gl, t_position src, t_position dest)
+{
+	char	*ptr;
+	int		bits_per_pixel = 0;
+	int		size_line = 0;
+	int		endian = 0;
+
+	ptr = mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);	
 }
