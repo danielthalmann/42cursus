@@ -22,6 +22,7 @@
 		- [verification des proprietes de sécurités](#verification-des-proprietes-de-sécurités)
 	- [réseau](#réseau)
 	- [creer un checksum](#creer-un-checksum)
+	- [monitoring](#monitoring)
 
 ## Debian vs CentOS
 
@@ -229,14 +230,20 @@ sudo apt install sysstat
 voir les port ouvert
 
 ```
-ss -tunlp
+$ ss -tunlp
 ```
 
 
 ## creer un checksum
 
-creation du ash
+creation du hash
 
 ```
-shasum
+$ shasum
+```
+
+## monitoring
+
+```
+$ /usr/local/sbin/monitoring.sh
 ```
