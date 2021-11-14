@@ -180,7 +180,7 @@ Le mot de passe sera de 10 caractères minimums (__minlen=10__) dont une majuscu
 
 Le mot de passe ne devra pas comporter le nom de l’utilisateur (__reject_username__).
 
-La règle suivante ne s’applique pas à l’utilisateur root (__enforce_for_root__): le mot de passe devra comporter au moins 7 (__difok=7__) caractères qui ne sont pas présents dans l’ancien mot depasse.
+La règle suivante ne s’applique pas à l’utilisateur root (__enforce_for_root__): le mot de passe devra comporter au moins 7 (__difok=7__) caractères qui ne sont pas présents dans l’ancien mot de passe.
 
 Le mot de passe peut être saisi 3 fois avant de retourner une erreur (__retry=3__)
 
@@ -202,7 +202,7 @@ le mot de passe expirer tous les 30 jours. (__PASS_MAX_DAYS__)
 
 Le nombre minimum de jours avant de pouvoir modifier un mot de passe est à 2. (__PASS_MIN_DAYS__)
 
-L’utilisateur recevoit un avertissement 7 jours avant que son mot de passen’expire. (__PASS_WARN_AGE__)
+L’utilisateur recevoit un avertissement 7 jours avant que son mot de passe n’expire. (__PASS_WARN_AGE__)
 
 
 ### verification des proprietes de sécurités
