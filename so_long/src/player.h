@@ -16,7 +16,7 @@
 
 typedef struct s_player
 {
-	int	state;
-	t_pos position;
+	int		state;
+	t_pos	position;
 }	t_player;
 #endif

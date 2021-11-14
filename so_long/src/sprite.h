@@ -15,6 +15,4 @@
 # include "game.h"
 
 void	ft_load_image(char *filename);
-void	ft_draw_image(void *img_ptr, t_gl *gl, t_pos src, t_pos dest, t_pos size);
-
 #endif
