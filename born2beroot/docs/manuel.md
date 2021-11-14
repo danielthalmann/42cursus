@@ -4,6 +4,8 @@
 
 - [42cursus - Born2beroot](#42cursus---born2beroot)
 	- [Indexe](#indexe)
+	- [Debian vs CentOS](#debian-vs-centos)
+	- [AppArmor vs SELinux](#apparmor-vs-selinux)
 	- [Installation](#installation)
 		- [Prérequis](#prérequis)
 	- [Packages](#packages)
@@ -18,6 +20,24 @@
 - [group](#group)
 - [Password](#password)
 		- [verification des proprietes de sécurités](#verification-des-proprietes-de-sécurités)
+	- [réseau](#réseau)
+	- [creer un checksum](#creer-un-checksum)
+
+## Debian vs CentOS
+
+Debian est plus axé installation serveur. CentOS est un fork de redhat.
+Deux systèm d'exploitation basé sur une unix-like stable.
+
+## AppArmor vs SELinux
+
+AppArmor et SELinux sont deux des modules de sécurité Linux qui peuvent être utilisés pour un contrôle d'accès obligatoire à granularité fine. Ils essaient tous les deux d'atteindre des objectifs très similaires, mais AppArmor est largement considéré comme plus facile à utiliser (et, vraiment, il l'est) et SELinux est largement considéré comme plus fin. 
+
+Ces systèmes de sécurité fournissent des outils pour isoler les applications les unes des autres... et à leur tour isoler un attaquant du reste du système lorsqu'une application est compromise.
+
+Les ensembles de règles SELinux sont incroyablement complexes, mais avec cette complexité, vous avez plus de contrôle sur la façon dont les processus sont isolés. La génération de ces stratégies peut être automatisée. Une grève contre ce système de sécurité est qu'il est très difficile à vérifier de manière indépendante.
+
+AppArmor (et SMACK) est très simple. Les profils peuvent être écrits à la main par des humains ou générés à l'aide de aa-logprof. AppArmor utilise un contrôle basé sur le chemin, ce qui rend le système plus transparent afin qu'il puisse être vérifié de manière indépendante. 
+
 ## Installation
 
 ### Prérequis
@@ -28,7 +48,7 @@ Pour debuter, il faut telecharger la dernier version de debian.
 
 Suivre les étapes d'installation du debian.
 
-Le mot de passe utlisé dans cet exercice est : Hellraiser42
+Le mot de passe utlisé dans cet exercice est : __Hellraiser42__
 
 ## Packages
 
@@ -203,3 +223,20 @@ Number of days of warning before password expires       : 7
 installation de mpstat
 
 sudo apt install sysstat
+
+## réseau
+
+voir les port ouvert
+
+```
+ss -tunlp
+```
+
+
+## creer un checksum
+
+creation du ash
+
+```
+shasum
+```
