@@ -29,7 +29,7 @@ int	ft_input_key(int key, void *param)
 	if(key == KEY_ESC)
 	{
 		mlx_destroy_window(game->gl.mlx_ptr, game->gl.win_ptr);
-		exit(0);
+		ft_end_game();
 	}
 	if(key == KEY_ENTER)
 	{

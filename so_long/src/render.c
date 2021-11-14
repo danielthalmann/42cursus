@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 23:21:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/14 11:56:28 by dthalman         ###   ########.fr       */
+/*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
+/*   Updated: 2021/11/14 11:33:39 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include "utils.h"
-# include "libft.h"
+#include "render.h"
+#include "game.h"
+#include "mlx.h"
 
-typedef struct s_map
+int	ft_init_render(t_gl *gl)
 {
-	t_size	size;
-	t_uint	*coord;
-}	t_map;
-int		ft_load_map(char *filename, t_map *map);
-int		ft_Load_list_map(t_list *list, t_map *map);
-void	ft_free_list_map(t_list *list);
-void	ft_free_map(t_map *map);
-t_uint	ft_map_count_width(char *s);
-#endif
+	t_game	*game;
+
+	game = ft_game();
+	game->gl.mlx_ptr = mlx_init();
+	if(!game->gl.mlx_ptr)
+		return (0);
+	game->gl.win_ptr = mlx_new_window(game->gl.mlx_ptr, 500, 500, "so_long");
+	if(!game->gl.win_ptr)
+		return (0);
+	return (1);
+}

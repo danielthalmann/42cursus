@@ -1,6 +1,6 @@
 NAME=so_long
 
-SRC=main.c game.c input.c player.c map.c sprite.c player.c
+SRC=main.c game.c input.c player.c map.c map_utils.c sprite.c player.c render.c
 
 HEADER=${SRC:.c=.h}
 
@@ -68,5 +68,8 @@ re: fclean all
 
 norm: 
 	${MINETTE} ${HEADER}
+
+run: all
+	./${NAME} level.ber
 
 .PHONY : ${LIBFT} ${LIBMLX} clean fclean all re

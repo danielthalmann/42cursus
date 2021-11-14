@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 06:39:26 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/14 09:24:32 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/14 12:14:24 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,19 @@ void	ft_load_image(char *filename)
 
 void	ft_draw_image(void *img_ptr, t_gl *gl, t_position src, t_position dest)
 {
-	char	*ptr;
-	int		bits_per_pixel = 0;
-	int		size_line = 0;
-	int		endian = 0;
+	char		*ptr;
+	int			bits_per_pixel = 0;
+	int			size_line = 0;
+	int			endian = 0;
+	t_position	c;
 
-	ptr = mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);	
+	ptr = mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);
+	for(int y = 100; y <  204; y++)
+		for(int x = 100; x < 220; x++)
+		{
+			//ft_printf("value %d\n", point[ (y * 64) + x]);
+			mlx_pixel_put(gl->mlx_ptr, gl->win_ptr, x-100, y -100, ((unsigned int*)ptr)[((y ) * 1200) + (x )]);
+
+		}	
+
 }

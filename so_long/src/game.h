@@ -30,5 +30,6 @@ typedef struct s_game
 
 int		ft_game_loop();
 int		ft_init_game();
+void	ft_end_game();
 t_game	*ft_game();
 #endif
