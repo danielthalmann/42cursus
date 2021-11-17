@@ -46,7 +46,10 @@
 # define KEY_RIGHT 124
 # define KEY_ESC 53
 # define KEY_ENTER 36
+# define KEY_SIZE 256
 
-int		ft_input_key(int key, void *param);
-t_uint	*ft_key_state(void);
+int	ft_input_keys(int *keys);
+int	ft_in_key_down(int keycode, void *param);
+int	ft_in_key_up(int keycode, void *param);
+int	*ft_keys_state(void);
 #endif

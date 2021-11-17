@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 06:39:26 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/17 11:26:32 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/17 14:37:35 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_load_image(char *f)
 	s.w = 0;
 	s.h = 0;
 	game = ft_game();
-
 	img_ptr = (*fn)(game->gl.mlx_ptr, f, (int *)&(s.w), (int *)&(s.h));
 	tr.dest.x = 0;
 	tr.dest.y = 0;

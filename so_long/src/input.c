@@ -12,32 +12,57 @@
 
 #include "input.h"
 
-t_uint	*ft_key_state(void)
+/**
+ * @brief retourne l'etat de toutes les touches du clavier
+ * si la clé a la valeur 1, la touche est pressée
+ * 
+ * @return t_uint* 
+ */
+int	*ft_keys_state(void)
 {
-	static t_uint	state[125];
+	static int	state[KEY_SIZE];
 
 	return (state);
 }
 
-int	ft_input_key(int key, void *param)
+int	ft_in_key_down(int keycode, void *param)
+{
+	int	*keys;
+
+	(void)param;
+	keys = ft_keys_state();
+	keys[keycode] = 1;
+	ft_input_keys(keys);
+	return (1);
+}
+
+int	ft_in_key_up(int keycode, void *param)
+{
+	int	*keys;
+
+	(void)param;
+	keys = ft_keys_state();
+	keys[keycode] = 0;
+	ft_input_keys(keys);
+	return (1);
+}
+
+int	ft_input_keys(int *keys)
 {
 	t_game	*game;
 	char	*msg;
 
-	(void)param;
 	game = ft_game();
-	if (key == KEY_ESC)
+	if (keys[KEY_ESC])
 	{
 		mlx_destroy_window(game->gl.mlx_ptr, game->gl.win_ptr);
 		ft_end_game();
 	}
-	if (key == KEY_ENTER)
+	if (keys[KEY_ENTER])
 	{
 		msg = "ENTER";
 		mlx_clear_window(game->gl.mlx_ptr, game->gl.win_ptr);
 		mlx_string_put(game->gl.mlx_ptr, game->gl.win_ptr, 10, 10, 255, msg);
 	}
-	ft_putnbr_fd(key, 1);
-	ft_putchar_fd(' ', 1);
-	return (0);
+	return (1);
 }

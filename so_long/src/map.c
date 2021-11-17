@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:21:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/14 11:56:56 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/17 13:53:38 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,12 @@ void	ft_free_map(t_map *map)
 	free(map->coord);
 }
 
+/**
+ * @brief fghjd
+ * 
+ * @param s 
+ * @return t_uint 
+ */
 t_uint	ft_map_count_width(char *s)
 {
 	unsigned int	c;

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "game.h"
+#include "input.h"
 
 int	ft_game_loop(void)
 {
@@ -27,16 +28,21 @@ t_game	*ft_game(void)
 	return (&game);
 }
 
+/**
+ * @brief initialise le jeu
+ * On peut trouver des informations sur les evenement a l'adresse suivante :
+ * https://harm-smits.github.io/42docs/libs/minilibx/events.html
+ * 
+ * @return int 
+ */
 int	ft_init_game(void)
 {
 	t_game	*game;
 
 	game = ft_game();
 	game->is_init = 1;
-	// https://harm-smits.github.io/42docs/libs/minilibx/events.html
-	// int	mlx_hook(game->gl.win_ptr, int x_event, int x_mask, int (*funct)(), void *param);
-	// example :  mlx_hook(vars.win, 2, 1L<<0, close, &vars);
-	mlx_key_hook(game->gl.win_ptr, &ft_input_key, (void *)0);
+	mlx_hook(game->gl.win_ptr, MLX_EVT_KEYDN, 1L, &ft_in_key_down, (void *)0);
+	mlx_hook(game->gl.win_ptr, MLX_EVT_KEYUP, 2L, &ft_in_key_up, (void *)0);
 	mlx_loop_hook(game->gl.mlx_ptr, &ft_game_loop, (void *)0);
 	ft_load_image("media/player.png");
 	mlx_loop(game->gl.mlx_ptr);

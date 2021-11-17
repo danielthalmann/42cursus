@@ -17,11 +17,15 @@
 # include <fcntl.h>
 # include "utils.h"
 # include "libft.h"
+# include "player.h"
 
 typedef struct s_map
 {
 	t_size	size;
 	t_uint	*coord;
+	t_pos	player_pos;
+	t_pos	exit;
+	t_list	*coll;
 }	t_map;
 int		ft_load_map(char *filename, t_map *map);
 int		ft_load_list_map(t_list *list, t_map *map);

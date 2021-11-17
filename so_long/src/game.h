@@ -19,6 +19,8 @@
 # include "input.h"
 # include "player.h"
 # include "sprite.h"
+# define MLX_EVT_KEYDN 2
+# define MLX_EVT_KEYUP 3
 
 typedef struct s_game
 {
