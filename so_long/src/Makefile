@@ -67,7 +67,7 @@ ${LIBMLX}:
 re: fclean all
 
 norm: 
-	${MINETTE} ${HEADER}
+	${MINETTE} ${HEADER} ${SRC}
 
 run: all
 	./${NAME} level.ber

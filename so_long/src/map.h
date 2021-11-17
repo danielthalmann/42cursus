@@ -24,7 +24,7 @@ typedef struct s_map
 	t_uint	*coord;
 }	t_map;
 int		ft_load_map(char *filename, t_map *map);
-int		ft_Load_list_map(t_list *list, t_map *map);
+int		ft_load_list_map(t_list *list, t_map *map);
 void	ft_free_list_map(t_list *list);
 void	ft_free_map(t_map *map);
 t_uint	ft_map_count_width(char *s);

@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:23:55 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/12 15:11:08 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/14 19:31:44 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ typedef struct s_position
 {
 	t_uint	x;
 	t_uint	y;
-}	t_position;
+}	t_pos;
 typedef struct s_size
 {
-	t_uint	width;
-	t_uint	height;
+	t_uint	w;
+	t_uint	h;
 }	t_size;
 typedef struct s_gl
 {

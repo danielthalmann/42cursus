@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                             :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -47,6 +47,6 @@
 # define KEY_ESC 53
 # define KEY_ENTER 36
 
-int	ft_input_key(int key, void *param);
-t_uint	*ft_key_state();
+int		ft_input_key(int key, void *param);
+t_uint	*ft_key_state(void);
 #endif

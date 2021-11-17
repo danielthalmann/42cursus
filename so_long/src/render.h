@@ -13,5 +13,21 @@
 #ifndef RENDER_H
 # define RENDER_H
 # include "utils.h"
-int	ft_init_render(t_gl *gl);
+
+typedef struct s_image_info
+{
+	int	bpp;
+	int	sl;
+	int	endian;
+	int	bytes;
+}	t_image_info;
+typedef struct s_translation
+{
+	t_pos	src;
+	t_pos	dest;
+	t_pos	size;
+}	t_translation;
+int		ft_init_render(t_gl *gl);
+void	ft_draw_image(void *i_ptr, t_gl *gl, t_translation tr);
+
 #endif

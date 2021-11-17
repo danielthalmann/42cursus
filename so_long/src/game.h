@@ -22,14 +22,13 @@
 
 typedef struct s_game
 {
-	int		 	is_init;
+	int			is_init;
 	t_gl		gl;
 	t_map		map;
 	t_player	player;
 }	t_game;
-
-int		ft_game_loop();
-int		ft_init_game();
-void	ft_end_game();
-t_game	*ft_game();
+int		ft_game_loop(void);
+int		ft_init_game(void);
+void	ft_end_game(void);
+t_game	*ft_game(void);
 #endif
