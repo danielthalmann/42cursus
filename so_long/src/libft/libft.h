@@ -93,6 +93,7 @@ typedef struct s_format
 }	t_format;
 
 int		ft_printf(const char *format, ...);
+int		ft_fprintf(int fd, const char *format, ...);
 int		ft_len_itoa(long nb);
 void	ft_uitoa_fd(unsigned int nb, int fd);
 void	ft_itoa_fd(int nb, int fd);
