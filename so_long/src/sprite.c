@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 06:39:26 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/17 14:37:35 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/17 15:38:43 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_load_image(char *f)
 	tr.dest.y = 0;
 	tr.src.x = 0;
 	tr.src.y = 0;
-	tr.size.x = 100;
-	tr.size.y = 100;
+	tr.size.x = 60;
+	tr.size.y = 75;
 	ft_draw_image(img_ptr, &(game->gl), tr);
 }

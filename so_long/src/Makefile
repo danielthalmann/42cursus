@@ -1,6 +1,6 @@
 NAME=so_long
 
-SRC=main.c game.c input.c player.c map.c map_utils.c sprite.c player.c render.c utils.c
+SRC=main.c game.c input.c player.c map.c map_utils.c sprite.c render.c utils.c
 
 HEADER=${SRC:.c=.h}
 

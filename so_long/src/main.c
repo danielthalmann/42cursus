@@ -14,9 +14,18 @@
 #include "map.h"
 #include "render.h"
 
+/**
+ * @brief depart de mon programme
+ * 
+ * @param argc nombre de ...
+ * @param argv 
+ * @return int 
+ */
 int	main(int argc, char **argv)
 {
 	t_game	*game;
+	int		w;
+	int		h;
 
 	if (argc != 2)
 	{
@@ -29,7 +38,9 @@ int	main(int argc, char **argv)
 		ft_printf("Erreur a l'ouverture du fichier (%s).\n", argv[1]);
 		return (1);
 	}
-	if (!ft_init_render(&(game->gl)))
+	w = game->map.size.w * MAP_SPRITE_WIDTH;
+	h = game->map.size.h * MAP_SPRITE_HEIGHT;
+	if (!ft_init_render(&(game->gl), w, h))
 	{
 		ft_free_map(&(game->map));
 		ft_printf("Erreur lors de l'init du gl.\n");

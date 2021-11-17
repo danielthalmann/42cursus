@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/14 11:28:51 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/17 15:31:52 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_translation
 	t_pos	dest;
 	t_pos	size;
 }	t_translation;
-int		ft_init_render(t_gl *gl);
+int		ft_init_render(t_gl *gl, int width, int height);
 void	ft_draw_image(void *i_ptr, t_gl *gl, t_translation tr);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/14 11:33:39 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/17 15:31:32 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "game.h"
 #include "mlx.h"
 
-int	ft_init_render(t_gl *gl)
+int	ft_init_render(t_gl *gl, int width, int height)
 {
 	gl->mlx_ptr = mlx_init();
 	if (!gl->mlx_ptr)
 		return (0);
-	gl->win_ptr = mlx_new_window(gl->mlx_ptr, 500, 500, "so_long");
+	gl->win_ptr = mlx_new_window(gl->mlx_ptr, width, height, "so_long");
 	if (!gl->win_ptr)
 		return (0);
 	return (1);
