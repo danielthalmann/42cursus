@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:21:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/17 16:25:51 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/17 17:53:22 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	ft_load_map(char *filename, t_map *map)
 	int		ret;
 
 	fd = open(filename, O_RDONLY);
-	ft_printf("%s\n", filename);
 	if (fd == -1)
 		return (0);
 	else
@@ -65,7 +64,7 @@ int	ft_load_list_map(t_list *list, t_map *map)
 		return (0);
 	map->size.h = ft_lstsize(list);
 	map->size.w = ft_map_count_width(list->content);
-	map->coord = malloc(sizeof(t_uint) * map->size.h * map->size.w);
+	map->coord = ft_calloc(map->size.h * map->size.w, sizeof(t_uint));
 	map->img_ptr = 0;
 	y = -1;
 	while (++y < map->size.h)
@@ -116,7 +115,7 @@ void	ft_free_map(t_map *map)
 }
 
 /**
- * @brief fghjd
+ * @brief compte la lagueur de la carte
  * 
  * @param s 
  * @return t_uint 
@@ -134,7 +133,11 @@ t_uint	ft_map_count_width(char *s)
 	return (c);
 }
 
-
+/**
+ * @brief Charge dans la map le sprite pour la map
+ * 
+ * @param f 
+ */
 void	ft_map_load_sprite(char *f)
 {
 	t_game			*game;
@@ -146,35 +149,46 @@ void	ft_map_load_sprite(char *f)
 	game->map.img_ptr = (*fn)(game->gl.mlx_ptr, f, (int *)&(s.w), (int *)&(s.h));
 }
 
+/**
+ * @brief Dessine a l'écran la carte
+ * 
+ * @param map 
+ */
 void	ft_draw_map(t_map *map)
 {
-	t_game			*game;
-	t_translation	tr;
+	t_game	*game;
 	t_uint	x;
 	t_uint	y;
-	char	c;
 
 	game = ft_game();
-	tr.dest.x = 0;
-	tr.dest.y = 0;
-	tr.src.x = 0;
-	tr.src.y = 0;
-	tr.size.x = MAP_SPRITE_WIDTH;
-	tr.size.y = MAP_SPRITE_HEIGHT;
 	y = -1;
 	while (++y < map->size.h)
 	{
 		x = -1;
 		while (++x < map->size.w)
 		{
-			c = (char)ft_get_map_pos(map, x, y);
-			if (ft_strchr("0PEC", c))
-				tr.src.x = 0;
-			else
-				tr.src.x = MAP_SPRITE_WIDTH;
-			tr.dest.x = MAP_SPRITE_WIDTH * x;
-			tr.dest.y = MAP_SPRITE_HEIGHT * y;
-			ft_draw_image(map->img_ptr, &(game->gl), tr);
+			ft_draw_map_pos(map, &(game->gl), x, y);
 		}
 	}
+}
+
+void	ft_draw_map_pos(t_map *map, t_gl *gl, t_uint x, t_uint y)
+{
+	t_translation	tr;
+	char	c;
+
+	tr.dest.x = 0;
+	tr.dest.y = 0;
+	tr.src.x = 0;
+	tr.src.y = 0;
+	tr.size.x = MAP_SPRITE_WIDTH;
+	tr.size.y = MAP_SPRITE_HEIGHT;
+	c = (char)ft_get_map_pos(map, x, y);
+	if (ft_strchr("0PEC", c))
+		tr.src.x = 0;
+	else
+		tr.src.x = MAP_SPRITE_WIDTH;
+	tr.dest.x = MAP_SPRITE_WIDTH * x;
+	tr.dest.y = MAP_SPRITE_HEIGHT * y;
+	ft_draw_image(map->img_ptr, gl, tr);
 }

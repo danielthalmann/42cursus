@@ -13,7 +13,13 @@
 #include "game.h"
 #include "input.h"
 #include "map.h"
+#include "player.h"
 
+/**
+ * @brief boucle du jeux
+ * 
+ * @return int 
+ */
 int	ft_game_loop(void)
 {
 	t_game		*game;
@@ -21,7 +27,8 @@ int	ft_game_loop(void)
 
 	i++;
 	game = ft_game();
-	ft_draw_map(&(game->map));
+	// ft_draw_map(&(game->map));
+	ft_draw_player_pos(&(game->player), &(game->gl));
 	return (0);
 }
 
@@ -49,7 +56,9 @@ int	ft_init_game(void)
 	mlx_hook(game->gl.win_ptr, MLX_EVT_KEYUP, 2L, &ft_in_key_up, (void *)0);
 	mlx_loop_hook(game->gl.mlx_ptr, &ft_game_loop, (void *)0);
 	ft_map_load_sprite("media/map.png");
-	ft_load_image("media/player.png");
+	ft_draw_map(&(game->map));
+	ft_player_load_sprite("media/player.png");
+	//ft_load_image("media/player.png");
 	mlx_loop(game->gl.mlx_ptr);
 	return (1);
 }
