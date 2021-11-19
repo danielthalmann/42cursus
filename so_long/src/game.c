@@ -27,7 +27,7 @@ int	ft_game_loop(void)
 
 	i++;
 	game = ft_game();
-	// ft_draw_map(&(game->map));
+	ft_update_player(&(game->player), game, i);
 	ft_draw_player_pos(&(game->player), &(game->gl));
 	return (0);
 }
@@ -57,8 +57,6 @@ int	ft_init_game(void)
 	mlx_loop_hook(game->gl.mlx_ptr, &ft_game_loop, (void *)0);
 	ft_map_load_sprite("media/map.png");
 	ft_draw_map(&(game->map));
-	ft_player_load_sprite("media/player.png");
-	//ft_load_image("media/player.png");
 	mlx_loop(game->gl.mlx_ptr);
 	return (1);
 }
