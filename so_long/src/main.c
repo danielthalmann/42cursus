@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "main.h"
+#include "player.h"
 #include "map.h"
 #include "render.h"
 

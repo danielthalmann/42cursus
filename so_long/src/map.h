@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:21:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/17 17:53:54 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/14 15:23:48 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <fcntl.h>
 # include "utils.h"
 # include "libft.h"
-# include "player.h"
 # define MAP_SPRITE_WIDTH 72
 # define MAP_SPRITE_HEIGHT 72
 

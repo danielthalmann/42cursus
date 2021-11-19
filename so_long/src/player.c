@@ -6,13 +6,14 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/17 18:13:43 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/19 06:26:58 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 #include "game.h"
 #include "render.h"
+#include "libft.h"
 
 /**
  * @brief Dessine le joueur a l'ecran
@@ -30,7 +31,10 @@ void	ft_draw_player_pos(t_player *player, t_gl *gl)
 	tr.src.y = player->state * PLAYER_SPRITE_HEIGHT;
 	tr.size.x = PLAYER_SPRITE_WIDTH;
 	tr.size.y = PLAYER_SPRITE_HEIGHT;
+	ft_printf("pointer img %p \n", player->img_ptr);
+	ft_printf("draw player \n");
 	ft_draw_image(player->img_ptr, gl, tr);
+	ft_printf("after draw player \n");
 }
 
 /**
@@ -40,14 +44,14 @@ void	ft_draw_player_pos(t_player *player, t_gl *gl)
  * @param game 
  * @return int 
  */
-int	ft_init_player(t_player *player, t_game *game)
+int	ft_init_player(t_game *game)
 {
-	player->speed = 200;
-	player->speed_anim = 200;
-	player->anim_last_time = 0;
-	player->anim_index = 0;
-	player->anim_limit[PLAYER_ANIM_WAIT] = 3;
-	player->state = PLAYER_ANIM_WAIT;
+	game->player.speed = 200;
+	game->player.speed_anim = 200;
+	game->player.anim_last_time = 0;
+	game->player.anim_index = 0;
+	game->player.anim_limit[PLAYER_ANIM_WAIT] = 3;
+	game->player.state = PLAYER_ANIM_WAIT;
 	ft_player_load_sprite("media/player.png", game);
 }
 

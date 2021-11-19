@@ -6,7 +6,7 @@ HEADER=${SRC:.c=.h}
 
 OBJS=${SRC:.c=.o}
 
-CFLAGS=-Wall -Wextra -Wall -I${LIBFT_PATH} -I${LIBMLX_PATH}
+CFLAGS=-Wall -Wextra -g -Wall -I${LIBFT_PATH} -I${LIBMLX_PATH}
 
 LDFLAGS=
 
@@ -40,7 +40,7 @@ LIBMLX=${LIBMLX_PATH}/libmlx.a
 
 
 
-${NAME}: ${OBJS} ${LIBFT} ${LIBMLX}
+${NAME}: ${LIBFT} ${LIBMLX} ${OBJS}
 	$(CC) $(LDFLAGS) $(TARGET_ARCH) ${OBJS} $(LOADLIBES) $(LDLIBS) -o $@
 
 all: ${NAME}
