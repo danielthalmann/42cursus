@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/20 12:44:06 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:03:27 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	ft_draw_player_pos(t_player *player, t_gl *gl)
  */
 int	ft_init_player(t_game *game)
 {
-	game->player.speed = 20;
+	
+	game->player.speed = 50;
 	game->player.speed_anim = 2;
 	game->player.anim_last_time = 0;
 	game->player.anim_index = 0;
@@ -57,6 +58,7 @@ int	ft_init_player(t_game *game)
 	game->player.anim_limit[PLAYER_ANIM_WALK_R] = 10;
 	game->player.state = PLAYER_ANIM_WALK_F;
 	game->player.position = ft_map_pos_to_screen(game->map.player_pos);
+	game->player.map_position = game->map.player_pos;
 	ft_player_load_sprite("media/player.png", game);
 }
 
@@ -93,11 +95,28 @@ void	ft_update_player(t_player *player, t_game *game, int time)
 			player->anim_index = 0;
 		player->anim_last_time = time;
 	}
-	if (ft_keys_state()[KEY_UP])
+	if (ft_keys_state()[KEY_UP] && !player->walk)
 	{
-		if (ft_get_map_pos(&(game->map), player->map_position.x, player->map_position.y - 1))
+		if (ft_get_map_pos(&(game->map), player->map_position.x, player->map_position.y - 1) != '1')
 		{
+			player->walk = 1;
+			player->map_destination = player->map_position;
+			player->map_destination.y--;
+			player->destination = ft_map_pos_to_screen(player->map_destination);
+			player->state = PLAYER_ANIM_WALK_B;
+		}
+	}
+	if (player->walk)
+	{
+		player->position.x -= ((player->position.x - player->destination.x)) / (player->speed);
+		player->position.y -= ((player->position.y - player->destination.y)) / (player->speed);
 
+		ft_printf("x: %d %d = %d %d  \n",player->position.x,player->position.y, player->destination.x,player->destination.y);
+		if (ft_compare_pos(&(player->position), &(player->destination)))
+		{
+			player->map_position = player->map_destination;
+			player->state = PLAYER_ANIM_WAIT_L;
+			player->walk = 0;
 		}
 	}
 }
