@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:23:55 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/19 13:59:46 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/20 08:58:27 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_player
 	int		anim_index;
 	int		speed;
 	int		speed_last_time;
-	int		anim_limit[5];
+	int		anim_limit[10];
 }	t_player;
 typedef struct s_game
 {

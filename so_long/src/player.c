@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/19 06:26:58 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/20 08:58:13 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void	ft_draw_player_pos(t_player *player, t_gl *gl)
 	tr.src.y = player->state * PLAYER_SPRITE_HEIGHT;
 	tr.size.x = PLAYER_SPRITE_WIDTH;
 	tr.size.y = PLAYER_SPRITE_HEIGHT;
-	ft_printf("pointer img %p \n", player->img_ptr);
-	ft_printf("draw player \n");
 	ft_draw_image(player->img_ptr, gl, tr);
-	ft_printf("after draw player \n");
 }
 
 /**
@@ -46,12 +43,19 @@ void	ft_draw_player_pos(t_player *player, t_gl *gl)
  */
 int	ft_init_player(t_game *game)
 {
-	game->player.speed = 200;
-	game->player.speed_anim = 200;
+	game->player.speed = 20;
+	game->player.speed_anim = 2;
 	game->player.anim_last_time = 0;
 	game->player.anim_index = 0;
-	game->player.anim_limit[PLAYER_ANIM_WAIT] = 3;
-	game->player.state = PLAYER_ANIM_WAIT;
+	game->player.anim_limit[PLAYER_ANIM_WAIT_F] = 3;
+	game->player.anim_limit[PLAYER_ANIM_WAIT_L] = 3;
+	game->player.anim_limit[PLAYER_ANIM_WAIT_B] = 1;
+	game->player.anim_limit[PLAYER_ANIM_WAIT_R] = 3;
+	game->player.anim_limit[PLAYER_ANIM_WALK_F] = 10;
+	game->player.anim_limit[PLAYER_ANIM_WALK_L] = 10;
+	game->player.anim_limit[PLAYER_ANIM_WALK_B] = 10;
+	game->player.anim_limit[PLAYER_ANIM_WALK_R] = 10;
+	game->player.state = PLAYER_ANIM_WALK_F;
 	ft_player_load_sprite("media/player.png", game);
 }
 
@@ -84,7 +88,7 @@ void	ft_update_player(t_player *player, t_game *game, int time)
 	if (player->anim_last_time + player->speed_anim < time)
 	{
 		player->anim_index++;
-		if (player->anim_index >= player->anim_limit[PLAYER_ANIM_WAIT])
+		if (player->anim_index >= player->anim_limit[player->state])
 			player->anim_index = 0;
 		player->anim_last_time = time;
 	}
