@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:23:55 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/17 14:37:25 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:57:52 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	ft_compare_pos(t_pos *a, t_pos *b)
 {
-	return (a->x - b->x | a->x - b->x);
+	return (a->x == b->x && a->y == b->y);
 }
