@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:21:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/17 17:53:22 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/20 12:31:55 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,13 +140,14 @@ t_uint	ft_map_count_width(char *s)
  */
 void	ft_map_load_sprite(char *f)
 {
-	t_game			*game;
-	t_size			s;
-	void			*(*fn)();
+	t_game	*game;
+	void	*(*fn)();
+	int		w;
+	int		h;
 
 	fn = &mlx_png_file_to_image;
 	game = ft_game();
-	game->map.img_ptr = (*fn)(game->gl.mlx_ptr, f, (int *)&(s.w), (int *)&(s.h));
+	game->map.img_ptr = (*fn)(game->gl.mlx_ptr, f, &w, &h);
 }
 
 /**
@@ -175,7 +176,7 @@ void	ft_draw_map(t_map *map)
 void	ft_draw_map_pos(t_map *map, t_gl *gl, t_uint x, t_uint y)
 {
 	t_translation	tr;
-	char	c;
+	char			c;
 
 	tr.dest.x = 0;
 	tr.dest.y = 0;

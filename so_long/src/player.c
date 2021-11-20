@@ -6,13 +6,14 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/20 08:58:13 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/20 12:44:06 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "player.h"
 #include "game.h"
 #include "render.h"
+#include "map_utils.h"
 #include "libft.h"
 
 /**
@@ -25,8 +26,7 @@ void	ft_draw_player_pos(t_player *player, t_gl *gl)
 {
 	t_translation	tr;
 
-	tr.dest.x = player->position.x;
-	tr.dest.y = player->position.y;
+	tr.dest = player->position;
 	tr.src.x = player->anim_index * PLAYER_SPRITE_WIDTH;
 	tr.src.y = player->state * PLAYER_SPRITE_HEIGHT;
 	tr.size.x = PLAYER_SPRITE_WIDTH;
@@ -56,6 +56,7 @@ int	ft_init_player(t_game *game)
 	game->player.anim_limit[PLAYER_ANIM_WALK_B] = 10;
 	game->player.anim_limit[PLAYER_ANIM_WALK_R] = 10;
 	game->player.state = PLAYER_ANIM_WALK_F;
+	game->player.position = ft_map_pos_to_screen(game->map.player_pos);
 	ft_player_load_sprite("media/player.png", game);
 }
 
@@ -91,5 +92,12 @@ void	ft_update_player(t_player *player, t_game *game, int time)
 		if (player->anim_index >= player->anim_limit[player->state])
 			player->anim_index = 0;
 		player->anim_last_time = time;
+	}
+	if (ft_keys_state()[KEY_UP])
+	{
+		if (ft_get_map_pos(&(game->map), player->map_position.x, player->map_position.y - 1))
+		{
+
+		}
 	}
 }
