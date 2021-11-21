@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:23:55 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/20 12:41:25 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/21 03:29:46 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 # include "libft.h"
 
 typedef unsigned int	t_uint;
-
+typedef struct s_state
+{
+	int	on_walk;
+	int	on_stay;
+}	t_state;
 typedef struct s_position
 {
 	t_uint	x;

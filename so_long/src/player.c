@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/21 03:11:20 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/21 03:28:33 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	ft_player_load_sprite(char *f, t_game *game)
  */
 void	ft_update_player(t_player *player, t_game *game, int time)
 {
+	t_state	state;
+
 	if (player->anim_last_time + player->speed_anim < time)
 	{
 		player->anim_index++;
@@ -99,6 +101,22 @@ void	ft_update_player(t_player *player, t_game *game, int time)
 			player->anim_index = 0;
 		player->anim_last_time = time;
 	}
+	state.on_walk = PLAYER_ANIM_WALK_B;
+	state.on_walk = PLAYER_ANIM_WAIT_B;
+	ft_update_player_action(player, game, state);
+	state.on_walk = PLAYER_ANIM_WALK_F;
+	state.on_walk = PLAYER_ANIM_WAIT_F;
+	ft_update_player_action(player, game, state);
+	state.on_walk = PLAYER_ANIM_WALK_L;
+	state.on_walk = PLAYER_ANIM_WAIT_L;
+	ft_update_player_action(player, game, state);
+	state.on_walk = PLAYER_ANIM_WALK_R;
+	state.on_walk = PLAYER_ANIM_WAIT_R;
+	ft_update_player_action(player, game, state);
+}
+
+void	ft_update_player_action(t_player *player, t_game *game, t_state s)
+{
 	if (ft_keys_state()[KEY_UP] && !player->walk)
 	{
 		if (ft_get_map_pos(&(game->map), player->map_position.x, player->map_position.y - 1) != '1')
@@ -107,12 +125,12 @@ void	ft_update_player(t_player *player, t_game *game, int time)
 			player->map_destination = player->map_position;
 			player->map_destination.y--;
 			player->destination = ft_map_pos_to_screen(player->map_destination);
-			player->state = PLAYER_ANIM_WALK_B;
+			player->state = s.on_walk;
 		}
 	}
 	if (player->walk)
 	{
-		if (player->state == PLAYER_ANIM_WALK_B)
+		if (player->state == s.on_walk)
 		{
 			player->position.y -= player->speed;
 			if (player->position.y < player->destination.y)
@@ -120,7 +138,7 @@ void	ft_update_player(t_player *player, t_game *game, int time)
 			if (ft_compare_pos(&(player->position), &(player->destination)))
 			{
 				player->map_position = player->map_destination;
-				player->state = PLAYER_ANIM_WAIT_B;
+				player->state = s.on_stay;
 				player->walk = 0;
 			}
 		}
