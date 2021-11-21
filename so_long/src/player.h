@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/20 09:00:47 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/21 01:49:10 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "utils.h"
 # include "game.h"
 
-void	ft_draw_player_pos(t_player *player, t_gl *gl);
+void	ft_draw_player_pos(t_player *player, t_map *map, t_gl *gl);
 int		ft_init_player(t_game *game);
 void	ft_player_load_sprite(char *f, t_game *game);
 void	ft_update_player(t_player *player, t_game *game, int time);

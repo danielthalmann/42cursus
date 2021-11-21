@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:21:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/20 12:31:55 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/21 03:12:00 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,22 +158,21 @@ void	ft_map_load_sprite(char *f)
 void	ft_draw_map(t_map *map)
 {
 	t_game	*game;
-	t_uint	x;
-	t_uint	y;
+	t_pos	pos;
 
 	game = ft_game();
-	y = -1;
-	while (++y < map->size.h)
+	pos.y = -1;
+	while (++pos.y < map->size.h)
 	{
-		x = -1;
-		while (++x < map->size.w)
+		pos.x = -1;
+		while (++pos.x < map->size.w)
 		{
-			ft_draw_map_pos(map, &(game->gl), x, y);
+			ft_draw_map_pos(map, &(game->gl), pos);
 		}
 	}
 }
 
-void	ft_draw_map_pos(t_map *map, t_gl *gl, t_uint x, t_uint y)
+void	ft_draw_map_pos(t_map *map, t_gl *gl, t_pos pos)
 {
 	t_translation	tr;
 	char			c;
@@ -184,12 +183,12 @@ void	ft_draw_map_pos(t_map *map, t_gl *gl, t_uint x, t_uint y)
 	tr.src.y = 0;
 	tr.size.x = MAP_SPRITE_WIDTH;
 	tr.size.y = MAP_SPRITE_HEIGHT;
-	c = (char)ft_get_map_pos(map, x, y);
+	c = (char)ft_get_map_pos(map, pos.x, pos.y);
 	if (ft_strchr("0PEC", c))
 		tr.src.x = 0;
 	else
 		tr.src.x = MAP_SPRITE_WIDTH;
-	tr.dest.x = MAP_SPRITE_WIDTH * x;
-	tr.dest.y = MAP_SPRITE_HEIGHT * y;
+	tr.dest.x = MAP_SPRITE_WIDTH * pos.x;
+	tr.dest.y = MAP_SPRITE_HEIGHT * pos.y;
 	ft_draw_image(map->img_ptr, gl, tr);
 }

@@ -28,7 +28,7 @@ int	ft_game_loop(void)
 	i++;
 	game = ft_game();
 	ft_update_player(&(game->player), game, i);
-	ft_draw_player_pos(&(game->player), &(game->gl));
+	ft_draw_player_pos(&(game->player), &(game->map), &(game->gl));
 	return (0);
 }
 
