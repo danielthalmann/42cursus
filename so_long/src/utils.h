@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:23:55 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/21 03:29:46 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/21 05:20:57 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_state
 {
 	int	on_walk;
 	int	on_stay;
+	int key;
 }	t_state;
 typedef struct s_position
 {
@@ -57,6 +58,7 @@ typedef struct s_player
 	int		speed_last_time;
 	int		anim_limit[10];
 	int		walk;
+	t_state	anim_state;
 	t_pos	destination;
 	t_pos	map_destination;
 }	t_player;
