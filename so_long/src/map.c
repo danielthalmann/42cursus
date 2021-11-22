@@ -145,7 +145,7 @@ void	ft_map_load_sprite(char *f)
 	int		w;
 	int		h;
 
-	fn = &mlx_png_file_to_image;
+	fn = &mlx_xpm_file_to_image;
 	game = ft_game();
 	game->map.img_ptr = (*fn)(game->gl.mlx_ptr, f, &w, &h);
 }
