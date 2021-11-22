@@ -15,6 +15,7 @@
 #include "render.h"
 #include "map_utils.h"
 #include "libft.h"
+#include "mlx.h"
 
 /**
  * @brief Dessine le joueur a l'ecran
