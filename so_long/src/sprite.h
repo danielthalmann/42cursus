@@ -15,5 +15,5 @@
 # define MLX_EVT_KEYUP 3
 # include "game.h"
 
-void	ft_load_image(char *filename);
+void	ft_load_image(char *f);
 #endif

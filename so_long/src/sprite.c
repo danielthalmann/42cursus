@@ -22,7 +22,7 @@ void	ft_load_image(char *f)
 	void			*img_ptr;
 	void			*(*fn)();
 
-	fn = &mlx_png_file_to_image;
+	fn = &mlx_xpm_file_to_image;
 	s.w = 0;
 	s.h = 0;
 	game = ft_game();
