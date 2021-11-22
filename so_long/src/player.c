@@ -63,7 +63,7 @@ int	ft_init_player(t_game *game)
 	game->player.map_position = game->map.player_pos;
 	game->player.destination = game->player.position;
 	game->player.map_destination = game->map.player_pos;
-	ft_player_load_sprite("media/player.png", game);
+	ft_player_load_sprite("media/player.xpm", game);
 	return (1);
 }
 
@@ -81,7 +81,7 @@ void	ft_player_load_sprite(char *f, t_game *game)
 
 	w = (int *)&(s.w);
 	h = (int *)&(s.h);
-	fn = &mlx_png_file_to_image;
+	fn = &mlx_xpm_file_to_image;
 	game->player.img_ptr = (*fn)(game->gl.mlx_ptr, f, w, h);
 }
 
