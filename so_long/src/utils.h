@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:23:55 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/21 05:20:57 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/24 10:43:03 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,16 @@ typedef struct s_map
 	t_size	size;
 	t_uint	*coord;
 	t_pos	player_pos;
+	t_pos	exit_pos;
+	t_list	*collect_pos;
 	t_pos	exit;
 	t_list	*coll;
 	void	*img_ptr;
 }	t_map;
 typedef struct s_player
 {
-	int		state;
+	int		current_state;
+	int		end_state;
 	t_pos	position;
 	t_pos	map_position;
 	void	*img_ptr;
@@ -58,7 +61,6 @@ typedef struct s_player
 	int		speed_last_time;
 	int		anim_limit[10];
 	int		walk;
-	t_state	anim_state;
 	t_pos	destination;
 	t_pos	map_destination;
 }	t_player;
@@ -69,5 +71,5 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 }	t_game;
-int	ft_compare_pos(t_pos *a, t_pos *b);
+int	ft_is_same_pos(t_pos *a, t_pos *b);
 #endif

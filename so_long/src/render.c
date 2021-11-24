@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/17 15:31:32 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/24 10:09:06 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #include "game.h"
 #include "mlx.h"
 
+/**
+ * @brief initialise la librairie graphique
+ * 
+ * @param gl 
+ * @param width 
+ * @param height 
+ * @return int 
+ */
 int	ft_init_render(t_gl *gl, int width, int height)
 {
 	gl->mlx_ptr = mlx_init();
@@ -25,6 +33,14 @@ int	ft_init_render(t_gl *gl, int width, int height)
 	return (1);
 }
 
+/**
+ * @brief Dessine une partie d'une image sur l'écran
+ * une couleur 0xFF000000 est une couleur transparente
+ * 
+ * @param i_ptr pointeur sur l'image
+ * @param gl 	pointeur sur la librairie graphique
+ * @param tr 	structure de la translation
+ */
 void	ft_draw_image(void *i_ptr, t_gl *gl, t_translation tr)
 {
 	t_uint			*ptr;
@@ -46,7 +62,8 @@ void	ft_draw_image(void *i_ptr, t_gl *gl, t_translation tr)
 			clr = ptr[((put.y) * ii.sl / ii.bytes) + (put.x)];
 			put.x = tr.dest.x + p.x;
 			put.y = tr.dest.y + p.y;
-			mlx_pixel_put(gl->mlx_ptr, gl->win_ptr, put.x, put.y, clr);
+			if (clr != 0xFF000000)
+				mlx_pixel_put(gl->mlx_ptr, gl->win_ptr, put.x, put.y, clr);
 			p.x++;
 		}
 		p.y++;

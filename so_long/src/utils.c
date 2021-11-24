@@ -6,13 +6,13 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:23:55 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/20 17:57:52 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/24 09:16:45 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	ft_compare_pos(t_pos *a, t_pos *b)
+int	ft_is_same_pos(t_pos *a, t_pos *b)
 {
 	return (a->x == b->x && a->y == b->y);
 }

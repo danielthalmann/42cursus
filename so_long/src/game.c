@@ -68,5 +68,6 @@ void	ft_end_game(void)
 
 	game = ft_game();
 	ft_free_map(&(game->map));
+	ft_free_player(&(game->player));
 	exit(0);
 }

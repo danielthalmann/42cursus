@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 08:58:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/20 12:32:09 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/24 10:42:04 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@
  */
 t_uint	ft_get_map_pos(t_map *map, t_uint x, t_uint y)
 {
+	t_uint	c;
+
+	c = 0;
 	if (x < map->size.w && y < map->size.h)
-		return (map->coord[(map->size.w * y) + x]);
-	return (0);
+		c = (map->coord[(map->size.w * y) + x]);
+	// ft_printf("map x %d, y %d : c %c\n", x, y, c);
+	return (c);
 }
 
 /**
@@ -45,7 +49,11 @@ void	ft_set_map_pos(t_uint v, t_map *map, t_uint x, t_uint y)
 		{
 			map->player_pos.x = x;
 			map->player_pos.y = y;
-			ft_printf("map x %d, z %d/n", map->player_pos.x, map->player_pos.y);
+		}
+		if ((char)v == 'E')
+		{
+			map->exit_pos.x = x;
+			map->exit_pos.y = y;
 		}
 	}
 }
