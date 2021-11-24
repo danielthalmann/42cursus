@@ -21,12 +21,6 @@ typedef struct s_image_info
 	int	endian;
 	int	bytes;
 }	t_image_info;
-typedef struct s_translation
-{
-	t_pos	src;
-	t_pos	dest;
-	t_pos	size;
-}	t_translation;
 int		ft_init_render(t_gl *gl, int width, int height);
 void	ft_draw_image(void *i_ptr, t_gl *gl, t_translation tr);
 

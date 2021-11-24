@@ -13,7 +13,6 @@
 #include "game.h"
 #include "map.h"
 #include "render.h"
-#include "map_utils.h"
 
 /**
  * @brief Charge un fichier contenant les données d'une carte
@@ -131,64 +130,4 @@ t_uint	ft_map_count_width(char *s)
 		s++;
 	}
 	return (c);
-}
-
-/**
- * @brief Charge dans la map le sprite pour la map
- * 
- * @param f 
- */
-void	ft_map_load_sprite(char *f)
-{
-	t_game	*game;
-	void	*(*fn)();
-	int		w;
-	int		h;
-
-	fn = &mlx_xpm_file_to_image;
-	game = ft_game();
-	game->map.img_ptr = (*fn)(game->gl.mlx_ptr, f, &w, &h);
-}
-
-/**
- * @brief Dessine a l'écran la carte
- * 
- * @param map 
- */
-void	ft_draw_map(t_map *map)
-{
-	t_game	*game;
-	t_pos	pos;
-
-	game = ft_game();
-	pos.y = -1;
-	while (++pos.y < map->size.h)
-	{
-		pos.x = -1;
-		while (++pos.x < map->size.w)
-		{
-			ft_draw_map_pos(map, &(game->gl), pos);
-		}
-	}
-}
-
-void	ft_draw_map_pos(t_map *map, t_gl *gl, t_pos pos)
-{
-	t_translation	tr;
-	char			c;
-
-	tr.dest.x = 0;
-	tr.dest.y = 0;
-	tr.src.x = 0;
-	tr.src.y = 0;
-	tr.size.x = MAP_SPRITE_WIDTH;
-	tr.size.y = MAP_SPRITE_HEIGHT;
-	c = (char)ft_get_map_pos(map, pos.x, pos.y);
-	if (ft_strchr("0PEC", c))
-		tr.src.x = 0;
-	else
-		tr.src.x = MAP_SPRITE_WIDTH;
-	tr.dest.x = MAP_SPRITE_WIDTH * pos.x;
-	tr.dest.y = MAP_SPRITE_HEIGHT * pos.y;
-	ft_draw_image(map->img_ptr, gl, tr);
 }

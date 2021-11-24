@@ -71,5 +71,11 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 }	t_game;
+typedef struct s_translation
+{
+	t_pos	src;
+	t_pos	dest;
+	t_pos	size;
+}	t_translation;
 int	ft_is_same_pos(t_pos *a, t_pos *b);
 #endif

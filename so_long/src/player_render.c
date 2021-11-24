@@ -13,7 +13,7 @@
 #include "player.h"
 #include "game.h"
 #include "render.h"
-#include "map_utils.h"
+#include "map.h"
 #include "libft.h"
 #include "mlx.h"
 

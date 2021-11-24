@@ -28,4 +28,7 @@ t_uint	ft_map_count_width(char *s);
 void	ft_map_load_sprite(char *f);
 void	ft_draw_map(t_map *map);
 void	ft_draw_map_pos(t_map *map, t_gl *gl, t_pos pos);
+t_uint	ft_get_map_pos(t_map *map, int x, int y);
+void	ft_set_map_pos(t_uint v, t_map *map, t_uint x, t_uint y);
+t_pos	ft_map_pos_to_screen(t_pos m_pos);
 #endif

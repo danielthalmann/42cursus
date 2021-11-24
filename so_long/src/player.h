@@ -37,4 +37,6 @@ void	ft_update_player_action_v(t_player *player, t_game *game, t_state *s);
 void	ft_update_player_pos(t_player *player, t_game *game);
 void	ft_update_player_pos_horizontal(t_player *player, t_game *game);
 void	ft_update_player_pos_vertical(t_player *player, t_game *game);
+void	ft_update_player_horizontal(t_player *player, t_game *game, int time);
+void	ft_update_player_vertical(t_player *player, t_game *game, int time);
 #endif
