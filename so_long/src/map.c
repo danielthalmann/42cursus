@@ -190,6 +190,5 @@ void	ft_draw_map_pos(t_map *map, t_gl *gl, t_pos pos)
 		tr.src.x = MAP_SPRITE_WIDTH;
 	tr.dest.x = MAP_SPRITE_WIDTH * pos.x;
 	tr.dest.y = MAP_SPRITE_HEIGHT * pos.y;
-	// ft_printf("pos : %d %d \n", tr.dest.x , tr.dest.y);
 	ft_draw_image(map->img_ptr, gl, tr);
 }

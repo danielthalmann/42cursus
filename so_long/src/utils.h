@@ -19,7 +19,7 @@ typedef struct s_state
 {
 	int	on_walk;
 	int	on_stay;
-	int key;
+	int	key;
 }	t_state;
 typedef struct s_position
 {

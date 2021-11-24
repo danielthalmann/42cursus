@@ -32,5 +32,9 @@ void	ft_free_player(t_player *player);
 void	ft_player_load_sprite(char *f, t_game *game);
 void	ft_update_player(t_player *player, t_game *game, int time);
 void	ft_update_player_action(t_player *player, t_game *game, t_state *s);
+void	ft_update_player_action_h(t_player *player, t_game *game, t_state *s);
+void	ft_update_player_action_v(t_player *player, t_game *game, t_state *s);
 void	ft_update_player_pos(t_player *player, t_game *game);
+void	ft_update_player_pos_horizontal(t_player *player, t_game *game);
+void	ft_update_player_pos_vertical(t_player *player, t_game *game);
 #endif

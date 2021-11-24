@@ -1,6 +1,17 @@
 NAME=so_long
 
-SRC=main.c game.c input.c player.c map.c map_utils.c sprite.c render.c utils.c
+SRC=main.c \
+	game.c \
+	input.c \
+	player.c \
+	player_position.c \
+	player_action.c \
+	player_render.c \
+	map.c \
+	map_utils.c \
+	sprite.c \
+	render.c \
+	utils.c
 
 HEADER=${SRC:.c=.h}
 

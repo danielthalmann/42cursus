@@ -28,7 +28,6 @@ t_uint	ft_get_map_pos(t_map *map, t_uint x, t_uint y)
 	c = 0;
 	if (x < map->size.w && y < map->size.h)
 		c = (map->coord[(map->size.w * y) + x]);
-	// ft_printf("map x %d, y %d : c %c\n", x, y, c);
 	return (c);
 }
 
