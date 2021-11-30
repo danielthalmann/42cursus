@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 08:58:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/24 10:42:04 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/30 03:40:11 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,9 @@ void	ft_set_map_pos(t_uint v, t_map *map, t_uint x, t_uint y)
 			map->player_pos.x = x;
 			map->player_pos.y = y;
 		}
-		if ((char)v == 'E')
+		if ((char)v == 'C')
 		{
-			map->exit_pos.x = x;
-			map->exit_pos.y = y;
+			map->nb_collect++;
 		}
 	}
 }
@@ -88,8 +87,12 @@ void	ft_draw_map_pos(t_map *map, t_gl *gl, t_pos pos)
 	tr.size.x = MAP_SPRITE_WIDTH;
 	tr.size.y = MAP_SPRITE_HEIGHT;
 	c = (char)ft_get_map_pos(map, pos.x, pos.y);
-	if (ft_strchr("0PEC", c))
+	if (ft_strchr("0P", c))
 		tr.src.x = 0;
+	else if (c == 'E')
+		tr.src.x = MAP_SPRITE_WIDTH * 3;
+	else if (c == 'C')
+		tr.src.x = MAP_SPRITE_WIDTH * 2;
 	else
 		tr.src.x = MAP_SPRITE_WIDTH;
 	tr.dest.x = MAP_SPRITE_WIDTH * pos.x;

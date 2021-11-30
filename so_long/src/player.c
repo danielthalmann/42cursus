@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/24 10:37:10 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/11/30 06:57:27 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_draw_player_pos(t_player *player, t_map *map, t_gl *gl)
  */
 int	ft_init_player(t_game *game)
 {
-	game->player.speed = 3;
+	game->player.speed = 5;
 	game->player.speed_anim = 2;
 	game->player.anim_last_time = 0;
 	game->player.anim_index = 0;
