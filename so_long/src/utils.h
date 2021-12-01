@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:23:55 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 11:59:43 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:15:14 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ typedef struct s_player
 	t_pos	destination;
 	t_pos	map_destination;
 }	t_player;
+typedef struct s_score
+{
+	void	*img_ptr;
+	t_pos	position;
+}	t_score;
 typedef struct s_game
 {
 	int			is_init;
@@ -70,6 +75,7 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	t_uint		nb_move;
+	t_score		score;
 }	t_game;
 typedef struct s_translation
 {

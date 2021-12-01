@@ -14,6 +14,7 @@
 #include "input.h"
 #include "map.h"
 #include "player.h"
+#include "score.h"
 
 /**
  * @brief boucle du jeux
@@ -58,6 +59,8 @@ int	ft_init_game(void)
 	ft_map_load_sprite("media/map.xpm");
 	ft_init_player(game);
 	ft_draw_map(&(game->map));
+	ft_init_score(game);
+	ft_draw_score_init(&game->score, &game->gl);
 	mlx_loop(game->gl.mlx_ptr);
 	return (1);
 }
@@ -69,5 +72,6 @@ void	ft_end_game(void)
 	game = ft_game();
 	ft_free_map(&(game->map));
 	ft_free_player(&(game->player));
+	ft_free_score(&game->score);
 	exit(0);
 }

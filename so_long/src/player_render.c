@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_position.c                                  :+:      :+:    :+:   */
+/*   player_render.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/24 10:37:10 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 13:49:33 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	ft_update_player(t_player *player, t_game *game, int time)
 	}
 	if (!player->walk)
 	{
-		ft_update_player_horizontal(player, game, time);
-		ft_update_player_vertical(player, game, time);
+		ft_update_player_horizontal(player, game);
+		ft_update_player_vertical(player, game);
 	}
 	else
 	{
@@ -43,7 +43,7 @@ void	ft_update_player(t_player *player, t_game *game, int time)
 	}
 }
 
-void	ft_update_player_horizontal(t_player *player, t_game *game, int time)
+void	ft_update_player_horizontal(t_player *player, t_game *game)
 {
 	t_state	state;
 
@@ -57,7 +57,7 @@ void	ft_update_player_horizontal(t_player *player, t_game *game, int time)
 	ft_update_player_action(player, game, &state);
 }
 
-void	ft_update_player_vertical(t_player *player, t_game *game, int time)
+void	ft_update_player_vertical(t_player *player, t_game *game)
 {
 	t_state	state;
 

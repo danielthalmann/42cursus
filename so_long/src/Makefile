@@ -12,6 +12,7 @@ SRC=main.c \
 	map_position2.c \
 	map_render.c \
 	map_validator.c \
+	score.c \
 	sprite.c \
 	render.c \
 	utils.c

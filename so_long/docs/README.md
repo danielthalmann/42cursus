@@ -54,3 +54,32 @@ respecte les règles de la carte
 Si une mauvaise configuration de quelque nature que ce soit est rencontrée dans 
 le fichier, le programme doit se fermer correctement et renvoyer "Erreur\n" 
 suivi d'un message d'erreur explicite de votre choix.
+
+
+
+0 0 0 0 0 0 0 1
+
+1L << 1
+
+0 0 0 0 0 0 1 0
+
+1L << 5
+
+0 0 0 1 0 0 0 0
+
+AND
+
+1 1 0 0 1 0 1 0
+ 
+0 0 0 0 0 0 0 0
+
+
+
+0 0 = 0
+0 1 = 0
+1 0 = 0
+1 1 = 1
+
+
+long
+
