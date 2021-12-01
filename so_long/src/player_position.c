@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 15:11:39 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:55:19 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_update_player_pos(t_player *player, t_game *game)
 		game->nb_move++;
 		ft_printf("%d\n", game->nb_move);
 		ft_draw_score(&game->score, game, &game->gl);
+		ft_draw_monster();
 		player->current_state = player->end_state;
 		player->map_position = player->map_destination;
 		c = ft_get_map_pos2(&game->map, &player->map_position);

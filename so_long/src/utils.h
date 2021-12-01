@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:23:55 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 15:15:14 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:54:30 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ typedef struct s_map
 	t_uint	*coord;
 	t_pos	player_pos;
 	t_pos	exit;
+	t_pos	monster_pos;
+	int		has_monster;
+	int		monster_direction;
 	t_uint	nb_collect;
 	int		has_exit;
 	void	*img_ptr;

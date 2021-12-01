@@ -21,6 +21,7 @@
 # include "sprite.h"
 # define MLX_EVT_KEYDN 2
 # define MLX_EVT_KEYUP 3
+# define MLX_EVT_DESTROY 17
 
 int		ft_game_loop(void);
 int		ft_init_game(void);

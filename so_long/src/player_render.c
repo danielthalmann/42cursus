@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 13:49:33 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:55:08 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,30 @@ void	ft_update_player_vertical(t_player *player, t_game *game)
 	state.on_stay = PLAYER_ANIM_WAIT_F;
 	state.key = KEY_DOWN;
 	ft_update_player_action(player, game, &state);
+}
+
+void	ft_draw_monster()
+{
+	t_game	*game;
+	t_pos	dest;
+
+	game = ft_game();
+	if (!game->map.has_monster)
+		return ;
+	dest = game->map.monster_pos;
+	if (game->map.monster_direction == 0)
+	{
+		dest.x++;
+		if (ft_get_map_pos2(&game->map, &dest) == '0')
+		{
+			ft_set_map_pos2('0', &game->map, &dest);
+			ft_draw_map_pos(&game->map, &game->gl, player->map_position);
+		}
+		else
+			game->map.monster_direction = 1;
+	}
+	else if(game->map.monster_direction == 0)
+	
+	ft_draw_map_pos(&game->map, &game->gl, player->map_position);
+	ft_draw_map_pos(&game->map, &game->gl, player->map_destination);
 }
