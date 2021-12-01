@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 08:58:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 11:59:23 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:13:56 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ void	ft_set_map_pos(t_uint v, t_map *map, t_uint x, t_uint y)
 			map->nb_collect++;
 		if ((char)v == 'C')
 			map->has_exit = 1;
+		if ((char)v == 'M')
+		{
+			map->has_monster = 1;
+			map->monster_pos.x = x;
+			map->monster_pos.y = y;
+		}
 	}
 }
 

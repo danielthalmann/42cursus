@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 15:55:37 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:09:05 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	ft_update_player_pos_vertical(t_player *player);
 void	ft_update_player_horizontal(t_player *player, t_game *game);
 void	ft_update_player_vertical(t_player *player, t_game *game);
 void	ft_draw_monster();
+void	ft_move_monster(t_game *game, t_pos *dest);
 #endif

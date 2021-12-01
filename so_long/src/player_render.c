@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 15:55:08 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:31:37 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,35 @@ void	ft_draw_monster()
 	if (game->map.monster_direction == 0)
 	{
 		dest.x++;
-		if (ft_get_map_pos2(&game->map, &dest) == '0')
-		{
-			ft_set_map_pos2('0', &game->map, &dest);
-			ft_draw_map_pos(&game->map, &game->gl, player->map_position);
-		}
+		ft_move_monster(game, &dest);
+	}
+	else
+	{
+		dest.x--;
+		ft_move_monster(game, &dest);
+	}
+}
+
+void	ft_move_monster(t_game *game, t_pos *dest)
+{
+	char	c;
+	c = ft_get_map_pos2(&game->map, dest);
+	if (c == '0')
+	{
+		ft_printf("monster %c", c);
+		ft_printf(" pos  %d %d ", dest->x, dest->y);
+
+		ft_set_map_pos2('M', &game->map, dest);
+		ft_set_map_pos2('0', &game->map, &game->map.monster_pos);
+		ft_draw_map_pos(&game->map, &game->gl, (game->map.monster_pos));
+		ft_draw_map_pos(&game->map, &game->gl, (*dest));
+		game->map.monster_pos = *dest;
+	}
+	else
+	{
+		if (game->map.monster_direction)
+			game->map.monster_direction = 0;
 		else
 			game->map.monster_direction = 1;
 	}
-	else if(game->map.monster_direction == 0)
-	
-	ft_draw_map_pos(&game->map, &game->gl, player->map_position);
-	ft_draw_map_pos(&game->map, &game->gl, player->map_destination);
 }
