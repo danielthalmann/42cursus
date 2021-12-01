@@ -55,6 +55,7 @@ int	ft_init_game(void)
 	game->is_init = 1;
 	mlx_hook(game->gl.win_ptr, MLX_EVT_KEYDN, 1L, &ft_in_key_down, (void *)0);
 	mlx_hook(game->gl.win_ptr, MLX_EVT_KEYUP, 2L, &ft_in_key_up, (void *)0);
+	mlx_hook(game->gl.win_ptr, 17, 0L, &ft_end_game, (void *)0);
 	mlx_loop_hook(game->gl.mlx_ptr, &ft_game_loop, (void *)0);
 	ft_map_load_sprite("media/map.xpm");
 	ft_init_player(game);
