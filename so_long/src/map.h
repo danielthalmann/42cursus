@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:21:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 07:58:59 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 09:03:16 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_uint	ft_map_count_width(char *s);
 void	ft_map_load_sprite(char *f);
 void	ft_draw_map(t_map *map);
 void	ft_draw_map_pos(t_map *map, t_gl *gl, t_pos pos);
-t_uint	ft_get_map_pos(t_map *map, int x, int y);
+t_uint	ft_get_map_pos(t_map *map, t_uint x, t_uint y);
 void	ft_set_map_pos(t_uint v, t_map *map, t_uint x, t_uint y);
 t_uint	ft_get_map_pos2(t_map *map, t_pos *pos);
 void	ft_set_map_pos2(t_uint v, t_map *map, t_pos *pos);

@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 08:11:44 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 09:07:44 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	ft_update_player_pos(t_player *player, t_game *game)
 {
 	char	c;
 
-	ft_update_player_pos_horizontal(player, game);
-	ft_update_player_pos_vertical(player, game);
+	ft_update_player_pos_horizontal(player);
+	ft_update_player_pos_vertical(player);
 	if (ft_is_same_pos(&player->position, &player->destination))
 	{
 		player->walk = 0;
@@ -38,11 +38,13 @@ void	ft_update_player_pos(t_player *player, t_game *game)
 		}
 		if (c == 'E')
 			ft_end_game();
+		if (c == 'M')
+			ft_end_game();
 		ft_update_player(player, game, player->anim_last_time);
 	}
 }
 
-void	ft_update_player_pos_horizontal(t_player *player, t_game *game)
+void	ft_update_player_pos_horizontal(t_player *player)
 {
 	if (player->position.x < player->destination.x)
 	{
@@ -58,7 +60,7 @@ void	ft_update_player_pos_horizontal(t_player *player, t_game *game)
 	}
 }
 
-void	ft_update_player_pos_vertical(t_player *player, t_game *game)
+void	ft_update_player_pos_vertical(t_player *player)
 {
 	if (player->position.y < player->destination.y)
 	{

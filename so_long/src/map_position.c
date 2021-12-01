@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 08:58:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 08:04:47 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 09:10:18 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  * @param y 
  * @return t_uint 
  */
-t_uint	ft_get_map_pos(t_map *map, int x, int y)
+t_uint	ft_get_map_pos(t_map *map, t_uint x, t_uint y)
 {
 	t_uint	c;
 
@@ -80,10 +80,7 @@ void	ft_draw_map_pos(t_map *map, t_gl *gl, t_pos pos)
 	t_translation	tr;
 	char			c;
 
-	tr.dest.x = 0;
-	tr.dest.y = 0;
-	tr.src.x = 0;
-	tr.src.y = 0;
+	ft_memset((void *)&tr, 0, sizeof(tr));
 	tr.size.x = MAP_SPRITE_WIDTH;
 	tr.size.y = MAP_SPRITE_HEIGHT;
 	c = (char)ft_get_map_pos(map, pos.x, pos.y);
@@ -93,6 +90,8 @@ void	ft_draw_map_pos(t_map *map, t_gl *gl, t_pos pos)
 		tr.src.x = MAP_SPRITE_WIDTH * 3;
 	else if (c == 'C')
 		tr.src.x = MAP_SPRITE_WIDTH * 2;
+	else if (c == 'M')
+		tr.src.x = MAP_SPRITE_WIDTH * 4;
 	else
 		tr.src.x = MAP_SPRITE_WIDTH;
 	tr.dest.x = MAP_SPRITE_WIDTH * pos.x;

@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/24 10:36:07 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 09:04:15 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	ft_update_player_action(t_player *player, t_game *game, t_state *s);
 void	ft_update_player_action_h(t_player *player, t_game *game, t_state *s);
 void	ft_update_player_action_v(t_player *player, t_game *game, t_state *s);
 void	ft_update_player_pos(t_player *player, t_game *game);
-void	ft_update_player_pos_horizontal(t_player *player, t_game *game);
-void	ft_update_player_pos_vertical(t_player *player, t_game *game);
+void	ft_update_player_pos_horizontal(t_player *player);
+void	ft_update_player_pos_vertical(t_player *player);
 void	ft_update_player_horizontal(t_player *player, t_game *game, int time);
 void	ft_update_player_vertical(t_player *player, t_game *game, int time);
 #endif
