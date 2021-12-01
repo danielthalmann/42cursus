@@ -9,6 +9,7 @@ SRC=main.c \
 	player_render.c \
 	map.c \
 	map_position.c \
+	map_position2.c \
 	map_render.c \
 	sprite.c \
 	render.c \

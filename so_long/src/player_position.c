@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/30 06:57:02 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 08:11:44 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@ void	ft_update_player_pos(t_player *player, t_game *game)
 	if (ft_is_same_pos(&player->position, &player->destination))
 	{
 		player->walk = 0;
+		game->nb_move++;
+		ft_printf("%d\n", game->nb_move);
 		player->current_state = player->end_state;
 		player->map_position = player->map_destination;
-		c = ft_get_map_pos(&game->map, player->map_position.x, player->map_position.y);
-		if(c == 'C')
+		c = ft_get_map_pos2(&game->map, &player->map_position);
+		if (c == 'C')
 		{
 			game->map.nb_collect--;
-			ft_set_map_pos('0', &game->map, player->map_position.x, player->map_position.y);
+			ft_set_map_pos2('0', &game->map, &player->map_position);
 		}
 		if (c == 'E')
 			ft_end_game();

@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 08:58:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/30 03:40:11 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 08:04:47 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_uint	ft_get_map_pos(t_map *map, int x, int y)
 
 	c = 0;
 	if (x < map->size.w && y < map->size.h)
-		c = (map->coord[(map->size.w * y) + x]);
+		c = map->coord[(map->size.w * y) + x];
 	return (c);
 }
 

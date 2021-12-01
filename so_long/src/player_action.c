@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/30 06:51:40 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 08:09:04 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_update_player_action(t_player *player, t_game *game, t_state *s)
 	int	x;
 	int	y;
 	int	not_allowed;
+	int	c;
 
 	if (player->walk)
 		return ;
@@ -31,8 +32,8 @@ void	ft_update_player_action(t_player *player, t_game *game, t_state *s)
 	{
 		x = player->map_destination.x;
 		y = player->map_destination.y;
-		not_allowed = (ft_get_map_pos(&(game->map), x, y) == '1');
-		not_allowed = not_allowed || (ft_get_map_pos(&(game->map), x, y) == 'E' && game->map.nb_collect > 0);
+		c = ft_get_map_pos(&(game->map), x, y);
+		not_allowed = ((c == '1') || (c == 'E' && game->map.nb_collect > 0));
 		if (not_allowed)
 			player->walk = 0;
 		else

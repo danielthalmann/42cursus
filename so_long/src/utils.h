@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:23:55 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/30 03:40:24 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 08:13:06 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_game
 	t_gl		gl;
 	t_map		map;
 	t_player	player;
+	t_uint		nb_move;
 }	t_game;
 typedef struct s_translation
 {
