@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:23:55 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 08:13:06 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 11:59:43 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_map
 	t_pos	player_pos;
 	t_pos	exit;
 	t_uint	nb_collect;
+	int		has_exit;
 	void	*img_ptr;
 }	t_map;
 typedef struct s_player

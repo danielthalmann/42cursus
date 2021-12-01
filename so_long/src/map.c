@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:21:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/24 10:01:00 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/01 11:16:41 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	ft_load_map(char *filename, t_map *map)
 	}
 	close(fd);
 	ret = ft_load_list_map(lines, map);
+	if (ret)
+		ret = ft_valid_map(map);
 	ft_free_list_map(lines);
 	return (ret);
 }
@@ -101,7 +103,7 @@ void	ft_free_list_map(t_list *list)
  * 
  * @param map 
  */
-void	ft_free_map(t_map *map)
+int	ft_free_map(t_map *map)
 {
 	t_game	*game;
 
@@ -111,6 +113,7 @@ void	ft_free_map(t_map *map)
 		game = ft_game();
 		mlx_destroy_image(game->gl.mlx_ptr, map->img_ptr);
 	}
+	return (1);
 }
 
 /**

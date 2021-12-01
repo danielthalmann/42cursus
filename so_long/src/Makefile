@@ -11,6 +11,7 @@ SRC=main.c \
 	map_position.c \
 	map_position2.c \
 	map_render.c \
+	map_validator.c \
 	sprite.c \
 	render.c \
 	utils.c
@@ -82,6 +83,6 @@ norm:
 	${MINETTE} ${HEADER} ${SRC}
 
 run: all
-	./${NAME} level.ber
+	./${NAME} map/level.ber
 
 .PHONY : ${LIBFT} ${LIBMLX} clean fclean all re

@@ -30,22 +30,21 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_printf("Nombre d'argument incorrect\n");
+		ft_printf("Error\nNombre d'argument incorrect\n");
 		return (1);
 	}
 	game = ft_game();
 	if (!ft_load_map(argv[1], &(game->map)))
 	{
-		ft_printf("Erreur a l'ouverture du fichier (%s).\n", argv[1]);
-		return (1);
+		ft_printf("Error\nErreur a l'ouverture du fichier (%s).\n", argv[1]);
+		return (ft_free_map(&(game->map)));
 	}
 	w = game->map.size.w * MAP_SPRITE_WIDTH;
 	h = game->map.size.h * MAP_SPRITE_HEIGHT;
 	if (!ft_init_render(&(game->gl), w, h))
 	{
-		ft_free_map(&(game->map));
-		ft_printf("Erreur lors de l'init du gl.\n");
-		return (1);
+		ft_printf("Error\nErreur lors de l'init du gl.\n");
+		return (ft_free_map(&(game->map)));
 	}
 	ft_init_game();
 	return (0);
