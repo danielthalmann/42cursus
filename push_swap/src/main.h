@@ -18,6 +18,6 @@ typedef struct s_number
 	int		n;
 	char	*s;
 }	t_number;
-int	main(int argc, char **argv);
-int	ft_load_list(t_list	*list, int l, char **v);
+int				main(int argc, char **argv);
+unsigned int	ft_load_list(t_list	**list, unsigned int l, char **v);
 #endif

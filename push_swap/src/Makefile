@@ -9,7 +9,7 @@ OBJS=${SRC:.c=.o}
 LIBFT_PATH=./libft
 LIBFT=${LIBFT_PATH}/libft.a
 
-CFLAGS=-Wall -Wextra -Wall -I${LIBFT_PATH}
+CFLAGS=-Wall -Wextra -Wall -I${LIBFT_PATH} -g
 
 LDFLAGS=
 
