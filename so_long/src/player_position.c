@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 15:55:19 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:05:54 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	ft_update_player_pos(t_player *player, t_game *game)
 			ft_set_map_pos2('0', &game->map, &player->map_position);
 		}
 		if (c == 'E')
-			ft_end_game();
+			ft_end_game(0);
 		if (c == 'M')
-			ft_end_game();
+			ft_end_game(0);
 		ft_update_player(player, game, player->anim_last_time);
 	}
 }

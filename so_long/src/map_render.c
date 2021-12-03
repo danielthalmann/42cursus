@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:21:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/24 10:01:00 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 10:51:20 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * 
  * @param f 
  */
-void	ft_map_load_sprite(char *f)
+void	*ft_map_load_sprite(char *f)
 {
 	t_game	*game;
 	void	*(*fn)();
@@ -29,6 +29,7 @@ void	ft_map_load_sprite(char *f)
 	fn = &mlx_xpm_file_to_image;
 	game = ft_game();
 	game->map.img_ptr = (*fn)(game->gl.mlx_ptr, f, &w, &h);
+	return (game->map.img_ptr);
 }
 
 /**

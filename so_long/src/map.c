@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:21:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 11:16:41 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 08:23:52 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_load_list_map(t_list *list, t_map *map)
 		if (ft_map_count_width(list->content) != map->size.w)
 			return (0);
 		while (++x < map->size.w)
-			ft_set_map_pos(((char *)(list->content))[x], map, x, y);
+			ft_set_map_pos_init(((char *)(list->content))[x], map, x, y);
 		list = list->next;
 	}
 	return (1);

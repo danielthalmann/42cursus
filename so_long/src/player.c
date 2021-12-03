@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 09:06:28 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:03:08 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int	ft_init_player(t_game *game)
 	game->player.map_position = game->map.player_pos;
 	game->player.destination = game->player.position;
 	game->player.map_destination = game->map.player_pos;
-	ft_player_load_sprite("media/player.xpm", game);
+	if (!ft_player_load_sprite("media/player.xpm", game))
+		ft_end_game("Le sprite du joueur n'a pas pu être chargé.");
 	return (1);
 }
 
@@ -78,7 +79,7 @@ int	ft_init_player(t_game *game)
  * 
  * @param f 
  */
-void	ft_player_load_sprite(char *f, t_game *game)
+void	*ft_player_load_sprite(char *f, t_game *game)
 {
 	t_size	s;
 	void	*(*fn)();
@@ -89,6 +90,7 @@ void	ft_player_load_sprite(char *f, t_game *game)
 	h = (int *)&(s.h);
 	fn = &mlx_xpm_file_to_image;
 	game->player.img_ptr = (*fn)(game->gl.mlx_ptr, f, w, h);
+	return (game->player.img_ptr);
 }
 
 /**

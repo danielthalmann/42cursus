@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 15:15:36 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:04:15 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	ft_init_score(t_game *game)
 {
 	game->score.position.x = 85;
 	game->score.position.y = 10;
-	ft_score_load_sprite("media/number.xpm", game);
+	if (!ft_score_load_sprite("media/number.xpm", game))
+		ft_end_game("Le sprite du score n'a pas pu être chargé.");
 	return (1);
 }
 
@@ -37,7 +38,7 @@ int	ft_init_score(t_game *game)
  * 
  * @param f 
  */
-void	ft_score_load_sprite(char *f, t_game *game)
+void	*ft_score_load_sprite(char *f, t_game *game)
 {
 	t_size	s;
 	void	*(*fn)();
@@ -48,8 +49,7 @@ void	ft_score_load_sprite(char *f, t_game *game)
 	h = (int *)&(s.h);
 	fn = &mlx_xpm_file_to_image;
 	game->score.img_ptr = (*fn)(game->gl.mlx_ptr, f, w, h);
-	if (!game->score.img_ptr)
-		ft_end_game();
+	return (game->score.img_ptr);
 }
 
 void	ft_free_score(t_score *score)

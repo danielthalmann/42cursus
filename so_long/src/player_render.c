@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 19:31:37 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 10:39:56 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_update_player_vertical(t_player *player, t_game *game)
 	ft_update_player_action(player, game, &state);
 }
 
-void	ft_draw_monster()
+void	ft_draw_monster(void)
 {
 	t_game	*game;
 	t_pos	dest;
@@ -95,14 +95,12 @@ void	ft_draw_monster()
 void	ft_move_monster(t_game *game, t_pos *dest)
 {
 	char	c;
+
 	c = ft_get_map_pos2(&game->map, dest);
 	if (c == '0')
 	{
-		ft_printf("monster %c", c);
-		ft_printf(" pos  %d %d ", dest->x, dest->y);
-
-		ft_set_map_pos2('M', &game->map, dest);
 		ft_set_map_pos2('0', &game->map, &game->map.monster_pos);
+		ft_set_map_pos2('M', &game->map, dest);
 		ft_draw_map_pos(&game->map, &game->gl, (game->map.monster_pos));
 		ft_draw_map_pos(&game->map, &game->gl, (*dest));
 		game->map.monster_pos = *dest;

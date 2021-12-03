@@ -56,7 +56,7 @@ int	ft_input_keys(int *keys)
 	if (keys[KEY_ESC])
 	{
 		mlx_destroy_window(game->gl.mlx_ptr, game->gl.win_ptr);
-		ft_end_game();
+		ft_end_game(0);
 	}
 	if (keys[KEY_ENTER])
 	{

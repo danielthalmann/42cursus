@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 08:58:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/01 19:13:56 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 08:24:39 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,14 @@ void	ft_set_map_pos(t_uint v, t_map *map, t_uint x, t_uint y)
 	if (x < map->size.w && y < map->size.h)
 	{
 		map->coord[(map->size.w * y) + x] = v;
+	}
+}
+
+void	ft_set_map_pos_init(t_uint v, t_map *map, t_uint x, t_uint y)
+{
+	if (x < map->size.w && y < map->size.h)
+	{
+		ft_set_map_pos(v, map, x, y);
 		if ((char)v == 'P')
 		{
 			map->player_pos.x = x;
