@@ -13,26 +13,33 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "main.h"
+#include "swap.h"
 
 int	main(int argc, char **argv)
 {
-	t_list	*list;
+	t_list			*list_a;
+	t_list			*list_b;
+	unsigned int	n;
 
 	if (argc < 2)
 	{
 		ft_fprintf(2, "Error\n");
 		return (1);
 	}
-	list = 0;
-	ft_load_list(list, ++argc, ++argv);
-	ft_lstclear(&list, free);
+	list_a = 0;
+	list_b = 0;
+	n = ft_load_list(&list_a, --argc, ++argv);
+	ft_printf("nombre d'objet dans la liste : %d\n", n);
+	ft_resolv(&list_a, &list_b, n);
+	ft_lstclear(&list_a, free);
+	ft_lstclear(&list_b, free);
 	return (0);
 }
 
-int	ft_load_list(t_list	*list, int l, char **v)
+unsigned int	ft_load_list(t_list	**list, unsigned int l, char **v)
 {
-	int			i;
-	t_number	*n;
+	unsigned int	i;
+	t_number		*n;
 
 	i = -1;
 	while (++i < l)
@@ -40,12 +47,17 @@ int	ft_load_list(t_list	*list, int l, char **v)
 		n = malloc(sizeof(n));
 		if (!n)
 		{
-			ft_lstclear(&list, free);
+			ft_lstclear(list, free);
 			return (0);
 		}
 		n->s = v[i];
 		n->n = ft_atoi(v[i]);
-		ft_lstadd_front(&list, ft_lstnew(n));
+		ft_lstadd_back(list, ft_lstnew(n));
 	}
-	return (i + 1);
+	return (i);
+}
+
+void ft_resolv(t_list **list_a, t_list **list_b, int n)
+{
+	
 }
