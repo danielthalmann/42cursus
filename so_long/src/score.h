@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/03 10:53:03 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 13:47:14 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@ void	*ft_score_load_sprite(char *f, t_game *game);
 void	ft_free_score(t_score *score);
 void	ft_draw_score_init(t_score *score, t_gl *gl);
 void	ft_draw_score(t_score *score, t_game *game, t_gl *gl);
+void	ft_draw_background(t_score *score, t_gl *gl);
 #endif

@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/24 10:09:06 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 13:50:31 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,27 @@ void	ft_draw_image(void *i_ptr, t_gl *gl, t_translation tr)
 			put.x = tr.src.x + p.x;
 			put.y = tr.src.y + p.y;
 			clr = ptr[((put.y) * ii.sl / ii.bytes) + (put.x)];
+			put.x = tr.dest.x + p.x;
+			put.y = tr.dest.y + p.y;
+			if (clr != 0xFF000000)
+				mlx_pixel_put(gl->mlx_ptr, gl->win_ptr, put.x, put.y, clr);
+			p.x++;
+		}
+		p.y++;
+	}
+}
+
+void	ft_draw_color(unsigned int clr, t_gl *gl, t_translation tr)
+{
+	t_pos			p;
+	t_pos			put;
+
+	p.y = 0;
+	while (p.y < tr.size.y)
+	{
+		p.x = 0;
+		while (p.x < tr.size.x)
+		{
 			put.x = tr.dest.x + p.x;
 			put.y = tr.dest.y + p.y;
 			if (clr != 0xFF000000)

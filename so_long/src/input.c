@@ -32,6 +32,14 @@ int	ft_in_key_down(int keycode, void *param)
 	(void)param;
 	keys = ft_keys_state();
 	keys[keycode] = 1;
+	if (keycode == KEY_A)
+		keys[KEY_LEFT] = 1;
+	if (keycode == KEY_D)
+		keys[KEY_RIGHT] = 1;
+	if (keycode == KEY_W)
+		keys[KEY_UP] = 1;
+	if (keycode == KEY_S)
+		keys[KEY_DOWN] = 1;
 	ft_input_keys(keys);
 	return (1);
 }
@@ -43,6 +51,14 @@ int	ft_in_key_up(int keycode, void *param)
 	(void)param;
 	keys = ft_keys_state();
 	keys[keycode] = 0;
+	if (keycode == KEY_A)
+		keys[KEY_LEFT] = 0;
+	if (keycode == KEY_D)
+		keys[KEY_RIGHT] = 0;
+	if (keycode == KEY_W)
+		keys[KEY_UP] = 0;
+	if (keycode == KEY_S)
+		keys[KEY_DOWN] = 0;
 	ft_input_keys(keys);
 	return (1);
 }

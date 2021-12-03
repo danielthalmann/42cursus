@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/03 11:17:57 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 14:01:33 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,44 +59,4 @@ void	ft_free_score(t_score *score)
 	game = ft_game();
 	if (score->img_ptr)
 		mlx_destroy_image(game->gl.mlx_ptr, score->img_ptr);
-}
-
-void	ft_draw_score_init(t_score *score, t_gl *gl)
-{
-	t_translation	tr;
-	t_uint			n;
-
-	ft_memset((void *)&tr, 0, sizeof(tr));
-	tr.dest = score->position;
-	tr.size.x = SCORE_SPRITE_WIDTH;
-	tr.size.y = SCORE_SPRITE_HEIGHT;
-	n = 0;
-	while (n < 3)
-	{
-		ft_draw_image(score->img_ptr, gl, tr);
-		tr.dest.x -= SCORE_SPRITE_WIDTH;
-		n++;
-	}
-}
-
-void	ft_draw_score(t_score *score, t_game *game, t_gl *gl)
-{
-	t_translation	tr;
-	t_uint			n;
-	t_uint			unit;
-
-	ft_memset((void *)&tr, 0, sizeof(tr));
-	n = game->nb_move;
-	tr.dest = score->position;
-	tr.size.x = SCORE_SPRITE_WIDTH;
-	tr.size.y = SCORE_SPRITE_HEIGHT;
-	while (n > 0)
-	{
-		unit = n % 10;
-		n = n / 10;
-		tr.src.x = (unit + 1) * 25;
-		tr.src.y = 0;
-		ft_draw_image(score->img_ptr, gl, tr);
-		tr.dest.x -= SCORE_SPRITE_WIDTH;
-	}
 }

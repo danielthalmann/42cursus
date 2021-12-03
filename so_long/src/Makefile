@@ -13,6 +13,7 @@ SRC=main.c \
 	map_render.c \
 	map_validator.c \
 	score.c \
+	score2.c \
 	render.c \
 	utils.c
 
