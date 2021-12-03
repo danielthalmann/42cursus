@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/03 11:04:15 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:17:57 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	ft_free_score(t_score *score)
 	t_game	*game;
 
 	game = ft_game();
-	mlx_destroy_image(game->gl.mlx_ptr, score->img_ptr);
+	if (score->img_ptr)
+		mlx_destroy_image(game->gl.mlx_ptr, score->img_ptr);
 }
 
 void	ft_draw_score_init(t_score *score, t_gl *gl)

@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/03 11:03:08 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:22:09 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ void	ft_free_player(t_player *player)
 	t_game	*game;
 
 	game = ft_game();
-	mlx_destroy_image(game->gl.mlx_ptr, player->img_ptr);
+	if (player->img_ptr)
+		mlx_destroy_image(game->gl.mlx_ptr, player->img_ptr);
 }

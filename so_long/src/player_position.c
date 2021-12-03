@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/03 11:05:54 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:24:10 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	ft_update_player_pos(t_player *player, t_game *game)
 		game->nb_move++;
 		ft_printf("%d\n", game->nb_move);
 		ft_draw_score(&game->score, game, &game->gl);
-		ft_draw_monster();
 		player->current_state = player->end_state;
 		player->map_position = player->map_destination;
 		c = ft_get_map_pos2(&game->map, &player->map_position);
@@ -44,6 +43,7 @@ void	ft_update_player_pos(t_player *player, t_game *game)
 		if (c == 'M')
 			ft_end_game(0);
 		ft_update_player(player, game, player->anim_last_time);
+		ft_draw_monster();
 	}
 }
 
