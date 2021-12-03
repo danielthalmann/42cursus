@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/03 11:30:53 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:49:41 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_move_monster(t_game *game, t_pos *dest)
 {
 	char	c;
 
-	if (ft_is_same_pos(&dest, &game->player.map_position))
+	if (ft_is_same_pos(dest, &game->player.map_position))
 		ft_end_game(0);
 	c = ft_get_map_pos2(&game->map, dest);
 	if (c == '0')
