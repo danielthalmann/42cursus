@@ -61,8 +61,8 @@ all: ${NAME}
 
 clean: 
 	rm -fr ${OBJS}
-#	make clean -C ${LIBFT_PATH}
-#	make clean -C ${LIBMLX_PATH}
+	make clean -C ${LIBFT_PATH}
+	make clean -C ${LIBMLX_PATH}
 
 fclean: clean
 	rm -fr ${NAME}

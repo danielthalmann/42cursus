@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 23:17:47 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/03 14:01:12 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/04 11:15:07 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_draw_background(t_score *score, t_gl *gl)
 	tr.dest.x -= 2 * SCORE_SPRITE_WIDTH;
 	tr.size.x = 3 * SCORE_SPRITE_WIDTH;
 	tr.size.y = SCORE_SPRITE_HEIGHT;
-	ft_draw_color(0xEE002222, gl, tr);
+	ft_draw_color(0x00002222, gl, tr);
 }
 
 void	ft_draw_score(t_score *score, t_game *game, t_gl *gl)
@@ -54,8 +54,6 @@ void	ft_draw_score(t_score *score, t_game *game, t_gl *gl)
 	t_uint			n;
 	t_uint			unit;
 
-	ft_draw_map_pos_xy(&game->map, &game->gl, 0, 0);
-	ft_draw_map_pos_xy(&game->map, &game->gl, 1, 0);
 	ft_draw_background(&game->score, &game->gl);
 	ft_memset((void *)&tr, 0, sizeof(tr));
 	n = game->nb_move;

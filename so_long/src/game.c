@@ -30,7 +30,8 @@ int	ft_game_loop(void)
 	game = ft_game();
 	ft_update_player(&(game->player), game, i);
 	ft_draw_player_pos(&(game->player), &(game->map), &(game->gl));
-	ft_draw_score(&game->score, game, &game->gl);
+	if ((i % 10) == 0)
+		ft_draw_score(&game->score, game, &game->gl);
 	return (0);
 }
 
