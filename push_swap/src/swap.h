@@ -6,21 +6,20 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:03:54 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/04 00:03:54 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/04 18:57:16 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SWAP_H
 # define SWAP_H
-# include "libft.h"
-
+# include <list2.h>
 typedef unsigned int t_uint;
 typedef struct s_swap
 {
-	t_list	*a;
-	t_list	*a_last;
-	t_list	*b;
-	t_list	*b_last;
+	t_list2	*a;
+	t_list2	*a_last;
+	t_list2	*b;
+	t_list2	*b_last;
 	t_uint	length;
 }	t_swap;
 

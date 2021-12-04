@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:12:32 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/04 10:04:34 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/04 19:31:42 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,22 @@
  */
 ft_swap_a(t_swap lists)
 {
-	lists.
+	t_list2 *a_nnext;
+	t_list2 *a_next;
+
+	if (!lists.a)
+		return ;
+	if (!lists.a->next)
+		return ;	
+	a_next = lists.a->next;
+	a_nnext = lists.a->next->next;
+	if (lists.a_last == a_next)
+		lists.a_last = lists.a;
+	a_next->next = lists.a;
+	a_next->previous = 0;
+	lists.a->next = a_nnext;
+	lists.a->previous = a_next;
+	lists.a = a_next;
 }
 
 /**
@@ -41,7 +56,8 @@ ft_swap_b(t_swap lists)
  */
 ft_swap_ss(t_swap lists)
 {
-
+	ft_swap_a(lists);
+	ft_swap_a(lists);
 }
 
 /**
@@ -52,7 +68,20 @@ ft_swap_ss(t_swap lists)
  */
 ft_swap_pa(t_swap lists)
 {
+	t_list2 *a_next;
 
+	if (!lists.a)
+		return;
+	if (lists.a_last == lists.a)
+		lists.a_last = lists.a->previous;
+	a_next = lists.a->next;
+	lists.a->next = lists.b;
+	lists.a->previous = 0;
+	lists.b->previous = lists.a;
+	lists.b = lists.a;
+	lists.a = a_next;
+	if (lists.a)
+		lists.a->previous = 0;
 }
 
 /**

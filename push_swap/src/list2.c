@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.c                                             :+:      :+:    :+:   */
+/*   list2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:03:54 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/04 10:14:53 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/04 18:53:34 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,42 @@ void	ft_lst2add_back(t_list2 **alst, t_list2 *new)
 		llast->next = new;
 		new->previous = llast;
 	}
+}
+
+/**
+ * @brief Libère la mémoire de l’élément passé en argument en utilisant 
+ * la fonction del puis avec free(3). La mémoire de next ne doit pas être free.
+ * 
+ * @param lst 
+ * @param del 
+ */
+void	ft_lstdelone(t_list2 *lst, void (*del)(void*))
+{
+	(*del)(lst->content);
+	free(lst);
+}
+
+/**
+ * @brief Supprime et libère la mémoire de l’élément passé en paramètre, 
+ * et de tous les élements qui suivent, à l’aide de del et de free(3)
+ * Enfin, le pointeur initial doit être mis à NULL
+ * 
+ * @param lst 
+ * @param del 
+ */
+void	ft_lstclear(t_list2 **lst, void (*del)(void*))
+{
+	t_list2	*l;
+	t_list2	*p;
+
+	if (!lst)
+		return ;
+	l = *lst;
+	while (l)
+	{
+		p = l;
+		l = l->next;
+		ft_lstdelone(p, del);
+	}
+	*lst = 0;
 }

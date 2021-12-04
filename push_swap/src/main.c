@@ -6,12 +6,12 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 07:43:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/11/17 07:43:01 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/04 18:56:09 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft.h"
+#include "list2.h"
 #include "main.h"
 #include "swap.h"
 
