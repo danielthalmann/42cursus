@@ -12,13 +12,13 @@
 
 #include <stdlib.h>
 #include "list2.h"
-#include "main.h"
 #include "swap.h"
+#include "libft.h"
+#include "main.h"
 
 int	main(int argc, char **argv)
 {
-	t_list			*list_a;
-	t_list			*list_b;
+	t_swap			lists;
 	unsigned int	n;
 
 	if (argc < 2)
@@ -26,17 +26,17 @@ int	main(int argc, char **argv)
 		ft_fprintf(2, "Error\n");
 		return (1);
 	}
-	list_a = 0;
-	list_b = 0;
-	n = ft_load_list(&list_a, --argc, ++argv);
+	lists.a = 0;
+	lists.b = 0;
+	n = ft_load_list(&lists.a, --argc, ++argv);
 	ft_printf("nombre d'objet dans la liste : %d\n", n);
-	ft_resolv(&list_a, &list_b, n);
-	ft_lstclear(&list_a, free);
-	ft_lstclear(&list_b, free);
+	ft_resolv(&lists, n);
+	ft_lstclear(&(lists.a), free);
+	ft_lstclear(&(lists.b), free);
 	return (0);
 }
 
-unsigned int	ft_load_list(t_list	**list, unsigned int l, char **v)
+unsigned int	ft_load_list(t_list2 **list, unsigned int l, char **v)
 {
 	unsigned int	i;
 	t_number		*n;
@@ -57,7 +57,13 @@ unsigned int	ft_load_list(t_list	**list, unsigned int l, char **v)
 	return (i);
 }
 
-void ft_resolv(t_list **list_a, t_list **list_b, int n)
+void ft_resolv(t_swap *lists, int n)
 {
-	
+	(void) n;
+	ft_swap_a(lists);
+	ft_print_swap(lists);
+	ft_swap_pa(lists);
+	ft_print_swap(lists);
+	ft_swap_pb(lists);
+	ft_print_swap(lists);
 }
