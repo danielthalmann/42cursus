@@ -12,12 +12,9 @@
 
 #ifndef MAIN_H
 # define MAIN_H
+# include "swap.h"
 
-typedef struct s_number
-{
-	int		n;
-	char	*s;
-}	t_number;
 int				main(int argc, char **argv);
-unsigned int	ft_load_list(t_list	**list, unsigned int l, char **v);
+unsigned int	ft_load_list(t_list2 **list, unsigned int l, char **v);
+void			ft_resolv(t_swap *lists, int n);
 #endif

@@ -1,6 +1,7 @@
 NAME=push_swap
 
-SRC=main.c
+SRC=main.c \
+	swap.c
 
 HEADER=${SRC:.c=.h}
 
