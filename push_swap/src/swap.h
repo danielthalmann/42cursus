@@ -13,6 +13,11 @@
 #ifndef SWAP_H
 # define SWAP_H
 # include "list2.h"
+# ifndef ASDF
+#  define LOG(s) ft_printf(s);
+# else
+#  define LOG(s)
+# endif
 typedef unsigned int t_uint;
 typedef struct s_swap
 {

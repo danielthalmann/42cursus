@@ -61,19 +61,11 @@ void ft_resolv(t_swap *lists, int n)
 {
 	(void) n;
 	ft_print_swap(lists);
-	ft_swap_a(lists);
+	ft_rotate_a(lists);
 	ft_print_swap(lists);
-	ft_push_a(lists);
+	ft_rotate_a(lists);
 	ft_print_swap(lists);
-	ft_swap_a(lists);
-	ft_print_swap(lists);
-	ft_push_a(lists);
-	ft_print_swap(lists);
-	ft_push_a(lists);
-	ft_print_swap(lists);
-	ft_push_b(lists);
-	ft_print_swap(lists);
-	ft_push_b(lists);
+	ft_rotate_a(lists);
 	ft_print_swap(lists);
 	ft_swap_b(lists);
 	ft_print_swap(lists);

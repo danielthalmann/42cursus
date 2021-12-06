@@ -24,6 +24,7 @@ void ft_swap_a(t_swap *lists)
 	t_list2 *a_nnext;
 	t_list2 *a_next;
 
+	LOG("sa\n")
 	if (!lists->a)
 		return ;
 	if (!lists->a->next)
@@ -88,7 +89,6 @@ void ft_push_a(t_swap *lists)
 
 	if (!lists->a)
 		return;
-
 	a_next = lists->a->next;
 	ft_lst2add_front(&(lists->b), lists->a);
 	lists->a->previous = 0;
@@ -132,8 +132,8 @@ void ft_rotate_a(t_swap *lists)
 	if (!lists->a->next)
 		return ;
 	a_next = lists->a->next;
-	lists->a->next = 0;
 	ft_lst2add_back(&(lists->a), lists->a);
+	lists->a->next = 0;
 	lists->a = a_next;
 	lists->a->previous = 0;
 }
@@ -153,8 +153,8 @@ void ft_rotate_b(t_swap *lists)
 	if (!lists->b->next)
 		return ;
 	b_next = lists->b->next;
-	lists->b->next = 0;
 	ft_lst2add_back(&(lists->b), lists->b);
+	lists->b->next = 0;
 	lists->b = b_next;
 	lists->b->previous = 0;
 }
