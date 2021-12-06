@@ -31,8 +31,8 @@ int	main(int argc, char **argv)
 	n = ft_load_list(&lists.a, --argc, ++argv);
 	ft_printf("nombre d'objet dans la liste : %d\n", n);
 	ft_resolv(&lists, n);
-	ft_lstclear(&(lists.a), free);
-	ft_lstclear(&(lists.b), free);
+	ft_lst2clear(&(lists.a), free);
+	ft_lst2clear(&(lists.b), free);
 	return (0);
 }
 
@@ -47,12 +47,12 @@ unsigned int	ft_load_list(t_list2 **list, unsigned int l, char **v)
 		n = malloc(sizeof(n));
 		if (!n)
 		{
-			ft_lstclear(list, free);
+			ft_lst2clear(list, free);
 			return (0);
 		}
 		n->s = v[i];
 		n->n = ft_atoi(v[i]);
-		ft_lstadd_back(list, ft_lstnew(n));
+		ft_lst2add_back(list, ft_lst2new(n));
 	}
 	return (i);
 }
@@ -60,10 +60,23 @@ unsigned int	ft_load_list(t_list2 **list, unsigned int l, char **v)
 void ft_resolv(t_swap *lists, int n)
 {
 	(void) n;
+	ft_print_swap(lists);
 	ft_swap_a(lists);
 	ft_print_swap(lists);
-	ft_swap_pa(lists);
+	ft_push_a(lists);
 	ft_print_swap(lists);
-	ft_swap_pb(lists);
+	ft_swap_a(lists);
+	ft_print_swap(lists);
+	ft_push_a(lists);
+	ft_print_swap(lists);
+	ft_push_a(lists);
+	ft_print_swap(lists);
+	ft_push_b(lists);
+	ft_print_swap(lists);
+	ft_push_b(lists);
+	ft_print_swap(lists);
+	ft_swap_b(lists);
+	ft_print_swap(lists);
+	ft_push_b(lists);
 	ft_print_swap(lists);
 }

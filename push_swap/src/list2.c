@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "list2.h"
+#include <stdlib.h>
 
 /**
  * @brief Alloue (avec malloc(3)) et renvoie un nouvel élément. la variable 
@@ -49,6 +50,21 @@ t_list2	*ft_lst2last(t_list2 *lst)
 	return (lst);
 }
 
+
+/**
+ * @brief Ajoute l’élément ’new’ au début de la liste.
+ * 
+ * @param alst 
+ * @param new 
+ */
+void	ft_lst2add_front(t_list2 **alst, t_list2 *new)
+{
+	new->next = (*alst);
+	if (*alst)
+		(*alst)->previous = new;
+	*alst = new;
+}
+
 /**
  * @brief Ajoute l’élément new à la fin de la liste.
  * 
@@ -76,7 +92,7 @@ void	ft_lst2add_back(t_list2 **alst, t_list2 *new)
  * @param lst 
  * @param del 
  */
-void	ft_lstdelone(t_list2 *lst, void (*del)(void*))
+void	ft_lst2delone(t_list2 *lst, void (*del)(void*))
 {
 	(*del)(lst->content);
 	free(lst);
@@ -90,7 +106,7 @@ void	ft_lstdelone(t_list2 *lst, void (*del)(void*))
  * @param lst 
  * @param del 
  */
-void	ft_lstclear(t_list2 **lst, void (*del)(void*))
+void	ft_lst2clear(t_list2 **lst, void (*del)(void*))
 {
 	t_list2	*l;
 	t_list2	*p;
@@ -102,7 +118,7 @@ void	ft_lstclear(t_list2 **lst, void (*del)(void*))
 	{
 		p = l;
 		l = l->next;
-		ft_lstdelone(p, del);
+		ft_lst2delone(p, del);
 	}
 	*lst = 0;
 }

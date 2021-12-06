@@ -82,21 +82,18 @@ void ft_swap_ss(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_swap_pa(t_swap *lists)
+void ft_push_a(t_swap *lists)
 {
 	t_list2 *a_next;
 
 	if (!lists->a)
 		return;
-	if (lists->a_last == lists->a)
-		lists->a_last = lists->a->previous;
+
 	a_next = lists->a->next;
-	lists->a->next = lists->b;
+	ft_lst2add_front(&(lists->b), lists->a);
 	lists->a->previous = 0;
-	lists->b->previous = lists->a;
-	lists->b = lists->a;
 	lists->a = a_next;
-	if (lists->a)
+	if(lists->a)
 		lists->a->previous = 0;
 }
 
@@ -106,21 +103,17 @@ void ft_swap_pa(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_swap_pb(t_swap *lists)
+void ft_push_b(t_swap *lists)
 {
 	t_list2 *b_next;
 
 	if (!lists->b)
 		return;
-	if (lists->b_last == lists->b)
-		lists->b_last = lists->b->previous;
 	b_next = lists->b->next;
-	lists->b->next = lists->b;
+	ft_lst2add_front(&(lists->a), lists->b);
 	lists->b->previous = 0;
-	lists->a->previous = lists->b;
-	lists->a = lists->b;
 	lists->b = b_next;
-	if (lists->b)
+	if(lists->b)
 		lists->b->previous = 0;
 }
 
@@ -130,9 +123,19 @@ void ft_swap_pb(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_swap_ra(t_swap *lists)
+void ft_rotate_a(t_swap *lists)
 {
-	(void) lists;
+	t_list2 *a_next;
+
+	if (!lists->a)
+		return ;
+	if (!lists->a->next)
+		return ;
+	a_next = lists->a->next;
+	lists->a->next = 0;
+	ft_lst2add_back(&(lists->a), lists->a);
+	lists->a = a_next;
+	lists->a->previous = 0;
 }
 
 /**
@@ -141,9 +144,19 @@ void ft_swap_ra(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_swap_rb(t_swap *lists)
+void ft_rotate_b(t_swap *lists)
 {
-	(void) lists;
+	t_list2 *b_next;
+
+	if (!lists->b)
+		return ;
+	if (!lists->b->next)
+		return ;
+	b_next = lists->b->next;
+	lists->b->next = 0;
+	ft_lst2add_back(&(lists->b), lists->b);
+	lists->b = b_next;
+	lists->b->previous = 0;
 }
 
 /**
@@ -151,9 +164,10 @@ void ft_swap_rb(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_swap_rr(t_swap *lists)
+void ft_rotate_rr(t_swap *lists)
 {
-	(void) lists;
+	ft_rotate_a(lists);
+	ft_rotate_b(lists);
 }
 
 /**
