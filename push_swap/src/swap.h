@@ -17,9 +17,9 @@ typedef unsigned int t_uint;
 typedef struct s_swap
 {
 	t_list2	*a;
-	t_list2	*a_last;
+	t_list2	*a_end;
 	t_list2	*b;
-	t_list2	*b_last;
+	t_list2	*b_end;
 	t_uint	length;
 }	t_swap;
 typedef struct s_number
@@ -35,8 +35,8 @@ void ft_push_b(t_swap *lists);
 void ft_rotate_a(t_swap *lists);
 void ft_rotate_b(t_swap *lists);
 void ft_rotate_rr(t_swap *lists);
-void ft_swap_rra(t_swap *lists);
-void ft_swap_rrb(t_swap *lists);
-void ft_swap_rrr(t_swap *lists);
+void ft_rotate_reverse_a(t_swap *lists);
+void ft_rotate_reverse_b(t_swap *lists);
+void ft_rotate_reverse_rr(t_swap *lists);
 void ft_print_swap(t_swap *lists);
 #endif
