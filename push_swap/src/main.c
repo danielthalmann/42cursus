@@ -26,12 +26,35 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_load_swap_list(&lists, --argc, ++argv);
-	ft_resolv(&lists);
+	ft_push_swap_test(&lists);
 	ft_free_swap_list(&lists);
 	return (0);
 }
 
-void ft_resolv(t_swap *lists)
+void ft_push_swap_resolv(t_swap *lists)
+{
+	int	i;
+
+	i = 1;
+	/*
+	while(i < lists->length) {
+
+		if ( lists->a->content < lists->a->next ) { // si l’élément est mal placé
+
+			j = 0;
+
+			while ( T[j] < T[i] ) j++; // cette boucle sort par j = la nouvelle position de l’élément
+	
+			c = T[i]; // ces 2 lignes servent a translater les cases en avant pour pouvoir insérer l’élément a sa nouvelle position
+			for( k = i-1 ; k >= j ; k-- ) T[k+1] = T[k];
+			T[j] = c; // l'insertion
+		}
+		i++;
+	}
+	*/
+}
+
+void ft_push_swap_test(t_swap *lists)
 {
 	ft_print_swap(lists);
 	ft_reverse_rotate_a(lists);

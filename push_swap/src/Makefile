@@ -1,7 +1,11 @@
 NAME=push_swap
 
 SRC=main.c \
+	push_swap_utils.c \
+	push.c \
 	swap.c \
+	rotate.c \
+	reverse_rotate.c \
 	list2.c
 
 HEADER=${SRC:.c=.h}

@@ -15,5 +15,6 @@
 # include "swap.h"
 
 int		main(int argc, char **argv);
-void	ft_resolv(t_swap *lists);
+void	ft_push_swap_test(t_swap *lists);
+void	ft_push_swap_resolv(t_swap *lists);
 #endif
