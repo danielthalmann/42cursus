@@ -23,6 +23,7 @@ typedef struct s_list2
 t_list2	*ft_lst2new(void *content);
 t_list2	*ft_lst2last(t_list2 *lst);
 void	ft_lst2add_back(t_list2 **alst, t_list2 *new);
+void	ft_lst2add_front(t_list2 **alst, t_list2 *new);
 void	ft_lst2delone(t_list2 *lst, void (*del)(void*));
 void	ft_lst2clear(t_list2 **lst, void (*del)(void*));
 #endif

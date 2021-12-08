@@ -30,11 +30,11 @@ typedef struct s_number
 void ft_swap_a(t_swap *lists);
 void ft_swap_b(t_swap *lists);
 void ft_swap_ss(t_swap *lists);
-void ft_swap_pa(t_swap *lists);
-void ft_swap_pb(t_swap *lists);
-void ft_swap_ra(t_swap *lists);
-void ft_swap_rb(t_swap *lists);
-void ft_swap_rr(t_swap *lists);
+void ft_push_a(t_swap *lists);
+void ft_push_b(t_swap *lists);
+void ft_rotate_a(t_swap *lists);
+void ft_rotate_b(t_swap *lists);
+void ft_rotate_rr(t_swap *lists);
 void ft_swap_rra(t_swap *lists);
 void ft_swap_rrb(t_swap *lists);
 void ft_swap_rrr(t_swap *lists);
