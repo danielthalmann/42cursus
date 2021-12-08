@@ -15,6 +15,5 @@
 # include "swap.h"
 
 int		main(int argc, char **argv);
-t_list2	*ft_load_list(t_list2 **list, unsigned int l, char **v);
 void	ft_resolv(t_swap *lists);
 #endif
