@@ -12,6 +12,7 @@
 
 #include "swap.h"
 #include "libft.h"
+#include <stdlib.h>
 
 /**
  * @brief swap the first 2 elements at the top of stacka. Do nothing if thereis
@@ -190,9 +191,19 @@ void ft_rotate_rr(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_rotate_reverse_a(t_swap *lists)
+void ft_reverse_rotate_a(t_swap *lists)
 {
-	(void) lists;
+	t_list2 *a_end;
+
+	if (!lists->a_end)
+		return ;
+	if (!lists->a_end->previous)
+		return ;
+	a_end = lists->a_end->previous;
+	a_end->next = 0;
+	ft_lst2add_front(&(lists->a), lists->a_end);
+	lists->a->previous = 0;
+	lists->a_end = a_end;
 }
 
 /**
@@ -201,9 +212,19 @@ void ft_rotate_reverse_a(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_rotate_reverse_b(t_swap *lists)
+void ft_reverse_rotate_b(t_swap *lists)
 {
-	(void) lists;
+	t_list2 *b_end;
+
+	if (!lists->b_end)
+		return ;
+	if (!lists->b_end->previous)
+		return ;
+	b_end = lists->b_end->previous;
+	b_end->next = 0;
+	ft_lst2add_front(&(lists->b), lists->b_end);
+	lists->b->previous = 0;
+	lists->b_end = b_end;
 }
 
 /**
@@ -211,10 +232,10 @@ void ft_rotate_reverse_b(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_rotate_reverse_rr(t_swap *lists)
+void ft_reverse_rotate_rr(t_swap *lists)
 {				
-	ft_rotate_reverse_a(lists);
-	ft_rotate_reverse_b(lists);
+	ft_reverse_rotate_a(lists);
+	ft_reverse_rotate_b(lists);
 }
 
 void ft_test()
@@ -299,4 +320,50 @@ void ft_print_swap(t_swap *lists)
 	else
 		ft_printf("%8s", "");
 	ft_printf("\n\n");
+}
+
+/**
+ * @brief Charge la liste a à partir d'un tableau de chaine de caractère
+ * 
+ * @param lists 
+ * @param l 
+ * @param v 
+ * @return t_list2* 
+ */
+void	ft_load_swap_list(t_swap *lists, unsigned int l, char **v)
+{
+	unsigned int	i;
+	t_number		*n;
+	t_list2			*lst;
+
+	ft_memset((void *)lists, 0, sizeof(t_swap));
+	i = -1;
+	lst = 0;
+	while (++i < l)
+	{
+		n = malloc(sizeof(t_number));
+		if (!n)
+		{
+			ft_lst2clear(&lists->a, free);
+			return ;
+		}
+		n->s = v[i];
+		n->n = ft_atoi(v[i]);
+		lst = ft_lst2new(n);
+		ft_lst2add_back(&lists->a, lst);
+	}
+	lists->length = l;
+}
+
+/**
+ * @brief libère de la mémoir les listes
+ * 
+ * @param lists 
+ */
+void	ft_free_swap_list(t_swap *lists)
+{
+	ft_lst2clear(&(lists->a), free);
+	ft_lst2clear(&(lists->b), free);
+	lists->a_end = 0;
+	lists->b_end = 0;
 }
