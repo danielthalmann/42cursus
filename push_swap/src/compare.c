@@ -15,54 +15,49 @@
 #include <stdlib.h>
 
 /**
- * @brief push a take the first element at the top ofband put it at the top ofa.
- * Do nothing if bis empty.
+ * @brief return true if the value of list a is little that list b
  * 
- * @param lists 
+ * @param a 
+ * @param b 
  */
-void ft_push_a(t_swap *lists)
+int	ft_a_lt_b(t_list2 *a, t_list2 *b)
 {
-	t_list2 *a_next;
+	t_number	*na;
+	t_number	*nb;
 
-	if (!lists->a)
-		return;
-
-	a_next = lists->a->next;
-	ft_lst2add_front(&(lists->b), lists->a);
-	if (!lists->b_end)
-		lists->b_end = lists->b;
-	lists->a->previous = 0;
-	lists->a = a_next;
-	if(a_next)
-		a_next->previous = 0;
-	else
-		lists->a_end = 0;
-	lists->a_length--;
-	lists->b_length++;
+	na = a->content;
+	nb = b->content;
+	return (na->n < nb->n);
 }
 
 /**
- * @brief pb :push b- take the first element at the top ofaand put it at the
- * top of b. Donothing ifais empty.
+ * @brief return true if the value of list a is great that list b
  * 
- * @param lists 
+ * @param a 
+ * @param b 
  */
-void ft_push_b(t_swap *lists)
+int	ft_a_gt_b(t_list2 *a, t_list2 *b)
 {
-	t_list2 *b_next;
+	t_number	*na;
+	t_number	*nb;
 
-	if (!lists->b)
-		return;
-	b_next = lists->b->next;
-	ft_lst2add_front(&(lists->a), lists->b);
-	if (!lists->a_end)
-		lists->a_end = lists->a;
-	lists->b->previous = 0;
-	lists->b = b_next;
-	if(b_next)
-		b_next->previous = 0;
-	else
-		lists->b_end = 0;
-	lists->a_length++;
-	lists->b_length--;
+	na = a->content;
+	nb = b->content;
+	return (na->n > nb->n);
+}
+
+/**
+ * @brief return true if the value of list a is equal to list b
+ * 
+ * @param a 
+ * @param b 
+ */
+int	ft_a_eq_b(t_list2 *a, t_list2 *b)
+{
+	t_number	*na;
+	t_number	*nb;
+
+	na = a->content;
+	nb = b->content;
+	return (na->n == nb->n);
 }

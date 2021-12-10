@@ -13,20 +13,37 @@
 #ifndef SWAP_H
 # define SWAP_H
 # include "list2.h"
+# define PS_CMD_SA 0
+# define PS_CMD_SB 1
+# define PS_CMD_SS 2
+# define PS_CMD_PA 3
+# define PS_CMD_PB 4
+# define PS_CMD_RA 5
+# define PS_CMD_RB 6
+# define PS_CMD_RR 7
+# define PS_CMD_RRA 8
+# define PS_CMD_RRB 9
+# define PS_CMD_RRR 10
+# define PS_CMD_LENGTH 11
+
 typedef unsigned int t_uint;
 typedef struct s_swap
 {
 	t_list2	*a;
 	t_list2	*a_end;
+	t_uint	a_length;
 	t_list2	*b;
 	t_list2	*b_end;
-	t_uint	length;
+	t_uint	b_length;
 }	t_swap;
 typedef struct s_number
 {
 	int		n;
 	char	*s;
 }	t_number;
+int		ft_a_lt_b(t_list2 *a, t_list2 *b);
+int		ft_a_gt_b(t_list2 *a, t_list2 *b);
+int		ft_a_eq_b(t_list2 *a, t_list2 *b);
 void	ft_exec_push_swap(int cmd, t_swap *lists);
 void	ft_swap_a(t_swap *lists);
 void	ft_swap_b(t_swap *lists);

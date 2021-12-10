@@ -26,32 +26,41 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_load_swap_list(&lists, --argc, ++argv);
-	ft_push_swap_test(&lists);
+	ft_print_swap(&lists);
+	 ft_push_swap_resolv(&lists);
+	//ft_push_swap_test(&lists);
+	ft_print_swap(&lists);
 	ft_free_swap_list(&lists);
 	return (0);
 }
 
 void ft_push_swap_resolv(t_swap *lists)
 {
-	int	i;
+	t_uint	i;
+	t_uint	j;
+	t_uint length;
 
-	i = 1;
-	/*
-	while(i < lists->length) {
-
-		if ( lists->a->content < lists->a->next ) { // si l’élément est mal placé
-
-			j = 0;
-
-			while ( T[j] < T[i] ) j++; // cette boucle sort par j = la nouvelle position de l’élément
 	
-			c = T[i]; // ces 2 lignes servent a translater les cases en avant pour pouvoir insérer l’élément a sa nouvelle position
-			for( k = i-1 ; k >= j ; k-- ) T[k+1] = T[k];
-			T[j] = c; // l'insertion
+	j = 0;
+	length = lists->a_length;
+	while(lists->a_length > 0 && j < length) {
+
+		if (lists->a_length > 1 && ft_a_lt_b(lists->a, lists->a->next))
+		{
+			ft_exec_push_swap(PS_CMD_PA, lists);
+			i = 0;
+			while (ft_a_lt_b(lists->a, lists->b) && i < lists->a_length)
+			{
+				ft_exec_push_swap(PS_CMD_PA, lists); 
+				ft_print_swap(lists);
+				i++;
+			}
+			ft_exec_push_swap(PS_CMD_PB, lists);
+			ft_print_swap(lists);
 		}
-		i++;
+		ft_exec_push_swap(PS_CMD_RA, lists);
+		ft_print_swap(lists);
 	}
-	*/
 }
 
 void ft_push_swap_test(t_swap *lists)

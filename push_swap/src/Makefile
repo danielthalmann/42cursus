@@ -5,6 +5,7 @@ SRC=main.c \
 	push.c \
 	swap.c \
 	rotate.c \
+	compare.c \
 	reverse_rotate.c \
 	list2.c
 

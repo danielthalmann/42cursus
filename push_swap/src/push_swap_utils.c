@@ -13,17 +13,6 @@
 #include "swap.h"
 #include "libft.h"
 #include <stdlib.h>
-# define PS_CMD_SA 1
-# define PS_CMD_SB 2
-# define PS_CMD_SS 4
-# define PS_CMD_PA 8
-# define PS_CMD_PB 16
-# define PS_CMD_RA 32
-# define PS_CMD_RB 64
-# define PS_CMD_RR 128
-# define PS_CMD_RRA 256
-# define PS_CMD_RRB 512
-# define PS_CMD_RRR 1024
 
 void ft_exec_push_swap(int cmd, t_swap *lists)
 {
@@ -100,19 +89,24 @@ void ft_print_swap(t_swap *lists)
 	while (list_a || list_b)
 	{
 		if(list_a)
-		{
 			ft_printf("%8s", ((t_number*)list_a->content)->s);
-			list_a = list_a->next;
-		}
 		else
 			ft_printf("%8s", "");
 		if(list_b)
-		{
 			ft_printf("%8s", ((t_number*)list_b->content)->s);
-			list_b = list_b->next;
-		}
 		else
 			ft_printf("%8s", "");
+
+		if(list_a)
+			ft_printf(" ap %10p an %10p", list_a->previous, list_a->next);
+		if(list_b)
+			ft_printf(" bp %10p bn %10p", list_b->previous, list_b->next);
+
+		if(list_a)
+			list_a = list_a->next;
+		if(list_b)
+			list_b = list_b->next;
+
 		ft_printf("\n");
 	}
 	ft_printf("%8s%8s\n", "end a", "end b");
@@ -124,11 +118,14 @@ void ft_print_swap(t_swap *lists)
 		ft_printf("%8s", ((t_number*)lists->b_end->content)->s);
 	else
 		ft_printf("%8s", "");
+	ft_printf("\n");
+	ft_printf("%8s%8s\n", "len a", "len b");
+	ft_printf("%8d%8d\n", lists->a_length, lists->b_length);
 	ft_printf("\n\n");
 }
 
 /**
- * @brief Charge la liste a à partir d'un tableau de chaine de caractère
+ * @brief Charge la liste à partir d'un tableau de chaine de caractère
  * 
  * @param lists 
  * @param l 
@@ -156,8 +153,10 @@ void	ft_load_swap_list(t_swap *lists, unsigned int l, char **v)
 		n->n = ft_atoi(v[i]);
 		lst = ft_lst2new(n);
 		ft_lst2add_back(&lists->a, lst);
+		lists->a_end = lst;
 	}
-	lists->length = l;
+	lists->a_length = l;
+	lists->b_length = 0;
 }
 
 /**
