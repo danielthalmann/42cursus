@@ -62,6 +62,7 @@ void	ft_lst2add_front(t_list2 **alst, t_list2 *new)
 	new->next = (*alst);
 	if (*alst)
 		(*alst)->previous = new;
+	new->next = *alst;
 	*alst = new;
 }
 

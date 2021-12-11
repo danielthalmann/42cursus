@@ -14,7 +14,7 @@
 # define MAIN_H
 # include "swap.h"
 
-int				main(int argc, char **argv);
-unsigned int	ft_load_list(t_list2 **list, unsigned int l, char **v);
-void			ft_resolv(t_swap *lists, int n);
+int		main(int argc, char **argv);
+void	ft_push_swap_test(t_swap *lists);
+void	ft_push_swap_resolv(t_swap *lists);
 #endif

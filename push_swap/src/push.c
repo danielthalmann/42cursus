@@ -15,69 +15,54 @@
 #include <stdlib.h>
 
 /**
- * @brief swap the first 2 elements at the top of stacka. Do nothing if thereis
- * only one or no elements
+ * @brief push a take the first element at the top ofband put it at the top ofa.
+ * Do nothing if bis empty.
  * 
  * @param lists 
  */
-void ft_swap_a(t_swap *lists)
+void ft_push_a(t_swap *lists)
 {
-	t_list2 *a_nnext;
 	t_list2 *a_next;
 
-	LOG("sa\n")
 	if (!lists->a)
-		return ;
-	if (!lists->a->next)
-		return ;	
+		return;
+
 	a_next = lists->a->next;
-	a_nnext = lists->a->next->next;
-	if (lists->a_end == a_next)
-		lists->a_end = lists->a;
-	a_next->next = lists->a;
-	a_next->previous = 0;
-	lists->a->next = a_nnext;
-	lists->a->previous = a_next;
+	ft_lst2add_front(&(lists->b), lists->a);
+	if (!lists->b_end)
+		lists->b_end = lists->b;
+	lists->a->previous = 0;
 	lists->a = a_next;
-	if (lists->a_end == a_nnext)
-		lists->a_end = a_next;
+	if(a_next)
+		a_next->previous = 0;
+	else
+		lists->a_end = 0;
+	lists->a_length--;
+	lists->b_length++;
 }
 
 /**
- * @brief swap b- swap the first 2 elements at the top of stackb. 
- * Do nothing if thereis only one or no elements).
+ * @brief pb :push b- take the first element at the top ofaand put it at the
+ * top of b. Donothing ifais empty.
  * 
  * @param lists 
  */
-void ft_swap_b(t_swap *lists)
+void ft_push_b(t_swap *lists)
 {
-	t_list2 *b_nnext;
 	t_list2 *b_next;
 
 	if (!lists->b)
-		return ;
-	if (!lists->b->next)
-		return ;	
+		return;
 	b_next = lists->b->next;
-	b_nnext = lists->b->next->next;
-	if (lists->b_end == b_next)
-		lists->b_end = lists->b;
-	b_next->next = lists->b;
-	b_next->previous = 0;
-	lists->b->next = b_nnext;
-	lists->b->previous = b_next;
+	ft_lst2add_front(&(lists->a), lists->b);
+	if (!lists->a_end)
+		lists->a_end = lists->a;
+	lists->b->previous = 0;
 	lists->b = b_next;
-	if (lists->b_end == b_nnext)
-		lists->b_end = b_next;
-}
-
-/**
- * @brief sa and sb at the same time.
- * 
- * @param lists 
- */
-void ft_swap_ss(t_swap *lists)
-{
-	ft_swap_a(lists);
-	ft_swap_a(lists);
+	if(b_next)
+		b_next->previous = 0;
+	else
+		lists->b_end = 0;
+	lists->a_length++;
+	lists->b_length--;
 }

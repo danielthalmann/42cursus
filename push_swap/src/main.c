@@ -19,56 +19,81 @@
 int	main(int argc, char **argv)
 {
 	t_swap			lists;
-	unsigned int	n;
 
 	if (argc < 2)
 	{
 		ft_fprintf(2, "Error\n");
 		return (1);
 	}
-	lists.a = 0;
-	lists.b = 0;
-	n = ft_load_list(&lists.a, --argc, ++argv);
-	ft_printf("nombre d'objet dans la liste : %d\n", n);
-	ft_resolv(&lists, n);
-	ft_lst2clear(&(lists.a), free);
-	ft_lst2clear(&(lists.b), free);
+	ft_load_swap_list(&lists, --argc, ++argv);
+	ft_print_swap(&lists);
+	ft_push_swap_resolv(&lists);
+	ft_print_swap(&lists);
+	//ft_push_swap_test(&lists);
+	ft_free_swap_list(&lists);
 	return (0);
 }
 
-unsigned int	ft_load_list(t_list2 **list, unsigned int l, char **v)
+void ft_push_swap_resolv(t_swap *lists)
 {
-	unsigned int	i;
-	t_number		*n;
+//	t_uint	i;
+	t_uint	j;
+	t_uint length;
 
-	i = -1;
-	while (++i < l)
+	if (lists->a_length > 2)
+		ft_exec(CMD_PA, lists);
+	else
 	{
-		n = malloc(sizeof(n));
-		if (!n)
-		{
-			ft_lst2clear(list, free);
-			return (0);
-		}
-		n->s = v[i];
-		n->n = ft_atoi(v[i]);
-		ft_lst2add_back(list, ft_lst2new(n));
+		if (ft_a_gt_b(lists->a, lists->a->next))
+			ft_exec(CMD_RA, lists);
+		return ;
 	}
-	return (i);
+
+	j = 0;
+	length = lists->a_length;
+	while(lists->a_length > 0 && j < length)
+	{
+
+		if (lists->a_length > 1 && ft_a_gt_b(lists->a, lists->b))
+			ft_exec(CMD_PA, lists);
+		else
+		{
+			ft_exec(CMD_RA, lists);
+		}
+			j++;
+	}
+	ft_print_swap(lists);
+	j = 0;
+	length = lists->b_length;
+	while(lists->b_length > 0 && j < length)
+	{
+		if (ft_a_gt_b(lists->a, lists->b))
+			ft_exec(CMD_PB, lists);
+		else
+		{
+			ft_exec(CMD_RB, lists);
+			j++;
+		}		
+	}
 }
 
-void ft_resolv(t_swap *lists, int n)
+void ft_push_swap_test(t_swap *lists)
 {
-	(void) n;
 	ft_print_swap(lists);
-	ft_rotate_a(lists);
+	ft_reverse_rotate_a(lists);
 	ft_print_swap(lists);
-	ft_rotate_a(lists);
+	ft_reverse_rotate_a(lists);
 	ft_print_swap(lists);
-	ft_rotate_a(lists);
+	ft_reverse_rotate_a(lists);
+	ft_push_a(lists);
+	ft_push_a(lists);
+	ft_push_a(lists);
+	ft_push_a(lists);
 	ft_print_swap(lists);
-	ft_swap_b(lists);
+	ft_push_a(lists);
 	ft_print_swap(lists);
-	ft_push_b(lists);
+	ft_rotate_b(lists);
+	ft_print_swap(lists);
+	ft_rotate_b(lists);
 	ft_print_swap(lists);
 }
