@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void ft_exec_push_swap(int cmd, t_swap *lists)
+void ft_exec(int cmd, t_swap *lists)
 {
 	if (cmd == PS_CMD_SA)
 	{

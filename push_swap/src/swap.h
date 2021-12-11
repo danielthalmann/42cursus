@@ -44,7 +44,7 @@ typedef struct s_number
 int		ft_a_lt_b(t_list2 *a, t_list2 *b);
 int		ft_a_gt_b(t_list2 *a, t_list2 *b);
 int		ft_a_eq_b(t_list2 *a, t_list2 *b);
-void	ft_exec_push_swap(int cmd, t_swap *lists);
+void	ft_exec(int cmd, t_swap *lists);
 void	ft_swap_a(t_swap *lists);
 void	ft_swap_b(t_swap *lists);
 void	ft_swap_ss(t_swap *lists);

@@ -27,39 +27,53 @@ int	main(int argc, char **argv)
 	}
 	ft_load_swap_list(&lists, --argc, ++argv);
 	ft_print_swap(&lists);
-	 ft_push_swap_resolv(&lists);
-	//ft_push_swap_test(&lists);
+	ft_push_swap_resolv(&lists);
 	ft_print_swap(&lists);
+	//ft_push_swap_test(&lists);
 	ft_free_swap_list(&lists);
 	return (0);
 }
 
 void ft_push_swap_resolv(t_swap *lists)
 {
-	t_uint	i;
+//	t_uint	i;
 	t_uint	j;
 	t_uint length;
 
-	
+	if (lists->a_length > 2)
+		ft_exec(PS_CMD_PA, lists);
+	else
+	{
+		if (ft_a_gt_b(lists->a, lists->a->next))
+			ft_exec(PS_CMD_RA, lists);
+		return ;
+	}
+
 	j = 0;
 	length = lists->a_length;
-	while(lists->a_length > 0 && j < length) {
+	while(lists->a_length > 0 && j < length)
+	{
 
-		if (lists->a_length > 1 && ft_a_lt_b(lists->a, lists->a->next))
+		if (lists->a_length > 1 && ft_a_gt_b(lists->a, lists->b))
+			ft_exec(PS_CMD_PA, lists);
+		else
 		{
-			ft_exec_push_swap(PS_CMD_PA, lists);
-			i = 0;
-			while (ft_a_lt_b(lists->a, lists->b) && i < lists->a_length)
-			{
-				ft_exec_push_swap(PS_CMD_PA, lists); 
-				ft_print_swap(lists);
-				i++;
-			}
-			ft_exec_push_swap(PS_CMD_PB, lists);
-			ft_print_swap(lists);
+			ft_exec(PS_CMD_RA, lists);
 		}
-		ft_exec_push_swap(PS_CMD_RA, lists);
-		ft_print_swap(lists);
+			j++;
+	}
+	ft_print_swap(lists);
+	j = 0;
+	length = lists->b_length;
+	while(lists->b_length > 0 && j < length)
+	{
+		if (ft_a_gt_b(lists->a, lists->b))
+			ft_exec(PS_CMD_PB, lists);
+		else
+		{
+			ft_exec(PS_CMD_RB, lists);
+			j++;
+		}		
 	}
 }
 
