@@ -25,7 +25,6 @@ void ft_swap_a(t_swap *lists)
 	t_list2 *a_nnext;
 	t_list2 *a_next;
 
-	LOG("sa\n")
 	if (!lists->a)
 		return ;
 	if (!lists->a->next)

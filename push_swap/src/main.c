@@ -51,17 +51,18 @@ void ft_push_swap_resolv(t_swap *lists)
 
 	j = 0;
 	length = lists->a_length;
-	while(lists->a_length > 0 && j < length)
+	while(j < length)
 	{
-
-		if (lists->a_length > 1 && ft_a_gt_b(lists->a, lists->b))
-			ft_exec(CMD_PA, lists);
-		else
+		if (ft_a_lt_b(lists->a, lists->b))
 		{
-			ft_exec(CMD_RA, lists);
+			ft_exec(CMD_PA, lists);
+			ft_exec(CMD_SB, lists);
 		}
-			j++;
+		else
+			ft_exec(CMD_RA, lists);
+		j++;
 	}
+
 	ft_print_swap(lists);
 	j = 0;
 	length = lists->b_length;
