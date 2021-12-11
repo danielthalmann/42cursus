@@ -16,57 +16,57 @@
 
 void ft_exec(int cmd, t_swap *lists)
 {
-	if (cmd == PS_CMD_SA)
+	if (cmd == CMD_SA)
 	{
 		ft_swap_a(lists);
 		ft_printf("sa\n");
 	}
-	if (cmd == PS_CMD_SB)
+	if (cmd == CMD_SB)
 	{
 		ft_swap_b(lists);
 		ft_printf("sb\n");
 	}
-	if (cmd == PS_CMD_SS)
+	if (cmd == CMD_SS)
 	{
 		ft_swap_ss(lists);
 		ft_printf("ss\n");
 	}
-	if (cmd == PS_CMD_PA)
+	if (cmd == CMD_PA)
 	{
 		ft_push_a(lists);
 		ft_printf("pa\n");
 	}
-	if (cmd == PS_CMD_PB)
+	if (cmd == CMD_PB)
 	{
 		ft_push_b(lists);
 		ft_printf("pb\n");
 	}
-	if (cmd == PS_CMD_RA)
+	if (cmd == CMD_RA)
 	{
 		ft_rotate_a(lists);
 		ft_printf("ra\n");
 	}
-	if (cmd == PS_CMD_RB)
+	if (cmd == CMD_RB)
 	{
 		ft_rotate_a(lists);
 		ft_printf("rb\n");
 	}
-	if (cmd == PS_CMD_RR)
+	if (cmd == CMD_RR)
 	{
 		ft_rotate_rr(lists);
 		ft_printf("rb\n");
 	}
-	if (cmd == PS_CMD_RRA)
+	if (cmd == CMD_RRA)
 	{
 		ft_reverse_rotate_a(lists);
 		ft_printf("rra\n");
 	}
-	if (cmd == PS_CMD_RRB)
+	if (cmd == CMD_RRB)
 	{
 		ft_reverse_rotate_b(lists);
 		ft_printf("rrb\n");
 	}
-	if (cmd == PS_CMD_RRR)
+	if (cmd == CMD_RRR)
 	{
 		ft_reverse_rotate_rr(lists);
 		ft_printf("rrr\n");

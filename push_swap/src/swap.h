@@ -13,18 +13,18 @@
 #ifndef SWAP_H
 # define SWAP_H
 # include "list2.h"
-# define PS_CMD_SA 0
-# define PS_CMD_SB 1
-# define PS_CMD_SS 2
-# define PS_CMD_PA 3
-# define PS_CMD_PB 4
-# define PS_CMD_RA 5
-# define PS_CMD_RB 6
-# define PS_CMD_RR 7
-# define PS_CMD_RRA 8
-# define PS_CMD_RRB 9
-# define PS_CMD_RRR 10
-# define PS_CMD_LENGTH 11
+# define CMD_SA 0
+# define CMD_SB 1
+# define CMD_SS 2
+# define CMD_PA 3
+# define CMD_PB 4
+# define CMD_RA 5
+# define CMD_RB 6
+# define CMD_RR 7
+# define CMD_RRA 8
+# define CMD_RRB 9
+# define CMD_RRR 10
+# define CMD_LENGTH 11
 
 typedef unsigned int t_uint;
 typedef struct s_swap

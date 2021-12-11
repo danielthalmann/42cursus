@@ -41,11 +41,11 @@ void ft_push_swap_resolv(t_swap *lists)
 	t_uint length;
 
 	if (lists->a_length > 2)
-		ft_exec(PS_CMD_PA, lists);
+		ft_exec(CMD_PA, lists);
 	else
 	{
 		if (ft_a_gt_b(lists->a, lists->a->next))
-			ft_exec(PS_CMD_RA, lists);
+			ft_exec(CMD_RA, lists);
 		return ;
 	}
 
@@ -55,10 +55,10 @@ void ft_push_swap_resolv(t_swap *lists)
 	{
 
 		if (lists->a_length > 1 && ft_a_gt_b(lists->a, lists->b))
-			ft_exec(PS_CMD_PA, lists);
+			ft_exec(CMD_PA, lists);
 		else
 		{
-			ft_exec(PS_CMD_RA, lists);
+			ft_exec(CMD_RA, lists);
 		}
 			j++;
 	}
@@ -68,10 +68,10 @@ void ft_push_swap_resolv(t_swap *lists)
 	while(lists->b_length > 0 && j < length)
 	{
 		if (ft_a_gt_b(lists->a, lists->b))
-			ft_exec(PS_CMD_PB, lists);
+			ft_exec(CMD_PB, lists);
 		else
 		{
-			ft_exec(PS_CMD_RB, lists);
+			ft_exec(CMD_RB, lists);
 			j++;
 		}		
 	}
