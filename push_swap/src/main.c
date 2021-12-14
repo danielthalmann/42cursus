@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 07:43:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/04 18:56:09 by dthalman         ###   ########.fr       */
+/*   Updated: 2021/12/14 14:05:32 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_load_swap_list(&lists, --argc, ++argv);
-	ft_print_swap(&lists);
+	// ft_print_swap(&lists);
 	ft_push_swap_resolv(&lists);
-	ft_print_swap(&lists);
+	// ft_print_swap(&lists);
 	//ft_push_swap_test(&lists);
 	ft_free_swap_list(&lists);
 	return (0);
@@ -36,13 +36,11 @@ int	main(int argc, char **argv)
 
 void ft_push_swap_resolv(t_swap *lists)
 {
-//	t_uint	i;
+	t_uint	i;
 	t_uint	j;
 	t_uint length;
 
-	if (lists->a_length > 2)
-		ft_exec(CMD_PA, lists);
-	else
+	if (lists->a_length < 3)
 	{
 		if (ft_a_gt_b(lists->a, lists->a->next))
 			ft_exec(CMD_RA, lists);
@@ -50,31 +48,22 @@ void ft_push_swap_resolv(t_swap *lists)
 	}
 
 	j = 0;
+	i = 0;
 	length = lists->a_length;
-	while(lists->a_length > 0 && j < length)
-	{
 
-		if (lists->a_length > 1 && ft_a_gt_b(lists->a, lists->b))
-			ft_exec(CMD_PA, lists);
-		else
-		{
-			ft_exec(CMD_RA, lists);
-		}
-			j++;
-	}
-	ft_print_swap(lists);
-	j = 0;
-	length = lists->b_length;
-	while(lists->b_length > 0 && j < length)
+	while(i < length)
 	{
-		if (ft_a_gt_b(lists->a, lists->b))
-			ft_exec(CMD_PB, lists);
-		else
+		j = i;
+		while(j < length - i)
 		{
-			ft_exec(CMD_RB, lists);
+			if (ft_a_gt_b(lists->a, lists->a->next))
+				ft_exec(CMD_SA, lists);
+			ft_exec(CMD_RA, lists);
 			j++;
-		}		
+		}
+		i++;
 	}
+	
 }
 
 void ft_push_swap_test(t_swap *lists)
