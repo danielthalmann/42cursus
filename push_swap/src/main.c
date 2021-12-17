@@ -18,20 +18,34 @@
 
 int	main(int argc, char **argv)
 {
-	t_swap			lists;
+	t_swap	lists;
+	char	**args;
 
-	if (argc < 2)
+	if (argc != 2)
 	{
 		ft_fprintf(2, "Error\n");
 		return (1);
 	}
-	ft_load_swap_list(&lists, --argc, ++argv);
+	args = ft_split(argv[1], ' ');
+	ft_load_swap_list(&lists, args);
 	// ft_print_swap(&lists);
 	ft_push_swap_resolv(&lists);
-	// ft_print_swap(&lists);
+	//ft_print_swap(&lists);
 	//ft_push_swap_test(&lists);
 	ft_free_swap_list(&lists);
+	ft_free_args(args);
 	return (0);
+}
+void ft_free_args(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i]){
+		free(args[i]);
+		i++;
+	}
+	free(args);
 }
 
 void ft_push_swap_resolv(t_swap *lists)
