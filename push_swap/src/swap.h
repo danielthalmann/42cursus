@@ -26,7 +26,7 @@
 # define CMD_RRR 10
 # define CMD_LENGTH 11
 
-typedef unsigned int t_uint;
+typedef unsigned int	t_uint;
 typedef struct s_swap
 {
 	t_list2	*a;
@@ -57,6 +57,7 @@ void	ft_reverse_rotate_a(t_swap *lists);
 void	ft_reverse_rotate_b(t_swap *lists);
 void	ft_reverse_rotate_rr(t_swap *lists);
 void	ft_print_swap(t_swap *lists);
-void	ft_load_swap_list(t_swap *lists, char **v);
+void	ft_load_swap_list(t_swap *lists, char **v, unsigned int len);
 void	ft_free_swap_list(t_swap *lists);
+int		ft_is_list_valid(t_swap *lists);
 #endif

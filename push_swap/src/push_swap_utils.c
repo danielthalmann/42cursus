@@ -132,7 +132,7 @@ void ft_print_swap(t_swap *lists)
  * @param v 
  * @return t_list2* 
  */
-void	ft_load_swap_list(t_swap *lists, char **v)
+void	ft_load_swap_list(t_swap *lists, char **v, unsigned int len)
 {
 	unsigned int	i;
 	t_number		*n;
@@ -141,7 +141,7 @@ void	ft_load_swap_list(t_swap *lists, char **v)
 	ft_memset((void *)lists, 0, sizeof(t_swap));
 	i = 0;
 	lst = 0;
-	while (v[i])
+	while (v[i] && i < len)
 	{
 		n = malloc(sizeof(t_number));
 		if (!n)
@@ -154,14 +154,14 @@ void	ft_load_swap_list(t_swap *lists, char **v)
 		lst = ft_lst2new(n);
 		ft_lst2add_back(&lists->a, lst);
 		lists->a_end = lst;
-		v++;
+		i++;
 	}
 	lists->a_length = i;
 	lists->b_length = 0;
 }
 
 /**
- * @brief libère de la mémoir les listes
+ * @brief libère de la mémoire les listes
  * 
  * @param lists 
  */

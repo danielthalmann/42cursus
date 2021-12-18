@@ -7,6 +7,7 @@ SRC=main.c \
 	rotate.c \
 	compare.c \
 	reverse_rotate.c \
+	checker.c \
 	list2.c
 
 HEADER=${SRC:.c=.h}
@@ -49,7 +50,7 @@ fclean: clean
 re: fclean all
 
 norm: 
-	${MINETTE} ${HEADER} ${SRC}
+	${MINETTE} ./*.c ./*.h
 
 run: all
 	./${NAME}
