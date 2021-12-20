@@ -36,7 +36,7 @@ int	ft_is_list_valid(t_swap *lists)
 		while (p)
 		{
 			if (((t_number *)l->content)->n == ((t_number *)p->content)->n)
-				return (0);
+				return (0);				
 			p = p->next;
 		}
 		l = l->next;

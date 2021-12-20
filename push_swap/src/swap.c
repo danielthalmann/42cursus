@@ -55,23 +55,20 @@ void ft_swap_ss(t_swap *lists)
  */
 void ft_swap_list(t_stack *stack)
 {
-	t_list2 *list_nnext;
-	t_list2 *list_next;
-	t_list2 *list;
-
+	t_list2 *new;
+	t_list2 *new_next;
+	
 	if (!stack->list)
 		return ;
 	if (!stack->list->next)
 		return ;
-	list = stack->list;
-	list_next = stack->list->next;
-	list_nnext = stack->list->next->next;
-	stack->list = list_next;
-	stack->list->previous = 0;
-	stack->list->next = list;
-	stack->list->next->previous = stack->list;
-	stack->list->next->next = list_nnext;
-	if (stack->end == list_next)
-		stack->end = stack->list;
+	new = stack->list->next;
+	new_next = stack->list->next->next;
+	ft_lst2add_front(&(stack->list), new);		
+	stack->list->next->next = new_next;
+	if (new_next)
+		new_next->previous = stack->list->next;
+	if (stack->end == new)
+		stack->end = stack->list->next;
 }
 

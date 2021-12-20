@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 	{
 		// ft_print_swap(&lists);
 		ft_push_swap_resolv(&lists);
-		// ft_print_swap(&lists);
+		ft_print_swap(&lists);
 	}
 	else
 		ft_fprintf(2, "Error\n");
@@ -82,7 +82,10 @@ t_uint	ft_next_height(t_list2 *c)
 	{
 		idx_curr++;
 		if (ft_a_lt_b(l_height, c))
+		{
 			idx_height = idx_curr;
+			l_height = c;
+		}
 		c = c->next;
 	}
 	return (idx_height);
@@ -120,7 +123,7 @@ void ft_push_swap_resolv(t_swap *lists)
 	while(lists->b.length > 1)
 	{
 		i = ft_next_height(lists->b.list);
-		if (lists->b.length / 2 > i)
+		if (lists->b.length > i * 2)
 		{
 			while(i--)
 				ft_exec(CMD_RB, lists);

@@ -22,7 +22,7 @@
  */
 void ft_rotate_a(t_swap *lists)
 {
-	ft_rotate_list(&lists->a);
+	ft_rotate_list(&(lists->a));
 }
 
 /**
@@ -33,7 +33,7 @@ void ft_rotate_a(t_swap *lists)
  */
 void ft_rotate_b(t_swap *lists)
 {
-	ft_rotate_list(&lists->b);
+	ft_rotate_list(&(lists->b));
 }
 
 /**
@@ -48,7 +48,7 @@ void ft_rotate_rr(t_swap *lists)
 }
 
 /**
- * @brief rotate b- shift up all elements of stackbby 1. The first element 
+ * @brief shift up all elements of stackbby 1. The first element 
  * becomes the last one.
  * 
  * @param stack 
@@ -56,13 +56,18 @@ void ft_rotate_rr(t_swap *lists)
 void ft_rotate_list(t_stack *stack)
 {
 	t_list2 *new;
+	t_list2 *new_next;
 
 	if (!stack->list)
 		return ;
 	if (!stack->list->next)
 		return ;
 	new = stack->list;
-	stack->list = stack->list->next;
-	stack->list->previous = 0;
-	ft_lst2add_back(&(stack->list), new);
+	new_next = stack->list->next;
+	stack->end->next = new;
+	new->previous = stack->end;
+	new->next = 0;
+	stack->end = new;
+	new_next->previous = 0;
+	stack->list = new_next;
 }

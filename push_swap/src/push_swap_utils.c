@@ -16,6 +16,8 @@
 
 void ft_exec(int cmd, t_swap *lists)
 {
+	// ft_printf("--------------------------------\n");
+
 	if (cmd == CMD_SA)
 	{
 		ft_swap_a(lists);
@@ -48,7 +50,7 @@ void ft_exec(int cmd, t_swap *lists)
 	}
 	if (cmd == CMD_RB)
 	{
-		ft_rotate_a(lists);
+		ft_rotate_b(lists);
 		ft_printf("rb\n");
 	}
 	if (cmd == CMD_RR)
@@ -71,7 +73,8 @@ void ft_exec(int cmd, t_swap *lists)
 		ft_reverse_rotate_rr(lists);
 		ft_printf("rrr\n");
 	}
-	ft_print_swap(lists);
+	// ft_printf("\n");
+	// ft_print_swap(lists);
 }
 
 /**
@@ -98,10 +101,14 @@ void ft_print_swap(t_swap *lists)
 		else
 			ft_printf("%8s", "");
 
-//		if(list_a)
-//			ft_printf(" ap %10p an %10p", list_a->previous, list_a->next);
-//		if(list_b)
-//			ft_printf(" bp %10p bn %10p", list_b->previous, list_b->next);
+		if(list_a)
+			ft_printf(" a %15p p %15p n %15p", list_a, list_a->previous, list_a->next);
+		else
+			ft_printf("   %15s   %15s   %15s", "", "", "");
+		if(list_b)
+			ft_printf(" b %15p p %15p n %15p", list_b, list_b->previous, list_b->next);
+		else
+			ft_printf("   %15s   %15s   %15s", "", "", "");
 
 		if(list_a)
 			list_a = list_a->next;
@@ -119,10 +126,20 @@ void ft_print_swap(t_swap *lists)
 		ft_printf("%8s", ((t_number*)lists->b.end->content)->s);
 	else
 		ft_printf("%8s", "");
+
+	if(lists->a.end)
+		ft_printf(" a %15p p %15p n %15p", lists->a.end, lists->a.end->previous, lists->a.end->next);
+	else
+		ft_printf("   %15s   %15s   %15s", "", "", "");
+	if(lists->b.end)
+		ft_printf(" b %15p p %15p n %15p", lists->b.end, lists->b.end->previous, lists->b.end->next);
+	else
+		ft_printf("   %15s   %15s   %15s", "", "", "");
+				
 	ft_printf("\n");
 	ft_printf("%8s%8s\n", "len a", "len b");
 	ft_printf("%8d%8d\n", lists->a.length, lists->b.length);
-	ft_printf("\n\n");
+	ft_printf("\n");
 }
 
 /**

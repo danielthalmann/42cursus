@@ -22,7 +22,7 @@
  */
 void ft_reverse_rotate_a(t_swap *lists)
 {
-	ft_reverse_rotate_list(&lists->a);
+	ft_reverse_rotate_list(&(lists->a));
 }
 
 /**
@@ -33,7 +33,7 @@ void ft_reverse_rotate_a(t_swap *lists)
  */
 void ft_reverse_rotate_b(t_swap *lists)
 {
-	ft_reverse_rotate_list(&lists->b);
+	ft_reverse_rotate_list(&(lists->b));
 }
 
 /**
@@ -63,7 +63,7 @@ void ft_reverse_rotate_list(t_stack *stack)
 	if (!stack->list->next)
 		return ;
 	new = stack->end;
-	if (stack->list->next == stack->end)
-		stack->list->next = 0;
+	new->previous->next = 0;
+	stack->end = new->previous;
 	ft_lst2add_front(&(stack->list), new);
 }
