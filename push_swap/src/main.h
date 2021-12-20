@@ -12,7 +12,7 @@
 
 #ifndef MAIN_H
 # define MAIN_H
-# include "swap.h"
+# include "push_swap.h"
 
 int		main(int argc, char **argv);
 void	ft_push_swap_test(t_swap *lists);

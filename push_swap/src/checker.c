@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "swap.h"
+#include "push_swap.h"
 #include "libft.h"
 #include <limits.h>
 #include <stdlib.h>
@@ -21,9 +21,9 @@ int	ft_is_list_valid(t_swap *lists)
 	t_list2	*l;
 	t_list2	*p;
 
-	l = lists->a;
+	l = lists->a.list;
 	i = -1;
-	while (l && ++i < ((lists->a_length + 1) / 2))
+	while (l && ++i < ((lists->a.length + 1) / 2))
 	{
 		p = l->previous;
 		while (p)

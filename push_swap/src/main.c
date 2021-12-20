@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 #include "list2.h"
-#include "swap.h"
+#include "push_swap.h"
 #include "libft.h"
 #include "main.h"
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 	{
 		// ft_print_swap(&lists);
 		ft_push_swap_resolv(&lists);
-		ft_print_swap(&lists);
+		// ft_print_swap(&lists);
 	}
 	else
 		ft_fprintf(2, "Error\n");
@@ -40,12 +40,12 @@ int	main(int argc, char **argv)
 
 void ft_push_swap_resolv_3(t_swap *lists)
 {
-	if (ft_a_gt_b(lists->a, lists->a->next))
+	if (ft_a_gt_b(lists->a.list, lists->a.list->next))
 	{
-		if (ft_a_gt_b(lists->a, lists->a->next->next))
+		if (ft_a_gt_b(lists->a.list, lists->a.list->next->next))
 		{
 			ft_exec(CMD_RA, lists);
-			if (ft_a_gt_b(lists->a, lists->a->next))
+			if (ft_a_gt_b(lists->a.list, lists->a.list->next))
 				ft_exec(CMD_SA, lists);
 		}
 		else
@@ -53,54 +53,85 @@ void ft_push_swap_resolv_3(t_swap *lists)
 	}
 	else
 	{
-		if (ft_a_gt_b(lists->a->next, lists->a->next->next))
+		if (ft_a_gt_b(lists->a.list->next, lists->a.list->next->next))
 		{
 			ft_exec(CMD_RRA, lists);
-			if (ft_a_gt_b(lists->a, lists->a->next))
+			if (ft_a_gt_b(lists->a.list, lists->a.list->next))
 				ft_exec(CMD_SA, lists);
 		}
 	}
 }
 
+/**
+ * @brief retourne l'index du plus au nombre
+ * 
+ * @param c 
+ * @return t_uint 
+ */
+t_uint	ft_next_height(t_list2 *c)
+{
+	t_uint idx_height;
+	t_uint idx_curr;
+	t_list2 *l_height;
+
+	idx_height = 0;
+	idx_curr = 0;
+	l_height = c;
+	c = c->next;
+	while(c)
+	{
+		idx_curr++;
+		if (ft_a_lt_b(l_height, c))
+			idx_height = idx_curr;
+		c = c->next;
+	}
+	return (idx_height);
+}
+
 void ft_push_swap_resolv(t_swap *lists)
 {
 	t_uint	i;
-	t_uint	j;
-	t_uint length;
 
-	if (lists->a_length < 3)
+	if (lists->a.length < 3)
 	{
-		if (ft_a_gt_b(lists->a, lists->a->next))
+		if (ft_a_gt_b(lists->a.list, lists->a.list->next))
 			ft_exec(CMD_SA, lists);
 		return ;
 	}
-	if (lists->a_length == 3)
+	if (lists->a.length == 3)
 	{
 		ft_push_swap_resolv_3(lists);
 		return ;
 	}
-	if (lists->a_length < 6)
+
+	while(lists->a.length > 1)
 	{
-		if (ft_a_gt_b(lists->a, lists->a->next))
-			ft_exec(CMD_SA, lists);
-		ft_exec(CMD_RA, lists);
-		if (ft_a_gt_b(lists->a, lists->a->next))
-			ft_exec(CMD_SA, lists);
-		return ;
-	}
-	j = 0;
-	i = 0;
-	length = lists->a_length;
-	while(i < length)
-	{
-		j = i;
-		while(j < length - i)
+		if (ft_a_lt_b(lists->a.list, lists->a.list->next))
+			ft_exec(CMD_PA, lists);
+		else
 		{
-			if (ft_a_gt_b(lists->a, lists->a->next))
+			if (lists->b.length > 1 && ft_a_lt_b(lists->b.list, lists->b.list->next))
+				ft_exec(CMD_SS, lists);
+			else
 				ft_exec(CMD_SA, lists);
-			ft_exec(CMD_RA, lists);
-			j++;
+			ft_exec(CMD_PA, lists);
 		}
-		i++;
 	}
+	while(lists->b.length > 1)
+	{
+		i = ft_next_height(lists->b.list);
+		if (lists->b.length / 2 > i)
+		{
+			while(i--)
+				ft_exec(CMD_RB, lists);
+		}
+		else
+		{
+			i = lists->b.length - i;
+			while(i--)
+				ft_exec(CMD_RRB, lists);
+		}
+		ft_exec(CMD_PB, lists);
+	}
+	ft_exec(CMD_PB, lists);
 }

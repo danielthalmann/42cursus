@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "swap.h"
+#include "push_swap.h"
 #include "libft.h"
 #include <stdlib.h>
 
@@ -22,23 +22,7 @@
  */
 void ft_push_a(t_swap *lists)
 {
-	t_list2 *a_next;
-
-	if (!lists->a)
-		return;
-
-	a_next = lists->a->next;
-	ft_lst2add_front(&(lists->b), lists->a);
-	if (!lists->b_end)
-		lists->b_end = lists->b;
-	lists->a->previous = 0;
-	lists->a = a_next;
-	if(a_next)
-		a_next->previous = 0;
-	else
-		lists->a_end = 0;
-	lists->a_length--;
-	lists->b_length++;
+	ft_push_a_b(&lists->a, &lists->b);
 }
 
 /**
@@ -49,20 +33,24 @@ void ft_push_a(t_swap *lists)
  */
 void ft_push_b(t_swap *lists)
 {
-	t_list2 *b_next;
+	ft_push_a_b(&lists->b, &lists->a);
+}
 
-	if (!lists->b)
+void ft_push_a_b(t_stack *a, t_stack *b)
+{
+	t_list2 *new;
+
+	if (!a->list)
 		return;
-	b_next = lists->b->next;
-	ft_lst2add_front(&(lists->a), lists->b);
-	if (!lists->a_end)
-		lists->a_end = lists->a;
-	lists->b->previous = 0;
-	lists->b = b_next;
-	if(b_next)
-		b_next->previous = 0;
-	else
-		lists->b_end = 0;
-	lists->a_length++;
-	lists->b_length--;
+	new = a->list;
+	a->list = a->list->next;
+	if (new == a->end)
+		a->end = 0;
+	if (a->list)
+		a->list->previous = 0;
+	ft_lst2add_front(&(b->list), new);
+	if (!b->end)
+		b->end = new;
+	a->length--;
+	b->length++;
 }

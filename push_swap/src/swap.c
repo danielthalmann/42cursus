@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "swap.h"
+#include "push_swap.h"
 #include "libft.h"
 #include <stdlib.h>
 
@@ -22,24 +22,7 @@
  */
 void ft_swap_a(t_swap *lists)
 {
-	t_list2 *a_nnext;
-	t_list2 *a_next;
-
-	if (!lists->a)
-		return ;
-	if (!lists->a->next)
-		return ;	
-	a_next = lists->a->next;
-	a_nnext = lists->a->next->next;
-	if (lists->a_end == a_next)
-		lists->a_end = lists->a;
-	a_next->next = lists->a;
-	a_next->previous = 0;
-	lists->a->next = a_nnext;
-	lists->a->previous = a_next;
-	lists->a = a_next;
-	if (lists->a_end == a_nnext)
-		lists->a_end = a_next;
+	ft_swap_list(&(lists->a));
 }
 
 /**
@@ -50,24 +33,7 @@ void ft_swap_a(t_swap *lists)
  */
 void ft_swap_b(t_swap *lists)
 {
-	t_list2 *b_nnext;
-	t_list2 *b_next;
-
-	if (!lists->b)
-		return ;
-	if (!lists->b->next)
-		return ;	
-	b_next = lists->b->next;
-	b_nnext = lists->b->next->next;
-	if (lists->b_end == b_next)
-		lists->b_end = lists->b;
-	b_next->next = lists->b;
-	b_next->previous = 0;
-	lists->b->next = b_nnext;
-	lists->b->previous = b_next;
-	lists->b = b_next;
-	if (lists->b_end == b_nnext)
-		lists->b_end = b_next;
+	ft_swap_list(&(lists->b));
 }
 
 /**
@@ -78,5 +44,34 @@ void ft_swap_b(t_swap *lists)
 void ft_swap_ss(t_swap *lists)
 {
 	ft_swap_a(lists);
-	ft_swap_a(lists);
+	ft_swap_b(lists);
 }
+
+/**
+ * @brief swap the first 2 elements at the top of stack. 
+ * Do nothing if there is only one or no elements.
+ * 
+ * @param lists 
+ */
+void ft_swap_list(t_stack *stack)
+{
+	t_list2 *list_nnext;
+	t_list2 *list_next;
+	t_list2 *list;
+
+	if (!stack->list)
+		return ;
+	if (!stack->list->next)
+		return ;
+	list = stack->list;
+	list_next = stack->list->next;
+	list_nnext = stack->list->next->next;
+	stack->list = list_next;
+	stack->list->previous = 0;
+	stack->list->next = list;
+	stack->list->next->previous = stack->list;
+	stack->list->next->next = list_nnext;
+	if (stack->end == list_next)
+		stack->end = stack->list;
+}
+
