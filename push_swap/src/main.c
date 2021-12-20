@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 	{
 		// ft_print_swap(&lists);
 		ft_push_swap_resolv(&lists);
-		ft_print_swap(&lists);
+		//ft_print_swap(&lists);
 	}
 	else
 		ft_fprintf(2, "Error\n");
@@ -91,6 +91,48 @@ t_uint	ft_next_height(t_list2 *c)
 	return (idx_height);
 }
 
+/**
+ * @brief retourne le plus grand nombre
+ * 
+ * @param c 
+ * @return t_uint 
+ */
+t_uint	ft_height_value(t_list2 *c)
+{
+	t_list2 *l_height;
+
+	l_height = c;
+	c = c->next;
+	while(c)
+	{
+		if (ft_a_lt_b(l_height, c))
+			l_height = c;
+		c = c->next;
+	}
+	return (l_height);
+}
+
+/**
+ * @brief retourne le plus petit nombre
+ * 
+ * @param c 
+ * @return t_uint 
+ */
+t_uint	ft_low_value(t_list2 *c)
+{
+	t_list2 *l_low;
+
+	l_low = c;
+	c = c->next;
+	while(c)
+	{
+		if (ft_a_lt_b(c, l_low))
+			l_low = c;
+		c = c->next;
+	}
+	return (l_low);
+}
+
 void ft_push_swap_resolv(t_swap *lists)
 {
 	t_uint	i;
@@ -110,14 +152,14 @@ void ft_push_swap_resolv(t_swap *lists)
 	while(lists->a.length > 1)
 	{
 		if (ft_a_lt_b(lists->a.list, lists->a.list->next))
-			ft_exec(CMD_PA, lists);
+			ft_exec(CMD_PB, lists);
 		else
 		{
 			if (lists->b.length > 1 && ft_a_lt_b(lists->b.list, lists->b.list->next))
 				ft_exec(CMD_SS, lists);
 			else
 				ft_exec(CMD_SA, lists);
-			ft_exec(CMD_PA, lists);
+			ft_exec(CMD_PB, lists);
 		}
 	}
 	while(lists->b.length > 1)
@@ -134,7 +176,7 @@ void ft_push_swap_resolv(t_swap *lists)
 			while(i--)
 				ft_exec(CMD_RRB, lists);
 		}
-		ft_exec(CMD_PB, lists);
+		ft_exec(CMD_PA, lists);
 	}
-	ft_exec(CMD_PB, lists);
+	ft_exec(CMD_PA, lists);
 }

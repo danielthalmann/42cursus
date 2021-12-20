@@ -15,25 +15,25 @@
 #include <stdlib.h>
 
 /**
- * @brief push a take the first element at the top ofband put it at the top ofa.
- * Do nothing if bis empty.
+ * @brief push a take the first element at the top of b and put it at the top
+ * of a. Do nothing if bis empty.
  * 
  * @param lists 
  */
 void ft_push_a(t_swap *lists)
 {
-	ft_push_a_b(&lists->a, &lists->b);
+	ft_push_a_b(&lists->b, &lists->a);
 }
 
 /**
- * @brief pb :push b- take the first element at the top ofaand put it at the
- * top of b. Donothing ifais empty.
+ * @brief pb : push b - take the first element at the top of a and put it at the
+ * top of b. Do nothing if a is empty.
  * 
  * @param lists 
  */
 void ft_push_b(t_swap *lists)
 {
-	ft_push_a_b(&lists->b, &lists->a);
+	ft_push_a_b(&lists->a, &lists->b);
 }
 
 void ft_push_a_b(t_stack *a, t_stack *b)

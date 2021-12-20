@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 /**
- * @brief rotate a- shift up all elements of stackaby 1. The first element 
+ * @brief rotate a - shift up all elements of stack a by 1. The first element 
  * becomes the last one.
  * 
  * @param lists 
@@ -26,7 +26,7 @@ void ft_rotate_a(t_swap *lists)
 }
 
 /**
- * @brief rotate b- shift up all elements of stackbby 1. The first element 
+ * @brief rotate b - shift up all elements of stack b by 1. The first element 
  * becomes the last one.
  * 
  * @param lists 
