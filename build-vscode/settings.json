@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/daniel/helloworld",
+            "binaryPath": "/home/daniel/helloworld/hello",
+            "binaryArgs": []
+        }
+    ]
+}
