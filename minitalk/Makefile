@@ -1,6 +1,6 @@
 PATH=./src
 
-MAKE=/usr/bin/make
+MAKE=make
 
 all:
 	${MAKE} -C ${PATH}
