@@ -5,7 +5,7 @@ SRC=main.c
 
 OBJS=${SRC:.c=.o}
 
-CFLAGS=
+CFLAGS=-Wall -Wextra -Werror
 
 CC=gcc
 

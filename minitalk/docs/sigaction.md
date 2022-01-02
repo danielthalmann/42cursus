@@ -21,7 +21,7 @@ struct sigaction {
 
 ## Type de données : **struct sigaction**
 
-Des structures de type struct sigaction sont utilisées dans la fonction sigaction 
+Des structures de type struct sigaction sont utilisées dans la fonction **sigaction**
 pour spécifier toutes les informations sur la façon de gérer un signal particulier. 
 Cette structure contient au moins les membres suivants :
 
@@ -44,7 +44,39 @@ débloquer.
 **int sa_flags**
 
 Ceci spécifie divers drapeaux qui peuvent affecter le comportement du 
-signal. Ceux-ci sont décrits plus en détail dans Flags for Sigaction.
+signal. 
+
+## Flag
+
+Macro : **int SA_NOCLDSTOP**
+
+Ce drapeau n'a de sens que pour le signal SIGCHLD. Lorsque l'indicateur est 
+défini, le système délivre le signal pour un processus fils terminé mais pas 
+pour celui qui est arrêté. Par défaut, SIGCHLD est fourni à la fois pour les 
+enfants terminés et pour les enfants arrêtés.
+
+Définir ce drapeau pour un signal autre que SIGCHLD n'a aucun effet.
+
+Macro : **int SA_ONSTACK**
+
+Si cet indicateur est défini pour un numéro de signal particulier, le système 
+utilise la pile de signaux lors de la livraison de ce type de signal. 
+Voir Pile de signaux. Si un signal avec ce drapeau arrive et que vous n'avez 
+pas défini de pile de signaux, le système termine le programme avec SIGILL.
+
+Macro : **int SA_RESTART**
+
+Ce drapeau contrôle ce qui se passe lorsqu'un signal est délivré pendant 
+certaines primitives (telles que l'ouverture, la lecture ou l'écriture), et 
+le gestionnaire de signal revient normalement. Il existe deux alternatives : 
+la fonction de bibliothèque peut reprendre ou elle peut renvoyer un échec 
+avec le code d'erreur EINTR.
+
+Le choix est contrôlé par le drapeau SA_RESTART pour le type particulier de 
+signal qui a été délivré. Si l'indicateur est défini, le retour d'un 
+gestionnaire reprend la fonction de bibliothèque. Si l'indicateur est clair, 
+le retour d'un gestionnaire fait échouer la fonction. Voir Primitives 
+interrompues. 
 
 
 ```c
@@ -66,7 +98,6 @@ int sigaction(int signum, const struct sigaction *action, struct sigaction *old-
 |SIGUSR1, SIGUSR2| 	Les signaux SIGUSR1 et SIGUSR2 peuvent être utilisés à votre guise. Il est utile d'écrire un gestionnaire de signal pour eux dans le programme qui reçoit le signal pour une communication inter-processus simple.|
 
 
-
 Préliminaire : | MT-Safe | AS-Safe | AC-Safe | Voir Concepts de sécurité POSIX.
 
 L'argument action est utilisé pour configurer une nouvelle action pour le 
@@ -76,9 +107,9 @@ renvoyer des informations sur l'action précédemment associée à ce signal.
 retour de la fonction de signal : vous pouvez vérifier quelle était l'ancienne 
 action en vigueur pour le signal et la restaurer plus tard si vous le souhaitez.)
 
-L'action ou l'ancienne action peut être un pointeur nul. Si old-action est un 
+L'action ou l'ancienne action peut être un pointeur *null*. Si old-action est un 
 pointeur null, cela supprime simplement le retour d'informations sur l'ancienne 
-action. Si action est un pointeur nul, l'action associée au signum du signal 
+action. Si action est un pointeur *null*, l'action associée au **signum** du signal 
 est inchangée ; cela vous permet de vous renseigner sur la façon dont un signal 
 est traité sans changer cette gestion.
 
@@ -86,7 +117,48 @@ La valeur de retour de sigaction est zéro en cas de réussite et -1 en cas
 d'échec. Les conditions d'erreur errno suivantes sont définies pour 
 cette fonction :
 
-EINVAL
+EINVAL : **E**rror **INVAL**id argument
 
 L'argument signum n'est pas valide, ou vous essayez d'intercepter ou d'ignorer 
-SIGKILL ou SIGSTOP.
+**SIGKILL** ou **SIGSTOP**.
+
+
+## Exemple d'utilisation de la fonction
+
+Voici un exemple équivalent utilisant sigaction : 
+
+```c
+#include <signal.h>
+
+void
+termination_handler (int signum)
+{
+  struct temp_file *p;
+
+  for (p = temp_file_list; p; p = p->next)
+    unlink (p->name);
+}
+
+int
+main (void)
+{
+  …
+  struct sigaction new_action, old_action;
+
+  /* Set up the structure to specify the new action. */
+  new_action.sa_handler = termination_handler;
+  sigemptyset (&new_action.sa_mask);
+  new_action.sa_flags = 0;
+
+  sigaction (SIGINT, NULL, &old_action);
+  if (old_action.sa_handler != SIG_IGN)
+    sigaction (SIGINT, &new_action, NULL);
+  sigaction (SIGHUP, NULL, &old_action);
+  if (old_action.sa_handler != SIG_IGN)
+    sigaction (SIGHUP, &new_action, NULL);
+  sigaction (SIGTERM, NULL, &old_action);
+  if (old_action.sa_handler != SIG_IGN)
+    sigaction (SIGTERM, &new_action, NULL);
+  …
+}
+```
