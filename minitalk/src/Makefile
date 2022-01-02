@@ -1,37 +1,32 @@
 
-NAME=cs
+SERVER=server
 
-SRC=main.c
+CLIENT=client
 
-OBJS=${SRC:.c=.o}
+SRC_CLIENT=client.c
+
+SRC_SERVER=server.c
+
+OBJS_CLIENT=${SRC_CLIENT:.c=.o}
+OBJS_SERVER=${SRC_SERVER:.c=.o}
 
 CFLAGS=-Wall -Wextra -Werror
 
 CC=gcc
 
-ifeq ($(OS),Windows_NT)
-        LDLIBS=-lft -lmlx -lXext -lX11 -lz
-else
-        UNAME_S := $(shell uname -s)
-        ifeq ($(UNAME_S),Linux)
-                LDLIBS=-lft -lmlx -lXext -lX11 -lz
-                LIBMLX_PATH=./minilibx_linux
-        endif
-        ifeq ($(UNAME_S),Darwin)
-                LDLIBS=-lft -lmlx -lz -framework OpenGL -framework AppKit
-        endif
-endif
+all: ${SERVER} ${CLIENT}
 
-all: ${NAME}
+${SERVER}: ${OBJS_SERVER}
+	${CC} $< -o $@
 
-${NAME}: ${OBJS}
+${CLIENT}: ${OBJS_CLIENT}
 	${CC} $< -o $@
 
 clean: 
-	rm -f ${OBJS}
+	rm -f ${OBJS_CLIENT} ${OBJS_SERVER}
 
 fclean: clean
-	rm -f ${NAME}
+	rm -f ${CLIENT} ${SERVER}
 
 re: fclean all
 

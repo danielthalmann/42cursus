@@ -12,10 +12,9 @@ La fonction sigaction est déclarée dans ***signal.h***.
 ```c
 struct sigaction {
 	void     (*sa_handler)(int);
-	void     (*sa_sigaction)(int, siginfo_t *, void *);
 	sigset_t   sa_mask;
 	int        sa_flags;
-	void     (*sa_restorer)(void);
+	void     (*sa_sigaction)(int, siginfo_t *, void *);
 };
 ```
 
@@ -77,6 +76,7 @@ signal qui a été délivré. Si l'indicateur est défini, le retour d'un
 gestionnaire reprend la fonction de bibliothèque. Si l'indicateur est clair, 
 le retour d'un gestionnaire fait échouer la fonction. Voir Primitives 
 interrompues. 
+
 
 
 ```c
