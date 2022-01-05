@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include "signum.h"
 
+void ft_print(char *str);
+
 void ft_handler (int signum)
 {
 	static int	octet;
@@ -54,14 +56,23 @@ void ft_print_nb(int value)
 int main (void)
 {
 	struct sigaction new_action;
-	struct sigaction old_action;
+
+    struct sigaction act = { 0 };
+    act.sa_flags = SA_SIGINFO;
+    act.sa_sigaction = &handler;
+    if (sigaction(SIGSEGV, &act, NULL) == -1) {
+        perror("sigaction");
+        exit(EXIT_FAILURE);
+    }
 	int	process;
 	/* Set up the structure to specify the new action. */
 	sigemptyset (&new_action.sa_mask);
 	new_action.sa_flags = 0;
 	new_action.sa_handler = &ft_handler;
-	sigaction(SIGUSR1, &new_action, &old_action);
-	sigaction(SIGUSR2, &new_action, &old_action);
+	sigaction(SIGUSR1, &new_action, NULL);
+	sigaction(SIGUSR2, &new_action, NULL);
+//	signal(SIGUSR1, &ft_handler);
+//	signal(SIGUSR2, &ft_handler);
 	process = getpid();
 	ft_print("process id : ");
 	ft_print_nb(process);
