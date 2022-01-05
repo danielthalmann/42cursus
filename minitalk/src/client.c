@@ -11,12 +11,12 @@ int	ft_atoi(const char *nptr)
 	if (*nptr == 0)
 		return (0);
 	value = 0;
-	while (*nptr && (*nptr < '0' || *nptr > '9'))
+	while (*nptr && !(*nptr >= '0' && *nptr <= '9'))
 		nptr++;
 	while (*nptr && (*nptr >= '0' && *nptr <= '9'))
 	{
 		value *= 10;
-		value = *nptr - '0';
+		value += *nptr - '0';
 		nptr++;
 	}
 	return (value);
@@ -32,12 +32,12 @@ void ft_transmit(int process, char *str)
 		while (octet < 8)
 		{
 			if (*str & (0x1 << octet))
-				kill(process, SIGUSR1);
+				kill(process, SIGUSR2);
 			else
 				kill(process, SIGUSR1);
 			octet++;
+			usleep(1000);
 		}
-		kill(process, SIGUSR1);
 		str++;
 	}
 }

@@ -12,9 +12,9 @@ La fonction sigaction est déclarée dans ***signal.h***.
 ```c
 struct sigaction {
 	void     (*sa_handler)(int);
+	void     (*sa_sigaction)(int, siginfo_t *, void *);
 	sigset_t   sa_mask;
 	int        sa_flags;
-	void     (*sa_sigaction)(int, siginfo_t *, void *);
 };
 ```
 
@@ -77,7 +77,57 @@ gestionnaire reprend la fonction de bibliothèque. Si l'indicateur est clair,
 le retour d'un gestionnaire fait échouer la fonction. Voir Primitives 
 interrompues. 
 
+Macro : **int SA_UNSUPPORTED (since Linux 5.11)**
 
+Utilisé pour sonder dynamiquement la prise en charge des bits d'indicateur.
+Si une tentative d'enregistrement d'un gestionnaire réussit avec ce
+indicateur défini dans act-> sa_flags aux côtés d'autres indicateurs qui sont
+potentiellement non pris en charge par le noyau, et immédiatement
+appel suivant sigaction() spécifiant le même signal
+nombre et avec un argument oldact non NULL donne
+SA_UNSUPPORTED effacer dans oldact->sa_flags, puis
+oldact->sa_flags peut être utilisé comme masque de bits décrivant quel
+des drapeaux potentiellement non pris en charge sont, en fait,
+prise en charge. Voir la section "Sonde dynamique pour le drapeau
+bit support" ci-dessous pour plus de détails. 
+      
+Macro : **int SA_SIGINFO**
+
+Le gestionnaire de signal prend trois arguments, pas un. Dans ce cas, 
+sa_sigaction doit être défini au lieu de sa_handler. Ce drapeau n'a de sens 
+que lorsque l'établissement d'un gestionnaire de signal. 
+
+### Exemple :
+
+```c
+#include <signal.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+
+void handler(int signo, siginfo_t *info, void *context)
+{
+    struct sigaction oldact;
+    if (sigaction(SIGSEGV, NULL, &oldact) == -1) {
+        exit(EXIT_FAILURE);
+    }
+    exit(EXIT_SUCCESS);
+}
+
+int main(void)
+{
+    struct sigaction act = { 0 };
+    act.sa_flags = SA_SIGINFO;
+    act.sa_sigaction = &handler;
+    if (sigaction(SIGSEGV, &act, NULL) == -1) {
+        perror("sigaction");
+        exit(EXIT_FAILURE);
+    }
+    raise(SIGSEGV);
+}
+```
+
+## fonction sigaction
 
 ```c
 #include <signal.h>
