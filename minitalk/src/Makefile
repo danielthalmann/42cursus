@@ -1,11 +1,11 @@
 
-SERVER=server
+SERVER=serv
 
-CLIENT=client
+CLIENT=cli
 
-SRC_CLIENT=client.c
+SRC_CLIENT=client/client.c
 
-SRC_SERVER=server.c
+SRC_SERVER=server/server.c
 
 OBJS_CLIENT=${SRC_CLIENT:.c=.o}
 OBJS_SERVER=${SRC_SERVER:.c=.o}

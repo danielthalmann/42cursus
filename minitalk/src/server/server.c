@@ -5,11 +5,13 @@
 
 void ft_print(char *str);
 
-void ft_handler (int signum)
+void ft_handler (int signum, siginfo_t *info, void *context)
 {
 	static int	octet;
 	static char	c;
 
+	(void) info;
+	(void) context;
 	if (signum == SIGUSR1)
 		c |= (0x0 << octet);
 	if (signum == SIGUSR2)
@@ -55,24 +57,19 @@ void ft_print_nb(int value)
 
 int main (void)
 {
-	struct sigaction new_action;
-
     struct sigaction act = { 0 };
-    act.sa_flags = SA_SIGINFO;
-    act.sa_sigaction = &handler;
-    if (sigaction(SIGSEGV, &act, NULL) == -1) {
-        perror("sigaction");
-        exit(EXIT_FAILURE);
-    }
 	int	process;
-	/* Set up the structure to specify the new action. */
-	sigemptyset (&new_action.sa_mask);
-	new_action.sa_flags = 0;
-	new_action.sa_handler = &ft_handler;
-	sigaction(SIGUSR1, &new_action, NULL);
-	sigaction(SIGUSR2, &new_action, NULL);
-//	signal(SIGUSR1, &ft_handler);
-//	signal(SIGUSR2, &ft_handler);
+
+    act.sa_flags = SA_SIGINFO;
+    act.sa_sigaction = &ft_handler;
+    if (sigaction(SIGUSR1, &act, NULL) == -1) {
+        ft_print("error sigaction\n");
+        return (1);
+    }
+    if (sigaction(SIGUSR2, &act, NULL) == -1) {
+        ft_print("error sigaction\n");
+        return (1);
+    }
 	process = getpid();
 	ft_print("process id : ");
 	ft_print_nb(process);
