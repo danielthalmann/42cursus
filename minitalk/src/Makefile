@@ -32,7 +32,7 @@ fclean: clean
 re: fclean all
 
 norm: 
-	norminette server/*.h server/*.c
-	norminette client/*.h client/*.c
+	norminette serv/*.h serv/*.c
+	norminette cli/*.h cli/*.c
 
 .PHONY: clean re fclean all

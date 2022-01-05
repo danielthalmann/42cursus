@@ -86,7 +86,7 @@ int	main(void)
 		return (1);
 	}
 	process = getpid();
-	ft_print("process id : ");
+	ft_print("PSID : ");
 	ft_print_nb(process);
 	ft_print("\n");
 	while (1)
