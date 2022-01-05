@@ -3,10 +3,10 @@ SERVER=server
 
 CLIENT=client
 
-SRC_CLIENT=client/client.c
+SRC_CLIENT=cli/client.c
 
-SRC_SERVER=server/ft_bzero.c \
-           server/server.c
+SRC_SERVER=serv/ft_bzero.c \
+           serv/server.c
 
 OBJS_CLIENT=${SRC_CLIENT:.c=.o}
 OBJS_SERVER=${SRC_SERVER:.c=.o}
