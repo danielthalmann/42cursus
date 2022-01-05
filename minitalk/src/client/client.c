@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/05 09:22:07 by dthalman          #+#    #+#             */
+/*   Updated: 2022/01/05 09:22:07 by dthalman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
-#include "signum.h"
+#include "ft_signum.h"
 
 int	ft_atoi(const char *nptr)
 {
@@ -22,7 +33,7 @@ int	ft_atoi(const char *nptr)
 	return (value);
 }
 
-void ft_transmit(int process, char *str)
+void	ft_transmit(int process, char *str)
 {
 	int	octet;
 
@@ -42,7 +53,7 @@ void ft_transmit(int process, char *str)
 	}
 }
 
-void ft_print(char *str)
+void	ft_print(char *str)
 {
 	while (*str)
 	{
@@ -51,7 +62,7 @@ void ft_print(char *str)
 	}
 }
 
-int main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int	process;
 
