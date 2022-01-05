@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 
 	if (fd)
 	{
-		while (s = gnl(fd))
+		while ((s = gnl(fd)))
 		{
 			printf("l:%s", s);
 

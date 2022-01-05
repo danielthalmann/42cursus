@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 1000
 
 int ft_strlen(char *s, char c);
 
@@ -75,15 +75,16 @@ char *gnl(int fd)
 		len = read(fd, buf, BUFFER_SIZE);
 		buf[len] = 0;
 	}
-	if (len < 1)
-		return (0);
 	
 	len = ft_strlen(buf, '\n');
+	if (len < 1)
+		return (0);
+
 //	printf("len [%d]\n", len + 1);
 	ret = malloc(len + 1);
 	ft_move(ret, buf, len);
 
-	while (len > 0 && buf[len] != '\n')
+	while (len > 0 && buf[len -1 ] != '\n')
 	{
 		len = read(fd, buf, BUFFER_SIZE);
 		buf[len] = 0;
@@ -95,6 +96,6 @@ char *gnl(int fd)
 		ret = ft_concate(ret, buf);
 		free(save);
 	}
-	ft_move(buf, &buf[len + 1], BUFFER_SIZE);
+	ft_move(buf, &buf[len], BUFFER_SIZE);
 	return (ret);
 }
