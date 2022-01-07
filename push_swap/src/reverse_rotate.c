@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "swap.h"
+#include "push_swap.h"
 #include "libft.h"
 #include <stdlib.h>
 
@@ -22,17 +22,7 @@
  */
 void ft_reverse_rotate_a(t_swap *lists)
 {
-	t_list2 *a_end;
-
-	if (!lists->a_end)
-		return ;
-	if (!lists->a_end->previous)
-		return ;
-	a_end = lists->a_end->previous;
-	a_end->next = 0;
-	ft_lst2add_front(&(lists->a), lists->a_end);
-	lists->a->previous = 0;
-	lists->a_end = a_end;
+	ft_reverse_rotate_list(&(lists->a));
 }
 
 /**
@@ -43,17 +33,7 @@ void ft_reverse_rotate_a(t_swap *lists)
  */
 void ft_reverse_rotate_b(t_swap *lists)
 {
-	t_list2 *b_end;
-
-	if (!lists->b_end)
-		return ;
-	if (!lists->b_end->previous)
-		return ;
-	b_end = lists->b_end->previous;
-	b_end->next = 0;
-	ft_lst2add_front(&(lists->b), lists->b_end);
-	lists->b->previous = 0;
-	lists->b_end = b_end;
+	ft_reverse_rotate_list(&(lists->b));
 }
 
 /**
@@ -65,4 +45,25 @@ void ft_reverse_rotate_rr(t_swap *lists)
 {				
 	ft_reverse_rotate_a(lists);
 	ft_reverse_rotate_b(lists);
+}
+
+
+/**
+ * @brief shift down all elements of stack by 1. The last 
+ * element becomes the first one.
+ * 
+ * @param stack 
+ */
+void ft_reverse_rotate_list(t_stack *stack)
+{
+	t_list2 *new;
+
+	if (!stack->list)
+		return ;
+	if (!stack->list->next)
+		return ;
+	new = stack->end;
+	new->previous->next = 0;
+	stack->end = new->previous;
+	ft_lst2add_front(&(stack->list), new);
 }

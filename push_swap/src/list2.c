@@ -59,10 +59,10 @@ t_list2	*ft_lst2last(t_list2 *lst)
  */
 void	ft_lst2add_front(t_list2 **alst, t_list2 *new)
 {
+	new->previous = 0;
 	new->next = (*alst);
 	if (*alst)
 		(*alst)->previous = new;
-	new->next = *alst;
 	*alst = new;
 }
 
@@ -77,12 +77,17 @@ void	ft_lst2add_back(t_list2 **alst, t_list2 *new)
 	t_list2	*llast;
 
 	if (!*alst)
+	{
 		*alst = new;
+		new->previous = 0;
+		new->next = 0;
+	}
 	else
 	{
 		llast = ft_lst2last(*alst);
 		llast->next = new;
 		new->previous = llast;
+		new->next = 0;
 	}
 }
 

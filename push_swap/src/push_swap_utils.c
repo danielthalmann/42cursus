@@ -10,12 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "swap.h"
+#include "push_swap.h"
 #include "libft.h"
 #include <stdlib.h>
 
 void ft_exec(int cmd, t_swap *lists)
 {
+	// ft_printf("--------------------------------\n");
+
 	if (cmd == CMD_SA)
 	{
 		ft_swap_a(lists);
@@ -48,7 +50,7 @@ void ft_exec(int cmd, t_swap *lists)
 	}
 	if (cmd == CMD_RB)
 	{
-		ft_rotate_a(lists);
+		ft_rotate_b(lists);
 		ft_printf("rb\n");
 	}
 	if (cmd == CMD_RR)
@@ -71,6 +73,8 @@ void ft_exec(int cmd, t_swap *lists)
 		ft_reverse_rotate_rr(lists);
 		ft_printf("rrr\n");
 	}
+	// ft_printf("\n");
+	// ft_print_swap(lists);
 }
 
 /**
@@ -83,8 +87,8 @@ void ft_print_swap(t_swap *lists)
 	t_list2 *list_a;
 	t_list2 *list_b;
 
-	list_a = lists->a;
-	list_b = lists->b;
+	list_a = lists->a.list;
+	list_b = lists->b.list;
 	ft_printf("%8s%8s\n", "list a", "list b");
 	while (list_a || list_b)
 	{
@@ -98,9 +102,13 @@ void ft_print_swap(t_swap *lists)
 			ft_printf("%8s", "");
 
 		if(list_a)
-			ft_printf(" ap %10p an %10p", list_a->previous, list_a->next);
+			ft_printf(" a %15p p %15p n %15p", list_a, list_a->previous, list_a->next);
+		else
+			ft_printf("   %15s   %15s   %15s", "", "", "");
 		if(list_b)
-			ft_printf(" bp %10p bn %10p", list_b->previous, list_b->next);
+			ft_printf(" b %15p p %15p n %15p", list_b, list_b->previous, list_b->next);
+		else
+			ft_printf("   %15s   %15s   %15s", "", "", "");
 
 		if(list_a)
 			list_a = list_a->next;
@@ -110,18 +118,28 @@ void ft_print_swap(t_swap *lists)
 		ft_printf("\n");
 	}
 	ft_printf("%8s%8s\n", "end a", "end b");
-	if(lists->a_end)
-		ft_printf("%8s", ((t_number*)lists->a_end->content)->s);
+	if(lists->a.end)
+		ft_printf("%8s", ((t_number*)lists->a.end->content)->s);
 	else
 		ft_printf("%8s", "");
-	if(lists->b_end)
-		ft_printf("%8s", ((t_number*)lists->b_end->content)->s);
+	if(lists->b.end)
+		ft_printf("%8s", ((t_number*)lists->b.end->content)->s);
 	else
 		ft_printf("%8s", "");
+
+	if(lists->a.end)
+		ft_printf(" a %15p p %15p n %15p", lists->a.end, lists->a.end->previous, lists->a.end->next);
+	else
+		ft_printf("   %15s   %15s   %15s", "", "", "");
+	if(lists->b.end)
+		ft_printf(" b %15p p %15p n %15p", lists->b.end, lists->b.end->previous, lists->b.end->next);
+	else
+		ft_printf("   %15s   %15s   %15s", "", "", "");
+				
 	ft_printf("\n");
 	ft_printf("%8s%8s\n", "len a", "len b");
-	ft_printf("%8d%8d\n", lists->a_length, lists->b_length);
-	ft_printf("\n\n");
+	ft_printf("%8d%8d\n", lists->a.length, lists->b.length);
+	ft_printf("\n");
 }
 
 /**
@@ -132,42 +150,43 @@ void ft_print_swap(t_swap *lists)
  * @param v 
  * @return t_list2* 
  */
-void	ft_load_swap_list(t_swap *lists, unsigned int l, char **v)
+void	ft_load_swap_list(t_swap *lists, char **v, unsigned int len)
 {
 	unsigned int	i;
 	t_number		*n;
 	t_list2			*lst;
 
 	ft_memset((void *)lists, 0, sizeof(t_swap));
-	i = -1;
+	i = 0;
 	lst = 0;
-	while (++i < l)
+	while (v[i] && i < len)
 	{
 		n = malloc(sizeof(t_number));
 		if (!n)
 		{
-			ft_lst2clear(&lists->a, free);
+			ft_lst2clear(&lists->a.list, free);
 			return ;
 		}
 		n->s = v[i];
 		n->n = ft_atoi(v[i]);
 		lst = ft_lst2new(n);
-		ft_lst2add_back(&lists->a, lst);
-		lists->a_end = lst;
+		ft_lst2add_back(&lists->a.list, lst);
+		lists->a.end = lst;
+		i++;
 	}
-	lists->a_length = l;
-	lists->b_length = 0;
+	lists->a.length = i;
+	lists->b.length = 0;
 }
 
 /**
- * @brief libère de la mémoir les listes
+ * @brief libère de la mémoire les listes
  * 
  * @param lists 
  */
 void	ft_free_swap_list(t_swap *lists)
 {
-	ft_lst2clear(&(lists->a), free);
-	ft_lst2clear(&(lists->b), free);
-	lists->a_end = 0;
-	lists->b_end = 0;
+	ft_lst2clear(&(lists->a.list), free);
+	ft_lst2clear(&(lists->b.list), free);
+	lists->a.end = 0;
+	lists->b.end = 0;
 }

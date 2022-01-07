@@ -23,6 +23,27 @@ void drawTriangle()
     glFlush();
 }
 
+void ft_push_swap_test(t_swap *lists)
+{
+	ft_print_swap(lists);
+	ft_reverse_rotate_a(lists);
+	ft_print_swap(lists);
+	ft_reverse_rotate_a(lists);
+	ft_print_swap(lists);
+	ft_reverse_rotate_a(lists);
+	ft_push_a(lists);
+	ft_push_a(lists);
+	ft_push_a(lists);
+	ft_push_a(lists);
+	ft_print_swap(lists);
+	ft_push_a(lists);
+	ft_print_swap(lists);
+	ft_rotate_b(lists);
+	ft_print_swap(lists);
+	ft_rotate_b(lists);
+	ft_print_swap(lists);
+}
+
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
