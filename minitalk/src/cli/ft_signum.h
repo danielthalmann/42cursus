@@ -18,4 +18,11 @@
 # ifndef    SIGUSR2
 #  define   SIGUSR2                12
 # endif
+typedef struct s_transmission
+{
+	char	*str;
+	int		octet;
+	int		pid;
+}	t_transmission;
+
 #endif

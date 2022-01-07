@@ -35,6 +35,7 @@ void	ft_handler(int signum, siginfo_t *info, void *context)
 		c = 0;
 		octet = 0;
 	}
+	kill(info->si_pid, SIGUSR1);
 }
 
 void	ft_print(char *str)
