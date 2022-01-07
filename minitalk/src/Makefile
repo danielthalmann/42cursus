@@ -3,9 +3,11 @@ SERVER=server
 
 CLIENT=client
 
-SRC_CLIENT=cli/client.c
+SRC_CLIENT=cli/client.c \
+           commons/ft_print.c 
 
-SRC_SERVER=serv/ft_bzero.c \
+SRC_SERVER=commons/ft_bzero.c \
+		   commons/ft_print.c \
            serv/server.c
 
 OBJS_CLIENT=${SRC_CLIENT:.c=.o}
@@ -17,16 +19,19 @@ SERVER_BONUS=server_bonus
 
 CLIENT_BONUS=client_bonus
 
-SRC_CLIENT_BONUS=cli/client_bonus.c
+SRC_CLIENT_BONUS=cli/client_bonus.c \
+                 commons/ft_print.c \
+				 cli/ft_transmission.c
 
-SRC_SERVER_BONUS=serv/ft_bzero.c \
+SRC_SERVER_BONUS=commons/ft_bzero.c \
+		         commons/ft_print.c \
            		 serv/server_bonus.c
 
 OBJS_CLIENT_BONUS=${SRC_CLIENT_BONUS:.c=.o}
 OBJS_SERVER_BONUS=${SRC_SERVER_BONUS:.c=.o}
 
 
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra -Werror -I./commons
 
 CC=gcc
 
@@ -49,14 +54,17 @@ ${CLIENT_BONUS}: ${OBJS_CLIENT_BONUS}
 
 clean: 
 	rm -f ${OBJS_CLIENT} ${OBJS_SERVER}
+	rm -f ${OBJS_CLIENT_BONUS} ${OBJS_SERVER_BONUS}
 
 fclean: clean
 	rm -f ${CLIENT} ${SERVER}
+	rm -f ${CLIENT_BONUS} ${SERVER_BONUS}
 
 re: fclean all
 
 norm: 
 	norminette serv/*.h serv/*.c
 	norminette cli/*.h cli/*.c
+	norminette commons/*.h commons/*.c
 
 .PHONY: clean re fclean all

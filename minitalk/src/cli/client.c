@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:22:07 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/05 10:04:22 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/07 11:27:55 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include "ft_signum.h"
+#include "ft_print.h"
 
 int	ft_atoi(const char *nptr)
 {
@@ -49,15 +50,6 @@ void	ft_transmit(int process, char *str)
 			octet++;
 			usleep(100);
 		}
-		str++;
-	}
-}
-
-void	ft_print(char *str)
-{
-	while (*str)
-	{
-		write(STDOUT_FILENO, str, 1);
 		str++;
 	}
 }

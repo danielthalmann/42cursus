@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:19:00 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/05 09:19:00 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/07 11:33:46 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include <unistd.h>
 #include "ft_signum.h"
 #include "ft_bzero.h"
-
-void	ft_print(char *str);
+#include "ft_print.h"
 
 void	ft_handler(int signum, siginfo_t *info, void *context)
 {
@@ -34,36 +33,6 @@ void	ft_handler(int signum, siginfo_t *info, void *context)
 		write(STDOUT_FILENO, &c, 1);
 		c = 0;
 		octet = 0;
-	}
-}
-
-void	ft_print(char *str)
-{
-	while (*str)
-	{
-		write(STDOUT_FILENO, str, 1);
-		str++;
-	}
-}
-
-void	ft_print_nb(int value)
-{
-	char	c;
-
-	if (value < 0)
-	{
-		ft_print("-");
-		ft_print_nb(-value);
-	}
-	else if (value < 10)
-	{
-		c = '0' + value;
-		write(STDOUT_FILENO, &c, 1);
-	}
-	else
-	{
-		ft_print_nb(value / 10);
-		ft_print_nb(value % 10);
 	}
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:22:07 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/05 10:04:22 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/07 11:34:32 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,8 @@
 #include <unistd.h>
 #include <signal.h>
 #include "ft_signum.h"
-
-t_transmission	*ft_get_transmission()
-{
-	static t_transmission	t;
-
-	return (&t);
-}
+#include "ft_transmission.h"
+#include "ft_print.h"
 
 int	ft_atoi(const char *nptr)
 {
@@ -40,61 +35,46 @@ int	ft_atoi(const char *nptr)
 	return (value);
 }
 
-void	ft_transmit(int process, char *str)
+void	ft_acknoledge(int signum, t_transmission *t)
 {
-	int	octet;
-
-	while (*str)
+	if (t->send != 0)
 	{
-		octet = 0;
-		while (octet < 8)
+		if (t->send != signum)
 		{
-			if (*str & (0x1 << octet))
-				kill(process, SIGUSR2);
-			else
-				kill(process, SIGUSR1);
-			octet++;
-			pause();
-		}
-		str++;
+			ft_print("Error aknowledge\n");
+			exit(1);
+		}	
 	}
 }
 
-void	ft_print(char *str)
-{
-	while (*str)
-	{
-		write(STDOUT_FILENO, str, 1);
-		str++;
-	}
-}
-
-void sig_handler(int signum)
+void	sig_handler(int signum)
 {
 	t_transmission	*t;
 
 	(void) signum;
 	t = ft_get_transmission();
+	ft_acknoledge(signum, t);
 	if (*(t->str))
 	{
-		usleep(100000);
-	ft_print("sig_handler argument\n");
 		if (t->octet < 8)
 		{
 			if (*(t->str) & (0x1 << t->octet))
-				kill(t->pid, SIGUSR2);
+				t->send = SIGUSR2;
 			else
-				kill(t->pid, SIGUSR1);
+				t->send = SIGUSR1;
+			kill(t->pid, t->send);
 			t->octet++;
 		}
 		else
 		{
-			t->octet = 0;
+			ft_clean_transmission(t);
 			t->str++;
+			raise(SIGUSR1);
 		}
 	}
+	else
+		exit(0);
 }
-
 
 int	main(int argc, char **argv)
 {
@@ -109,6 +89,9 @@ int	main(int argc, char **argv)
 	t->pid = ft_atoi(argv[1]);
 	t->str = argv[2];
 	signal(SIGUSR1, sig_handler);
+	signal(SIGUSR2, sig_handler);
 	raise(SIGUSR1);
+	while (1)
+		pause();
 	return (0);
 }
