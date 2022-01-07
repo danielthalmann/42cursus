@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:17:10 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/07 11:03:33 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/07 11:51:49 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_transmission
 	int		octet;
 	int		pid;
 	int		send;
+	int		ack;
 }	t_transmission;
 t_transmission	*ft_get_transmission(void);
 void			ft_clean_transmission(t_transmission *t);

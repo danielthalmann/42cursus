@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:22:07 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/07 11:34:32 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/07 11:58:48 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	ft_atoi(const char *nptr)
 	return (value);
 }
 
-void	ft_acknoledge(int signum, t_transmission *t)
+void	ft_acknoledge(t_transmission *t)
 {
 	if (t->send != 0)
 	{
-		if (t->send != signum)
+		if (t->send != t->ack)
 		{
 			ft_print("Error aknowledge\n");
 			exit(1);
@@ -51,10 +51,13 @@ void	sig_handler(int signum)
 {
 	t_transmission	*t;
 
-	(void) signum;
 	t = ft_get_transmission();
-	ft_acknoledge(signum, t);
-	if (*(t->str))
+	t->ack = signum;
+}
+
+void	ft_transmit(t_transmission *t)
+{
+	while (*(t->str))
 	{
 		if (t->octet < 8)
 		{
@@ -63,18 +66,18 @@ void	sig_handler(int signum)
 			else
 				t->send = SIGUSR1;
 			kill(t->pid, t->send);
+			pause();
+			usleep(10);
+			ft_acknoledge(t);
 			t->octet++;
 		}
 		else
 		{
 			ft_clean_transmission(t);
 			t->str++;
-			raise(SIGUSR1);
 		}
 	}
-	else
-		exit(0);
-}
+}	
 
 int	main(int argc, char **argv)
 {
@@ -91,7 +94,6 @@ int	main(int argc, char **argv)
 	signal(SIGUSR1, sig_handler);
 	signal(SIGUSR2, sig_handler);
 	raise(SIGUSR1);
-	while (1)
-		pause();
+	ft_transmit(t);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:19:00 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/07 11:43:40 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:02:25 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_handler(int signum, siginfo_t *info, void *context)
 		c = 0;
 		octet = 0;
 	}
-	usleep(600);
+	usleep(100);
 	kill(info->si_pid, signum);
 }
 
