@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:22:07 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/07 11:58:48 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/07 17:08:40 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	ft_transmit(t_transmission *t)
 				t->send = SIGUSR2;
 			else
 				t->send = SIGUSR1;
+			usleep(50);
 			kill(t->pid, t->send);
 			pause();
-			usleep(10);
 			ft_acknoledge(t);
 			t->octet++;
 		}
@@ -93,7 +93,6 @@ int	main(int argc, char **argv)
 	t->str = argv[2];
 	signal(SIGUSR1, sig_handler);
 	signal(SIGUSR2, sig_handler);
-	raise(SIGUSR1);
 	ft_transmit(t);
 	return (0);
 }

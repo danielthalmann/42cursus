@@ -21,10 +21,11 @@ CLIENT_BONUS=client_bonus
 
 SRC_CLIENT_BONUS=cli/client_bonus.c \
                  commons/ft_print.c \
-				 cli/ft_transmission.c
+				 commons/ft_transmission.c
 
 SRC_SERVER_BONUS=commons/ft_bzero.c \
 		         commons/ft_print.c \
+				 commons/ft_transmission.c \
            		 serv/server_bonus.c
 
 OBJS_CLIENT_BONUS=${SRC_CLIENT_BONUS:.c=.o}

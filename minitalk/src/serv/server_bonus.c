@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:19:00 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/07 12:02:25 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/07 17:12:37 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,37 @@
 #include "ft_signum.h"
 #include "ft_bzero.h"
 #include "ft_print.h"
+#include "ft_transmission.h"
 
 void	ft_handler(int signum, siginfo_t *info, void *context)
 {
-	static int	octet;
-	static char	c;
+	t_transmission	*t;
 
 	(void) context;
-	if (signum == SIGUSR1)
-		c |= (0x0 << octet);
-	if (signum == SIGUSR2)
-		c |= (0x1 << octet);
-	octet++;
-	if (octet == 8)
+	t = ft_get_transmission();
+	t->send = signum;
+	t->pid = info->si_pid;
+}
+
+void	ft_send(void)
+{
+	static char		c;
+	t_transmission	*t;
+
+	t = ft_get_transmission();
+	if (t->send == SIGUSR1)
+		c |= (0x0 << t->octet);
+	if (t->send == SIGUSR2)
+		c |= (0x1 << t->octet);
+	t->octet++;
+	if (t->octet == 8)
 	{
 		write(STDOUT_FILENO, &c, 1);
 		c = 0;
-		octet = 0;
+		t->octet = 0;
 	}
-	usleep(100);
-	kill(info->si_pid, signum);
+	usleep(50);
+	kill(t->pid, t->send);
 }
 
 int	main(void)
@@ -60,5 +71,8 @@ int	main(void)
 	ft_print_nb(process);
 	ft_print("\n");
 	while (1)
+	{
 		pause();
+		ft_send();
+	}
 }
