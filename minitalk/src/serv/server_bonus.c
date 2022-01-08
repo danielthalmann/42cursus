@@ -12,6 +12,7 @@
 
 #include <signal.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "ft_signum.h"
 #include "ft_bzero.h"
 #include "ft_print.h"
@@ -27,10 +28,9 @@ void	ft_handler(int signum, siginfo_t *info, void *context)
 	t->pid = info->si_pid;
 }
 
-void	ft_send(void)
+void	ft_print_message(t_transmission *t)
 {
 	static char		c;
-	t_transmission	*t;
 
 	t = ft_get_transmission();
 	if (t->send == SIGUSR1)
@@ -44,35 +44,38 @@ void	ft_send(void)
 		c = 0;
 		t->octet = 0;
 	}
-	usleep(50);
-	kill(t->pid, t->send);
+}
+
+void	ft_error(char *str)
+{
+	ft_print(str);
+	exit(1);
 }
 
 int	main(void)
 {
 	struct sigaction	act;
 	int					process;
+	t_transmission		*t;
 
+	t = ft_get_transmission();
 	ft_bzero(&act, sizeof(act));
 	act.sa_flags = SA_SIGINFO;
 	act.sa_sigaction = &ft_handler;
 	if (sigaction(SIGUSR1, &act, NULL) == -1)
-	{
-		ft_print("error sigaction\n");
-		return (1);
-	}
+		ft_error("error sigaction\n");
 	if (sigaction(SIGUSR2, &act, NULL) == -1)
-	{
-		ft_print("error sigaction\n");
-		return (1);
-	}
+		ft_error("error sigaction\n");
 	process = getpid();
 	ft_print("PSID : ");
 	ft_print_nb(process);
 	ft_print("\n");
+	pause();
 	while (1)
 	{
+		ft_print_message(t);
+		usleep(20);
+		kill(t->pid, t->send);
 		pause();
-		ft_send();
 	}
 }
