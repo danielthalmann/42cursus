@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:03:54 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/04 18:53:34 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/09 12:04:56 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_list2	*ft_lst2last(t_list2 *lst)
 		lst = lst->next;
 	return (lst);
 }
-
 
 /**
  * @brief Ajoute l’élément ’new’ au début de la liste.

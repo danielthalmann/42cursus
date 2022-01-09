@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:12:32 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/04 19:31:42 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/09 12:06:51 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * 
  * @param lists 
  */
-void ft_push_a(t_swap *lists)
+void	ft_push_a(t_swap *lists)
 {
 	ft_push_a_b(&lists->b, &lists->a);
 }
@@ -31,17 +31,17 @@ void ft_push_a(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_push_b(t_swap *lists)
+void	ft_push_b(t_swap *lists)
 {
 	ft_push_a_b(&lists->a, &lists->b);
 }
 
-void ft_push_a_b(t_stack *a, t_stack *b)
+void	ft_push_a_b(t_stack *a, t_stack *b)
 {
-	t_list2 *new;
+	t_list2	*new;
 
 	if (!a->list)
-		return;
+		return ;
 	new = a->list;
 	a->list = a->list->next;
 	if (new == a->end)

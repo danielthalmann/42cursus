@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.h                                             :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:03:54 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/04 18:57:16 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/09 13:13:33 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SWAP_H
-# define SWAP_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 # include "list2.h"
 # define CMD_SA 0
 # define CMD_SB 1
@@ -25,7 +25,11 @@
 # define CMD_RRB 9
 # define CMD_RRR 10
 # define CMD_LENGTH 11
-
+enum push_swap_cmd
+{
+	sa,
+	sb
+};
 typedef unsigned int	t_uint;
 typedef struct s_stack
 {

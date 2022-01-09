@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:12:32 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/04 19:31:42 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/09 12:10:13 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * 
  * @param lists 
  */
-void ft_rotate_a(t_swap *lists)
+void	ft_rotate_a(t_swap *lists)
 {
 	ft_rotate_list(&(lists->a));
 }
@@ -31,7 +31,7 @@ void ft_rotate_a(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_rotate_b(t_swap *lists)
+void	ft_rotate_b(t_swap *lists)
 {
 	ft_rotate_list(&(lists->b));
 }
@@ -41,7 +41,7 @@ void ft_rotate_b(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_rotate_rr(t_swap *lists)
+void	ft_rotate_rr(t_swap *lists)
 {
 	ft_rotate_a(lists);
 	ft_rotate_b(lists);
@@ -53,10 +53,10 @@ void ft_rotate_rr(t_swap *lists)
  * 
  * @param stack 
  */
-void ft_rotate_list(t_stack *stack)
+void	ft_rotate_list(t_stack *stack)
 {
-	t_list2 *new;
-	t_list2 *new_next;
+	t_list2	*new;
+	t_list2	*new_next;
 
 	if (!stack->list)
 		return ;

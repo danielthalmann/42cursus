@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 11:28:45 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/18 11:28:45 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/09 12:04:18 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_is_list_valid(t_swap *lists)
 		while (p)
 		{
 			if (((t_number *)l->content)->n == ((t_number *)p->content)->n)
-				return (0);				
+				return (0);
 			p = p->next;
 		}
 		l = l->next;

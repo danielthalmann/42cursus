@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 07:43:01 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/14 14:05:32 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/09 11:54:28 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_uint	ft_height_value(t_list2 *c)
 			l_height = c;
 		c = c->next;
 	}
-	return (l_height);
+	return (((t_number*)l_height->content)->n);
 }
 
 /**
@@ -130,7 +130,7 @@ t_uint	ft_low_value(t_list2 *c)
 			l_low = c;
 		c = c->next;
 	}
-	return (l_low);
+	return (((t_number*)l_low->content)->n);
 }
 
 void ft_push_swap_resolv(t_swap *lists)
