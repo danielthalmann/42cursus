@@ -6,11 +6,12 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 11:28:15 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/07 11:32:25 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/09 09:36:20 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 
 void	ft_print(char *str)
 {
@@ -40,4 +41,10 @@ void	ft_print_nb(int value)
 		ft_print_nb(value / 10);
 		ft_print_nb(value % 10);
 	}
+}
+
+void	ft_error(char *str)
+{
+	ft_print(str);
+	exit(1);
 }

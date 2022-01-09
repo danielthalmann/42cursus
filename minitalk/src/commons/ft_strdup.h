@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_transmission.h                                  :+:      :+:    :+:   */
+/*   ft_strdup.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/05 09:17:10 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/09 10:16:31 by dthalman         ###   ########.fr       */
+/*   Created: 2022/01/09 10:08:47 by dthalman          #+#    #+#             */
+/*   Updated: 2022/01/09 10:11:43 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TRANSMISSION_H
-# define FT_TRANSMISSION_H
+#ifndef FT_STRDUP_H
+# define FT_STRDUP_H
+# include <stdlib.h> 
 
-typedef struct s_transmission
-{
-	char	*str;
-	int		octet;
-	int		pid;
-	int		send;
-	int		ack;
-	int		idx;
-}	t_transmission;
-t_transmission	*ft_get_transmission(void);
-void			ft_clean_transmission(t_transmission *t);
+char	*ft_strdup(const char *s);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t	ft_strlen(const char *s);
 #endif

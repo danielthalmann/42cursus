@@ -21,7 +21,10 @@ CLIENT_BONUS=client_bonus
 
 SRC_CLIENT_BONUS=cli/client_bonus.c \
                  commons/ft_print.c \
-				 commons/ft_transmission.c
+				 commons/ft_transmission.c \
+                 commons/ft_strdup.c \
+                 commons/ft_strlcpy.c \
+                 commons/ft_strlen.c 
 
 SRC_SERVER_BONUS=commons/ft_bzero.c \
 		         commons/ft_print.c \

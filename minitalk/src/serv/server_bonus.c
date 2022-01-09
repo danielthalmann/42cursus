@@ -6,27 +6,16 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:19:00 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/07 17:12:37 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/09 10:22:10 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "ft_signum.h"
 #include "ft_bzero.h"
 #include "ft_print.h"
 #include "ft_transmission.h"
-
-void	ft_handler(int signum, siginfo_t *info, void *context)
-{
-	t_transmission	*t;
-
-	(void) context;
-	t = ft_get_transmission();
-	t->send = signum;
-	t->pid = info->si_pid;
-}
 
 void	ft_print_message(t_transmission *t)
 {
@@ -38,18 +27,25 @@ void	ft_print_message(t_transmission *t)
 	if (t->send == SIGUSR2)
 		c |= (0x1 << t->octet);
 	t->octet++;
-	if (t->octet == 8)
+	if (t->octet > 7)
 	{
 		write(STDOUT_FILENO, &c, 1);
 		c = 0;
 		t->octet = 0;
 	}
+	if (kill(t->pid, SIGUSR1) == -1)
+		ft_error("Sending error\n");
 }
 
-void	ft_error(char *str)
+void	ft_handler(int signum, siginfo_t *info, void *context)
 {
-	ft_print(str);
-	exit(1);
+	t_transmission	*t;
+
+	(void) context;
+	t = ft_get_transmission();
+	t->send = signum;
+	t->pid = info->si_pid;
+	ft_print_message(t);
 }
 
 int	main(void)
@@ -70,12 +66,7 @@ int	main(void)
 	ft_print("PSID : ");
 	ft_print_nb(process);
 	ft_print("\n");
-	pause();
 	while (1)
-	{
-		ft_print_message(t);
-		usleep(20);
-		kill(t->pid, t->send);
 		pause();
-	}
+	return (0);
 }
