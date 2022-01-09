@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:19:00 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/07 17:12:37 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/09 10:35:07 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	ft_print_message(t_transmission *t)
 	static char		c;
 
 	t = ft_get_transmission();
-	if (t->send == SIGUSR1)
-		c |= (0x0 << t->octet);
 	if (t->send == SIGUSR2)
 		c |= (0x1 << t->octet);
 	t->octet++;
@@ -60,6 +58,7 @@ int	main(void)
 
 	t = ft_get_transmission();
 	ft_bzero(&act, sizeof(act));
+	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_SIGINFO;
 	act.sa_sigaction = &ft_handler;
 	if (sigaction(SIGUSR1, &act, NULL) == -1)
