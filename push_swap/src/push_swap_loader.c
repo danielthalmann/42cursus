@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:12:32 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/12 15:23:09 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:53:17 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_internal_load_swap_list(t_swap *lists, char **v, unsigned int len)
 			return (0);
 		}
 		n->s = v[i];
-		n->n = ft_atoi(v[i]);
+		n->n = ft_atol(v[i]);
 		lst = ft_lst2new(n);
 		ft_lst2add_back(&lists->a.list, lst);
 		lists->a.end = lst;

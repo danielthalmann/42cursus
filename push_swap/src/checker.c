@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 11:28:45 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/12 15:23:41 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:52:50 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	ft_found_forward(t_list2 *l, t_list2 *p)
  * @brief Vérifie si la valeur numérique passé en paramètre est correct
  * 
  * @param l 
+ * 
  * @return int 
  */
 int	ft_is_invalid_num(t_list2 *l)
@@ -68,6 +69,8 @@ int	ft_is_invalid_num(t_list2 *l)
 			return (0);
 		str++;
 	}
+	//if (-2147483648L)
+	ft_printf("%d\n", ((t_number *)l->content)->n);
 	return (1);
 }
 

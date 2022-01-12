@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:03:54 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/12 17:12:05 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:53:55 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_swap
 }	t_swap;
 typedef struct s_number
 {
-	int		n;
+	long	n;
 	char	*s;
 }	t_number;
 int		ft_a_lt_b(t_list2 *a, t_list2 *b);
