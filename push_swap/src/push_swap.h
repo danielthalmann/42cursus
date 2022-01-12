@@ -65,7 +65,7 @@ void	ft_reverse_rotate_b(t_swap *lists);
 void	ft_reverse_rotate_rr(t_swap *lists);
 void	ft_reverse_rotate_list(t_stack *stack);
 void	ft_print_swap(t_swap *lists);
-int		ft_load_swap_list(t_swap *lists, char **v, unsigned int len);
+int		ft_load_swap_list(t_swap *lists, char **v, int len);
 void	ft_free_swap_list(t_swap *lists);
 int		ft_is_list_valid(t_swap *lists);
 void	ft_push_swap_resolv(t_swap *lists);

@@ -59,7 +59,7 @@ int	ft_internal_load_swap_list(t_swap *lists, char **v, unsigned int len)
  * @param v 
  * @return retourne 1 si tout s'est bien passé
  */
-int	ft_load_swap_list(t_swap *lists, char **v, unsigned int len)
+int	ft_load_swap_list(t_swap *lists, char **v, int len)
 {
 	int	ret;
 

@@ -69,8 +69,10 @@ int	ft_is_invalid_num(t_list2 *l)
 			return (0);
 		str++;
 	}
-	//if (-2147483648L)
-	ft_printf("%d\n", ((t_number *)l->content)->n);
+	if (((t_number *)l->content)->n > 2147483647L)
+		return (0);
+	if (((t_number *)l->content)->n < -2147483648L)
+		return (0);
 	return (1);
 }
 
