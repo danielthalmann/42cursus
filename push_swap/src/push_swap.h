@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:03:54 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/12 14:43:17 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/12 17:12:05 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,10 @@ void	ft_print_swap(t_swap *lists);
 int		ft_load_swap_list(t_swap *lists, char **v, unsigned int len);
 void	ft_free_swap_list(t_swap *lists);
 int		ft_is_list_valid(t_swap *lists);
+void	ft_push_swap_resolv(t_swap *lists);
+void	ft_push_swap_resolv_3(t_swap *lists);
+void	ft_push_swap_resolv_100(t_swap *lists);
+t_uint	ft_next_height(t_list2 *c);
+t_uint	ft_height_value(t_list2 *c);
+t_uint	ft_low_value(t_list2 *c);
 #endif

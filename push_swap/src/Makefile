@@ -6,6 +6,8 @@ SRC=main.c \
 	push_swap_cmd.c \
 	push.c \
 	swap.c \
+	resolver.c \
+	resolver_utils.c \
 	rotate.c \
 	compare.c \
 	reverse_rotate.c \
