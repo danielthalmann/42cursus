@@ -25,7 +25,7 @@ SRCS=ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 
 OBJS=${SRCS:.c=.o}
 
-CFLAG=-Wall -Wextra -Werror
+CFLAG=-Wall -Wextra -Werror -g
 
 LFLAG=
 

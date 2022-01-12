@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 07:43:01 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/09 11:54:28 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/12 16:10:13 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,21 @@
 #include "libft.h"
 #include "main.h"
 
+void ft_error(char *str)
+{
+	ft_fprintf(2, str);
+	exit(1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_swap	lists;
 
 	if (argc < 2)
-	{
-		ft_fprintf(2, "Error\n");
-		return (1);
-	}
+		ft_error("Error\n");
 	ft_load_swap_list(&lists, ++argv, argc - 1);
 	if (ft_is_list_valid(&lists))
-	{
-		// ft_print_swap(&lists);
 		ft_push_swap_resolv(&lists);
-		//ft_print_swap(&lists);
-	}
 	else
 		ft_fprintf(2, "Error\n");
 	ft_free_swap_list(&lists);
@@ -44,20 +43,20 @@ void ft_push_swap_resolv_3(t_swap *lists)
 	{
 		if (ft_a_gt_b(lists->a.list, lists->a.list->next->next))
 		{
-			ft_exec(CMD_RA, lists);
+			ft_exec(ra, lists);
 			if (ft_a_gt_b(lists->a.list, lists->a.list->next))
-				ft_exec(CMD_SA, lists);
+				ft_exec(sa, lists);
 		}
 		else
-			ft_exec(CMD_SA, lists);
+			ft_exec(sa, lists);
 	}
 	else
 	{
 		if (ft_a_gt_b(lists->a.list->next, lists->a.list->next->next))
 		{
-			ft_exec(CMD_RRA, lists);
+			ft_exec(rra, lists);
 			if (ft_a_gt_b(lists->a.list, lists->a.list->next))
-				ft_exec(CMD_SA, lists);
+				ft_exec(sa, lists);
 		}
 	}
 }
@@ -140,7 +139,7 @@ void ft_push_swap_resolv(t_swap *lists)
 	if (lists->a.length < 3)
 	{
 		if (ft_a_gt_b(lists->a.list, lists->a.list->next))
-			ft_exec(CMD_SA, lists);
+			ft_exec(sa, lists);
 		return ;
 	}
 	if (lists->a.length == 3)
@@ -152,14 +151,14 @@ void ft_push_swap_resolv(t_swap *lists)
 	while(lists->a.length > 1)
 	{
 		if (ft_a_lt_b(lists->a.list, lists->a.list->next))
-			ft_exec(CMD_PB, lists);
+			ft_exec(pb, lists);
 		else
 		{
 			if (lists->b.length > 1 && ft_a_lt_b(lists->b.list, lists->b.list->next))
-				ft_exec(CMD_SS, lists);
+				ft_exec(ss, lists);
 			else
-				ft_exec(CMD_SA, lists);
-			ft_exec(CMD_PB, lists);
+				ft_exec(sa, lists);
+			ft_exec(pb, lists);
 		}
 	}
 	while(lists->b.length > 1)
@@ -168,15 +167,15 @@ void ft_push_swap_resolv(t_swap *lists)
 		if (lists->b.length > i * 2)
 		{
 			while(i--)
-				ft_exec(CMD_RB, lists);
+				ft_exec(rb, lists);
 		}
 		else
 		{
 			i = lists->b.length - i;
 			while(i--)
-				ft_exec(CMD_RRB, lists);
+				ft_exec(rrb, lists);
 		}
-		ft_exec(CMD_PA, lists);
+		ft_exec(pa, lists);
 	}
-	ft_exec(CMD_PA, lists);
+	ft_exec(pa, lists);
 }
