@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 07:43:01 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/12 17:10:58 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/13 20:21:08 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	t_swap	lists;
 
 	if (argc < 2)
-		ft_error("Error\n");
+		return (0);
 	ft_load_swap_list(&lists, ++argv, argc - 1);
 	if (ft_is_list_valid(&lists))
 		ft_push_swap_resolv(&lists);
