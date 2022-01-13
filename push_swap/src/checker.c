@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 11:28:45 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/12 17:52:50 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:43:19 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,26 @@ int	ft_is_list_valid(t_swap *lists)
 		}
 		if (!ft_is_invalid_num(l))
 			return (0);
+		l = l->next;
+	}
+	return (1);
+}
+
+/**
+ * @brief verify if the list is sorted
+ * 
+ * @param lists 
+ * @return int 
+ */
+int	ft_is_list_sorted(t_list2 *l)
+{
+	while (l)
+	{
+		if (l->next)
+		{
+			if (!ft_a_lte_b(l, l->next))
+				return (0);
+		}
 		l = l->next;
 	}
 	return (1);

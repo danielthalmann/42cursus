@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:03:54 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/12 17:53:55 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:11:07 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_number
 }	t_number;
 int		ft_a_lt_b(t_list2 *a, t_list2 *b);
 int		ft_a_gt_b(t_list2 *a, t_list2 *b);
+int		ft_a_lte_b(t_list2 *a, t_list2 *b);
 int		ft_a_eq_b(t_list2 *a, t_list2 *b);
 void	ft_exec(t_push_swap_cmd cmd, t_swap *lists);
 void	ft_swap_a(t_swap *lists);
@@ -68,8 +69,10 @@ void	ft_print_swap(t_swap *lists);
 int		ft_load_swap_list(t_swap *lists, char **v, int len);
 void	ft_free_swap_list(t_swap *lists);
 int		ft_is_list_valid(t_swap *lists);
+int		ft_is_list_sorted(t_list2 *l);
 void	ft_push_swap_resolv(t_swap *lists);
 void	ft_push_swap_resolv_3(t_swap *lists);
+void	ft_push_swap_resolv_5(t_swap *lists);
 void	ft_push_swap_resolv_100(t_swap *lists);
 t_uint	ft_next_height(t_list2 *c);
 t_uint	ft_height_value(t_list2 *c);
