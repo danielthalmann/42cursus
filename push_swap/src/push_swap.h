@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:03:54 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/13 18:11:07 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/14 15:18:02 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ void	ft_push_swap_resolv(t_swap *lists);
 void	ft_push_swap_resolv_3(t_swap *lists);
 void	ft_push_swap_resolv_5(t_swap *lists);
 void	ft_push_swap_resolv_100(t_swap *lists);
+int		ft_get_value(t_list2 *list);
 t_uint	ft_next_height(t_list2 *c);
-t_uint	ft_height_value(t_list2 *c);
-t_uint	ft_low_value(t_list2 *c);
+t_uint	ft_next_low(t_list2 *c);
+int		ft_height_value(t_list2 *c);
+int		ft_low_value(t_list2 *c);
+t_uint	ft_get_index_of(t_list2 *c, int value);
 #endif

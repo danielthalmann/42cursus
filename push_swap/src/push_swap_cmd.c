@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:12:32 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/12 11:05:30 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/14 14:48:48 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,15 @@ int	ft_exec_rev_rotate(t_push_swap_cmd cmd, t_swap *lists)
 	return (0);
 }
 
+void ft_debug(t_swap *lists)
+{
+	if (0)
+	{
+		ft_print_swap(lists);
+		sleep(1);		
+	}
+}
+
 /**
  * @brief Execute a command on lists
  * 
@@ -98,11 +107,11 @@ int	ft_exec_rev_rotate(t_push_swap_cmd cmd, t_swap *lists)
 void	ft_exec(t_push_swap_cmd cmd, t_swap *lists)
 {
 	if (ft_exec_swap(cmd, lists))
-		return ;
+		return (ft_debug(lists));
 	if (ft_exec_push(cmd, lists))
-		return ;
+		return (ft_debug(lists));
 	if (ft_exec_rotate(cmd, lists))
-		return ;
+		return (ft_debug(lists));
 	if (ft_exec_rev_rotate(cmd, lists))
-		return ;
+		return (ft_debug(lists));
 }

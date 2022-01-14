@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 16:37:29 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/13 18:32:30 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/14 15:17:23 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,32 +74,48 @@ void	ft_push_swap_resolv_5(t_swap *lists)
 {
 	t_uint	i;
 
-	ft_print_swap(lists);
-	i = lists->a.length - 1 - ft_next_height(lists->a.list);
-	ft_printf("index %d \n", i);
-	if (i > lists->a.length / 2)
+	ft_exec(pb, lists);
+	ft_exec(pb, lists);
+	if (lists->a.length == 3)
+		ft_push_swap_resolv_3(lists);
+	else
 	{
-		i = lists->a.length - i;
-		ft_printf("index %d \n", i);
-		while (i--)
+		if (ft_a_gt_b(lists->b.list, lists->b.list->next)
+			&& ft_a_gt_b(lists->b.list, lists->b.list->next))
+			ft_exec(ss, lists);
+		else if (ft_a_gt_b(lists->a.list, lists->a.list->next))
+			ft_exec(sa, lists);
+	}
+	if (ft_a_lt_b(lists->b.list, lists->b.list->next))
+		ft_exec(sb, lists);
+	while (lists->b.length)
+	{
+		i = ft_get_index_of(lists->a.list, ft_get_value(lists->b.list));
+		if (lists->a.length > i * 2)
 		{
-			ft_exec(ra, lists);
-			ft_print_swap(lists);
-			sleep(1);
+			while (i--)
+				ft_exec(ra, lists);
 		}
-
+		else
+		{
+			i = lists->a.length - i;
+			while (i--)
+				ft_exec(rra, lists);
+		}
+		ft_exec(pa, lists);
+	}
+	i = ft_next_low(lists->a.list);
+	if (lists->a.length > i * 2)
+	{
+		while (i--)
+			ft_exec(ra, lists);
 	}
 	else
 	{
+		i = lists->a.length - i;
 		while (i--)
-		{
 			ft_exec(rra, lists);
-			ft_print_swap(lists);
-			sleep(1);
-		}
-
 	}
-
 }
 
 /**
