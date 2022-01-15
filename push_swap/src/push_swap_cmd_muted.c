@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push_swap_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 07:43:01 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/13 20:21:08 by dthalman         ###   ########.fr       */
+/*   Created: 2021/12/04 00:12:32 by dthalman          #+#    #+#             */
+/*   Updated: 2022/01/14 14:48:48 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "list2.h"
 #include "push_swap.h"
 #include "libft.h"
-#include "main.h"
 
-void	ft_error(char *str)
+/**
+ * @brief Execute a command on lists
+ * 
+ * @param cmd 
+ * @param lists 
+ */
+void	ft_exec_muted(t_push_swap_cmd cmd, t_swap *lists)
 {
-	ft_fprintf(2, str);
-	exit(1);
-}
-
-int	main(int argc, char **argv)
-{
-	t_swap	lists;
-
-	if (argc < 2)
-		return (0);
-	if (!ft_load_swap_list(&lists, ++argv, argc - 1))
-		ft_fprintf(2, "Error\n");
-	if (ft_is_list_valid(&lists))
-		ft_push_swap_resolv(&lists);
-	else
-		ft_fprintf(2, "Error\n");
-	ft_free_swap_list(&lists);
-	return (0);
+	if (ft_exec_swap(cmd, lists, 1))
+		return ;
+	if (ft_exec_push(cmd, lists, 1))
+		return ;
+	if (ft_exec_rotate(cmd, lists, 1))
+		return ;
+	if (ft_exec_rev_rotate(cmd, lists, 1))
+		return ;
 }

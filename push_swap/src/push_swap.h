@@ -43,6 +43,7 @@ typedef struct s_swap
 typedef struct s_number
 {
 	long	n;
+	t_uint	i;
 	char	*s;
 }	t_number;
 int		ft_a_lt_b(t_list2 *a, t_list2 *b);
@@ -50,6 +51,11 @@ int		ft_a_gt_b(t_list2 *a, t_list2 *b);
 int		ft_a_lte_b(t_list2 *a, t_list2 *b);
 int		ft_a_eq_b(t_list2 *a, t_list2 *b);
 void	ft_exec(t_push_swap_cmd cmd, t_swap *lists);
+void	ft_exec_muted(t_push_swap_cmd cmd, t_swap *lists);
+int		ft_exec_swap(t_push_swap_cmd cmd, t_swap *lists, int muted);
+int		ft_exec_push(t_push_swap_cmd cmd, t_swap *lists, int muted);
+int		ft_exec_rotate(t_push_swap_cmd cmd, t_swap *lists, int muted);
+int		ft_exec_rev_rotate(t_push_swap_cmd cmd, t_swap *lists, int muted);
 void	ft_swap_a(t_swap *lists);
 void	ft_swap_b(t_swap *lists);
 void	ft_swap_ss(t_swap *lists);
@@ -70,11 +76,14 @@ int		ft_load_swap_list(t_swap *lists, char **v, int len);
 void	ft_free_swap_list(t_swap *lists);
 int		ft_is_list_valid(t_swap *lists);
 int		ft_is_list_sorted(t_list2 *l);
+int		ft_is_ascii_num(char *str);
 void	ft_push_swap_resolv(t_swap *lists);
 void	ft_push_swap_resolv_3(t_swap *lists);
 void	ft_push_swap_resolv_5(t_swap *lists);
 void	ft_push_swap_resolv_100(t_swap *lists);
+void	ft_list_indexing(t_list2 *l, t_uint size);
 int		ft_get_value(t_list2 *list);
+t_uint	ft_get_index(t_list2 *list);
 t_uint	ft_next_height(t_list2 *c);
 t_uint	ft_next_low(t_list2 *c);
 int		ft_height_value(t_list2 *c);

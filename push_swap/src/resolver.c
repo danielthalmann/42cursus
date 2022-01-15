@@ -126,6 +126,104 @@ void	ft_push_swap_resolv_5(t_swap *lists)
 void	ft_push_swap_resolv_100(t_swap *lists)
 {
 	t_uint	i;
+	t_uint	j;
+	t_uint	size;
+
+	size = lists->a.length;
+	ft_list_indexing(lists->a.list, lists->a.length);
+	i = 0;
+	while (i++ < size / 2)
+	{
+		// recherche le prochain en dessus
+		j = 0;
+		while (ft_get_index(lists->a.list) <= size / 2)	{
+			if (lists->a.length > 1)
+				if (ft_a_gt_b(lists->a.list, lists->a.list->next))
+					ft_exec(sa, lists);	
+			ft_exec(ra, lists);
+		}
+		if (lists->b.length > 1)
+		{
+			j = ft_get_index_of(lists->b.list, ft_get_value(lists->a.list));
+			if (lists->b.length > j * 2)
+			{
+				while (j--)
+					ft_exec(rb, lists);
+			}
+			else
+			{
+				j = lists->b.length - j;
+				while (j--)
+					ft_exec(rrb, lists);
+			}
+		}
+		ft_exec(pb, lists);
+	}
+	while (lists->b.length)
+	{
+		i = ft_next_height(lists->b.list);
+		if (lists->b.length > i * 2)
+		{
+			while (i--)
+				ft_exec(rb, lists);
+		}
+		else
+		{
+			i = lists->b.length - i;
+			while (i--)
+				ft_exec(rrb, lists);
+		}
+		ft_exec(pa, lists);
+	}
+	i = 0;
+	while (i++ < size / 2)
+	{
+		ft_exec(rra, lists);
+		if (lists->b.length > 1)
+		{
+			j = ft_get_index_of(lists->b.list, ft_get_value(lists->a.list));
+			if (lists->b.length > j * 2)
+			{
+				while (j--)
+					ft_exec(rb, lists);
+			}
+			else
+			{
+				j = lists->b.length - j;
+				while (j--)
+					ft_exec(rrb, lists);
+			}
+		}
+		ft_exec(pb, lists);
+	}
+		
+	while (lists->b.length)
+	{
+		i = ft_next_height(lists->b.list);
+		if (lists->b.length > i * 2)
+		{
+			while (i--)
+				ft_exec(rb, lists);
+		}
+		else
+		{
+			i = lists->b.length - i;
+			while (i--)
+				ft_exec(rrb, lists);
+		}
+		ft_exec(pa, lists);
+	}
+}
+
+/**
+ * @brief résoud une liste jusqu'à 500 entrées
+ * 
+ * @param lists 
+ */
+
+void	ft_push_swap_resolv_500(t_swap *lists)
+{
+	t_uint	i;
 
 	while (lists->a.length > 1)
 	{

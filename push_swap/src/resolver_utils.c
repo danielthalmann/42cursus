@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 #include "libft.h"
+#include <limits.h>
 
 /**
  * @brief retourne l'index du plus au nombre
@@ -147,4 +148,39 @@ int	ft_low_value(t_list2 *c)
 		c = c->next;
 	}
 	return (ft_get_value(l_low));
+}
+
+
+/**
+ * @brief enregistre la position de chaque élément dans la liste.
+ * 
+ * @param l 
+ * @param size 
+ */
+void	ft_list_indexing(t_list2 *l, t_uint size)
+{
+	t_list2	*p;
+	t_list2	*small;
+	int		last_n;
+	t_uint	counter;
+
+	small = l;
+	counter = 0;
+	
+	while (counter < size)
+	{
+		p = l;
+		last_n = INT_MAX;
+		while (p)
+		{
+			if (((t_number *)p->content)->i == 0)
+				if (ft_get_value(p) <= last_n)
+				{
+					small = p;
+					last_n = ft_get_value(p);
+				}
+			p = p->next;
+		}
+		((t_number *)small->content)->i = ++counter;
+	}
 }

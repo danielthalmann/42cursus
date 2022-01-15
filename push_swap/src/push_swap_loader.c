@@ -34,13 +34,13 @@ int	ft_internal_load_swap_list(t_swap *lists, char **v, unsigned int len)
 	while (v[i] && i < len)
 	{
 		n = malloc(sizeof(t_number));
-		if (!n)
+		if (!n || !ft_is_ascii_num(v[i]))
 		{
 			ft_lst2clear(&lists->a.list, free);
 			return (0);
 		}
-		n->s = v[i];
 		n->n = ft_atol(v[i]);
+		n->i = 0;
 		lst = ft_lst2new(n);
 		ft_lst2add_back(&lists->a.list, lst);
 		lists->a.end = lst;
@@ -79,4 +79,21 @@ int	ft_load_swap_list(t_swap *lists, char **v, int len)
 	}
 	else
 		return (ft_internal_load_swap_list(lists, v, len));
+}
+
+/**
+ * @brief vérifie que le contenu est bien un chiffre
+ * 
+ * @param str 
+ * @return int 
+ */
+int	ft_is_ascii_num(char *str)
+{
+	while (*str)
+	{
+		if ((*str < '0' || *str > '9') && *str != '-' && *str != '+')
+			return (0);
+		str++;
+	}
+	return (1);
 }

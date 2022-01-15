@@ -86,3 +86,13 @@ int	ft_get_value(t_list2 *list)
 {
 	return (((t_number *)list->content)->n);
 }
+
+/**
+ * @brief retourne l'indexe de l'élément
+ * 
+ * @param lists 
+ */
+t_uint	ft_get_index(t_list2 *list)
+{
+	return (((t_number *)list->content)->i);
+}

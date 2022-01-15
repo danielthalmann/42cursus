@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 11:28:45 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/13 17:43:19 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/15 11:36:05 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,6 @@ int	ft_found_forward(t_list2 *l, t_list2 *p)
  */
 int	ft_is_invalid_num(t_list2 *l)
 {
-	char	*str;
-
-	str = ((t_number *)l->content)->s;
-	while (*str)
-	{
-		if ((*str < '0' || *str > '9') && *str != '-')
-			return (0);
-		str++;
-	}
 	if (((t_number *)l->content)->n > 2147483647L)
 		return (0);
 	if (((t_number *)l->content)->n < -2147483648L)
@@ -106,7 +97,7 @@ int	ft_is_list_valid(t_swap *lists)
 }
 
 /**
- * @brief verify if the list is sorted
+ * @brief Vérifie si la liste est ordonnée
  * 
  * @param lists 
  * @return int 
