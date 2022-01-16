@@ -7,6 +7,7 @@ SRC=push_swap.c \
 	push_swap_cmd.c \
 	push_swap_cmd_muted.c \
 	push_swap_cmd_muted2.c \
+	push_swap_checker.c \
 	push.c \
 	swap.c \
 	resolver.c \
@@ -17,7 +18,6 @@ SRC=push_swap.c \
 	rotate.c \
 	compare.c \
 	reverse_rotate.c \
-	checker.c \
 	list2.c \
 	list2b.c
 
