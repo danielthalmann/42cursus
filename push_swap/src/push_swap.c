@@ -31,9 +31,13 @@ int	main(int argc, char **argv)
 	if (!ft_load_swap_list(&lists, ++argv, argc - 1))
 		ft_fprintf(2, "Error\n");
 	if (ft_is_list_valid(&lists))
+	{
 		ft_push_swap_resolv(&lists);
+		ft_print_exec_list();
+	}
 	else
 		ft_fprintf(2, "Error\n");
 	ft_free_swap_list(&lists);
+	ft_free_exec_list();
 	return (0);
 }

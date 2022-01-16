@@ -98,4 +98,7 @@ void	ft_push_swap_resolv_b_to_sort_a(t_swap *lists);
 void	ft_push_swap_resolv_a_to_b(t_swap *lists);
 void	ft_push_swap_resolv_sort_b_to_a(t_swap *lists);
 void	ft_push_swap_resolv_5_final(t_swap *lists);
+t_list2	**ft_get_cmd_list(void);
+void	ft_free_exec_list(void);
+void	ft_print_exec_list(void);
 #endif

@@ -129,6 +129,8 @@ int	ft_exec_rev_rotate(t_push_swap_cmd cmd, t_swap *lists, int muted)
  */
 void	ft_exec(t_push_swap_cmd cmd, t_swap *lists)
 {
+	ft_exec_muted(cmd, lists);
+	return ;
 	if (ft_exec_swap(cmd, lists, 0))
 		return ;
 	if (ft_exec_push(cmd, lists, 0))
