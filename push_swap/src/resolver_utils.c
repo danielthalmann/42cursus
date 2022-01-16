@@ -15,100 +15,6 @@
 #include <limits.h>
 
 /**
- * @brief retourne l'index du plus au nombre
- * 
- * @param c 
- * @return t_uint 
- */
-t_uint	ft_next_height(t_list2 *c)
-{
-	t_uint	idx_height;
-	t_uint	idx_curr;
-	t_list2	*l_height;
-
-	idx_height = 0;
-	idx_curr = 0;
-	l_height = c;
-	c = c->next;
-	while (c)
-	{
-		idx_curr++;
-		if (ft_a_lt_b(l_height, c))
-		{
-			idx_height = idx_curr;
-			l_height = c;
-		}
-		c = c->next;
-	}
-	return (idx_height);
-}
-
-/**
- * @brief retourne l'index le plus bas en nombre
- * 
- * @param c 
- * @return t_uint 
- */
-t_uint	ft_next_low(t_list2 *c)
-{
-	t_uint	idx_low;
-	t_uint	idx_curr;
-	t_list2	*l_height;
-
-	idx_low = 0;
-	idx_curr = 0;
-	l_height = c;
-	c = c->next;
-	while (c)
-	{
-		idx_curr++;
-		if (ft_a_gt_b(l_height, c))
-		{
-			idx_low = idx_curr;
-			l_height = c;
-		}
-		c = c->next;
-	}
-	return (idx_low);
-}
-
-/**
- * @brief retourne l'index du plus grand nombre juste après la valeur
- * 
- * @param c 
- * @return t_uint 
- */
-t_uint	ft_get_index_of(t_list2 *c, int value)
-{
-	t_uint	idx_height;
-	t_uint	idx_curr;
-	int		sav;
-
-	idx_height = 0;
-	idx_curr = 0;
-	sav = 2147483647;
-	while (c)
-	{
-		idx_curr++;
-		if (ft_get_value(c) > value)
-		{
-			if (sav >= ft_get_value(c))
-			{
-				idx_height = idx_curr - 1;
-				sav = ft_get_value(c);
-			}
-		}
-		else
-		{
-			if (sav < ft_get_value(c))
-				idx_height = idx_curr;
-		}
-		c = c->next;
-	}
-	return (idx_height);
-}
-
-/**
  * @brief retourne le plus grand nombre
  * 
  * @param c 
@@ -150,7 +56,6 @@ int	ft_low_value(t_list2 *c)
 	return (ft_get_value(l_low));
 }
 
-
 /**
  * @brief enregistre la position de chaque élément dans la liste.
  * 
@@ -166,7 +71,6 @@ void	ft_list_indexing(t_list2 *l, t_uint size)
 
 	small = l;
 	counter = 0;
-	
 	while (counter < size)
 	{
 		p = l;
@@ -174,11 +78,13 @@ void	ft_list_indexing(t_list2 *l, t_uint size)
 		while (p)
 		{
 			if (((t_number *)p->content)->i == 0)
+			{
 				if (ft_get_value(p) <= last_n)
 				{
 					small = p;
 					last_n = ft_get_value(p);
 				}
+			}
 			p = p->next;
 		}
 		((t_number *)small->content)->i = ++counter;

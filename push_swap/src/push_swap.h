@@ -89,4 +89,5 @@ t_uint	ft_next_low(t_list2 *c);
 int		ft_height_value(t_list2 *c);
 int		ft_low_value(t_list2 *c);
 t_uint	ft_get_index_of(t_list2 *c, int value);
+t_uint	ft_get_smallindex_of(t_list2 *c, int value);
 #endif

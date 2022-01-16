@@ -76,23 +76,3 @@ void	ft_free_swap_list(t_swap *lists)
 	lists->a.end = 0;
 	lists->b.end = 0;
 }
-
-/**
- * @brief retourne la valeur contenu dans l'index de liste
- * 
- * @param lists 
- */
-int	ft_get_value(t_list2 *list)
-{
-	return (((t_number *)list->content)->n);
-}
-
-/**
- * @brief retourne l'indexe de l'élément
- * 
- * @param lists 
- */
-t_uint	ft_get_index(t_list2 *list)
-{
-	return (((t_number *)list->content)->i);
-}
