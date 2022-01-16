@@ -11,6 +11,8 @@ SRC=main.c \
 	resolver.c \
 	resolver_utils.c \
 	resolver_utils2.c \
+	resolver_utils3.c \
+	resolver_utils4.c \
 	rotate.c \
 	compare.c \
 	reverse_rotate.c \

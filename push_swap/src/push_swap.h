@@ -16,7 +16,7 @@
 
 typedef enum e_push_swap_cmd
 {
-	sa,
+	sa = 1,
 	sb,
 	ss,
 	pa,
@@ -81,6 +81,7 @@ void	ft_push_swap_resolv(t_swap *lists);
 void	ft_push_swap_resolv_3(t_swap *lists);
 void	ft_push_swap_resolv_5(t_swap *lists);
 void	ft_push_swap_resolv_100(t_swap *lists);
+void	ft_push_swap_resolv_500(t_swap *lists);
 void	ft_list_indexing(t_list2 *l, t_uint size);
 int		ft_get_value(t_list2 *list);
 t_uint	ft_get_index(t_list2 *list);
@@ -90,4 +91,11 @@ int		ft_height_value(t_list2 *c);
 int		ft_low_value(t_list2 *c);
 t_uint	ft_get_index_of(t_list2 *c, int value);
 t_uint	ft_get_smallindex_of(t_list2 *c, int value);
+void	ft_push_b_region(t_swap *lists, t_uint s, t_uint split, t_uint index);
+long	ft_search_next_index_p(t_list2 *l, t_uint min, t_uint max);
+long	ft_search_next_index(t_list2 *l, t_uint min, t_uint max);
+void	ft_push_swap_resolv_b_to_sort_a(t_swap *lists);
+void	ft_push_swap_resolv_a_to_b(t_swap *lists);
+void	ft_push_swap_resolv_sort_b_to_a(t_swap *lists);
+void	ft_push_swap_resolv_5_final(t_swap *lists);
 #endif
