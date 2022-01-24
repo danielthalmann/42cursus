@@ -46,6 +46,15 @@ typedef struct s_number
 	t_uint	i;
 	char	*s;
 }	t_number;
+typedef struct s_descriptor
+{
+	t_uint			range;
+	t_swap			*lists;
+	long			len;
+	t_uint			min;
+	t_uint			max;
+	t_push_swap_cmd	move;
+}	t_descriptor;
 int		ft_a_lt_b(t_list2 *a, t_list2 *b);
 int		ft_a_gt_b(t_list2 *a, t_list2 *b);
 int		ft_a_lte_b(t_list2 *a, t_list2 *b);

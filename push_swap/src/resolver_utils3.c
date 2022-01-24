@@ -14,54 +14,32 @@
 #include "libft.h"
 #include <limits.h>
 
-void	ft_p_b_r_a(t_swap *lists, t_uint size, t_uint split, t_uint index)
+void	ft_push_b_region_int(t_descriptor *desc)
 {
-	long	j;
+	t_uint	idx;
+	t_uint	nb_moved;
 
-	j = ft_search_next_index_p(lists->a.end, ((size / split) * index),
-			((size / split) * (index + 1)) + 1);
-	while (j > -1)
+	nb_moved = 0;
+	while (desc->len)
 	{
-		j++;
-		if (j != lists->a.length)
+		idx = ft_get_index(desc->lists->a.list);
+		if (idx >= desc->min && idx <= desc->max)
 		{
-			while (j)
-			{
-				if (index != split - 1)
-					ft_exec(rra, lists);
-				else
-					ft_exec(ra, lists);
-				j--;
-			}
+			ft_push_swap_resolv_a_to_b(desc->lists);
+			if(nb_moved)
+				nb_moved--;
 		}
-		ft_push_swap_resolv_a_to_b(lists);
-		j = ft_search_next_index_p(lists->a.end, ((size / split) * index),
-				((size / split) * (index + 1)));
+		else
+		{
+			ft_exec(desc->move, desc->lists);
+			nb_moved++;
+		}
+		desc->len--;
 	}
-}
-
-void	ft_p_b_r_b(t_swap *lists, t_uint size, t_uint split, t_uint index)
-{
-	long	j;
-
-	j = ft_search_next_index(lists->a.list, ((size / split) * index),
-			((size / split) * (index + 1)) + 1);
-	while (j > -1)
+	if (desc->move == rra)
 	{
-		if (j != lists->a.length)
-		{
-			while (j)
-			{
-				if (index != split - 1)
-					ft_exec(rra, lists);
-				else
-					ft_exec(ra, lists);
-				j--;
-			}
-		}
-		ft_push_swap_resolv_a_to_b(lists);
-		j = ft_search_next_index(lists->a.list, ((size / split) * index),
-				((size / split) * (index + 1)));
+		while (nb_moved--)
+			ft_exec(ra, desc->lists);
 	}
 }
 
@@ -76,12 +54,35 @@ void	ft_p_b_r_b(t_swap *lists, t_uint size, t_uint split, t_uint index)
  */
 void	ft_push_b_region(t_swap *lists, t_uint size, t_uint split, t_uint index)
 {
-	if (index != split - 1)
-		ft_p_b_r_a(lists, size, split, index);
+	t_descriptor	desc;
+
+	desc.range = (size / split);
+	desc.min = (desc.range * index) + 1;
+	if (index + 1 == split)
+		desc.max = size;
 	else
-		ft_p_b_r_b(lists, size, split, index);
+		desc.max = (desc.range * (index + 1));
+	desc.len = lists->a.length;
+	desc.lists = lists;
+	//if (desc.max <= size / 2)
+	//{
+	//	desc.len = lists->a.length - desc.min;
+	//	desc.move = rra;
+	//}
+	//else
+		desc.move = ra;
+	ft_push_b_region_int(&desc);
 }
 
+/**
+ * @brief retourne l'index de la list *l du prochain élément chainé qui est dans
+ * la tranche de l'index entre min et max en reculant dans la liste
+ * 
+ * @param l 
+ * @param min 
+ * @param max 
+ * @return long 
+ */
 long	ft_search_next_index_p(t_list2 *l, t_uint min, t_uint max)
 {
 	t_uint	index;
@@ -99,6 +100,15 @@ long	ft_search_next_index_p(t_list2 *l, t_uint min, t_uint max)
 	return (-1);
 }
 
+/**
+ * @brief retourne l'index de la list *l du prochain élément chainé qui est dans
+ * la tranche de l'index entre min et max en avancant dans la liste
+ * 
+ * @param l 
+ * @param min 
+ * @param max 
+ * @return long 
+ */
 long	ft_search_next_index(t_list2 *l, t_uint min, t_uint max)
 {
 	t_uint	index;

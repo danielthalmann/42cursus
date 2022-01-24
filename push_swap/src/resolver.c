@@ -103,7 +103,7 @@ void	ft_push_swap_resolv_100(t_swap *lists)
 	cute = 4;
 	ft_list_indexing(lists->a.list, lists->a.length);
 	j = cute;
-	while (j > 0)
+	while (j)
 	{
 		j--;
 		ft_push_b_region(lists, size, cute, j);
@@ -125,10 +125,10 @@ void	ft_push_swap_resolv_500(t_swap *lists)
 	t_uint	cute;
 
 	size = lists->a.length;
-	cute = 5;
+	cute = 7;
 	ft_list_indexing(lists->a.list, lists->a.length);
 	j = cute;
-	while (j > 0)
+	while (j)
 	{
 		j--;
 		ft_push_b_region(lists, size, cute, j);
