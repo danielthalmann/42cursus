@@ -65,7 +65,7 @@ void	ft_transmit(t_transmission *t)
 				t->send = SIGUSR2;
 			else
 				t->send = SIGUSR1;
-			usleep(50);
+			usleep(20);
 			kill(t->pid, t->send);
 			pause();
 			ft_acknoledge(t);

@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 07:43:01 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/14 09:43:26 by dthalman         ###   ########.fr       */
+/*   Created: 2021/12/04 00:12:32 by dthalman          #+#    #+#             */
+/*   Updated: 2022/01/14 10:30:01 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
-# include "push_swap.h"
+#include "push_swap.h"
+#include "libft.h"
 
-int		main(int argc, char **argv);
-#endif
+/**
+ * @brief retourne la valeur contenu dans l'index de liste
+ * 
+ * @param lists 
+ */
+int	ft_get_value(t_list2 *list)
+{
+	return (((t_number *)list->content)->n);
+}
+
+/**
+ * @brief retourne l'indexe de l'élément
+ * 
+ * @param lists 
+ */
+t_uint	ft_get_index(t_list2 *list)
+{
+	return (((t_number *)list->content)->i);
+}

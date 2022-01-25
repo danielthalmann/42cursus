@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:12:32 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/04 19:31:42 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/09 12:10:44 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * 
  * @param lists 
  */
-void ft_reverse_rotate_a(t_swap *lists)
+void	ft_reverse_rotate_a(t_swap *lists)
 {
 	ft_reverse_rotate_list(&(lists->a));
 }
@@ -31,7 +31,7 @@ void ft_reverse_rotate_a(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_reverse_rotate_b(t_swap *lists)
+void	ft_reverse_rotate_b(t_swap *lists)
 {
 	ft_reverse_rotate_list(&(lists->b));
 }
@@ -41,12 +41,11 @@ void ft_reverse_rotate_b(t_swap *lists)
  * 
  * @param lists 
  */
-void ft_reverse_rotate_rr(t_swap *lists)
+void	ft_reverse_rotate_rr(t_swap *lists)
 {				
 	ft_reverse_rotate_a(lists);
 	ft_reverse_rotate_b(lists);
 }
-
 
 /**
  * @brief shift down all elements of stack by 1. The last 
@@ -54,9 +53,9 @@ void ft_reverse_rotate_rr(t_swap *lists)
  * 
  * @param stack 
  */
-void ft_reverse_rotate_list(t_stack *stack)
+void	ft_reverse_rotate_list(t_stack *stack)
 {
-	t_list2 *new;
+	t_list2	*new;
 
 	if (!stack->list)
 		return ;

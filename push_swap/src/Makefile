@@ -1,14 +1,25 @@
 NAME=push_swap
 
-SRC=main.c \
+SRC=push_swap.c \
 	push_swap_utils.c \
+	push_swap_utils2.c \
+	push_swap_loader.c \
+	push_swap_cmd.c \
+	push_swap_cmd_muted.c \
+	push_swap_cmd_muted2.c \
+	push_swap_checker.c \
 	push.c \
 	swap.c \
+	resolver.c \
+	resolver_utils.c \
+	resolver_utils2.c \
+	resolver_utils3.c \
+	resolver_utils4.c \
 	rotate.c \
 	compare.c \
 	reverse_rotate.c \
-	checker.c \
-	list2.c
+	list2.c \
+	list2b.c
 
 HEADER=${SRC:.c=.h}
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   compare.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 00:12:32 by dthalman          #+#    #+#             */
-/*   Updated: 2021/12/04 19:31:42 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:41:04 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,21 @@ int	ft_a_eq_b(t_list2 *a, t_list2 *b)
 	na = a->content;
 	nb = b->content;
 	return (na->n == nb->n);
+}
+
+/**
+ * @brief return true if the value of list a is great or egual
+ * that list b
+ * 
+ * @param a 
+ * @param b 
+ */
+int	ft_a_lte_b(t_list2 *a, t_list2 *b)
+{
+	t_number	*na;
+	t_number	*nb;
+
+	na = a->content;
+	nb = b->content;
+	return (na->n <= nb->n);
 }

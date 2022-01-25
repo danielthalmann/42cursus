@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 07:43:01 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/14 09:43:26 by dthalman         ###   ########.fr       */
+/*   Created: 2022/01/22 14:34:56 by dthalman          #+#    #+#             */
+/*   Updated: 2022/01/22 14:34:56 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
-# include "push_swap.h"
+#ifndef PHILO_H
+# define PHILO_H
+# include <pthread.h>
+# include <stdio.h>
 
-int		main(int argc, char **argv);
+void	*start_routine(void *p);
 #endif
