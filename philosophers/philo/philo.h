@@ -22,6 +22,7 @@ enum e_state
 {
 	take_fork,
 	eating,
+	meal_finished,
 	sleeping,
 	thinking,
 	died
@@ -40,18 +41,20 @@ typedef	struct s_philo
 {
 	int				number;
 	pthread_t		thread;
-	pthread_mutex_t	fork_left;
+	pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*fork_right;
 	enum e_state	state;
 	int				time_to_eat;
 	struct s_table	*table;
+	long			last_eat;
 }	t_philo;
 typedef	struct s_table
 {
-	int			place;
-	int			start_time;
-	t_philo		*philos;
-	t_parameter	*param;
+	int				place;
+	int				start_time;
+	t_philo			*philos;
+	pthread_mutex_t	*forks;
+	t_parameter		*param;
 }	t_table;
 int		load_parameter(t_parameter *param, int argc, char **argv);
 void	*ft_philo_work(void *p);
@@ -59,5 +62,6 @@ int		ft_atoi_pos(const char *nptr);
 void	ft_philo_factory(t_table *table);
 void	ft_philo_wait_end(t_table *table);
 void	ft_philo_dispose(t_table *table);
+void	ft_print_status(t_philo *philo, enum e_state state);
 
 #endif
