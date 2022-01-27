@@ -54,6 +54,7 @@ typedef struct s_descriptor
 	t_uint			min;
 	t_uint			max;
 	t_push_swap_cmd	move;
+	t_uint			stop_if_heigther;
 }	t_descriptor;
 int		ft_a_lt_b(t_list2 *a, t_list2 *b);
 int		ft_a_gt_b(t_list2 *a, t_list2 *b);

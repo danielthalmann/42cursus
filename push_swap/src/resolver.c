@@ -100,16 +100,13 @@ void	ft_push_swap_resolv_100(t_swap *lists)
 	t_uint	cute;
 
 	size = lists->a.length;
-	cute = 4;
+	cute = 6;
 	ft_list_indexing(lists->a.list, lists->a.length);
-	j = cute;
-	while (j)
-	{
-		j--;
-		ft_push_b_region(lists, size, cute, j);
-		while (lists->b.length)
-			ft_push_swap_resolv_sort_b_to_a(lists);
-	}
+	j = 0;
+	while (j < cute)
+		ft_push_b_region(lists, size, cute, j++);
+	while (lists->b.length)
+		ft_push_swap_resolv_sort_b_to_a(lists);
 	ft_exec(pa, lists);
 }
 
@@ -125,15 +122,12 @@ void	ft_push_swap_resolv_500(t_swap *lists)
 	t_uint	cute;
 
 	size = lists->a.length;
-	cute = 7;
+	cute = 12;
 	ft_list_indexing(lists->a.list, lists->a.length);
 	j = cute;
-	while (j)
-	{
-		j--;
+	while (j--)
 		ft_push_b_region(lists, size, cute, j);
-		while (lists->b.length)
-			ft_push_swap_resolv_sort_b_to_a(lists);
-	}
+	while (lists->b.length)
+		ft_push_swap_resolv_sort_b_to_a(lists);
 	ft_exec(pa, lists);
 }
