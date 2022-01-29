@@ -1,5 +1,5 @@
 import random
-list = random.sample(range(-200, 600), 5)
+list = random.sample(range(-200, 600), 500)
 text = ""
 s = 0
 for i in list:

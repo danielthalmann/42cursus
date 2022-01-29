@@ -61,7 +61,7 @@ int		ft_a_gt_b(t_list2 *a, t_list2 *b);
 int		ft_a_lte_b(t_list2 *a, t_list2 *b);
 int		ft_a_eq_b(t_list2 *a, t_list2 *b);
 void	ft_exec(t_push_swap_cmd cmd, t_swap *lists);
-void	ft_exec_muted(t_push_swap_cmd cmd, t_swap *lists);
+int		ft_exec_muted(t_push_swap_cmd cmd, t_swap *lists);
 int		ft_exec_swap(t_push_swap_cmd cmd, t_swap *lists, int muted);
 int		ft_exec_push(t_push_swap_cmd cmd, t_swap *lists, int muted);
 int		ft_exec_rotate(t_push_swap_cmd cmd, t_swap *lists, int muted);

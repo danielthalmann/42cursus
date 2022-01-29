@@ -14,9 +14,35 @@
 #include "libft.h"
 #include <limits.h>
 
+t_uint	ft_have_some_index(t_descriptor *desc, t_list2 *l, int forward)
+{
+	t_uint	idx;
+	t_uint	pos;
+
+	pos = 0;
+	while (l)
+	{
+		idx = ft_get_index(l);
+		if (idx >= desc->min && idx <= desc->max)
+		{
+			if (forward)
+				return (pos);
+			else
+				return (pos + 1);
+		}
+		if (forward)
+			l = l->next;
+		else
+			l = l->previous;
+		pos++;
+	}
+	return (0);
+}
+
 void	ft_push_b_region_int(t_descriptor *desc)
 {
 	t_uint	idx;
+	t_uint	forward;
 
 	while (desc->len)
 	{
@@ -24,7 +50,13 @@ void	ft_push_b_region_int(t_descriptor *desc)
 		if (idx >= desc->min && idx <= desc->max)
 			ft_push_swap_resolv_a_to_b(desc->lists);
 		else
-			ft_exec(ra, desc->lists);
+		{
+			forward = ft_have_some_index(desc, desc->lists->a.list, 1);
+			if (forward == 0)
+				break ;
+			while (forward--)
+				ft_exec(ra, desc->lists);
+		}
 		desc->len--;
 	}
 }

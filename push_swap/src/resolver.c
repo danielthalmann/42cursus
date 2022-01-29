@@ -122,7 +122,7 @@ void	ft_push_swap_resolv_500(t_swap *lists)
 	t_uint	cute;
 
 	size = lists->a.length;
-	cute = 12;
+	cute = 13;
 	ft_list_indexing(lists->a.list, lists->a.length);
 	j = cute;
 	while (j--)

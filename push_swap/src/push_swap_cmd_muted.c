@@ -27,7 +27,7 @@ t_list2	**ft_get_cmd_list(void)
  * @param cmd 
  * @param lists 
  */
-void	ft_exec_muted(t_push_swap_cmd cmd, t_swap *lists)
+int	ft_exec_muted(t_push_swap_cmd cmd, t_swap *lists)
 {
 	t_list2			**lcmd;
 	t_list2			*lst;
@@ -39,13 +39,14 @@ void	ft_exec_muted(t_push_swap_cmd cmd, t_swap *lists)
 	lst = ft_lst2new(ncmd);
 	ft_lst2add_back(lcmd, lst);
 	if (ft_exec_swap(cmd, lists, 1))
-		return ;
+		return (1);
 	if (ft_exec_push(cmd, lists, 1))
-		return ;
+		return (1);
 	if (ft_exec_rotate(cmd, lists, 1))
-		return ;
+		return (1);
 	if (ft_exec_rev_rotate(cmd, lists, 1))
-		return ;
+		return (1);
+	return (0);
 }
 
 /**
