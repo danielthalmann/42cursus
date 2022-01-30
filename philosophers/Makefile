@@ -1,6 +1,7 @@
 NAME=philo
 
 SRC=philo/philo.c \
+	philo/ft_philo_factory.c \
 	philo/ft_atoi_pos.c
 
 OBJS=${SRC:%.c=%.o}
@@ -24,3 +25,6 @@ fclean: clean
 	rm -f philo/${NAME}
 
 re: fclean all
+
+norm: 
+	norminette philo/*.c philo/*.h
