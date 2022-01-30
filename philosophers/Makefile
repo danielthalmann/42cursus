@@ -2,6 +2,7 @@ NAME=philo
 
 SRC=philo/philo.c \
 	philo/ft_philo_factory.c \
+	philo/ft_philo_thread.c \
 	philo/ft_atoi_pos.c
 
 OBJS=${SRC:%.c=%.o}
