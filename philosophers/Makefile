@@ -12,7 +12,7 @@ CC=gcc
 philo/${NAME}: ${OBJS}
 	${CC} ${OBJS} -lpthread -o philo/${NAME}
 
-all: ${NAME}
+all: philo/${NAME}
 
 test: 
 	${CC} tests/main.c -lpthread -o tests/test
