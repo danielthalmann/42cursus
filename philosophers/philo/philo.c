@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:34:44 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/22 14:34:44 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/30 10:25:26 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,18 @@ int	main(int argc, char **argv)
 
 }
 
+long	ft_gettime()
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000000 + tv.tv_usec);
+}
+
 void	ft_philo_factory(t_table *table)
 {
 	int	i;
+	long	time;
 
 	table->philos = malloc(sizeof(t_philo) * table->param->nb_of_philosophers);
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->param->nb_of_philosophers);
@@ -50,7 +59,8 @@ void	ft_philo_factory(t_table *table)
 		table->philos[i].state = sleeping;
 		table->philos[i].time_to_eat = 0;
 		table->philos[i].table = table;
-		table->philos[i].last_eat = 0;
+		table->philos[i].last_eat = ft_gettime();
+		table->philos[i].end = 0;
 		i++;
 	}
 }
@@ -62,11 +72,38 @@ void	ft_philo_dispose(t_table *table)
 
 void	ft_philo_wait_end(t_table *table)
 {
-	int	i;
+	int				i;
+	long	time;
+	int				end;
 
+	end = 0;
+	while (!end)
+	{			
+		time = ft_gettime();
+		i = table->param->nb_of_philosophers;
+		while (i--)
+		{
+			if (table->param->number_of_times_eat > 0 &&
+				table->philos[i].time_to_eat >= table->param->number_of_times_eat)
+			{
+				table->philos[i].end = 1;
+				pthread_detach(table->philos[i].thread);
+			}
+			printf("check time %ld < %d\n",tv.tv_usec - table->philos[i].last_eat, table->param->time_to_die * 1000);
+			if (tv.tv_usec - table->philos[i].last_eat < table->param->time_to_die * 1000)
+			{
+				table->philos[i].end = 1;
+				pthread_detach(table->philos[i].thread);
+			}
+		}
+		usleep(10000);
+	}
 	i = table->param->nb_of_philosophers;
 	while (i--)
+	{
+		table->philos[i].end = 1;
 		pthread_join (table->philos[i].thread, NULL);
+	}
 }
 
 /**
@@ -88,11 +125,13 @@ int	load_parameter(t_parameter *param, int argc, char **argv)
 		return (0);
 	}
 	param->nb_of_philosophers = ft_atoi_pos(argv[1]);
+	/*
 	if (param->nb_of_philosophers < 2)
 	{
 		printf("The number og philosopher is not enought\n\n");
 		return (0);
 	}
+	*/
 	param->time_to_die = ft_atoi_pos(argv[2]);
 	param->time_to_eat = ft_atoi_pos(argv[3]);
 	param->time_to_sleep = ft_atoi_pos(argv[4]);
@@ -109,13 +148,13 @@ void ft_print_status(t_philo *philo, enum e_state state)
 
 	gettimeofday(&tv, NULL);
 	if (state == take_fork)
-		printf("%ld %d has taken a fork\n", tv.tv_usec, philo->number);
+		printf("%d %d has taken a fork\n", tv.tv_usec, philo->number);
 	if (state == eating)
-		printf("%ld %d is eating\n", tv.tv_usec, philo->number);
+		printf("%d %d is eating\n", tv.tv_usec, philo->number);
 	if (state == sleeping)
-		printf("%ld %d is sleeping\n", tv.tv_usec, philo->number);
+		printf("%d %d is sleeping\n", tv.tv_usec, philo->number);
 	if (state == thinking)
-		printf("%ld %d thinking\n", tv.tv_usec, philo->number);
+		printf("%d %d thinking\n", tv.tv_usec, philo->number);
 	if (state == meal_finished)
 	{
 		philo->time_to_eat += philo->table->param->time_to_eat;
@@ -126,12 +165,10 @@ void ft_print_status(t_philo *philo, enum e_state state)
 void *ft_philo_work(void *arg)
 {
 	t_philo			*philo;
-	
 
 	philo = (t_philo *)arg;
 	ft_print_status(philo, thinking);
-	while (philo->table->param->number_of_times_eat == 0 ||
-		philo->time_to_eat < philo->table->param->number_of_times_eat)
+	while (!philo->end)
 	{
 		if (philo->number % 2)
 		{
@@ -156,5 +193,6 @@ void *ft_philo_work(void *arg)
 		ft_print_status(philo, sleeping);
 		usleep(philo->table->param->time_to_sleep * 1000);
 	}
+	ft_print_status(philo, died);
 	return (arg);
 }
