@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:34:44 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/30 16:57:40 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/02/02 13:43:49 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ void	ft_print_status(t_philo *philo, enum e_state state)
 	philo->state = state;
 	time = ft_gettime();
 	if (state == take_fork && !philo->end)
-		printf("%ld %d has taken a fork\n", time, philo->number);
+		printf("%ld %d has taken a fork\n", time / 1000, philo->number);
 	if (state == eating && !philo->end)
-		printf("%ld %d is eating\n", time, philo->number);
+		printf("%ld %d is eating\n", time / 1000, philo->number);
 	if (state == sleeping && !philo->end)
-		printf("%ld %d is sleeping\n", time, philo->number);
+		printf("%ld %d is sleeping\n", time / 1000, philo->number);
 	if (state == thinking && !philo->end)
-		printf("%ld %d thinking\n", time, philo->number);
+		printf("%ld %d thinking\n", time / 1000, philo->number);
 	if (state == died)
-		printf("%ld %d died\n", time, philo->number);
+		printf("%ld %d died\n", time / 1000, philo->number);
 	if (state == meal_finished && !philo->end)
 	{
 		philo->last_eat = time;

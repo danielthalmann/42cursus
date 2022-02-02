@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:34:56 by dthalman          #+#    #+#             */
-/*   Updated: 2022/02/02 08:15:45 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/02/02 13:47:56 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_table
 	int				place;
 	int				start_time;
 	t_philo			*philos;
-	sem_t			*forks;
+	pthread_mutex_t	*forks;
 	t_parameter		*param;
 }	t_table;
 int		ft_load_parameter(t_parameter *param, int argc, char **argv);
