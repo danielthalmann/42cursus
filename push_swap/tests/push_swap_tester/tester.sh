@@ -6,13 +6,13 @@
 #    By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/04 16:53:09 by lfrasson          #+#    #+#              #
-#    Updated: 2022/01/28 10:40:34 by dthalman         ###   ########.fr        #
+#    Updated: 2022/02/02 09:16:31 by dthalman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/bash
 
-NUM_TESTS=10
+NUM_TESTS=100
 PUSH_SWAP=./push_swap
 CKER=1
 RET_CKER="is not working"
