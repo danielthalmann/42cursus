@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:34:44 by dthalman          #+#    #+#             */
-/*   Updated: 2022/02/02 13:43:49 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/02/02 14:11:16 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@ void	ft_print_status(t_philo *philo, enum e_state state)
 	long	time;
 
 	philo->state = state;
-	time = ft_gettime();
+	time = ft_gettime() / 1000;
 	if (state == take_fork && !philo->end)
-		printf("%ld %d has taken a fork\n", time / 1000, philo->number);
+		printf("\033[32m%ld\033[0m %d has taken a fork\n", time, philo->number);
 	if (state == eating && !philo->end)
-		printf("%ld %d is eating\n", time / 1000, philo->number);
+		printf("\033[32m%ld\033[0m %d is eating\n", time, philo->number);
 	if (state == sleeping && !philo->end)
-		printf("%ld %d is sleeping\n", time / 1000, philo->number);
+		printf("\033[32m%ld\033[0m %d is sleeping\n", time, philo->number);
 	if (state == thinking && !philo->end)
-		printf("%ld %d thinking\n", time / 1000, philo->number);
+		printf("\033[32m%ld\033[0m %d thinking\n", time, philo->number);
 	if (state == died)
-		printf("%ld %d died\n", time / 1000, philo->number);
+		printf("\033[32m%ld\033[0m %d died\n", time, philo->number);
 	if (state == meal_finished && !philo->end)
 	{
-		philo->last_eat = time;
+		philo->last_eat = time * 1000;
 		philo->time_to_eat++;
 	}
 }
