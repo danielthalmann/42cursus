@@ -15,24 +15,90 @@ Votre shell doit :
 	- >> doit rediriger la sortie en mode ajout.
 	- Mettre en œuvre les tuyaux (caractère |). La sortie de chaque commande dans le pipeline est connecté à l'entrée de la commande suivante via un tube.
     - Gérer les variables d'environnement ($ suivi d'une séquence de caractères) qui devraient s'étendre à leurs valeurs.
-    - Gérer $ ? qui devrait s'étendre au statut de sortie du dernier exécuté pipeline de premier plan.
+    - Gérer $? qui devrait s'étendre au statut de sortie du dernier exécuté pipeline de premier plan.
     - Gérer ctrl-C, ctrl-D et ctrl-\ qui doivent se comporter comme dans bash.
 - En mode interactif :
 	- ctrl-C affiche une nouvelle invite sur une nouvelle ligne.
 	- ctrl-D quitte le shell.
 	- ctrl-\ ne fait rien.
 - Votre shell doit implémenter les commandes intégrées suivantes :
-	- écho avec l'option -n
-	- cd avec uniquement un chemin relatif ou absolu
-	- pwd sans options
-	- exporter sans options
-	- désactivé sans options
-	- env sans options ni arguments
-	- quitter sans options
+	- **echo** avec l'option -n
+	- **cd** avec uniquement un chemin relatif ou absolu
+	- **pwd** sans options
+	- **export** sans options
+	- **unset** sans options
+	- **env** sans options ni arguments
+	- **exit** sans options
 La fonction readline() peut provoquer des fuites de mémoire. Vous n'avez pas à les réparer. Mais
-cela ne signifie pas que votre propre code, oui le code que vous avez écrit, peut avoir de la mémoire
-fuites. 
-En savoir plus sur ce texte source
-Vous devez indiquer le texte source pour obtenir des informations supplémentaires
-Envoyer des commentaires
-Panneaux latéraux
+cela ne signifie pas que votre propre code, oui le code que vous avez écrit, peut en avoir. 
+
+## Fonctions autorisé
+
+readline
+rl_clear_history
+rl_on_new_line
+rl_replace_line
+rl_redisplay
+add_history
+printf
+malloc
+free
+write
+
+int access(const char *path, int mode);
+
+The access() system call checks the accessibility of the file named by the path argument for the access permissions indicated by the mode argument.  The value of mode is either the bitwise-inclusive OR of the access permissions to be checked (R_OK for read permission, W_OK for write permission, and X_OK for execute/search permission), or the existence test (F_OK).
+
+
+open
+read
+close
+fork
+wait
+waitpid
+wait3
+wait4
+signal
+sigaction
+sigemptyset
+sigaddset
+kill
+exit
+getcwd
+chdir
+stat
+
+int lstat(const char *restrict path, struct stat *restrict buf);
+
+The lstat() function obtains information about the file pointed to by path.  Read, write or execute permission of the named file is not required, but all directories listed in the
+     path name leading to the file must be searchable.
+
+fstat
+
+The fstat() obtains the same information about an open file known by the file descriptor fildes.
+
+unlink
+execve
+dup
+
+int dup2(int fildes, int fildes2);
+
+pipe
+opendir
+readdir
+closedir
+strerror
+perror
+isatty
+ttyname
+ttyslot
+ioctl
+getenv
+tcsetattr
+tcgetattr
+tgetent
+tgetflag
+tgetnum
+tgetstr
+tgoto
+tputs
