@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_philo_factory.c                                 :+:      :+:    :+:   */
+/*   philo_factory.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:34:44 by dthalman          #+#    #+#             */
-/*   Updated: 2022/02/02 08:09:48 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/01/30 16:44:35 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,6 @@ void	ft_philo_factory(t_table *table)
 
 void	ft_philo_dispose(t_table *table)
 {
-	int	i;
-
 	free(table->philos);
-	i = 0;
-	while (i < table->param->nb_of_philos)
-	{	
-		pthread_mutex_destroy(&table->forks[i]);
-		i++;
-	}
 	free(table->forks);
 }
