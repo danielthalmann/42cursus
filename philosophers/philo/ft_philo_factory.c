@@ -12,6 +12,25 @@
 
 #include "philo.h"
 
+/**
+ * @brief initialise le mutex d'impression
+ * 
+ * @param table 
+ * @return int si tout s'est bien passé, le retour est 1. Lors d'une erreur
+ * on retourne 0.
+ */
+int	ft_print_mutex_factory(t_table *table)
+{
+	if (pthread_mutex_init(&table->print_mutex, NULL))
+		return (0);
+	return (1);
+}
+
+/**
+ * @brief Retourne le temps en microseconde
+ * 
+ * @return long 
+ */
 long	ft_gettime(void)
 {
 	struct timeval	tv;
@@ -20,31 +39,51 @@ long	ft_gettime(void)
 	return (tv.tv_sec * 1000000 + tv.tv_usec);
 }
 
-void	ft_fork_factory(t_table *table)
+/**
+ * @brief Création des mutex pour les fourchettes
+ * 
+ * @param table 
+ * @return int si tout s'est bien passé, le retour est 1. Lors d'une erreur
+ * on retourne 0.
+ */
+int	ft_fork_factory(t_table *table)
 {
 	int	i;
 
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->param->nb_of_philos);
+	if (!table->forks)
+		return (0);
 	i = 0;
 	while (i < table->param->nb_of_philos)
 	{	
-		pthread_mutex_init(&table->forks[i], NULL);
+		if (pthread_mutex_init(&table->forks[i], NULL))
+			return (0);
 		i++;
 	}
+	return (1);
 }
 
-void	ft_philo_factory(t_table *table)
+/**
+ * @brief Création des threads des philosophes
+ * 
+ * @param table 
+ * @return int si tout s'est bien passé, le retour est 1. Lors d'une erreur
+ * on retourne 0.
+ */
+int	ft_philo_factory(t_table *table)
 {
 	int		i;
 
 	table->philos = malloc(sizeof(t_philo) * table->param->nb_of_philos);
-	ft_fork_factory(table);
+	if (!table->philos || !ft_fork_factory(table))
+		return (0);
 	i = 0;
 	while (i < table->param->nb_of_philos)
 	{	
 		table->philos[i].number = i;
-		pthread_create (&(table->philos[i].thread), NULL, &ft_philo_work,
-			&(table->philos[i]));
+		if (pthread_create (&(table->philos[i].thread), NULL, &ft_philo_work,
+				&(table->philos[i])))
+			return (0);
 		table->philos[i].fork_left = &table->forks[i];
 		table->philos[i].fork_right = &table->forks[(i + 1)
 			% table->param->nb_of_philos];
@@ -56,6 +95,7 @@ void	ft_philo_factory(t_table *table)
 		usleep(100);
 		i++;
 	}
+	return (1);
 }
 
 void	ft_philo_dispose(t_table *table)

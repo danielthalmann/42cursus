@@ -21,9 +21,14 @@ int	main(int argc, char **argv)
 	if (!ft_load_parameter(&param, argc, argv))
 		return (0);
 	table.param = &param;
-	ft_philo_factory(&table);
-	ft_philo_wait_end(&table);
-	ft_philo_dispose(&table);
+	if(ft_print_mutex_factory(&table))
+	{
+		if (ft_philo_factory(&table))
+			ft_philo_wait_end(&table);
+		else
+			ft_philo_end(&table);
+		ft_philo_dispose(&table);		
+	}
 }
 
 int	ft_all_died(t_philo *philos, int len)
@@ -40,6 +45,8 @@ void	ft_philo_end(t_table *table)
 {
 	int		i;
 
+	if (!table->philos)
+		return ;
 	i = table->param->nb_of_philos;
 	while (i--)
 	{
@@ -59,19 +66,19 @@ void	ft_philo_wait_end(t_table *table)
 		i = table->param->nb_of_philos;
 		while (i--)
 		{
-			if (!table->philos[i].end && table->philos[i].state != eating
+			if (!table->philos[i].end
 				&& ft_gettime() - table->philos[i].last_eat
 				> table->param->time_to_die * 1000)
 			{
-				ft_print_status(&table->philos[i], died);
 				table->philos[i].end = 1;
+				ft_apply_status(&table->philos[i], died);
 				pthread_detach(table->philos[i].thread);
 				end = 1;
 			}
 			if (ft_all_died(table->philos, table->param->nb_of_philos))
 				end = 1;
 		}
-		usleep(10000);
+		usleep(1000);
 	}
 	ft_philo_end(table);
 }
