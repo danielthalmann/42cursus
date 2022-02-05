@@ -16,12 +16,16 @@ SRC_BONUS=philo_bonus/philo.c \
 
 OBJS_BONUS=${SRC_BONUS:%.c=%.o}
 
-FLAGS=-Wall -Wetra -Werror -g 
+CFLAGS=-Wall -Wextra -Werror
+
+LDFLAGS=
+
+DEBUG_FLAGS= -g3 -O0 -fsanitize=address
 
 CC=gcc
 
 ${NAME}: ${OBJS}
-	${CC} ${OBJS} -lpthread -o ${NAME}
+	${CC} ${OBJS} -lpthread ${LDFLAGS} -o ${NAME}
 
 ${NAME_BONUS}: ${OBJS_BONUS}
 	${CC} ${OBJS_BONUS} -lpthread -o ${NAME_BONUS}
@@ -30,8 +34,9 @@ bonus: ${NAME_BONUS}
 
 all: ${NAME}
 
-test: 
-	${CC} tests/main.c -lpthread -o tests/test
+dev: CFLAGS += ${DEBUG_FLAGS}
+dev: LDFLAGS += ${DEBUG_FLAGS} 
+dev: ${NAME}
 
 clean:
 	rm -f ${OBJS}

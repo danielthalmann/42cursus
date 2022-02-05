@@ -19,12 +19,12 @@ void	ft_apply_status(t_philo *philo, enum e_state state)
 	pthread_mutex_lock(&philo->table->print_mutex);
 	philo->state = state;
 	time = ft_gettime() / 1000;
-	if (state == meal_finished && !philo->end)
+	if (philo->state == meal_finished && !philo->end)
 	{
 		philo->last_eat = time * 1000;
 		philo->time_to_eat++;
 	}
-	if (state == died)
+	if (philo->state == died)
 		ft_print_status(philo, time);
 	else
 	{
