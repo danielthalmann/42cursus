@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:34:44 by dthalman          #+#    #+#             */
-/*   Updated: 2022/02/02 11:45:27 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:09:54 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 	if (!ft_load_parameter(&param, argc, argv))
 		return (0);
 	table.param = &param;
+	table.start_time = ft_gettime();
 	if(ft_print_mutex_factory(&table))
 	{
 		if (ft_philo_factory(&table))
@@ -59,16 +60,18 @@ void	ft_philo_wait_end(t_table *table)
 {
 	int		i;
 	int		end;
+	long	time;
 
 	end = 0;
 	while (!end)
 	{			
 		i = table->param->nb_of_philos;
+		time = (ft_gettime() - table->start_time);
 		while (i--)
 		{
 			if (!table->philos[i].end
-				&& ft_gettime() - table->philos[i].last_eat
-				> table->param->time_to_die * 1000)
+				&& time	- table->philos[i].last_eat - 8
+				> table->param->time_to_die)
 			{
 				table->philos[i].end = 1;
 				ft_apply_status(&table->philos[i], died);
@@ -98,7 +101,7 @@ int	ft_load_parameter(t_parameter *param, int argc, char **argv)
 		printf("The number of arguments is invalid.\n\n");
 		printf("type : %s [nb_of_philos] [time_to_die] ", argv[0]);
 		printf("[time_to_eat] [time_to_sleep]");
-		printf("\n optional  : [number_of_times_eat]\n\n");
+		printf("\noptional  : [number_of_times_eat]\n\n");
 		return (0);
 	}
 	param->nb_of_philos = ft_atoi_pos(argv[1]);

@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:34:56 by dthalman          #+#    #+#             */
-/*   Updated: 2022/01/30 15:39:04 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:44:22 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ typedef struct s_philo
 	int				time_to_eat;
 	struct s_table	*table;
 	long			last_eat;
+	long			last_chstatus;
 	int				end;
 }	t_philo;
 typedef struct s_table
 {
 	int				place;
-	int				start_time;
+	long			start_time;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
