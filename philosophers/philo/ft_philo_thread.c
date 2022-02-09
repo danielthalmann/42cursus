@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:34:44 by dthalman          #+#    #+#             */
-/*   Updated: 2022/02/09 10:55:27 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:25:24 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	*ft_philo_work(void *arg)
 		ft_apply_status(philo, sleeping);
 		usleep(philo->table->param->time_to_sleep * 1000);
 		ft_apply_status(philo, thinking);
-		usleep(philo->number * 100);	
+		usleep(philo->number * 100);
 	}
 	return (arg);
 }

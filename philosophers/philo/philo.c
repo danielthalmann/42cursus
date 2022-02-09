@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:34:44 by dthalman          #+#    #+#             */
-/*   Updated: 2022/02/09 11:09:54 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:26:15 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	main(int argc, char **argv)
 		return (0);
 	table.param = &param;
 	table.start_time = ft_gettime();
-	if(ft_print_mutex_factory(&table))
+	if (ft_print_mutex_factory(&table))
 	{
 		if (ft_philo_factory(&table))
 			ft_philo_wait_end(&table);
 		else
 			ft_philo_end(&table);
-		ft_philo_dispose(&table);		
+		ft_philo_dispose(&table);
 	}
 }
 
@@ -69,8 +69,7 @@ void	ft_philo_wait_end(t_table *table)
 		time = (ft_gettime() - table->start_time);
 		while (i--)
 		{
-			if (!table->philos[i].end
-				&& time	- table->philos[i].last_eat - 8
+			if (!table->philos[i].end && time - table->philos[i].last_eat - 8
 				> table->param->time_to_die)
 			{
 				table->philos[i].end = 1;
