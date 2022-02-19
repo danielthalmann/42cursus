@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <unistd.h>
-int main()
+int main(int argc, char ** argv)
 {
-	int p = getpid();
-	printf("%d : hello", p);
+	int pid = getpid();
+	printf("%d : start %s\n", pid, argv[0]);
+	printf("%d : hello i am pid\n", pid);
 }
