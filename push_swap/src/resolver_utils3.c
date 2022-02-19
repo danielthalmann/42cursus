@@ -14,32 +14,50 @@
 #include "libft.h"
 #include <limits.h>
 
+t_uint	ft_have_some_index(t_descriptor *desc, t_list2 *l, int forward)
+{
+	t_uint	idx;
+	t_uint	pos;
+
+	pos = 0;
+	while (l)
+	{
+		idx = ft_get_index(l);
+		if (idx >= desc->min && idx <= desc->max)
+		{
+			if (forward)
+				return (pos);
+			else
+				return (pos + 1);
+		}
+		if (forward)
+			l = l->next;
+		else
+			l = l->previous;
+		pos++;
+	}
+	return (0);
+}
+
 void	ft_push_b_region_int(t_descriptor *desc)
 {
 	t_uint	idx;
-	t_uint	nb_moved;
+	t_uint	forward;
 
-	nb_moved = 0;
 	while (desc->len)
 	{
 		idx = ft_get_index(desc->lists->a.list);
 		if (idx >= desc->min && idx <= desc->max)
-		{
 			ft_push_swap_resolv_a_to_b(desc->lists);
-			if(nb_moved)
-				nb_moved--;
-		}
 		else
 		{
-			ft_exec(desc->move, desc->lists);
-			nb_moved++;
+			forward = ft_have_some_index(desc, desc->lists->a.list, 1);
+			if (forward == 0)
+				break ;
+			while (forward--)
+				ft_exec(ra, desc->lists);
 		}
 		desc->len--;
-	}
-	if (desc->move == rra)
-	{
-		while (nb_moved--)
-			ft_exec(ra, desc->lists);
 	}
 }
 
@@ -61,16 +79,9 @@ void	ft_push_b_region(t_swap *lists, t_uint size, t_uint split, t_uint index)
 	if (index + 1 == split)
 		desc.max = size;
 	else
-		desc.max = (desc.range * (index + 1));
+		desc.max = 5 + (desc.range * (index + 1));
 	desc.len = lists->a.length;
 	desc.lists = lists;
-	//if (desc.max <= size / 2)
-	//{
-	//	desc.len = lists->a.length - desc.min;
-	//	desc.move = rra;
-	//}
-	//else
-		desc.move = ra;
 	ft_push_b_region_int(&desc);
 }
 

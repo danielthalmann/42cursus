@@ -120,7 +120,7 @@ t_uint	ft_get_smallindex_of(t_list2 *c, int value)
 
 	idx_height = 0;
 	idx_curr = 0;
-	sav = -2147483648;
+	sav = ft_low_value(c);
 	while (c)
 	{
 		idx_curr++;

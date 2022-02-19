@@ -17,12 +17,14 @@ typedef struct
  
    pthread_t thread_store;
    pthread_t thread_clients [NB_CLIENTS];
+   pthread_mutex_t mutex;
 }
 store_t;
  
 static store_t store =
 {
    .stock = INITIAL_STOCK,
+   .mutex = PTHREAD_MUTEX_INITIALIZER
 };
  
  
@@ -43,11 +45,13 @@ static void * fn_store (void * p_data)
 {
    while (1)
    {
+      pthread_mutex_lock(&store.mutex);
       if (store.stock <= 0)
       {
          store.stock = INITIAL_STOCK;
          printf ("Remplissage du stock de %d articles !\n", store.stock);
       }
+      pthread_mutex_unlock(&store.mutex);
    }
  
    return NULL;
@@ -65,11 +69,14 @@ static void * fn_clients (void * p_data)
  
       psleep (get_random (3));
  
+      pthread_mutex_lock(&store.mutex);
       store.stock = store.stock - val;
+      
       printf (
          "Client %d prend %d du stock, reste %d en stock !\n",
          *nb, val, store.stock
       );
+      pthread_mutex_unlock(&store.mutex);
    }
  
    return NULL;

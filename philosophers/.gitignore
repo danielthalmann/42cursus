@@ -1,0 +1,4 @@
+philo/philo
+philo/*.o
+philo_bonus/philo_bonus
+philo_bonus/*.o

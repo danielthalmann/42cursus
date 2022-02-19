@@ -1,29 +1,38 @@
 NAME=push_swap
 
+CHECKER=checker
+
+CHECKER_SRC=checker.c \
+	${COMMON}
+
 SRC=push_swap.c \
-	push_swap_utils.c \
-	push_swap_utils2.c \
-	push_swap_loader.c \
-	push_swap_cmd.c \
-	push_swap_cmd_muted.c \
-	push_swap_cmd_muted2.c \
-	push_swap_checker.c \
-	push.c \
-	swap.c \
-	resolver.c \
-	resolver_utils.c \
-	resolver_utils2.c \
-	resolver_utils3.c \
-	resolver_utils4.c \
-	rotate.c \
-	compare.c \
-	reverse_rotate.c \
-	list2.c \
-	list2b.c
+	${COMMON}
+
+COMMON= push_swap_utils.c \
+		push_swap_utils2.c \
+		push_swap_loader.c \
+		push_swap_cmd.c \
+		push_swap_cmd_muted.c \
+		push_swap_cmd_muted2.c \
+		push_swap_checker.c \
+		push.c \
+		swap.c \
+		resolver.c \
+		resolver_utils.c \
+		resolver_utils2.c \
+		resolver_utils3.c \
+		resolver_utils4.c \
+		rotate.c \
+		compare.c \
+		reverse_rotate.c \
+		list2.c \
+		list2b.c
 
 HEADER=${SRC:.c=.h}
 
 OBJS=${SRC:.c=.o}
+
+CHECKER_OBJS=${CHECKER_SRC:.c=.o}
 
 LIBFT_PATH=./libft
 LIBFT=${LIBFT_PATH}/libft.a
@@ -42,6 +51,9 @@ MINETTE=norminette
 
 ${NAME}: ${LIBFT} ${OBJS}
 	$(CC) $(LDFLAGS) $(TARGET_ARCH) ${OBJS} -L${LIBFT_PATH} -lft -o $@
+
+${CHECKER}: ${LIBFT} ${CHECKER_OBJS}
+	$(CC) $(LDFLAGS) $(TARGET_ARCH) ${CHECKER_OBJS} -L${LIBFT_PATH} -lft -o $@
 
 all: ${NAME}
 
