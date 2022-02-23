@@ -1,8 +1,9 @@
 #include <unistd.h>
 #include <stdio.h>
+#include <fcntl.h>
 #include <sys/wait.h> 
 
-int pipeint(int in_fd, char *prg, char **args, char *envp[], int idx)
+int pipeint(int in_fd, int out_fd, char *prg, char **args, char *envp[])
 {
 	int pid;
 	int r;
@@ -20,17 +21,19 @@ int pipeint(int in_fd, char *prg, char **args, char *envp[], int idx)
 	}
 	else if (pid == 0) // enfant
 	{
-
-		close (fd[0]); // on ferme le in
+		//sleep(10);
+		close(fd[0]); // on ferme le in
+		dup2(in_fd, 0);
 		dup2(fd[1],1);
 		if(execve(prg, args, envp))
 		{
 			perror("pipex");
-		};	
-	} else // parent
+		}
+	} 
+	else // parent
 	{
-		close (fd[1]); // ferme la sortie
-		
+		close(fd[1]); // ferme la sortie
+		dup2(fd[0], out_fd);
 		do
 		{
 			l = read(fd[0], buff, 255 );
@@ -41,7 +44,7 @@ int pipeint(int in_fd, char *prg, char **args, char *envp[], int idx)
 
 		waitpid(pid, NULL, 0);
 	}
-
+	return (0);
 }
 
 int main(int argc, char *argv[], char *envp[])
@@ -54,11 +57,13 @@ int main(int argc, char *argv[], char *envp[])
 	pid = getpid();
 	ar = 0;
 
-	printf("%d : start %s\n", pid, argv[0], 1);	
-	//r = execve("php", argv, envp);
+	printf("%d : start %s\n", pid, argv[0]);	
+	//r = execve("php", argv, envp)
 
+	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+	int ffd = open("file.log", O_WRONLY | O_CREAT, mode);
 
-	pipeint(0, "pid", argv, envp);
+	pipeint(0, ffd, "pid", argv, envp);
 	printf("%d : end \n", pid);
 	return (0);
 
