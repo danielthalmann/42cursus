@@ -102,3 +102,8 @@ tgetnum
 tgetstr
 tgoto
 tputs
+
+
+(lexical Analyzer in C and C++)[https://www.thecrazyprogrammer.com/2017/02/lexical-analyzer-in-c.html]
+(C program to detect tokens in a C program)[https://www.geeksforgeeks.org/c-program-detect-tokens-c-program/?ref=lbp]
+(C program to detect tokens in a C program)[https://rosettacode.org/wiki/Compiler/lexical_analyzer]
