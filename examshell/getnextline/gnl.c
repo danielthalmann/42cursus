@@ -5,6 +5,25 @@
 
 void	ft_strcpy(char *s1, char *s2, int len)
 {
+<<<<<<< HEAD
+	static char	buf[BUFFER_SIZE + 1];
+	int len;
+	char *ret;
+
+	ret = 0;
+	len = 1;
+	if (!*buf)
+	{
+		len = read(fd, buf, BUFFER_SIZE);
+		buf[len] = 0;
+		len = ft_lentoend(buf);
+	}
+	while (len > 0) 
+	{
+		malloc
+	}
+	return (ret);
+=======
 	int i;
 	i = len - 1;
 
@@ -13,6 +32,7 @@ void	ft_strcpy(char *s1, char *s2, int len)
 		s1[i] = s2[i];
 		i--;
 	}
+>>>>>>> 22390c51b4bfa16d5549ccb2bdf8bbaa931c5eb2
 }
 
 int	ft_lentoend(char *s)

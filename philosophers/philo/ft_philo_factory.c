@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:34:44 by dthalman          #+#    #+#             */
-/*   Updated: 2022/02/02 08:09:48 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:32:27 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ long	ft_gettime(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000000 + tv.tv_usec);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
 /**
@@ -90,7 +90,7 @@ int	ft_philo_factory(t_table *table)
 		table->philos[i].state = sleeping;
 		table->philos[i].time_to_eat = 0;
 		table->philos[i].table = table;
-		table->philos[i].last_eat = ft_gettime();
+		table->philos[i].last_eat = (ft_gettime() - table->start_time);
 		table->philos[i].end = 0;
 		usleep(100);
 		i++;

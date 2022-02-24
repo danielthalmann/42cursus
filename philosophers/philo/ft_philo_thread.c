@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 14:34:44 by dthalman          #+#    #+#             */
-/*   Updated: 2022/02/02 14:11:16 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/02/09 12:25:24 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ void	ft_apply_status(t_philo *philo, enum e_state state)
 	long	time;
 
 	pthread_mutex_lock(&philo->table->print_mutex);
+	time = (ft_gettime() - philo->table->start_time);
 	philo->state = state;
-	time = ft_gettime() / 1000;
-	if (philo->state == meal_finished && !philo->end)
+	philo->last_chstatus = time;
+	if (state == meal_finished && !philo->end)
 	{
-		philo->last_eat = time * 1000;
+		philo->last_eat = time;
 		philo->time_to_eat++;
 	}
 	if (philo->state == died)
@@ -37,15 +38,16 @@ void	ft_apply_status(t_philo *philo, enum e_state state)
 void	ft_print_status(t_philo *philo, long time)
 {
 	if (philo->state == take_fork)
-		printf("\033[32m%ld\033[0m %d has taken a fork\n", time, philo->number);
+		printf("\033[32m%6ld\033[0m %d has taken a fork\n", time,
+			philo->number);
 	if (philo->state == eating)
-		printf("\033[32m%ld\033[0m %d is eating\n", time, philo->number);
+		printf("\033[32m%6ld\033[0m %d is eating\n", time, philo->number);
 	if (philo->state == sleeping)
-		printf("\033[32m%ld\033[0m %d is sleeping\n", time, philo->number);
+		printf("\033[32m%6ld\033[0m %d is sleeping\n", time, philo->number);
 	if (philo->state == thinking)
-		printf("\033[32m%ld\033[0m %d thinking\n", time, philo->number);
+		printf("\033[32m%6ld\033[0m %d thinking\n", time, philo->number);
 	if (philo->state == died)
-		printf("\033[32m%ld\033[0m %d died\n", time, philo->number);
+		printf("\033[32m%6ld\033[0m %d died\n", time, philo->number);
 }
 
 void	ft_philo_pick_fork(t_philo *philo)
@@ -72,6 +74,7 @@ void	*ft_philo_work(void *arg)
 
 	philo = (t_philo *)arg;
 	ft_apply_status(philo, thinking);
+	usleep(philo->number * 100);
 	while (!philo->end)
 	{
 		ft_philo_pick_fork(philo);
@@ -86,6 +89,7 @@ void	*ft_philo_work(void *arg)
 		ft_apply_status(philo, sleeping);
 		usleep(philo->table->param->time_to_sleep * 1000);
 		ft_apply_status(philo, thinking);
+		usleep(philo->number * 100);
 	}
 	return (arg);
 }
