@@ -22,6 +22,30 @@ MLX_FLAG	 = mlx
 
 LDFLAGS = -lXext -lX11 -lz
 
+# detection du systeme d'exploitation
+UNAME_S := $(shell uname -s)
+# pour linux
+ifeq ($(UNAME_S),Linux)
+	LDFLAGS = -lXext -lX11 -lz
+
+	MLX_LIB_PATH = ./minilibx_linux/
+	MLX_LIB		 = $(MLX_LIB_PATH)
+	MLX_INCLUDE  = $(MLX_LIB_PATH)
+	MLX_FLAG	 = mlx
+
+endif
+# pour macOS
+ifeq ($(UNAME_S),Darwin)
+
+	LDFLAGS = -lz -framework OpenGL -framework AppKit
+
+	MLX_LIB_PATH = ./minilibx_opengl/
+	MLX_LIB		 = $(MLX_LIB_PATH)
+	MLX_INCLUDE  = $(MLX_LIB_PATH)
+	MLX_FLAG	 = mlx
+
+endif
+
 GL			 = glmath
 INCLUDE_PATH =./include/
 SRC_PATH	 =./srcs/
@@ -41,10 +65,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-	
-
-
-	
-
-	
-	

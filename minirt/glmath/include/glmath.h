@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libglmath.h                                        :+:      :+:    :+:   */
+/*   glmath.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:40:24 by dthalman          #+#    #+#             */
-/*   Updated: 2022/02/28 10:40:24 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/03/05 08:59:48 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <stdlib.h>
 # include <math.h>
 
-typedef char	t_c;
+typedef int	t_c;
 typedef struct s_vector3f
 {
 	float	x;
