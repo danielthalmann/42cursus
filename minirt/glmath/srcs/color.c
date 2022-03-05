@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 19:33:13 by dthalman          #+#    #+#             */
-/*   Updated: 2022/02/28 19:33:13 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/03/05 10:26:28 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ t_color	*color_create(t_color *copy)
 	return (c);
 }
 
+/**
+ * @brief Création d'une couleur avec un entier
+ * 
+ * @param color 
+ * @return t_color* 
+ */
 t_color	*color_create_int(int color)
 {
 	t_color	*c;
@@ -52,6 +58,13 @@ t_color	*color_create_int(int color)
 	return (c);
 }
 
+/**
+ * @brief retourne la valeur représenté par la couleur
+ * en entier
+ * 
+ * @param color 
+ * @return int 
+ */
 int	color_int(t_color *color)
 {
 	int	c;

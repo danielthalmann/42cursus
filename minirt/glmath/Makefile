@@ -1,6 +1,6 @@
 NAME=libglmath.a
 
-SRCS=vector.c color.c
+SRCS=vector.c color.c ray.c
 
 OBJS=$(addprefix $(SRC_PATH), $(SRCS:.c=.o))
 

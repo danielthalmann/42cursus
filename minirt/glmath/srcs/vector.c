@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:42:10 by dthalman          #+#    #+#             */
-/*   Updated: 2022/02/28 10:42:10 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/03/05 10:49:55 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,9 @@ t_v3f	*v3f_create(t_v3f *copy)
 
 	v = malloc(sizeof(t_v3f));
 	if (copy != NULL)
-	{
-		v->x = copy->x;
-		v->y = copy->y;
-		v->z = copy->z;
-	}
+		v3f_copy(v, copy);
 	else
-	{
-		v->x = 0;
-		v->y = 0;
-		v->z = 0;
-	}
+		v3f_clear(v);
 	return (v);
 }
 
@@ -105,4 +97,29 @@ void	v3f_multi_v(t_v3f *vector, float value)
 	vector->x *= value;
 	vector->y *= value;
 	vector->z *= value;
+}
+
+/**
+ * @brief met à zéro toute les valeurs d'un vecteur
+ * 
+ * @param vector 
+ */
+void	v3f_clear(t_v3f *vector)
+{
+	vector->x = 0;
+	vector->y = 0;
+	vector->z = 0;
+}
+
+/**
+ * @brief copie les valeurs d'un vecteur dans un autre
+ * 
+ * @param to 
+ * @param copy 
+ */
+void	v3f_copy(t_v3f *to, t_v3f *copy)
+{
+	to->x = copy->x;
+	to->y = copy->y;
+	to->z = copy->z;
 }
