@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:40:24 by dthalman          #+#    #+#             */
-/*   Updated: 2022/03/05 10:59:30 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/03/12 10:24:29 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ typedef struct s_ray
 	t_v3f origin;
 	t_v3f direction;
 }	t_ray;
+typedef struct s_size
+{
+	int	w;
+	int	h;
+}	t_size;
+typedef struct s_size t_scene;
+
 t_v3f	*v3f_create(t_v3f *copy);
 void	v3f_add(t_v3f *to, t_v3f *add);
 void	v3f_sub(t_v3f *to, t_v3f *sub);
@@ -66,4 +73,5 @@ t_ray	*ray_create(t_ray *copy);
 t_v3f	*ray_at(float pos, t_ray *ray);
 void	ray_clear(t_ray *r);
 
+void	scene_around(t_scene *scene, void *data, void (*fn)(t_scene *, int, int, void *));
 #endif

@@ -1,12 +1,19 @@
 NAME=libglmath.a
 
-SRCS=vector.c color.c ray.c
+SRCS=scene.c vector.c color.c ray.c
 
 OBJS=$(addprefix $(SRC_PATH), $(SRCS:.c=.o))
 
 CC=gcc
 
-CFLAGS=-Wall -Werror -Wextra -I $(INCLUDE_PATH) -lm
+CFLAGS=-Wall -Werror -Wextra -I $(INCLUDE_PATH)
+
+# detection du systeme d'exploitation
+UNAME_S := $(shell uname -s)
+# pour linux
+ifeq ($(UNAME_S),Linux)
+	CFLAGS = -lm
+endif
 
 # path
 LIB_PATH=./lib/
