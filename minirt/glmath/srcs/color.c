@@ -51,10 +51,10 @@ t_color	*color_create_int(int color)
 	t_color	*c;
 
 	c = malloc(sizeof(t_color));
-	c->b = color & 0xFF;
-	c->g = (color >> 8) & 0xFF;
-	c->r = (color >> 16) & 0xFF;
-	c->a = (color >> 24) & 0xFF;
+	c->b = (color & 0xFF) / 255.0;
+	c->g = ((color >> 8) & 0xFF) / 255.0;
+	c->r = ((color >> 16) & 0xFF) / 255.0;
+	c->a = ((color >> 24) & 0xFF) / 255.0;
 	return (c);
 }
 
@@ -70,12 +70,26 @@ int	color_int(t_color *color)
 	int	c;
 
 	c = 0;
-	c += (color->a) & 0xFF;
+	c += (int)(color->a * 255.0) & 0xFF;
 	c = c << 8;
-	c += (color->r) & 0xFF;
+	c += (int)(color->r * 255.0) & 0xFF;
 	c = c << 8;
-	c += (color->g) & 0xFF;
+	c += (int)(color->g * 255.0) & 0xFF;
 	c = c << 8;
-	c += (color->b) & 0xFF;
+	c += (int)(color->b * 255.0) & 0xFF;
 	return (c);
+}
+
+/**
+ * @brief converti un vecteur en couleur
+ * 
+ * @param color 
+ * @param v 
+ */
+void cpy_vector_to_color(t_color *color, t_v3f *v)
+{
+	color->r = v->x;
+	color->g = v->y;
+	color->b = v->z;
+	color->a = v->w;
 }

@@ -26,7 +26,7 @@ LDFLAGS = -lXext -lX11 -lz
 UNAME_S := $(shell uname -s)
 # pour linux
 ifeq ($(UNAME_S),Linux)
-	LDFLAGS = -lXext -lX11 -lz
+	LDFLAGS = -lm -lz -lXext -lX11
 
 	MLX_LIB_PATH = ./minilibx_linux/
 	MLX_LIB		 = $(MLX_LIB_PATH)
@@ -37,7 +37,7 @@ endif
 # pour macOS
 ifeq ($(UNAME_S),Darwin)
 
-	LDFLAGS = -lz -framework OpenGL -framework AppKit
+	LDFLAGS = -lm -lz -framework OpenGL -framework AppKit
 
 	MLX_LIB_PATH = ./minilibx_opengl/
 	MLX_LIB		 = $(MLX_LIB_PATH)

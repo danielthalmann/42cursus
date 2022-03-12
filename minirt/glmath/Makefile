@@ -6,7 +6,7 @@ OBJS=$(addprefix $(SRC_PATH), $(SRCS:.c=.o))
 
 CC=gcc
 
-CFLAGS=-Wall -Werror -Wextra -I $(INCLUDE_PATH)
+CFLAGS=-Wall -Werror -Wextra -I $(INCLUDE_PATH) -lm
 
 # path
 LIB_PATH=./lib/

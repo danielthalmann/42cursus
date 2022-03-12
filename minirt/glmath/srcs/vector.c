@@ -38,6 +38,7 @@ t_v3f	*v3f_create(t_v3f *copy)
  */
 void	v3f_add(t_v3f *vector, t_v3f *add)
 {
+	vector->w += add->w;
 	vector->x += add->x;
 	vector->y += add->y;
 	vector->z += add->z;
@@ -51,6 +52,7 @@ void	v3f_add(t_v3f *vector, t_v3f *add)
  */
 void	v3f_sub(t_v3f *vector, t_v3f *sub)
 {
+	vector->w -= sub->w;
 	vector->x -= sub->x;
 	vector->y -= sub->y;
 	vector->z -= sub->z;
@@ -106,6 +108,7 @@ void	v3f_multi_v(t_v3f *vector, float value)
  */
 void	v3f_clear(t_v3f *vector)
 {
+	vector->w = 0;
 	vector->x = 0;
 	vector->y = 0;
 	vector->z = 0;
@@ -119,7 +122,40 @@ void	v3f_clear(t_v3f *vector)
  */
 void	v3f_copy(t_v3f *to, t_v3f *copy)
 {
+	to->w = copy->w;
 	to->x = copy->x;
 	to->y = copy->y;
 	to->z = copy->z;
+}
+
+/**
+ * @brief modifie les valeurs du vecteur en absolut
+ * 
+ * @param vector 
+ * @param sub 
+ */
+void	v3f_abs(t_v3f *vector)
+{
+	if (vector->w < 0)
+		vector->w = -vector->w;
+	if (vector->x < 0)
+		vector->x = -vector->x;
+	if (vector->y < 0)
+		vector->y = -vector->y;
+	if (vector->z < 0)
+		vector->z = -vector->z;
+}
+
+/**
+ * @brief affiche dans la console les valeurs du vecteur
+ * 
+ * @param vector 
+ * @param sub 
+ */
+void	v3f_print(t_v3f *vector)
+{
+	printf("vector->w = %f\n", vector->w);
+	printf("vector->x = %f\n", vector->x);
+	printf("vector->y = %f\n", vector->y);
+	printf("vector->z = %f\n", vector->z);
 }

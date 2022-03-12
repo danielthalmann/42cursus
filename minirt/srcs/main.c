@@ -30,18 +30,26 @@ int	main(int argc, char **argv)
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
-	int		width = 640;
+	float	ratio = 16.0 / 9.0;
 	int		height = 480;
-	int		x, y ;
+	int		width = height * ratio;
 	unsigned int *ptr;
 	int bpp, sl, endian;
 	t_color	c;
+	t_ray r;
+	t_v3f vect;
+	t_v3f v_color;
+
+	v3f_clear(&vect);
 
 	c.r = 0;
-	c.g = 255;
-	c.b = 255; // r
+	c.g = .5;
+	c.b = 0.5; // r
 	c.a = 0;
 
+	ray_clear(&r);
+	r.direction.z = -2.0;
+	
 	mlx_ptr = mlx_init();
 	if (!mlx_ptr)
 		return (0);
@@ -51,20 +59,40 @@ int	main(int argc, char **argv)
 	img_ptr = mlx_new_image(mlx_ptr, width, height);
 
 	ptr = (unsigned int *)mlx_get_data_addr(img_ptr, &(bpp), &(sl), &(endian));
-	y = 0;
 
 	printf("%X \n", color_int(&c));
+	
 
-	while (y < height)
+	r.direction.x =  ((20 / (width - 1)) * 2);
+	r.direction.y =  ((20 / (height - 1)) * 2);
+
+	v3f_normalize(&r.direction);
+	v3f_abs(&r.direction);
+	v3f_print(&r.direction);
+
+	vect.y = 0;
+	while (vect.y < height)
 	{
-		x = 0;
-		while (x < width)
+		vect.x = 0;
+		while (vect.x < width)
 		{
-			ptr[x + (y * width)] = color_int(&c);
+			float u = vect.x / (width - 1);
+            float v = vect.y / (height - 1);
+
+			r.direction.x = -1.0 + (u * 2.0);
+			r.direction.y = -1.0 + (v * 2.0);
+
+			v3f_copy(&v_color, &vect);
+
+			v3f_normalize(&v_color);
+			v3f_abs(&v_color);
+			cpy_vector_to_color(&c, &v_color);
+
+			ptr[(int)(vect.x + (vect.y * width))] = color_int(&c);
 			//mlx_pixel_put(img_ptr, win_ptr, x, y, color_int(&c));
-			x++;
+			vect.x++;
 		}
-		y++;
+		vect.y++;
 	}
 	mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 0, 0);	
 	mlx_loop(mlx_ptr);
