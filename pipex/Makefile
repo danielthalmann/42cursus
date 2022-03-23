@@ -16,11 +16,14 @@ CFLAGS=
 
 .phony : all
 
-all: $(NAME) $(PID_NAME)
+all: $(NAME) $(PID_NAME)0 $(PID_NAME)1
 
 $(NAME) : $(OBJS)
 	$(CC) $(OBJS) -o $(NAME)
 
 
-$(PID_NAME) : $(PID_OBJS)
-	$(CC) $(PID_OBJS) -o $(PID_NAME)
+$(PID_NAME)0 : $(PID_OBJS)
+	$(CC) $(PID_OBJS) -o $(PID_NAME)0
+
+$(PID_NAME)1 : $(PID_OBJS)
+	$(CC) $(PID_OBJS) -o $(PID_NAME)1

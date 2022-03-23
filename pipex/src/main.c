@@ -3,13 +3,14 @@
 #include <fcntl.h>
 #include <sys/wait.h> 
 
-int pipeint(int in_fd, int out_fd, char *prg, char **args, char *envp[])
+int pipeint(int in_fd, int last, char *prg, char **args, char *envp[])
 {
 	int pid;
 	int r;
     int fd[2];
 
-    pipe(fd);
+	if (!last)
+    	pipe(fd);
 
 	pid = fork();
 	if (pid == -1)
@@ -20,9 +21,13 @@ int pipeint(int in_fd, int out_fd, char *prg, char **args, char *envp[])
 	else if (pid == 0) // enfant
 	{
 		//sleep(10);
-		close(fd[0]); // on ferme le in
+
 		dup2(in_fd,0);
-		dup2(fd[1],1);
+		if (!last)
+		{
+			close(fd[0]); // on ferme le in
+			dup2(fd[1],1);			
+		}
 		if(execve(prg, args, envp))
 		{
 			perror("pipex");
@@ -30,9 +35,17 @@ int pipeint(int in_fd, int out_fd, char *prg, char **args, char *envp[])
 	} 
 	else // parent
 	{
-		close(fd[1]); // ferme la sortie
-		return (fd[0]);
-		waitpid(pid, NULL, 0);
+		waitpid(pid, NULL, 0);		
+		if (!last)
+		{
+			close(fd[1]); // ferme la sortie
+			return (fd[0]);
+		} 
+		else
+		{
+			return (0);
+		}
+
 	}
 	return (0);
 }
@@ -53,20 +66,22 @@ int main(int argc, char *argv[], char *envp[])
 	//r = execve("php", argv, envp)
 
 	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-	int in_fd = open("file.log", O_WRONLY | O_CREAT, mode);
+	//int in_fd = open("file.log", O_WRONLY | O_CREAT, mode);
 	int out_fd = open("in.log", O_RDONLY);
 
-	int fd = pipeint(out_fd, in_fd, "pid", argv, envp);
-	do
-	{
-		l = read(fd, buff, 255);
-		buff[l] = 0;
-		printf("%d : read %d : {%s}\n", pid, l, buff);
-	} while (l);
+	int fd = pipeint(out_fd, 0, "pid0", argv, envp);
+	fd = pipeint(fd, 1, "pid1", argv, envp);
+	//do
+	//{
+	//	l = read(fd, buff, 255);
+	//	buff[l] = 0;
+	//	printf("%d : read %d : {%s}\n", pid, l, buff);
+	//} while (l);
 
 	printf("%d : end \n", pid);
 
-	close(in_fd);
+	//close(in_fd);
+	wait(NULL);
 	
 	
 	return (0);
