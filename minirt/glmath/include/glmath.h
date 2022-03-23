@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:40:24 by dthalman          #+#    #+#             */
-/*   Updated: 2022/03/12 10:24:29 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/03/23 07:55:28 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_sphere
 	float		rayon;
 }	t_sphere;
 
-int		sphere_intersect(t_ray *ray, float dist);
+int		sphere_intersect(t_ray *ray, t_sphere *sphere);
 void	computeColorNormal(t_ray *ray, float dist, t_color *c, t_v3f *normal);
 
 #endif

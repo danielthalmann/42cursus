@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 23:17:13 by dthalman          #+#    #+#             */
-/*   Updated: 2022/03/12 10:25:12 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/03/23 08:24:55 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,33 @@ void around(t_scene *scene, int x, int y, void *data)
 {
 	unsigned int *ptr;
 	t_color	c;
+	t_sphere s;
+	t_ray	r;
+
+	r.origin.x = 0.0;
+	r.origin.y = 0.0;
+	r.origin.z = -1.0;
+
+	r.direction.x = -1.0 + (2 * ((float)x / (float)scene->w));
+	r.direction.y = -1.0 + (2 * ((float)y / (float)scene->h));
+	r.direction.z = 1.0;
+
+	v3f_normalize(&r.direction);
+
+	s.origin.x = 21.0;
+	s.origin.y = 10.0;
+	s.origin.x = 1.0;
+	s.rayon = 30.0;
 
 	//c.b = (float)y / (float)scene->h;
 	c.b = 1.0;
 	c.g = 1.0 - ((float)y / (float)scene->h);
 	c.r = 1.0 - ((float)y / (float)scene->h);
 	ptr = (unsigned int *)data;
+	if (sphere_intersect(&r, &s))
+	{
+		c.b = 0.5;
+	}
 	ptr[(int)(x + (y * scene->w))] = color_int(&c);
 	
 }
