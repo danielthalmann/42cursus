@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 09:55:20 by dthalman          #+#    #+#             */
-/*   Updated: 2022/03/20 10:40:25 by dthalman         ###   ########.fr       */
+/*   Created: 2022/03/19 10:26:45 by dthalman          #+#    #+#             */
+/*   Updated: 2022/03/19 10:26:45 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "glmath.h"
 
-void	scene_around(t_scene *scene, void *data,
-		void (*fn)(t_scene *, int, int, void *))
+int	sphere_intersect(t_ray *ray, float dist)
 {
-	t_point	pos;
-
-	pos.y = 0;
-	while (pos.y < scene->h)
-	{
-		pos.x = 0;
-		while (pos.x < scene->w)
-		{
-			fn(scene, pos.x, pos.y, data);
-			pos.x++;
-		}
-		pos.y++;
-	}
+	(void)ray;
+	(void)dist;
+	return (0);
+}
+ 
+void	computeColorNormal(t_ray *ray, float dist, t_color *c, t_v3f *normal)
+{
+	(void)ray;
+	(void)dist;
+	(void)c;
+	(void)normal;
+	return ;
 }

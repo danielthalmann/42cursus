@@ -86,7 +86,7 @@ int	color_int(t_color *color)
  * @param color 
  * @param v 
  */
-void cpy_vector_to_color(t_color *color, t_v3f *v)
+void	cpy_vector_to_color(t_color *color, t_v3f *v)
 {
 	color->r = v->x;
 	color->g = v->y;

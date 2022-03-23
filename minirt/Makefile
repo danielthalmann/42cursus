@@ -58,6 +58,7 @@ $(NAME): $(OBJS)
 	$(CC) $(OBJS) -l$(GL_FLAG) -l$(MLX_FLAG) -L$(GL_LIB) -L$(MLX_LIB) $(LDFLAGS) -o $(NAME)
 
 clean: 
+	$(MAKE) -C $(GL_LIB_PATH) clean
 	rm -f $(OBJS)
 
 fclean: clean

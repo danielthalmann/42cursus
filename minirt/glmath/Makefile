@@ -1,6 +1,6 @@
 NAME=libglmath.a
 
-SRCS=scene.c vector.c color.c ray.c
+SRCS=scene.c vector.c color.c ray.c primitives/sphere.c
 
 OBJS=$(addprefix $(SRC_PATH), $(SRCS:.c=.o))
 
@@ -12,7 +12,7 @@ CFLAGS=-Wall -Werror -Wextra -I $(INCLUDE_PATH)
 UNAME_S := $(shell uname -s)
 # pour linux
 ifeq ($(UNAME_S),Linux)
-	CFLAGS = -lm
+	CFLAGS += -lm
 endif
 
 # path
