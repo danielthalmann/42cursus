@@ -16,7 +16,6 @@ int	main(int argc, char **argv)
 {
 	t_parameter	param;
 	t_table		table;
-	int			i;
 
 	if (!ft_load_parameter(&param, argc, argv))
 		return (0);
@@ -98,9 +97,9 @@ int	ft_load_parameter(t_parameter *param, int argc, char **argv)
 	if (argc < 5 || argc > 6)
 	{
 		printf("The number of arguments is invalid.\n\n");
-		printf("type : %s [nb_of_philos] [time_to_die] ", argv[0]);
+		printf("type     : %s [nb_of_philos] [time_to_die] ", argv[0]);
 		printf("[time_to_eat] [time_to_sleep]");
-		printf("\noptional  : [number_of_times_eat]\n\n");
+		printf("\noptional : [number_of_times_eat]\n\n");
 		return (0);
 	}
 	param->nb_of_philos = ft_atoi_pos(argv[1]);

@@ -1,0 +1,13 @@
+P3
+# Le P3 signifie que les couleurs sont en ASCII, et qu'elles sont en RGB.
+# Par 3 colonnes et 2 lignes:
+3 2
+# Ayant 255 pour valeur maximum:
+255
+
+255  0     0          
+ 0   255   0 
+ 0     0   255
+255 255  0        
+255 255 255
+  0   0  0

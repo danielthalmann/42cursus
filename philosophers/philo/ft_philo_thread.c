@@ -25,7 +25,7 @@ void	ft_apply_status(t_philo *philo, enum e_state state)
 		philo->last_eat = time;
 		philo->time_to_eat++;
 	}
-	if (state == died)
+	if (philo->state == died)
 		ft_print_status(philo, time);
 	else
 	{
