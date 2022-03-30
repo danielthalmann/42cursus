@@ -7,12 +7,12 @@ function save_login()
     localStorage.setItem("g_my_login", login);
     if (login == '')
     {
-	var lvl = Math.round(6 + 4*Math.random());
-	localStorage.setItem("g_my_eval", JSON.stringify([lvl]));
-	window.location = "level"+lvl+".html";
+        var lvl = Math.round(6 + 4 * Math.random());
+        localStorage.setItem("g_my_eval", JSON.stringify([lvl]));
+        window.location = "level"+lvl+".html";
     }
     else
-	window.location = 'level1.html';
+        window.location = 'level1.html';
 }
 
 

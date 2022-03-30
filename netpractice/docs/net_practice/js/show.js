@@ -327,10 +327,10 @@ function all_goals()
 function load_board()
 {
     if (!(g_my_login = localStorage.getItem("g_my_login")))
-	g_my_login = ''; // will means evaluation & full random
+	    g_my_login = ''; // will means evaluation & full random
     g_rand_prev = level + hash_login(g_my_login); // initialize replayable pseudo random generator
     if (g_my_login == '')
-	g_eval_lvls = JSON.parse(localStorage.getItem("g_my_eval"));
+	    g_eval_lvls = JSON.parse(localStorage.getItem("g_my_eval")) || [];
     
     var root = document.getElementById("root_id");
 
