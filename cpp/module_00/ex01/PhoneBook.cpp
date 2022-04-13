@@ -32,7 +32,8 @@ Contact &PhoneBook::getNewContact(void)
 	Contact &c = contacts[length];
 	c.setIndex(length);
 	std::cout << length;
-	length = ++length % MAX_LEN;
+	++length;
+	length = length % MAX_LEN;
 	return (c);
 }
 
