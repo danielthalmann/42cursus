@@ -12,7 +12,7 @@ function save_login()
         window.location = "level"+lvl+".html";
     }
     else
-        window.location = 'level1.html';
+        window.location = 'level1.html?g_my_login=' + login;
 }
 
 
