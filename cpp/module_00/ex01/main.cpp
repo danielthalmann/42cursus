@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:03:53 by dthalman          #+#    #+#             */
-/*   Updated: 2022/04/13 17:06:51 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:09:43 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int main ()
 			std::cout << std::endl << "Peux-tu me dire quel secret terrible cette personne cache ? ";
 			std::getline(std::cin, buffer);
 			contact.setDarkestSecret(buffer);
+			std::cout << std::endl << std::endl;
 
 		} 
 		else if (input == "SEARCH") 
@@ -64,11 +65,13 @@ int main ()
 
 			std::cout << std::endl << "Qui recherches-tu ? ";
 			std::getline(std::cin, index);
+			std::cout << std::endl << std::endl;
 
 		}
 		else if (input == "EXIT")
 		{
 			std::cout << std::endl << "Bye." << std::endl;
+			std::cout << std::endl << std::endl;
 			return (0);
 		}
 		else
