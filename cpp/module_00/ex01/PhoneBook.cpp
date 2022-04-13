@@ -22,6 +22,8 @@ void PhoneBook::AddContact(Contact *c)
 {
 	std::cout << "AddContact to index : " << length << std::endl;
 	
+	c->Whoami();
+
 	contacts[length] = c;
 	length++;
 	length = length % MAX_LEN;

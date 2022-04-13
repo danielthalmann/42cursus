@@ -9,6 +9,12 @@ int main ()
 
 	PhoneBook book;
 	book.AddContact(Contact::create());
+	book.AddContact(Contact::create());
+	book.AddContact(Contact::create());
+	book.AddContact(Contact::create());
+	book.AddContact(Contact::create());
+	book.AddContact(Contact::create());
+	book.AddContact(Contact::create());
 
 	return (0);
 }

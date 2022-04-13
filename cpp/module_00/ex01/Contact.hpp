@@ -12,7 +12,8 @@ public:
 
 	void SetLastName(std::string n);
 	void SetFirstName(std::string n);
-	static Contact *create();
+	static Contact *create(void);
+	void Whoami(void);
 
 	static int idx;
 
