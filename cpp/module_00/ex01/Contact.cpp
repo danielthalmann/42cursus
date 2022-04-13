@@ -1,39 +1,74 @@
-#include "Contact.hpp"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/13 12:03:22 by dthalman          #+#    #+#             */
+/*   Updated: 2022/04/13 17:04:57 by dthalman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int Contact::idx = 0;
+#include "Contact.hpp"
 
 Contact::Contact()
 {
-	std::cout << "Contact Construct" << std::endl;
+	// std::cout << std::setiosflags (std::ios::left) << std::setw(20) << "Contact" <<  "Construct" << std::endl;
 }
 
 Contact::~Contact()
 {
-	std::cout << "Contact Destruct" << std::endl;
+	// std::cout << std::setiosflags (std::ios::left) << std::setw(20) << "Contact" << "Destruct " <<  LastName << " " << FirstName << std::endl;
 }
 
-void Contact::SetLastName(std::string n)
+void Contact::setIndex(int n)
 {
-	LastName = n;
+	index = n;
 }
 
-void Contact::SetFirstName(std::string n)
+void Contact::setLastName(std::string n)
 {
-	FirstName = n;
+	lastName = n;
 }
 
-Contact *Contact::create(void)
+void Contact::setFirstName(std::string n)
 {
-	std::string firstname[5] = {"Vincent", "Céline", "Christophe", "Kenza", "Jérémie"};
-	std::string lastname[4] = {"Blaise", "Stroustrup", "Pascal", "Gates"};
-	Contact *c = new Contact();
-	c->SetFirstName( firstname[Contact::idx % 5]);
-	c->SetLastName( lastname[Contact::idx % 4] );
-	Contact::idx++;
-	return (c);
+	firstName = n;
 }
 
-void Contact::Whoami(void)
+void Contact::setNickName(std::string n)
 {
-	std::cout << LastName << " " << FirstName << std::endl;
+	nickName = n;
+}
+
+void Contact::setPhone(std::string n)
+{
+	phone = n;
+}
+
+void Contact::setDarkestSecret(std::string n)
+{
+	secret = n;
+}
+
+std::string Contact::truncate(std::string str, size_t width)
+{
+    if (str.length() > width)
+        return str.substr(0, width - 3) + "...";
+    return str;
+}
+
+
+void Contact::displayList(void)
+{
+	if (index < 0)
+		return ;
+	std::cout << std::setiosflags (std::ios::left);
+	std::cout << " | ";
+	std::cout << std::setiosflags (std::ios::right);
+	std::cout << std::setw(10) << index << " | ";
+	std::cout << std::setw(10) << truncate(firstName, 10) << " | ";
+	std::cout << std::setw(10) << truncate(lastName, 10) << " | ";
+	std::cout << std::setw(10) << truncate(nickName, 10) << " | " << std::endl;
 }
