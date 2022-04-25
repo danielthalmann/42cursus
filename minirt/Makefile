@@ -1,12 +1,12 @@
 NAME=minirt
 
-SRCS=main.c
+SRCS=main.c input.c
 
 OBJS=$(addprefix $(SRC_PATH), $(SRCS:.c=.o))
 
 CC=gcc
 
-CFLAGS=-Wall -Werror -Wextra -I $(INCLUDE_PATH) -I $(GL_INCLUDE) -I $(MLX_INCLUDE)
+CFLAGS=-Wall -Werror -Wextra -I $(INCLUDE_PATH) -I $(GL_INCLUDE) -I $(MLX_INCLUDE) -g
 
 # path
 
@@ -26,7 +26,7 @@ LDFLAGS = -lXext -lX11 -lz
 UNAME_S := $(shell uname -s)
 # pour linux
 ifeq ($(UNAME_S),Linux)
-	LDFLAGS = -lm -lz -lXext -lX11
+	LDFLAGS = -lm -lz -lXext -lX11 -g
 
 	MLX_LIB_PATH = ./minilibx_linux/
 	MLX_LIB		 = $(MLX_LIB_PATH)

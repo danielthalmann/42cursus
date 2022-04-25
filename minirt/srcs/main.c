@@ -11,11 +11,11 @@
 /* ************************************************************************** */
 
 #include "main.h"
-#include <stdlib.h>
-#include <stdio.h>
-# define MLX_EVT_KEYDN 2
-# define MLX_EVT_KEYUP 3
-# define MLX_EVT_DESTROY 17
+
+int				mlx_int_find_in_pcm()
+{
+	return (0);
+}
 
 int	on_close(void)
 {
@@ -24,7 +24,9 @@ int	on_close(void)
 
 void around(t_scene *scene, int x, int y, void *data)
 {
-	unsigned int *ptr;
+//	unsigned int *ptr;
+	t_app	*app;
+	app = (t_app *)data;
 	t_color	c;
 //	t_sphere s;
 	t_ray	r;
@@ -46,28 +48,27 @@ void around(t_scene *scene, int x, int y, void *data)
 //	s.rayon = 30.0;
 
 	//c.b = (float)y / (float)scene->h;
-	c.b = 1.0;
-	c.g = 1.0 - ((float)y / (float)scene->h);
-	c.r = 1.0 - ((float)y / (float)scene->h);
-	ptr = (unsigned int *)data;
+	c.b = 1.0 - ((float)y / (float)scene->h);
+	c.g = 0.5;
+	c.r = 1.0 - ((float)y / (float)scene->h * .5);
+
 //	if (sphere_intersect(&r, &s))
 //	{
-//		c.b = 0.5;
+//		c	.b = 0.5;
 //	}
 
-	t_complex comp;
+	//int iter = 500;
 
-	comp.real = (((float)x / (float)scene->w) * 1.2);
-	comp.imag = (((float)y / (float)scene->h) * 1.2);
+	app->mandel.x = x;
+	app->mandel.y = y;
+	// app->mandel.zoom = 200;
+	//app->mandel.max_iter = iter;
 
-	t_complex z;
-
-	z.real = 0;
-	z.imag = 0;
-
-	m = mandel(&comp, &z, 0, 60);
-	c.b = m / 60.0;
-	ptr[(int)(x + (y * scene->w))] = color_int(&c);
+	m = mandel(&(app->mandel));
+	c.b = 1.0 - (m / app->mandel.max_iter);
+	c.g = 0.2;
+	c.r = 1.0 - (m / 50.0);
+	app->pix_ptr[(int)(x + (y * scene->w))] = color_int(&c);
 	
 }
 
@@ -83,52 +84,93 @@ void sq_complex(t_complex *c)
 	float real;
 	float imag;
 	
-	real = sq(c->real) - sq(c->imag);
-	imag = 2 * (c->imag * c->real);
-	c->real = real;
-	c->imag = imag;
+	real = sq(c->r) - sq(c->i);
+	imag = 2 * (c->i * c->r);
+	c->r = real;
+	c->i = imag;
 }
 
 
 // http://sdz.tdct.org/sdz/dessiner-la-fractale-de-mandelbrot.html
-int	mandel(t_complex *c, t_complex *z, int iter, int iter_max)
+int mandel(t_mandel *p)
 {
-	sq_complex(z);
-	z->real += c->real;
-	z->imag += c->imag;
-	if ((sq(z->real) + sq(z->imag)) >= 4)
-		return (iter);
-	if (iter < iter_max)
-		return (mandel(c, z, ++iter, iter_max));
-	return (iter);
+	//t_v2f range_min;
+	//t_v3f range_max;
+	t_complex z;
+	t_complex c;
+	float z_r;
+	int i;
+
+	//p->range_min.x = -2.1;
+	//range_max.x = 0.6;
+	//p->range_min.y = -1.1;
+	//range_max.y = 1.2;
+	c.r = (p->x / p->zoom) + p->range_min.x;
+	c.i = (p->y / p->zoom) + p->range_min.y;
+	z.r = 0;
+	z.i = 0;
+	i = 0;
+
+	while (sq(z.r) + sq(z.i) < 4 && i < p->max_iter)
+	{
+		z_r = z.r;
+		z.r = sq(z.r) - sq(z.i) + c.r;
+		z.i = 2 * z_r * z.i + c.i;
+		i++;
+	}
+	return (i);
+}
+
+int	loop(void *param)
+{
+	t_app	*app;
+	app = (t_app *)param;
+	(void)param;
+
+	if (app)
+	{
+		if (app->on_change)
+		{
+			int bpp, sl, endian;
+			app->img_ptr = mlx_new_image(app->mlx_ptr, app->scene.w, app->scene.h);
+			app->pix_ptr = (unsigned int *)mlx_get_data_addr(app->img_ptr, &(bpp), &(sl), &(endian));
+			scene_around(&(app->scene), app, &around);
+			mlx_put_image_to_window(app->mlx_ptr, app->win_ptr, app->img_ptr, 0, 0);
+			app->on_change = 0;
+
+		}
+	}
+
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	(void) argc;
 	(void) argv;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr;
-	t_scene	scene;
-	unsigned int *ptr;
-	int bpp, sl, endian;
-	float	ratio = 16.0 / 9.0;
+	t_app	app;
+	app.on_change = 1;
+	app.mandel.range_min.x = -2.1;
+	app.mandel.range_min.y = -1.1;
+	app.mandel.zoom = 200;
+	app.mandel.max_iter = 500;
 
-	scene.h = 480;
-	scene.w = scene.h * ratio;
+	float ratio = 16.0 / 9.0;
+	mlx_int_find_in_pcm();
+	app.scene.h = 480;
+	app.scene.w = app.scene.h * ratio;
 	
-	mlx_ptr = mlx_init();
-	if (!mlx_ptr)
+	app.mlx_ptr = mlx_init();
+	if (!app.mlx_ptr)
 		return (0);
-	win_ptr = mlx_new_window(mlx_ptr, scene.w, scene.h, "minirt");
-	mlx_hook(win_ptr, MLX_EVT_DESTROY, 0L, &on_close, (void *)0);
-	img_ptr = mlx_new_image(mlx_ptr, scene.w, scene.h);
-	ptr = (unsigned int *)mlx_get_data_addr(img_ptr, &(bpp), &(sl), &(endian));
+	app.win_ptr = mlx_new_window(app.mlx_ptr, app.scene.w, app.scene.h, "minirt");
+	mlx_hook(app.win_ptr, MLX_EVT_DESTROY, 0L, &on_close, &app);
+//	mlx_hook(app.win_ptr, MLX_EVT_KEYDN, 1L, &key_down, &app);
+	mlx_hook(app.win_ptr, MLX_EVT_KEYUP, 2L, &key_up, &app);
+	mlx_loop_hook(app.mlx_ptr, &loop, &app);
 
-	scene_around(&scene, ptr, &around);
-	mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 0, 0);	
-	mlx_loop(mlx_ptr);
+
+	mlx_loop(app.mlx_ptr);
 
 	return (0);
 }

@@ -28,6 +28,12 @@ typedef struct s_vector4f
 typedef struct s_vector4f	t_v3f;
 typedef struct s_vector4f	t_point3f;
 
+typedef struct s_vector2f
+{
+	float	x;
+	float	y;
+}	t_v2f;
+
 typedef struct s_point2
 {
 	int	x;
