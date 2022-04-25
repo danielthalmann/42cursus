@@ -323,30 +323,14 @@ function all_goals()
     document.getElementById("logs_id").innerHTML = g_sim_logs.replace(/\n/g, '<br />');
 }
 
-function getUrlParam(name)
-{
-	let s = document.location.search;
-	if (s.length == 0) {
-		return (null);
-	}
-	s = s.substring(1);
-	let kvs = s.split('&');
-	for (i = 0; i < kvs.length; i++) {
-		kv = kvs[i].split('=');
-		if (kv[0] == name)
-			return (kv[1]);
-	}
-	return (null);
-}
 
 function load_board()
 {
-	console.log(getUrlParam('g_my_login'));
     if (!(g_my_login = localStorage.getItem("g_my_login")))
-	    g_my_login = ''; // will means evaluation & full random
+	g_my_login = ''; // will means evaluation & full random
     g_rand_prev = level + hash_login(g_my_login); // initialize replayable pseudo random generator
     if (g_my_login == '')
-	    g_eval_lvls = JSON.parse(localStorage.getItem("g_my_eval")) || [];
+	g_eval_lvls = JSON.parse(localStorage.getItem("g_my_eval"));
     
     var root = document.getElementById("root_id");
 

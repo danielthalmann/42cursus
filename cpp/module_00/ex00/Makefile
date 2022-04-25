@@ -14,7 +14,7 @@ CXXFLAGS=-Wall -Wextra -Werror -std=c++98
 LDFLAGS=-lstdc++
 
 $(NAME) : $(OBJS)
-	$(CXX) $< $(LDFLAGS) -o $@
+	$(CXX) $(OBJS) $(LDFLAGS) -o $@
 
 all : $(NAME)
 

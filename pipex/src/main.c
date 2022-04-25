@@ -9,7 +9,8 @@ int pipeint(int in_fd, int with_out, char *prg, char **args, char *envp[])
 	int r;
     int fd[2];
 
-    pipe(fd);
+	if (!last)
+    	pipe(fd);
 
 	pid = fork();
 	if (pid == -1)
@@ -65,25 +66,9 @@ int main(int argc, char *argv[], char *envp[])
 	//int in_fd = open("file.log", O_WRONLY | O_CREAT, mode);
 	int out_fd = open("in.log", O_RDONLY);
 
-	int fd = pipeint(-1, "pid0", 1, p0, envp);
-	fd = pipeint(fd, "pid1", p1, envp);
-	do
-	{
-		l = read(fd, buff, 255);
-		buff[l] = 0;
-		printf("%d : read %d : {%s}\n", pid, l, buff);
-	} while (l);
-	close(fd);
-
-	printf("%d : end \n", pid);
-
-	//close(in_fd);
-	
-	
 	return (0);
 
 	//perror("res");
-
 	printf("r : %d\n", r);
 
 	pid = getpid();
