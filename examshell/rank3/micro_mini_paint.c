@@ -213,5 +213,4 @@ int main (int argc, char **argv)
 	draw(&scr);
 	free(scr.a);
 	return (0);
-		
 }
