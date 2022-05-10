@@ -25,6 +25,7 @@ int perr(char *s, FILE *f, t_a *a)
 		fclose(f);
 	if (a && a->a)
 		free(a->a);
+	return (1);
 }
 
 int ishit(float x, float y, float tx, float ty, float bx, float by)
