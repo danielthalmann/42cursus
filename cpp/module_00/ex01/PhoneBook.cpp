@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:04:05 by dthalman          #+#    #+#             */
-/*   Updated: 2022/04/13 17:05:54 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/05/11 11:51:53 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 PhoneBook::PhoneBook() 
 {
-	length = 0;
+	_length = 0;
 	for (size_t i = 0; i < MAX_LEN; i++)
 	{
-		contacts[i].setIndex(-1);
+		_contacts[i].setIndex(-1);
 	}
 	// std::cout << std::setiosflags (std::ios::left) << std::setw(20) << "PhoneBook" <<  "Construct" << std::endl;
 }
@@ -29,11 +29,10 @@ PhoneBook::~PhoneBook()
 
 Contact &PhoneBook::getNewContact(void)
 {
-	Contact &c = contacts[length];
-	c.setIndex(length);
-	std::cout << length;
-	++length;
-	length = length % MAX_LEN;
+	Contact &c = _contacts[_length];
+	c.setIndex(_length);
+	++_length;
+	_length = _length % MAX_LEN;
 	return (c);
 }
 
@@ -53,8 +52,17 @@ void PhoneBook::showBook(void)
 	
 	for (size_t i = 0; i < MAX_LEN; i++)
 	{
-		contacts[i].displayList();
+		_contacts[i].displayList();
 	}
 	std::cout << " " << std::setfill('-') << std::setw(53) << "-" << std::endl;
 	std::cout << std::setfill(' ');
+}
+
+Contact *PhoneBook::getContact(int idx)
+{
+	if (idx >= 0 && idx < _length)
+	{
+		return &_contacts[idx];
+	}
+	return NULL;
 }

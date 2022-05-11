@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:03:45 by dthalman          #+#    #+#             */
-/*   Updated: 2022/04/13 17:04:51 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/05/11 11:21:25 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ public:
 	void setDarkestSecret(std::string n);
 	void setIndex(int n);
 	void displayList(void);
+	void displayDetail(void);
 
 private:
-	std::string firstName;
-	std::string lastName;
-	std::string nickName;
-	std::string phone;
-	std::string secret;
-	int index;
+	std::string _firstName;
+	std::string _lastName;
+	std::string _nickName;
+	std::string _phone;
+	std::string _secret;
+	int _index;
 
 	std::string truncate(std::string str, size_t width);
 };

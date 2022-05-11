@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:03:53 by dthalman          #+#    #+#             */
-/*   Updated: 2022/04/13 17:09:43 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/05/11 12:01:29 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,24 @@ int main ()
 
 			std::cout << std::endl << "Qui recherches-tu ? ";
 			std::getline(std::cin, index);
+
+			int idx = -1;
+			try
+			{
+				idx = std::stoi(index);
+			}
+			catch(const std::exception& e)
+			{
+				
+			}
+
+			Contact *contact = book.getContact(idx);
+
+			if (contact == NULL)
+				std::cout << std::endl << "Ce contact n'existe pas.";
+			else
+				contact->displayDetail();
+
 			std::cout << std::endl << std::endl;
 
 		}
@@ -88,6 +106,6 @@ void stringToUpper(std::string &s)
 {
 	for (int i = 0; i < (int)s.length(); i++)
 	{
-		s[i] = toupper(s[i]);
+		s[i] = std::toupper(s[i]);
 	};
 }
