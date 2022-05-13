@@ -10,7 +10,7 @@ int main ( void )
 	Zombie *z = newZombie("daniel");
 	z->announce();
 
-	randomChump("Aliend");
+	randomChump("aliend");
 
 	delete z;	
 
