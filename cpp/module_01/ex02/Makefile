@@ -1,9 +1,9 @@
 
 # https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html
 
-NAME=horde
+NAME=brain
 
-SRCS=main.cpp zombieHorde.cpp Zombie.cpp
+SRCS=main.cpp
 
 OBJS=$(SRCS:cpp=o)
 

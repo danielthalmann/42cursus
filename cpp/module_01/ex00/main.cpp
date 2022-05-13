@@ -12,6 +12,8 @@ int main ( void )
 
 	randomChump("aliend");
 
-	delete z;	
+	delete z;
+
+	return (0);
 
 }

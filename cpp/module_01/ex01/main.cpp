@@ -1,8 +1,6 @@
 
 #include "Zombie.hpp"
 
-Zombie* newZombie( std::string name );
-void randomChump( std::string name );
 Zombie* zombieHorde( int N, std::string name );
 
 #define NB_ZOMBIE 5
@@ -17,6 +15,7 @@ int main ( void )
 		z->announce();
 	}
 	
-	delete [] z;	
+	delete [] z;
 
+	return (0);
 }
