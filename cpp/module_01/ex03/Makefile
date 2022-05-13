@@ -1,9 +1,9 @@
 
 # https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html
 
-NAME=zombie
+NAME=humans
 
-SRCS=main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
+SRCS=main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 
 OBJS=$(SRCS:cpp=o)
 
@@ -19,12 +19,13 @@ $(NAME) : $(OBJS)
 all : $(NAME)
 
 clean :
-	rm $(OBJS)
+	rm -fr $(OBJS)
 
 fclean : clean
-	rm $(NAME)
+	rm -fr $(NAME)
 
 re : fclean all
 
 run : $(NAME)
 	./$(NAME)
+

@@ -1,9 +1,9 @@
 
 # https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html
 
-NAME=zombie
+NAME=searchreplace
 
-SRCS=main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
+SRCS=main.cpp
 
 OBJS=$(SRCS:cpp=o)
 
@@ -19,12 +19,12 @@ $(NAME) : $(OBJS)
 all : $(NAME)
 
 clean :
-	rm $(OBJS)
+	rm -f $(OBJS)
 
 fclean : clean
-	rm $(NAME)
+	rm -f $(NAME)
 
 re : fclean all
 
 run : $(NAME)
-	./$(NAME)
+	./$(NAME) editable.txt test hello
