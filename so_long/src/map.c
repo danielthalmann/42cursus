@@ -30,7 +30,7 @@ int	ft_load_map(char *filename, t_map *map)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		return (1);
 	else
 	{
 		lines = 0;
