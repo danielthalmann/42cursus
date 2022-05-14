@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include "colors.hpp"
+#include "SearchReplace.hpp"
 
 int help (char **argv)
 {
@@ -15,7 +16,6 @@ int help (char **argv)
 	std::cout << std::endl;
 
 	return (1);
-
 }
 
 int err_opening (char **argv)
@@ -29,18 +29,22 @@ int main ( int argc, char **argv )
 	if (argc != 4)
 		return (help(argv));
 	
-	std::ifstream myfile; 
+	SearchReplace sr; 
 
-	myfile.open(argv[1]);
-	if ( !myfile.is_open() )
-		return (err_opening(argv));
-	
-	std::string line;
-	while (!myfile.eof())
+	try
 	{
-		std::getline(myfile, line);
-		std::cout << line << std::endl;
+		sr.setFileName(argv[1]);
+		sr.setSearch(argv[2]);
+		sr.setReplace(argv[3]);
 	}
-	myfile.close();
+	catch(SearchReplace::OpenFileException &e)
+	{
+	      std::cout << "OpenFileException caught" << std::endl;
+		std::cout << e.what() << std::endl;
+		return (1);
+	}
+
+	sr.replace();
+	
 	return (0);
 }

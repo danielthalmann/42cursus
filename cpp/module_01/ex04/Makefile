@@ -3,7 +3,7 @@
 
 NAME=searchreplace
 
-SRCS=main.cpp
+SRCS=main.cpp SearchReplace.cpp
 
 OBJS=$(SRCS:cpp=o)
 
@@ -27,4 +27,4 @@ fclean : clean
 re : fclean all
 
 run : $(NAME)
-	./$(NAME) editable.txt test hello
+	./$(NAME) editable.txt journal cahier
