@@ -1,5 +1,5 @@
-#ifndef SEARCHREPLACE_H
-#define SEARCHREPLACE_H
+#ifndef SEARCHREPLACE_HPP
+#define SEARCHREPLACE_HPP
 #include <iostream>
 #include <fstream>
 #include "colors.hpp"

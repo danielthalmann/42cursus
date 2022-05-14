@@ -1,20 +1,15 @@
-/* ************************************************************************** */
-/*                                                                         
-/*                                                      .   :::::::: 
-/*   Harl.hpp                                          :    :+:    :+: 
-/*                                                    +  +       +:+     
-/*   By: dthalman <daniel@thalmann.li>               +-+-+-       +#+     
-/*                                                    +-           */
-/*   Created: 2022/05/14 11:29:03 by dthalman         
-             */
-/*   Updated: 2022/05/14 11:29:03 by dthalman        ######.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-
-#ifndef HARL_H
-#define HARL_H
+#ifndef HARL_HPP
+#define HARL_HPP
 #include <iostream>
+
+class Harl;
+typedef struct s_loglevel
+{
+    std::string name;
+    void (Harl::*fn)( void );
+
+} t_loglevel;
 
 class Harl
 {
@@ -25,14 +20,12 @@ public:
     void complain( std::string level );
 
 private:
+
     void debug( void );
     void info( void );
     void warning( void );
     void error( void );
-
-private:
-
-    void (fn*[5])( void ) 
+    t_loglevel _levels[4];
 
 };
 

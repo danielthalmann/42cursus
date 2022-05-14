@@ -1,9 +1,9 @@
 
 # https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html
 
-NAME=brain
+NAME=harl
 
-SRCS=main.cpp
+SRCS=main.cpp Harl.cpp
 
 OBJS=$(SRCS:cpp=o)
 
