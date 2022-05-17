@@ -2,6 +2,7 @@
 #define FIXED_HPP
 
 #include <iostream>
+#include <cmath>
 
 class Fixed
 {
@@ -20,24 +21,28 @@ public:
     /**
      * Operateurs de comparaison
      */
-    bool operator>(const Fixed& fixed);
-    bool operator<(const Fixed& fixed);
-    bool operator>=(const Fixed& fixed);
-    bool operator<=(const Fixed& fixed);
-    bool operator==(const Fixed& fixed);
-    bool operator!=(const Fixed& fixed);
+    bool operator>(const Fixed& fixed) const;
+    bool operator<(const Fixed& fixed) const;
+    bool operator>=(const Fixed& fixed) const;
+    bool operator<=(const Fixed& fixed) const;
+    bool operator==(const Fixed& fixed) const;
+    bool operator!=(const Fixed& fixed) const;
 
     /**
      * Operateurs arithmétiques
      */
-    Fixed &operator+(const Fixed& fixed);
-    Fixed &operator-(const Fixed& fixed);
-    Fixed &operator*(const Fixed& fixed);
-    Fixed &operator/(const Fixed& fixed);
+    Fixed operator+(const Fixed& fixed);
+    Fixed operator-(const Fixed& fixed);
+    Fixed operator*(const Fixed& fixed);
+    Fixed operator/(const Fixed& fixed);
 
    /**
     * Operateurs d'incrémentation
     */
+    Fixed &operator++();
+    Fixed operator++(int);
+    Fixed &operator--();
+    Fixed operator--(int);
 
 
     int   getRawBits( void ) const;
@@ -45,6 +50,9 @@ public:
     
     float toFloat( void ) const;
     int   toInt( void ) const;
+
+    static const Fixed &min(const Fixed &a, const Fixed &b);
+    static const Fixed &max(const Fixed &a, const Fixed &b);
 
 private:
     int _value;

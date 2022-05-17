@@ -11,7 +11,7 @@ CXX=gcc
 
 CXXFLAGS=-Wall -Wextra -Werror -std=c++98
 
-LDFLAGS=-lstdc++
+LDFLAGS=-lstdc++ -lm
 
 $(NAME) : $(OBJS)
 	$(CXX) $(OBJS) $(LDFLAGS) -o $@
