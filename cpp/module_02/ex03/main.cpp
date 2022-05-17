@@ -18,10 +18,16 @@ void drawTriangolo(Point const a, Point const b, Point const c)
 		if (i > 0 && (i % 8) == 0)
 			std::cout << std::endl;
 
-		m = Point((float)(i % 8), 7.0 - (float)(i / 8));
+		m = Point((float)(i % 8) + 1, 7.0 - (float)(i / 8));
 
-		if (bsp(a, b, c, m))
-			std::cout << ANSI_COLOR_CYAN << "Xx" << ANSI_COLOR_RESET;
+		if (m == a)
+			std::cout << ANSI_COLOR_CYAN << "A)" << ANSI_COLOR_RESET;
+		else if (m == b)
+			std::cout << ANSI_COLOR_CYAN << "B)" << ANSI_COLOR_RESET;
+		else if (m == c)
+			std::cout << ANSI_COLOR_CYAN << "C)" << ANSI_COLOR_RESET;
+		else if (bsp(a, b, c, m))
+			std::cout << ANSI_COLOR_CYAN << "xx" << ANSI_COLOR_RESET;
 		else
 			std::cout << ANSI_COLOR_RESET << ". " ;
 	}	

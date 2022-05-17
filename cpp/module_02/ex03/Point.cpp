@@ -39,6 +39,14 @@ Point &Point::operator=(const Point& point)
 	return (*this);
 }
 
+bool Point::operator==(const Point& point) const
+{
+	if (this->_x == point._x && this->_y == point._y)
+		return true;
+	else
+		return false;
+}
+
 Fixed Point::getX() const
 {
 	return (_x);

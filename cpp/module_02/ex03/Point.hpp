@@ -16,6 +16,8 @@ public:
 
     Point &operator=(const Point& point);
 
+    bool operator==(const Point& point) const;
+
     Fixed getX() const;
     Fixed getY() const;
 
