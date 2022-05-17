@@ -156,3 +156,25 @@ const Fixed &Fixed::max(const Fixed &a, const Fixed &b)
 	else
 		return (b);
 }
+
+
+bool operator<(Fixed const &fixed, float const &value)
+{
+	return (fixed.toFloat() < value);
+}
+
+bool operator<(float const &value, Fixed const &fixed)
+{
+	return (value < fixed.toFloat());
+}
+
+bool operator>(Fixed const &fixed, float const &value)
+{
+	return (fixed.toFloat() > value);	
+}
+
+bool operator>(float const &value, Fixed const &fixed)
+{
+	return (value > fixed.toFloat());
+}
+
