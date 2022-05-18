@@ -18,20 +18,20 @@
 int	ft_valid_map(t_map *map)
 {
 	if (!map->nb_collect)
-		return (0);
+		return (2);
 	if (!map->has_exit)
-		return (0);
+		return (3);
 	if (map->size.w < 3 || map->size.h < 3)
-		return (0);
+		return (4);
 	if (map->player_pos.x == 0 && map->player_pos.y == 0)
-		return (0);
+		return (5);
 	if (!ft_valid_map_caracter(map))
-		return (0);
+		return (6);
 	if (!ft_valid_map_isclosed_h(map))
-		return (0);
+		return (7);
 	if (!ft_valid_map_isclosed_v(map))
-		return (0);
-	return (1);
+		return (8);
+	return (0);
 }
 
 int	ft_valid_map_caracter(t_map *map)

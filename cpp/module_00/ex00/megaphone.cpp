@@ -12,7 +12,6 @@
 
 
 #include <string>
-#include <algorithm>
 #include <iostream>
 
 void stringToUpper(std::string &s)

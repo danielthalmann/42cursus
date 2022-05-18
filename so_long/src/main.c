@@ -27,6 +27,7 @@ int	main(int argc, char **argv)
 	t_game	*game;
 	int		w;
 	int		h;
+	int		m;
 
 	if (argc != 2)
 	{
@@ -34,9 +35,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	game = ft_game();
-	if (!ft_load_map(argv[1], &(game->map)))
+	if (m = ft_load_map(argv[1], &(game->map)))
 	{
-		ft_printf("Error\nErreur a l'ouverture du fichier (%s).\n", argv[1]);
+		ft_printf("Error\nErreur a l'ouverture du fichier (%s) (%d).\n", argv[1], m);
 		return (ft_free_map(&(game->map)));
 	}
 	w = game->map.size.w * MAP_SPRITE_WIDTH;

@@ -1,0 +1,3 @@
+C'est la première ligne
+de mon journal intime de
+développeur.
