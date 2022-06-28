@@ -1,0 +1,6 @@
+microshell/microshell
+out*.res
+leaks.res
+out*
+microshell.dSYM
+.vscode
