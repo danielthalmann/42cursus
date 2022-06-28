@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:03:22 by dthalman          #+#    #+#             */
-/*   Updated: 2022/04/13 17:04:57 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/05/11 12:05:21 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,32 @@ Contact::~Contact()
 
 void Contact::setIndex(int n)
 {
-	index = n;
+	_index = n;
 }
 
 void Contact::setLastName(std::string n)
 {
-	lastName = n;
+	_lastName = n;
 }
 
 void Contact::setFirstName(std::string n)
 {
-	firstName = n;
+	_firstName = n;
 }
 
 void Contact::setNickName(std::string n)
 {
-	nickName = n;
+	_nickName = n;
 }
 
 void Contact::setPhone(std::string n)
 {
-	phone = n;
+	_phone = n;
 }
 
 void Contact::setDarkestSecret(std::string n)
 {
-	secret = n;
+	_secret = n;
 }
 
 std::string Contact::truncate(std::string str, size_t width)
@@ -59,16 +59,26 @@ std::string Contact::truncate(std::string str, size_t width)
     return str;
 }
 
-
 void Contact::displayList(void)
 {
-	if (index < 0)
+	if (_index < 0)
 		return ;
 	std::cout << std::setiosflags (std::ios::left);
 	std::cout << " | ";
 	std::cout << std::setiosflags (std::ios::right);
-	std::cout << std::setw(10) << index << " | ";
-	std::cout << std::setw(10) << truncate(firstName, 10) << " | ";
-	std::cout << std::setw(10) << truncate(lastName, 10) << " | ";
-	std::cout << std::setw(10) << truncate(nickName, 10) << " | " << std::endl;
+	std::cout << std::setw(10) << _index << " | ";
+	std::cout << std::setw(10) << truncate(_firstName, 10) << " | ";
+	std::cout << std::setw(10) << truncate(_lastName, 10) << " | ";
+	std::cout << std::setw(10) << truncate(_nickName, 10) << " | " << std::endl;
+}
+
+void Contact::displayDetail(void)
+{
+	std::cout << std::setiosflags (std::ios::left);
+	std::cout << " index   : " << _index << std::endl;
+	std::cout << " prenom  : " << _firstName << std::endl;
+	std::cout << " nom     : " << _lastName << std::endl;
+	std::cout << " pseudo  : " << _nickName << std::endl;
+	std::cout << " tel     : " << _phone << std::endl;
+	std::cout << " secret  : " << _secret << std::endl;
 }

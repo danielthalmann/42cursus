@@ -1,10 +1,13 @@
 
 #include <iostream>
 #include "Fixed.hpp"
+#include "colors.hpp"
 
 
 void testA( void )
 {
+	std::cout << ANSI_COLOR_BLUE << "test A" << ANSI_COLOR_RESET << std::endl;
+
 	Fixed a;
 	Fixed b( a );
 	Fixed c;
@@ -17,6 +20,8 @@ void testA( void )
 
 void testB( void )
 {
+	std::cout << ANSI_COLOR_BLUE << "test B" << ANSI_COLOR_RESET << std::endl;
+
 	Fixed a;
 	a.setRawBits(42);
 	Fixed b( a );

@@ -6,7 +6,7 @@
 /*   By: dthalman <daniel@thalmann.li>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 12:04:21 by dthalman          #+#    #+#             */
-/*   Updated: 2022/04/13 16:42:07 by dthalman         ###   ########.fr       */
+/*   Updated: 2022/05/11 11:50:57 by dthalman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ public:
     ~PhoneBook();
 
 	Contact &getNewContact(void);
+	Contact *getContact(int idx);
 	void showBook(void);
 
 private:
-	int length;
-	Contact contacts[MAX_LEN];
+	int _length;
+	Contact _contacts[MAX_LEN];
 
 };
 
