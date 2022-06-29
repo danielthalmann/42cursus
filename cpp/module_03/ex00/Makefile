@@ -1,9 +1,9 @@
 
 # https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html
 
-NAME=fixed
+NAME=claptrap
 
-SRCS=main.cpp Fixed.cpp
+SRCS=main.cpp ClapTrap.cpp
 
 OBJS=$(SRCS:cpp=o)
 
