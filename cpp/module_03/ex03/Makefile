@@ -1,9 +1,9 @@
 
 # https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html
 
-NAME=scavtrap
+NAME=fragtrap
 
-SRCS=main.cpp ClapTrap.cpp ScavTrap.cpp
+SRCS=main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
 OBJS=$(SRCS:cpp=o)
 

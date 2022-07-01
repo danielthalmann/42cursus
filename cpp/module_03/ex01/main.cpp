@@ -48,6 +48,8 @@ void testB( void )
 	st.info();
 	st.guardGate();
 	st.info();
+	st.guardGate();
+	st.info();
 	st.beRepaired(2);
 	st.info();
 	st.takeDamage(10);
@@ -59,9 +61,32 @@ void testB( void )
 
 }
 
+void testC( void )
+{	
+	std::cout << std::endl << ANSI_COLOR_RED << "TEST C (with ptr) " << ANSI_COLOR_RESET << std::endl << std::endl;
+
+	ScavTrap st("Norman");
+	ClapTrap *cp = &st;
+
+	cp->info();
+	cp->attack("world");
+	cp->info();
+	cp->takeDamage(10);
+	cp->info();
+	((ScavTrap *)cp)->guardGate();
+	cp->info();
+	((ScavTrap *)cp)->guardGate();
+	cp->info();
+	cp->attack("world 2");
+	cp->info();
+
+
+}
+
 int main ( void )
 {
 	testA();
 	testB();
+	testC();
 	return (0);
 }

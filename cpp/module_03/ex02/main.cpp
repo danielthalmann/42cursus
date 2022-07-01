@@ -2,61 +2,44 @@
 #include <iostream>
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 
 void testA( void )
 {
-	std::cout << std::endl << ANSI_COLOR_RED << "TEST A " << ANSI_COLOR_RESET << std::endl << std::endl;
+	std::cout << std::endl << ANSI_COLOR_RED << "TEST A (FragTrap)" << ANSI_COLOR_RESET << std::endl << std::endl;
 
-	ClapTrap ct("Daniel");
+	FragTrap ft("Daniel");
 
-	ct.info();
-	ct.attack("world");
-	ct.info();
-	ct.takeDamage(5);
-	ct.info();
-	ct.beRepaired(2);
-
-	for (size_t i = 0; i < 9; i++)
-	{
-		ct.attack("world");
-	}
-	ct.info();	
-	ct.beRepaired(2);
-	ct.info();
-	ct.takeDamage(10);
-	ct.info();
-	ct.beRepaired(2);
-	ct.info();
-	ct.attack("world 2");
-	ct.info();
+	ft.info();
+	ft.attack("world");
+	ft.info();
+	ft.takeDamage(5);
+	ft.info();
+	ft.beRepaired(2);
+	ft.info();
+	ft.highFiveGuys();
+	std::cout << std::endl;
 
 }
 
 void testB( void )
-{	
-	std::cout << std::endl << ANSI_COLOR_RED << "TEST B " << ANSI_COLOR_RESET << std::endl << std::endl;
+{
+	std::cout << std::endl << ANSI_COLOR_RED << "TEST B (FragTrap with ptr)" << ANSI_COLOR_RESET << std::endl << std::endl;
 
-	ScavTrap st("Robert");
+	FragTrap ft("Bernard");
 
-	st.info();
-	st.attack("world");
-	st.info();
-	st.takeDamage(5);
-	st.info();
-	st.beRepaired(2);
-	st.info();
-	st.guardGate();
-	st.info();
-	st.beRepaired(2);
-	st.info();
-	st.takeDamage(10);
-	st.info();
-	st.beRepaired(2);
-	st.info();
-	st.attack("world 2");
-	st.info();
+	FragTrap *ftp = &ft;
 
+	ftp->info();
+	ftp->attack("world");
+	ftp->info();
+	ftp->takeDamage(5);
+	ftp->info();
+	ftp->beRepaired(2);
+	ftp->info();
+	ftp->highFiveGuys();
+	std::cout << std::endl;
 }
 
 int main ( void )

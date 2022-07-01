@@ -1,7 +1,7 @@
 #include "ClapTrap.hpp"
 
  ClapTrap::ClapTrap() :
-	_name	("ClapTrpap"),
+	_name	("ClapTrap"),
 	_hit	(10),
 	_energy	(10),
 	_damage	(0)
@@ -9,11 +9,11 @@
 	std::cout << "Constructor ClapTrap called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string name, const int hit, const int energy, const int damage) :
+ClapTrap::ClapTrap(const std::string name) :
 	_name	(name),
-	_hit	(hit),
-	_energy	(energy),
-	_damage	(damage)
+	_hit	(10),
+	_energy	(10),
+	_damage	(0)
 {
 	std::cout << "Constructor ClapTrap called" << std::endl;
 }
@@ -38,6 +38,8 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &clapTrap)
 	_hit = clapTrap._hit;
 	_energy = clapTrap._energy;
 	_damage = clapTrap._damage;
+
+	std::cout << ANSI_COLOR_MAGENTA << "ClapTrap " << ANSI_COLOR_RESET << "operator = called" << std::endl;
 
 	return *this;
 }
@@ -93,7 +95,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 
 void ClapTrap::info(void)
 {
- 	std::cout << std::endl << _name << " info >"
+ 	std::cout << std::endl << _name << " info's ->"
 					   << " hit : " << ANSI_COLOR_BLUE << _hit << ANSI_COLOR_RESET 
 					   << " energy : " << ANSI_COLOR_BLUE << _energy  << ANSI_COLOR_RESET 
 					   << " damage : " << ANSI_COLOR_BLUE << _damage  << ANSI_COLOR_RESET << std::endl << std::endl;

@@ -29,7 +29,7 @@ ClapTrap::ClapTrap(const ClapTrap &claptrap) :
 
 ClapTrap::~ClapTrap()
 {
-	std::cout<< ANSI_COLOR_MAGENTA << "ClapTrap " << ANSI_COLOR_RESET << "Destructor called" << std::endl;
+	std::cout << ANSI_COLOR_MAGENTA << "ClapTrap " << ANSI_COLOR_RESET << "Destructor called" << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &clapTrap)
