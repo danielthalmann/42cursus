@@ -1,32 +1,32 @@
-#include "Dog.hpp"
+#include "WrongCat.hpp"
 
-#define CLASSNAME "Dog"
+#define CLASSNAME "WrongCat"
 
-Dog::Dog()
+WrongCat::WrongCat()
 {
 	_type = CLASSNAME;
 	std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
 }
 
-Dog::Dog(Dog &dog) : Animal(dog)
+WrongCat::WrongCat(WrongCat &wrongcat) : WrongAnimal(wrongcat)
 {
-	_type = dog._type;
+	_type = wrongcat._type;
 	std::cout << "\x1b[32m" << "Copy Construct " << "\x1b[0m" << CLASSNAME << std::endl;
 }
 
-Dog::~Dog()
+WrongCat::~WrongCat()
 {
 	std::cout << "\x1b[32m" << "Destructor " << "\x1b[0m" << CLASSNAME << std::endl;
 }
 
-Dog &Dog::operator=(const Dog &dog)
+WrongCat &WrongCat::operator=(const WrongCat &wrongcat)
 {
-	(void) dog;
+	(void) wrongcat;
 	std::cout << "\x1b[32m" << "Operator Equal " << "\x1b[0m" << CLASSNAME << std::endl;
 	return (*this);
 }
 
-void Dog::makeSound(void) const
+void WrongCat::makeSound(void) const
 {
-	std::cout << "Wouafff !" << std::endl;
+	std::cout << "Wrong Miaou !" << std::endl;
 }
