@@ -1,13 +1,13 @@
 
 # https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html
 
-NAME=claptrap
+NAME=animal
 
 SRCS=main.cpp Dog.cpp Cat.cpp Animal.cpp
 
 OBJS=$(SRCS:cpp=o)
 
-CXX=gcc
+CXX=c++
 
 CXXFLAGS=-Wall -Wextra -Werror -std=c++98
 
