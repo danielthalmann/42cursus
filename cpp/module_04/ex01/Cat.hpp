@@ -2,7 +2,6 @@
 #define CAT_HPP
 
 #include "Animal.hpp"
-#include "Brain.hpp"
 #include <iostream>
 
 class Cat : public Animal
@@ -15,7 +14,6 @@ public:
     void makeSound(void) const;
 
 private:
-    Brain *_brain;
     
 };
 

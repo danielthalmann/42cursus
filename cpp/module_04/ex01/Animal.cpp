@@ -35,3 +35,8 @@ void Animal::makeSound(void) const
 {
 	std::cout << "Muted" << std::endl;
 }
+
+Brain *Animal::getBrain() const
+{
+	return _brain;
+}

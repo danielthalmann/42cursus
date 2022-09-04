@@ -4,26 +4,29 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
+#define ANIMAL_SIZE 4
+
 void testA( void )
 {
 
-	const Animal *animal = new Animal();
-	const Animal *dog = new Dog();
-	const Animal *cat = new Cat();	
+	Animal *animal[ANIMAL_SIZE];
 
-	std::cout << dog->getType() << " " << std::endl;
-	std::cout << cat->getType() << " " << std::endl;
+	for (int i = 0; i < (ANIMAL_SIZE / 2); i++)
+		animal[i] = new Dog();
 
-	animal->makeSound();
-	dog->makeSound();
-	cat->makeSound();
+	for (int i = (ANIMAL_SIZE / 2); i < ANIMAL_SIZE; i++)
+		animal[i] = new Cat();
+
+	for (int i = 0; i < ANIMAL_SIZE; i++) {
+		animal[i]->makeSound();
+		
+	}
+
 
 	std::cout << std::endl;
 
-	delete animal;
-	delete dog;
-	delete cat;
-
+	for (int i = 0; i < ANIMAL_SIZE; i++)
+		delete animal[i];
 }
 
 int main ( void )

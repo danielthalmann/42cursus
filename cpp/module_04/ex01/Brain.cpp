@@ -9,7 +9,7 @@ Brain::Brain()
 
 Brain::Brain(Brain &brain)
 {
-	(void) brain;
+	*this = brain;
 	std::cout << "\x1b[32m" << "Copy Construct " << "\x1b[0m" << CLASSNAME << std::endl;
 }
 
@@ -20,7 +20,13 @@ Brain::~Brain()
 
 Brain &Brain::operator=(const Brain &brain)
 {
-	(void) brain;
+	for (int i = 0; i < Brain::sizeOfIdeas; i++)
+		this->_ideas[i] = brain._ideas[i];
 	std::cout << "\x1b[32m" << "Operator Equal " << "\x1b[0m" << CLASSNAME << std::endl;
 	return (*this);
+}
+
+std::string *Brain::getIdeas()
+{
+	return _ideas;
 }

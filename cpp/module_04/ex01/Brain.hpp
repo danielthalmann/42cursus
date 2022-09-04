@@ -11,8 +11,11 @@ public:
     virtual ~Brain();
     Brain &operator=(const Brain &brain);
 
+    std::string *getIdeas();
+    static const int sizeOfIdeas = 100;
+
 private:
-    std::string _ideas[100];
+    std::string _ideas[Brain::sizeOfIdeas];
 
 };
 
