@@ -19,6 +19,11 @@ void testA( void )
 
 	for (int i = 0; i < ANIMAL_SIZE; i++) {
 		animal[i]->makeSound();
+		Brain *b = animal[i]->getBrain();
+		for(int y = 0; y < 3; y++)
+		{
+			std::cout << b->getIdeas()[y] << std::endl;
+		}
 		
 	}
 
