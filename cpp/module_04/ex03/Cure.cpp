@@ -4,24 +4,32 @@
 
 Cure::Cure() : AMateria("cure")
 {
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 }
 
 Cure::Cure(Cure &cure) : AMateria("cure")
 {
 	*this = cure;
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Copy Construct " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 }
 
 Cure::~Cure()
 {
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Destructor " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 }
 
 Cure &Cure::operator=(const Cure &cure)
 {
 	(void) cure;
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Operator Equal " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 	return (*this);
 }
 

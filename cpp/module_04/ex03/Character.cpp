@@ -9,19 +9,25 @@ Character::Character() : _name("character")
 	{
 		this->_materials[i] = NULL;
 	}
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 }
 
 Character::Character(std::string name) : _name(name)
 {
 	Character();
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 }
 
 Character::Character(Character &character)
 {
 	(void) character;
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Copy Construct " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 }
 
 Character::~Character()
@@ -32,7 +38,9 @@ Character::~Character()
 			delete this->_materials[i];
 	}
 
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Destructor " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 }
 
 Character &Character::operator=(const Character &character)
@@ -45,8 +53,11 @@ Character &Character::operator=(const Character &character)
 	}
 	_length = character._length;
 	_name = character._name;
-
+	
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Operator Equal " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
+
 	return (*this);
 }
 

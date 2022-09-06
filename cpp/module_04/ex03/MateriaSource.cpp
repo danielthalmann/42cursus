@@ -10,7 +10,9 @@ MateriaSource::MateriaSource()
 		this->_materials[i] = NULL;
 	}
 
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 }
 
 MateriaSource::MateriaSource(MateriaSource &materiasource)
@@ -21,12 +23,16 @@ MateriaSource::MateriaSource(MateriaSource &materiasource)
 		this->_materials[i] = NULL;
 	}
 	*this = materiasource;
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Copy Construct " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 }
 
 MateriaSource::~MateriaSource()
 {
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Destructor " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 }
 
 MateriaSource &MateriaSource::operator=(const MateriaSource &materiasource)
@@ -37,7 +43,9 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &materiasource)
 	}
 	_length = materiasource._length;
 	
+	#ifdef DEBUG
 	std::cout << "\x1b[32m" << "Operator Equal " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 	return (*this);
 }
 
