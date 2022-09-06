@@ -14,7 +14,7 @@ Cat::Cat()
 	std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
 }
 
-Cat::Cat(Cat &cat) : Animal (cat)
+Cat::Cat(Cat &cat) : AAnimal (cat)
 {
 	_type = cat._type;
 	*(_brain) = *(cat._brain);
@@ -25,6 +25,14 @@ Cat::~Cat()
 {
 	delete _brain;
 	std::cout << "\x1b[32m" << "Destructor " << "\x1b[0m" << CLASSNAME << std::endl;
+}
+
+AAnimal	&Cat::operator=( const AAnimal &other )
+{
+	_type = other.getType();
+	*(_brain) = *(other.getBrain());
+	std::cout << "\x1b[32m" << "Operator Equal AAnimal " << "\x1b[0m" << CLASSNAME << std::endl;
+	return (*this);	
 }
 
 Cat &Cat::operator=(const Cat &cat)
@@ -43,4 +51,10 @@ void Cat::makeSound(void) const
 std::string Cat::getType(void) const
 {
 	return (_type);
+}
+
+
+Brain *Cat::getBrain(void) const
+{
+	return (_brain);
 }

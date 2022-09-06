@@ -3,7 +3,7 @@
 
 NAME=animal
 
-SRCS=main.cpp Dog.cpp Cat.cpp Animal.cpp Brain.cpp
+SRCS=main.cpp Dog.cpp Cat.cpp AAnimal.cpp Brain.cpp
 
 OBJS=$(SRCS:cpp=o)
 

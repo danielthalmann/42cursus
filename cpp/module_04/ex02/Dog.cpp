@@ -14,7 +14,7 @@ Dog::Dog()
 	std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
 }
 
-Dog::Dog(Dog &dog) : Animal(dog)
+Dog::Dog(Dog &dog) : AAnimal(dog)
 {
 	_type = dog._type;
 	*(_brain) = *(dog._brain);
@@ -35,6 +35,14 @@ Dog &Dog::operator=(const Dog &dog)
 	return (*this);
 }
 
+AAnimal	&Dog::operator=( const AAnimal &other )
+{
+	_type = other.getType();
+	*(_brain) = *(other.getBrain());
+	std::cout << "\x1b[32m" << "Operator Equal AAnimal " << "\x1b[0m" << CLASSNAME << std::endl;
+	return (*this);	
+}
+
 void Dog::makeSound(void) const
 {
 	std::cout << "Wouafff !" << std::endl;
@@ -43,4 +51,9 @@ void Dog::makeSound(void) const
 std::string Dog::getType(void) const
 {
 	return (_type);
+}
+
+Brain *Dog::getBrain(void) const
+{
+	return (_brain);
 }
