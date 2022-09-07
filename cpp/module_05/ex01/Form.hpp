@@ -13,14 +13,22 @@ public:
 	Form 		&operator=(Form &f);
 
 	std::string	getName();
-	bool		getSigned();
+	bool		isSigned();
 	int			getSignGrade();
 	int			getExecGrade();
 
+	void		beSigned(Bureaucrat &b);
+
 	class GradeTooHighException : public std::exception	{
+		const char *what () const throw () {
+			return ("Grade too high");
+		}
 	};
 
 	class GradeTooLowException : public std::exception	{
+		const char *what () const throw () {
+			return ("Grade too low");
+		}
 	};
 
 private:

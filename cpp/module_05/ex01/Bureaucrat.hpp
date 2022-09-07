@@ -23,6 +23,8 @@ public:
 	void grade();
 	void degrade();
 
+	void signForm(Form &f);
+
 	class GradeTooHighException : public std::exception
 	{
 	public:

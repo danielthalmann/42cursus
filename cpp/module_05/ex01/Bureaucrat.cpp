@@ -68,3 +68,8 @@ std::ostream &operator<<(std::ostream &out, Bureaucrat const &value)
 	out << value.getName() << ", bureaucrat grade " << value.getGrade() << std::endl;
 	return out;
 }
+
+void Bureaucrat::signForm(Form &f)
+{
+	f
+}

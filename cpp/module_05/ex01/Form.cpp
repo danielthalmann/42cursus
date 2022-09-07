@@ -3,7 +3,7 @@
 Form::Form()
 {
 	_name = "";
-	_signed = 0;
+	_signed = false;
 	_sign_grade = 0;
 	_exec_grade = 0;
 }
@@ -19,6 +19,8 @@ Form 		&operator=(Form &f)
 	_signed = f.getSigned();
 	_sign_grade = f.getSignGrade();
 	_exec_grade = f.getExecGrade();
+
+	return (*this);
 }
 
 Form::~Form()
@@ -31,7 +33,7 @@ std::string	Form::getName()
     return _name;
 }
 
-bool		Form::getSigned()
+bool		Form::isSigned()
 {
     return _signed;
 }
@@ -44,6 +46,12 @@ int			Form::getSignGrade()
 int			Form::getExecGrade()
 {
     return _exec_grade;
+}
+
+void		Form::beSigned(Bureaucrat &b)
+{
+	if (b.getGrade() <= _sign_grade) 
+		_signed = true;
 }
 
 void        Form::gradeValidator(int g)
