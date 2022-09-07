@@ -46,3 +46,25 @@ int Bureaucrat::getGrade() const
 {
 	return _grade;
 }
+
+void Bureaucrat::grade()
+{
+	if (_grade > Bureaucrat::max_grade)
+		_grade--;
+	else
+		throw GradeTooHighException().setName(_name);
+}
+
+void Bureaucrat::degrade()
+{
+	if (_grade < Bureaucrat::min_grade)
+		_grade++;
+	else
+		throw GradeTooLowException().setName(_name);
+}
+
+std::ostream &operator<<(std::ostream &out, Bureaucrat const &value)
+{
+	out << value.getName() << ", bureaucrat grade " << value.getGrade() << std::endl;
+	return out;
+}

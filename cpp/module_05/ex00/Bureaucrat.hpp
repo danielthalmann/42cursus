@@ -20,6 +20,8 @@ public:
 	std::string getName() const;
 	int getGrade() const;
 
+	void grade();
+	void degrade();
 
 	class GradeException : public std::exception
 	{
@@ -77,5 +79,7 @@ private:
 
 
 };
+
+std::ostream &operator<<(std::ostream &out, Bureaucrat const &value);
 
 #endif
