@@ -23,21 +23,7 @@ public:
 	void grade();
 	void degrade();
 
-	class GradeException : public std::exception
-	{
-	public:
-		~GradeException() throw () {}
-        GradeException &setName(const std::string &n)
-        {
-            _name = n;
-            return (*this);
-        }
-	private:
-		std::string _name;
-	};
-
-
-	class GradeTooHighException : public GradeException
+	class GradeTooHighException : public std::exception
 	{
 	public:
 		~GradeTooHighException() throw () {}
@@ -53,7 +39,7 @@ public:
 		std::string _message;
 	};
 
-	class GradeTooLowException : public GradeException
+	class GradeTooLowException : public std::exception
 	{
 	public:
 		~GradeTooLowException() throw () {}
