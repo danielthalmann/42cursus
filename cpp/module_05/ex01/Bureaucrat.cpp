@@ -71,5 +71,5 @@ std::ostream &operator<<(std::ostream &out, Bureaucrat const &value)
 
 void Bureaucrat::signForm(Form &f)
 {
-	f
+	f.beSigned(*this);
 }

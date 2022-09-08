@@ -8,15 +8,15 @@ Form::Form()
 	_exec_grade = 0;
 }
 
-Form(Form &f)
+Form::Form(Form &f)
 {
     (*this) = f;
 }
 
-Form 		&operator=(Form &f)
+Form 		&Form::operator=(Form &f)
 {
     _name = f.getName();
-	_signed = f.getSigned();
+	_signed = f.isSigned();
 	_sign_grade = f.getSignGrade();
 	_exec_grade = f.getExecGrade();
 
