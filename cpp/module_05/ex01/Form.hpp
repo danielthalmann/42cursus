@@ -14,12 +14,12 @@ public:
 				Form(Form &f);
 	Form 		&operator=(Form &f);
 
-	std::string	getName();
-	bool		isSigned();
-	int			getSignGrade();
-	int			getExecGrade();
+	std::string	getName() const;
+	bool		isSigned() const;
+	int			getSignGrade() const;
+	int			getExecGrade() const;
 
-	void		beSigned(Bureaucrat &b);
+	void		beSigned(const Bureaucrat &b);
 
 	class GradeTooHighException : public std::exception	{
 		const char *what () const throw () {
@@ -43,5 +43,7 @@ private:
 	int			_exec_grade;
 
 };
+
+std::ostream &operator<<(std::ostream &out, Form const &f);
 
 #endif

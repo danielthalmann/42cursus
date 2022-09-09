@@ -28,27 +28,27 @@ Form::~Form()
 
 }
 
-std::string	Form::getName()
+std::string	Form::getName() const
 {
     return _name;
 }
 
-bool		Form::isSigned()
+bool		Form::isSigned() const
 {
     return _signed;
 }
 
-int			Form::getSignGrade()
+int			Form::getSignGrade() const
 {
     return _sign_grade;
 }
 
-int			Form::getExecGrade()
+int			Form::getExecGrade() const
 {
     return _exec_grade;
 }
 
-void		Form::beSigned(Bureaucrat &b)
+void		Form::beSigned(const Bureaucrat &b)
 {
 	if (b.getGrade() <= _sign_grade) 
 		_signed = true;
@@ -60,4 +60,10 @@ void        Form::gradeValidator(int g)
 		throw GradeTooHighException();
 	if (g > Bureaucrat::min_grade)
 		throw GradeTooLowException();
+}
+
+std::ostream &operator<<(std::ostream &out, Form const &f)
+{
+	out << f.getName() << ", needed grade for signed " << f.getSignGrade() << std::endl;
+	return out;
 }

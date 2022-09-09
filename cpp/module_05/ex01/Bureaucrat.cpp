@@ -72,4 +72,15 @@ std::ostream &operator<<(std::ostream &out, Bureaucrat const &value)
 void Bureaucrat::signForm(Form &f)
 {
 	f.beSigned(*this);
+	if (f.isSigned())
+	{
+		std::cout << this->getName() << " signed " << f.getName();
+	} 
+	else 
+	{
+		std::cout << this->getName() << " couldn’t sign " << f.getName() 
+			<< " because their grade is to low";
+		
+	}
 }
+
