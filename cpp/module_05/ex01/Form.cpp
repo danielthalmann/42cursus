@@ -10,8 +10,8 @@ Form::Form()
 
 Form::Form(std::string name, int signGrade, int execGrade)
 {
-	Form();
 	_name = name;
+	_signed = false;
 	_sign_grade = Form::gradeValidator(signGrade);
 	_exec_grade = Form::gradeValidator(execGrade);
 }
