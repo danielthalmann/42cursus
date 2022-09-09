@@ -65,6 +65,6 @@ void Bureaucrat::degrade()
 
 std::ostream &operator<<(std::ostream &out, Bureaucrat const &value)
 {
-	out << value.getName() << ", bureaucrat grade " << value.getGrade() << std::endl;
+	out << "\x1b[33m" << value.getName() << "\x1b[0m" << ", bureaucrat grade " << value.getGrade() << std::endl;
 	return out;
 }
