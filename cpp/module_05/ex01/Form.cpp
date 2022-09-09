@@ -4,8 +4,8 @@ Form::Form()
 {
 	_name = "";
 	_signed = false;
-	_sign_grade = 0;
-	_exec_grade = 0;
+	_sign_grade = Bureaucrat::min_grade;
+	_exec_grade = Bureaucrat::min_grade;
 }
 
 Form::Form(std::string name, int signGrade, int execGrade)
@@ -14,7 +14,6 @@ Form::Form(std::string name, int signGrade, int execGrade)
 	_name = name;
 	_sign_grade = Form::gradeValidator(signGrade);
 	_exec_grade = Form::gradeValidator(execGrade);
-
 }
 
 Form::Form(Form &f)
