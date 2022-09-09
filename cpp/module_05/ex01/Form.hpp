@@ -11,6 +11,7 @@ class Form
 public:
 				Form();
 	virtual 	~Form();
+				Form(std::string name, int signGrade, int execGrade);
 				Form(Form &f);
 	Form 		&operator=(Form &f);
 
@@ -35,7 +36,7 @@ public:
 
 private:
 	
-	void        gradeValidator(int g);
+	int        gradeValidator(int g);
 
 	std::string	_name;
 	bool		_signed;

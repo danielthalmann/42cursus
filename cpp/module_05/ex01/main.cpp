@@ -1,62 +1,42 @@
 
 #include <iostream>
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main ( )
 {
-	try{
-		std::cout << "\x1b[32m" << "Bureaucrat" << "\x1b[0m" << " with grade 5" << std::endl;
-		Bureaucrat lambique("lambique", 5);
-		for (int i = 4; i > -2; i--)
-		{
-			std::cout << "\x1b[32m" << "Bureaucrat.grade()" << "\x1b[0m" << std::endl;
-			lambique.grade();
-			std::cout << lambique;
-		}
-	}
-	catch(Bureaucrat::GradeTooHighException &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch(Bureaucrat::GradeTooLowException &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
 
-
+	Bureaucrat bob("bob", 42);
+	Bureaucrat bobette("bobette", 43);
 
 	try{
-		std::cout << "\x1b[32m" << "Bureaucrat" << "\x1b[0m" << " with grade -1" << std::endl;
-		Bureaucrat bob("bob", -1);
+		Form paperLow("paper", 151, 1);
 	}
 	catch(std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+
+	try{
+		Form paperHight("paper", 150, -1);
+	}
+	catch(std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	Form paper42("paper", 42, 24);
 	
-    try{
-		std::cout << "\x1b[32m" << "Bureaucrat" << "\x1b[0m" << " with grade 155" << std::endl;
-		Bureaucrat bobette("bobette", 155);
-	}
-	catch(std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	std::cout << bob;
+	std::cout << paper42;
 
-	try{
-		std::cout << "\x1b[32m" << "Bureaucrat" << "\x1b[0m" << " with grade 5" << std::endl;
-		Bureaucrat sidonie("sidonie", 146);
-		for (int i = 0; i < 5; i++)
-		{
-			std::cout << "\x1b[32m" << "Bureaucrat.grade()" << "\x1b[0m" << std::endl;
-			sidonie.degrade();
-			std::cout << sidonie;
-		}
-	}
-	catch(std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	bob.signForm(paper42);
+	
+
+	std::cout << bobette;
+	std::cout << paper42;
+
+	bobette.signForm(paper42);
 
 	return (0);
 }

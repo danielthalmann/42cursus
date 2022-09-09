@@ -65,22 +65,20 @@ void Bureaucrat::degrade()
 
 std::ostream &operator<<(std::ostream &out, Bureaucrat const &value)
 {
-	out << value.getName() << ", bureaucrat grade " << value.getGrade() << std::endl;
+	out << "\x1b[33m" << value.getName() << "\x1b[0m" << ", bureaucrat grade " << value.getGrade() << std::endl;
 	return out;
 }
 
 void Bureaucrat::signForm(Form &f)
 {
-	f.beSigned(*this);
-	if (f.isSigned())
-	{
-		std::cout << this->getName() << " signed " << f.getName();
-	} 
-	else 
-	{
+	try {
+		f.beSigned(*this);
+		if (f.isSigned())
+			std::cout << this->getName() << " signed " << f.getName() << std::endl;
+	}
+	catch (Form::GradeTooLowException &e) {
 		std::cout << this->getName() << " couldn’t sign " << f.getName() 
-			<< " because their grade is to low";
-		
+			<< " because their grade is to low" << std::endl;
 	}
 }
 
