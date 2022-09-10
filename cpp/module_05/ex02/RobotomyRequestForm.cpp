@@ -4,7 +4,6 @@
 
 RobotomyRequestForm::RobotomyRequestForm() : Form("robotomy", 72, 45)
 {
-	std::srand(std::time(NULL));
 	#ifdef DEBUG
 		std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
 	#endif
@@ -13,7 +12,6 @@ RobotomyRequestForm::RobotomyRequestForm() : Form("robotomy", 72, 45)
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : Form("robotomy", 72, 45), _target(target)
 {
-	std::srand(std::time(NULL));
 	#ifdef DEBUG
 		std::cout << "\x1b[32m" << "Construct with value " << "\x1b[0m" << CLASSNAME << std::endl;
 	#endif

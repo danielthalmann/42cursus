@@ -63,11 +63,13 @@ void trait(Bureaucrat &b)
 int main ( )
 {
 
-	Bureaucrat bob("bob", 42);
-	Bureaucrat bobette("bobette", 43);
-	Bureaucrat jerome("jerome", 43);
+	Bureaucrat bob("bob", 150);
+	Bureaucrat sidonie("sidonie", 70);
+	Bureaucrat bobette("bobette", 42);
+	Bureaucrat jerome("jerome", 2);
 
 	trait(bob);
+	trait(sidonie);
 	trait(bobette);
 	trait(jerome);
 
