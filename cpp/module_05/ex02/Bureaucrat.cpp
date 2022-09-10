@@ -88,9 +88,9 @@ void Bureaucrat::signForm(Form &f)
 void Bureaucrat::executeForm(Form const &f)
 {
 	try {
-		f.execute(*this);
 		std::cout << "\x1b[33m" << this->getName() << "\x1b[0m" 
 				<< " execute " << f.getName() << std::endl;
+		f.execute(*this);
 	}
 	catch (Form::ExecutionNotAllowException &e) {
 		std::cout << "\x1b[33m" << this->getName() << "\x1b[0m" 

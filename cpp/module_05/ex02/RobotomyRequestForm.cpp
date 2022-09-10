@@ -4,6 +4,7 @@
 
 RobotomyRequestForm::RobotomyRequestForm() : Form("robotomy", 72, 45)
 {
+	std::srand(std::time(NULL));
 	#ifdef DEBUG
 		std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
 	#endif
@@ -12,6 +13,7 @@ RobotomyRequestForm::RobotomyRequestForm() : Form("robotomy", 72, 45)
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : Form("robotomy", 72, 45), _target(target)
 {
+	std::srand(std::time(NULL));
 	#ifdef DEBUG
 		std::cout << "\x1b[32m" << "Construct with value " << "\x1b[0m" << CLASSNAME << std::endl;
 	#endif
@@ -49,7 +51,10 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 
 	executeValidator(executor);
 
-	// TODO
-
+	std::cout << "Bzzz bzzz ping pllogg twisszz" << std::endl;
+	if (std::rand() % 2)
+		std::cout << "\x1b[34m" << _target << "\x1b[0m" << " has been successfully robotomized" << std::endl;
+	else
+		std::cout << "\x1b[31m" << "Operation failed" << "\x1b[0m" << std::endl;
 }
 

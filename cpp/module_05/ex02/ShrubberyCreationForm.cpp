@@ -74,6 +74,10 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	}
 	
 	file.close();
+	
+	std::cout << "\x1b[34m" << this->_target << "_shrubbery"  << "\x1b[0m" << " created"
+		<< std::endl;
+
 
 }
 

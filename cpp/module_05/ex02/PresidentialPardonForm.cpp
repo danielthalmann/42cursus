@@ -49,7 +49,7 @@ void PresidentialPardonForm::execute(Bureaucrat const &executor) const
 
 	executeValidator(executor);
 
-	// TODO
+	std::cout << "\x1b[34m" << _target << "\x1b[0m" << " has been forgiven by Zaphod Beeblebrox" << std::endl;
 
 }
 
