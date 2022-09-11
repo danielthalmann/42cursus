@@ -1,9 +1,9 @@
 
 # https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html
 
-NAME=bureaucrat
+NAME=convert
 
-SRCS=main.cpp Bureaucrat.cpp
+SRCS=main.cpp Scalar.cpp ScalarInt.cpp
 
 OBJS=$(SRCS:cpp=o)
 
