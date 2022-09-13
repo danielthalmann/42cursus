@@ -4,6 +4,7 @@
 #include "Scalar.hpp"
 #include <iostream>
 #include <cstdlib>
+#include <limits>
 
 class ScalarInt : public Scalar
 {
@@ -25,7 +26,6 @@ public:
 	virtual double 	toDouble(void) const;
 
 private:
-	int _value;
 
 };
 

@@ -21,10 +21,7 @@ int main ( int argc, char **argv )
 
 		std::cout << s->getType() << std::endl;
 
-		std::cout << "char:" << s->toChar() << std::endl;
-		std::cout << "int:" << s->toInt() << std::endl;
-		std::cout << "float:" << s->toFloat() << std::endl;
-		std::cout << "double:" << s->toDouble() << std::endl;
+		delete s;
 	}
 	catch(const std::exception& e)
 	{

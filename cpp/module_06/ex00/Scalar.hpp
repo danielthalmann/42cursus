@@ -11,6 +11,8 @@ public:
 	virtual ~Scalar();
 	Scalar &operator=(const Scalar &scalar);
 
+	void print( void );
+
 	virtual Scalar 	*clone(void) = 0;
 
 	virtual std::string getType(void) const = 0;
@@ -22,7 +24,9 @@ public:
 	virtual float 	toFloat(void) const = 0;
 	virtual double 	toDouble(void) const = 0;
 
-private:
+protected:
+	double _value;
+
 
 };
 

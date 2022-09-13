@@ -33,4 +33,12 @@ Scalar &Scalar::operator=(const Scalar &scalar)
 	return (*this);
 }
 
+void Scalar::print( void )
+{
+	std::cout << "char:" << this->toChar() << std::endl;
+	std::cout << "int:" << this->toInt() << std::endl;
+	std::cout << "float:" << this->toFloat() << std::endl;
+	std::cout << "double:" << this->toDouble() << std::endl;
+}
+
 
