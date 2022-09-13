@@ -3,22 +3,32 @@
 
 #include "Scalar.hpp"
 #include <iostream>
+#include <cstdlib>
 
 class ScalarInt : public Scalar
 {
 public:
 	ScalarInt();
-	ScalarInt(double value);
-	ScalarInt(ScalarInt &scalarint);
+	ScalarInt(ScalarInt &obj);
 	virtual ~ScalarInt();
-	ScalarInt &operator=(const ScalarInt &scalarint);
+	ScalarInt &operator=(const ScalarInt &obj);
 
-	virtual void parse(const std::string &value);
-	virtual bool canParsed(const std::string &value) const;
-	virtual std::string getType() const;
+	virtual Scalar 	*clone(void);
+
+	virtual std::string getType(void) const;
+	virtual void	parse(const std::string &value);
+	virtual bool	canParsed(const std::string &value) const;
+
+	virtual char 	toChar(void) const;
+	virtual int 	toInt(void) const;
+	virtual float 	toFloat(void) const;
+	virtual double 	toDouble(void) const;
 
 private:
+	int _value;
 
 };
+
+std::ostream &operator<<(std::ostream &out, ScalarInt const &value);
 
 #endif

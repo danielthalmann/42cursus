@@ -3,7 +3,7 @@
 
 NAME=convert
 
-SRCS=main.cpp Scalar.cpp ScalarInt.cpp
+SRCS=main.cpp Convert.cpp Scalar.cpp ScalarInt.cpp
 
 OBJS=$(SRCS:cpp=o)
 

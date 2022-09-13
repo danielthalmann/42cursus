@@ -1,16 +1,36 @@
 #include "Scalar.hpp"
-#include "ScalarInt.hpp"
 
 #define CLASSNAME "Scalar"
 
-
-ScalarInt Scalar::toInt() const
+Scalar::Scalar()
 {
-	ScalarInt s(_value);
-	return s;
+	#ifdef DEBUG
+		std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 }
 
-void Scalar::convert(std::string s)
+Scalar::Scalar(Scalar &scalar)
 {
-	std::cout << s << std::endl;
+	(*this) = (scalar);
+	#ifdef DEBUG
+		std::cout << "\x1b[32m" << "Copy Construct " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
 }
+
+Scalar::~Scalar()
+{
+	#ifdef DEBUG
+		std::cout << "\x1b[32m" << "Destructor " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
+}
+
+Scalar &Scalar::operator=(const Scalar &scalar)
+{
+	(void) scalar;
+	#ifdef DEBUG
+		std::cout << "\x1b[32m" << "Operator Equal " << "\x1b[0m" << CLASSNAME << std::endl;
+	#endif
+	return (*this);
+}
+
+

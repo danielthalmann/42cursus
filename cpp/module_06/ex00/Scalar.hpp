@@ -3,25 +3,26 @@
 
 #include <iostream>
 
-class ScalarInt;
-
-
-
-
 class Scalar
 {
 public:
-	virtual void parse(const std::string &value) = 0;
-	virtual bool canParsed(const std::string &value) const = 0;
-	virtual std::string getType() const = 0;
+	Scalar();
+	Scalar(Scalar &scalar);
+	virtual ~Scalar();
+	Scalar &operator=(const Scalar &scalar);
 
-	ScalarInt toInt() const;
+	virtual Scalar 	*clone(void) = 0;
 
-	static void convert(std::string s);
+	virtual std::string getType(void) const = 0;
+	virtual void	parse(const std::string &value) = 0;
+	virtual bool	canParsed(const std::string &value) const = 0;
 
-protected:
-	std::string	_type;
-	double		_value;
+	virtual char 	toChar(void) const = 0;
+	virtual int 	toInt(void) const = 0;
+	virtual float 	toFloat(void) const = 0;
+	virtual double 	toDouble(void) const = 0;
+
+private:
 
 };
 
