@@ -2,6 +2,8 @@
 #define SCALAR_HPP
 
 #include <iostream>
+#include <cstdlib>
+
 
 class Scalar
 {
@@ -24,8 +26,13 @@ public:
 	virtual float 	toFloat(void) const = 0;
 	virtual double 	toDouble(void) const = 0;
 
+	bool	isOverflow() const;
+	bool	isImpossible() const;
+
 protected:
 	double _value;
+	bool   _overflow;
+	bool   _impossible;
 
 
 };

@@ -2,6 +2,8 @@
 #define CONVERT_HPP
 
 #include "Scalar.hpp"
+#include "ScalarInt.hpp"
+
 #include <iostream>
 
 class Convert

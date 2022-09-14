@@ -25,6 +25,7 @@ public:
 	virtual float 	toFloat(void) const;
 	virtual double 	toDouble(void) const;
 
+
 private:
 
 };

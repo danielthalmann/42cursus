@@ -20,6 +20,7 @@ int main ( int argc, char **argv )
 		s->parse(value);
 
 		std::cout << s->getType() << std::endl;
+		s->print();
 
 		delete s;
 	}

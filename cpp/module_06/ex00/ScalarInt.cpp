@@ -2,7 +2,7 @@
 
 #define CLASSNAME "ScalarInt"
 
-ScalarInt::ScalarInt()
+ScalarInt::ScalarInt() : Scalar()
 {
 	#ifdef DEBUG
 		std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
@@ -27,6 +27,9 @@ ScalarInt::~ScalarInt()
 ScalarInt &ScalarInt::operator=(const ScalarInt &obj)
 {
 	_value = obj._value;
+	_overflow = obj._overflow;
+	_impossible = obj._impossible;
+
 	#ifdef DEBUG
 		std::cout << "\x1b[32m" << "Operator Equal " << "\x1b[0m" << CLASSNAME << std::endl;
 	#endif

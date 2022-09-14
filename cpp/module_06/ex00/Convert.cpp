@@ -1,12 +1,10 @@
 #include "Convert.hpp"
-#include "ScalarInt.hpp"
 
 #define CLASSNAME "Convert"
 
 Convert::Convert()
 {
 	_scalar[0] = new ScalarInt();
-
 	#ifdef DEBUG
 		std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
 	#endif
