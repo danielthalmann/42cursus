@@ -35,6 +35,31 @@ Scalar &Scalar::operator=(const Scalar &scalar)
 	return (*this);
 }
 
+char 	Scalar::toChar(void) const
+{
+	return static_cast<char>(_value);
+}
+
+int 	Scalar::toInt(void) const
+{
+	return static_cast<int>(_value);
+}
+
+float 	Scalar::toFloat(void) const
+{
+	return static_cast<float>(_value);
+}
+
+double 	Scalar::toDouble(void) const
+{
+	return static_cast<double>(_value);
+}
+
+void Scalar::parse(const std::string &value)
+{	
+	_value = std::atof(value.c_str());
+}
+
 bool 	Scalar::isOverflow(void) const
 {
 	return _overflow;
@@ -56,7 +81,7 @@ void Scalar::print( void )
 		return ;	
 	}
 
-	if (_value < 0.0 || _value > 255.0)
+	if (_value < std::numeric_limits<char>::min() || _value > std::numeric_limits<char>::max())
 		std::cout << "char: overflow" << std::endl;
 	else {
 		if (std::isprint(_value))
@@ -64,12 +89,17 @@ void Scalar::print( void )
 		else
 			std::cout << "char: Non displayable" << std::endl;
 	}
-	if (_value < 0.0 || _value > 255.0)
-		
+
+	if (_value < std::numeric_limits<int>::min() || _value > std::numeric_limits<int>::max())
+		std::cout << "int: overflow" << std::endl;
 	else
 		std::cout << "int: " << this->toInt() << std::endl;
+	
+	if (_value < std::numeric_limits<float>::min() || _value > std::numeric_limits<float>::max())
+		std::cout << "float: overflow" << std::endl;
+	else
+		std::cout << "float: " << this->toFloat() << std::endl;
 
-	std::cout << "float: " << this->toFloat() << std::endl;
 	std::cout << "double: " << this->toDouble() << std::endl;
 }
 

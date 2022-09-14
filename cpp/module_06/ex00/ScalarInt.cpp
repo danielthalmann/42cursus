@@ -41,11 +41,6 @@ Scalar 	*ScalarInt::clone(void)
 	return new ScalarInt();
 }
 
-void ScalarInt::parse(const std::string &value)
-{
-	_value = atoi(value.c_str());
-}
-
 bool ScalarInt::canParsed(const std::string &value) const
 {
 	int i = 0;
@@ -55,7 +50,7 @@ bool ScalarInt::canParsed(const std::string &value) const
 
 	while (value[i])
 	{
-		if (!isdigit(value[i]))
+		if (!std::isdigit(value[i]))
 			return false;
 		i++;
 	}
@@ -66,26 +61,6 @@ bool ScalarInt::canParsed(const std::string &value) const
 std::string ScalarInt::getType(void) const
 {
 	return std::string("int");
-}
-
-char 	ScalarInt::toChar(void) const
-{
-	return static_cast<char>(_value);
-}
-
-int 	ScalarInt::toInt(void) const
-{
-	return static_cast<int>(_value);
-}
-
-float 	ScalarInt::toFloat(void) const
-{
-	return static_cast<float>(_value);
-}
-
-double 	ScalarInt::toDouble(void) const
-{
-	return static_cast<double>(_value);
 }
 
 std::ostream &operator<<(std::ostream &out, ScalarInt const &value)

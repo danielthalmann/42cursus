@@ -2,7 +2,9 @@
 #define CONVERT_HPP
 
 #include "Scalar.hpp"
+#include "ScalarChar.hpp"
 #include "ScalarInt.hpp"
+#include "ScalarFloat.hpp"
 
 #include <iostream>
 
@@ -25,7 +27,7 @@ public:
 		}
 	};
 
-	static const int scalar_length = 1;
+	static const int scalar_length = 3;
 
 protected:
 

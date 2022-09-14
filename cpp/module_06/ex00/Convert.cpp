@@ -4,7 +4,9 @@
 
 Convert::Convert()
 {
-	_scalar[0] = new ScalarInt();
+	_scalar[0] = new ScalarChar();
+	_scalar[1] = new ScalarInt();
+	_scalar[2] = new ScalarFloat();
 	#ifdef DEBUG
 		std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
 	#endif

@@ -18,14 +18,14 @@ public:
 	virtual Scalar 	*clone(void) = 0;
 
 	virtual std::string getType(void) const = 0;
-	virtual void	parse(const std::string &value) = 0;
 	virtual bool	canParsed(const std::string &value) const = 0;
 
-	virtual char 	toChar(void) const = 0;
-	virtual int 	toInt(void) const = 0;
-	virtual float 	toFloat(void) const = 0;
-	virtual double 	toDouble(void) const = 0;
+	virtual char 	toChar(void) const;
+	virtual int 	toInt(void) const;
+	virtual float 	toFloat(void) const;
+	virtual double 	toDouble(void) const;
 
+	virtual void	parse(const std::string &value);
 	bool	isOverflow() const;
 	bool	isImpossible() const;
 

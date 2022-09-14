@@ -4,6 +4,16 @@
 
 int main ( int argc, char **argv )
 {
+/*
+	double max = std::numeric_limits<double>::max();
+	double min = std::numeric_limits<double>::min();
+    double inf = std::numeric_limits<double>::infinity();
+ 
+    if(inf > max)
+        std::cout << inf << " is greater than " << max << '\n';
+    if(-inf < min)
+        std::cout << -inf << " is small than " << min << '\n';
+*/
 
 	if (argc < 2)
 	{
