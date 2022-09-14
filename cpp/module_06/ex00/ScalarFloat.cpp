@@ -88,12 +88,14 @@ void ScalarFloat::parse(const std::string &value)
 	if(value == "-inff")
 	{
 		_value = -std::numeric_limits<float>::infinity();
+		_infinity_m = true;
 		return ;
 	}
 
 	if(value == "+inff")
 	{
 		_value = std::numeric_limits<float>::infinity();
+		_infinity_p = true;
 		return ;
 	}
 

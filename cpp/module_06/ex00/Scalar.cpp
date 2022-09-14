@@ -9,6 +9,8 @@ Scalar::Scalar()
 	#endif
 	_impossible = false;
 	_overflow = false;
+	_infinity_p = false;
+	_infinity_m = false;
 }
 
 Scalar::Scalar(Scalar &scalar)
@@ -85,7 +87,7 @@ void Scalar::print( void )
 		std::cout << "char: overflow" << std::endl;
 	else {
 		if (std::isprint(_value))
-			std::cout << "char: " << this->toChar() << std::endl;
+			std::cout << "char: '" << this->toChar() << "'" << std::endl;
 		else
 			std::cout << "char: Non displayable" << std::endl;
 	}
@@ -95,20 +97,43 @@ void Scalar::print( void )
 	else
 		std::cout << "int: " << this->toInt() << std::endl;
 	
-	if (_value < std::numeric_limits<float>::min() || _value > std::numeric_limits<float>::max())
-		std::cout << "float: overflow" << std::endl;
+	if (_infinity_m)
+	{
+		std::cout << "float: -inff" << std::endl;
+	}
+	else if (_infinity_p)
+	{
+		std::cout << "float: +inff" << std::endl;
+	}
 	else
 	{
-		if ( std::floorf(_value) != _value )
-			std::cout << "float: " << this->toFloat() << "f" << std::endl;
+		if (_value < std::numeric_limits<float>::min() || _value > std::numeric_limits<float>::max())
+			std::cout << "float: overflow" << std::endl;
 		else
-			std::cout << "float: " << this->toFloat() << ".0f" << std::endl;
+		{
+			if ( std::floorf(_value) != _value )
+				std::cout << "float: " << this->toFloat() << "f" << std::endl;
+			else
+				std::cout << "float: " << this->toFloat() << ".0f" << std::endl;
+		}		
 	}
 
-	if ( std::floor(_value) != _value )
-		std::cout << "double: " << this->toDouble() << "" << std::endl;
+
+	if (_infinity_m)
+	{
+		std::cout << "float: -inf" << std::endl;
+	}
+	else if (_infinity_p)
+	{
+		std::cout << "float: +inf" << std::endl;
+	}
 	else
-		std::cout << "double: " << this->toDouble() << ".0" << std::endl;
+	{
+		if ( std::floor(_value) != _value )
+			std::cout << "double: " << this->toDouble() << "" << std::endl;
+		else
+			std::cout << "double: " << this->toDouble() << ".0" << std::endl;
+	}
 
 }
 

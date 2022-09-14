@@ -82,13 +82,15 @@ void ScalarDouble::parse(const std::string &value)
 {
 	if(value == "-inf")
 	{
-		_value = -std::numeric_limits<float>::infinity();
+		_value = -std::numeric_limits<double>::infinity();
+		_infinity_m = true;
 		return ;
 	}
 
 	if(value == "+inf")
 	{
-		_value = std::numeric_limits<float>::infinity();
+		_value = std::numeric_limits<double>::infinity();
+		_infinity_p = true;
 		return ;
 	}
 

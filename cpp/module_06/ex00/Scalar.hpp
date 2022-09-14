@@ -30,11 +30,11 @@ public:
 	bool	isImpossible() const;
 
 protected:
-	double _value;
-	bool   _overflow;
-	bool   _impossible;
-
-
+	double	_value;
+	bool	_overflow;
+	bool	_impossible;
+	bool	_infinity_p;
+	bool	_infinity_m;
 };
 
 #endif

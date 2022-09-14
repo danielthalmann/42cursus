@@ -4,7 +4,19 @@
 
 int main ( int argc, char **argv )
 {
+
+
 /*
+		try
+		{
+			double v = 923892393823.5;
+			char e = static_cast<char>(v);
+			std::cout << "char: '" << e << "'\n";
+		}
+		catch(const char *r)
+		{
+			std::cout << "char: " << r << "\n";
+		}
 	double max = std::numeric_limits<double>::max();
 	double min = std::numeric_limits<double>::min();
     double inf = std::numeric_limits<double>::infinity();
