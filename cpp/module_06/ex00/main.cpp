@@ -29,7 +29,7 @@ int main ( int argc, char **argv )
 		Scalar *s = c.scalar(value);
 		s->parse(value);
 
-		std::cout << s->getType() << std::endl;
+		//std::cout << s->getType() << std::endl;
 		s->print();
 
 		delete s;

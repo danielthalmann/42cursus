@@ -1,18 +1,18 @@
-#ifndef SCALARFLOAT_HPP
-#define SCALARFLOAT_HPP
+#ifndef SCALARFDOUBLE_HPP
+#define SCALARFDOUBLE_HPP
 
 #include "Scalar.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <limits>
 
-class ScalarFloat : public Scalar
+class ScalarDouble : public Scalar
 {
 public:
-	ScalarFloat();
-	ScalarFloat(ScalarFloat &obj);
-	virtual ~ScalarFloat();
-	ScalarFloat &operator=(const ScalarFloat &obj);
+	ScalarDouble();
+	ScalarDouble(ScalarDouble &obj);
+	virtual ~ScalarDouble();
+	ScalarDouble &operator=(const ScalarDouble &obj);
 
 	virtual Scalar 	*clone(void);
 	virtual void parse(const std::string &value);

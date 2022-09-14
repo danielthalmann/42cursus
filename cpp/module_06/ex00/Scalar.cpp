@@ -98,9 +98,18 @@ void Scalar::print( void )
 	if (_value < std::numeric_limits<float>::min() || _value > std::numeric_limits<float>::max())
 		std::cout << "float: overflow" << std::endl;
 	else
-		std::cout << "float: " << this->toFloat() << std::endl;
+	{
+		if ( std::floorf(_value) != _value )
+			std::cout << "float: " << this->toFloat() << "f" << std::endl;
+		else
+			std::cout << "float: " << this->toFloat() << ".0f" << std::endl;
+	}
 
-	std::cout << "double: " << this->toDouble() << std::endl;
+	if ( std::floor(_value) != _value )
+		std::cout << "double: " << this->toDouble() << "" << std::endl;
+	else
+		std::cout << "double: " << this->toDouble() << ".0" << std::endl;
+
 }
 
 

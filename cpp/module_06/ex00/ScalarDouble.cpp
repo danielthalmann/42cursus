@@ -1,15 +1,15 @@
-#include "ScalarFloat.hpp"
+#include "ScalarDouble.hpp"
 
-#define CLASSNAME "ScalarFloat"
+#define CLASSNAME "ScalarDouble"
 
-ScalarFloat::ScalarFloat() : Scalar()
+ScalarDouble::ScalarDouble() : Scalar()
 {
 	#ifdef DEBUG
 		std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
 	#endif
 }
 
-ScalarFloat::ScalarFloat(ScalarFloat &obj) : Scalar(obj)
+ScalarDouble::ScalarDouble(ScalarDouble &obj) : Scalar(obj)
 {
 	(*this) = (obj);
 	#ifdef DEBUG
@@ -17,14 +17,14 @@ ScalarFloat::ScalarFloat(ScalarFloat &obj) : Scalar(obj)
 	#endif
 }
 
-ScalarFloat::~ScalarFloat()
+ScalarDouble::~ScalarDouble()
 {
 	#ifdef DEBUG
 		std::cout << "\x1b[32m" << "Destructor " << "\x1b[0m" << CLASSNAME << std::endl;
 	#endif
 }
 
-ScalarFloat &ScalarFloat::operator=(const ScalarFloat &obj)
+ScalarDouble &ScalarDouble::operator=(const ScalarDouble &obj)
 {
 	_value = obj._value;
 	_overflow = obj._overflow;
@@ -36,16 +36,16 @@ ScalarFloat &ScalarFloat::operator=(const ScalarFloat &obj)
 	return (*this);
 }
 
-Scalar 	*ScalarFloat::clone(void)
+Scalar 	*ScalarDouble::clone(void)
 {
-	return new ScalarFloat();
+	return new ScalarDouble();
 }
 
-bool ScalarFloat::canParsed(const std::string &value) const
+bool ScalarDouble::canParsed(const std::string &value) const
 {
 	int i = 0;
 	bool comma = false;
-	char const *literal[] = {"-inff", "+inff", "nanf"};
+	char const *literal[] = {"-inf", "+inf", "nan"};
 	
 	for (size_t i = 0; i < 3; i++)
 	{
@@ -58,12 +58,7 @@ bool ScalarFloat::canParsed(const std::string &value) const
 
 	while (value[i])
 	{
-		if (i == (int)(value.length() - 1))
-		{
-			if (value[i] != 'f')
-				return false;
-		}
-		else if (value[i] == '.')
+		if (value[i] == '.')
 		{
 			if (comma)
 				return false;
@@ -78,36 +73,35 @@ bool ScalarFloat::canParsed(const std::string &value) const
 	return true;
 }
 
-std::string ScalarFloat::getType(void) const
+std::string ScalarDouble::getType(void) const
 {
-	return std::string("float");
+	return std::string("double");
 }
 
-void ScalarFloat::parse(const std::string &value)
+void ScalarDouble::parse(const std::string &value)
 {
-	if(value == "-inff")
+	if(value == "-inf")
 	{
 		_value = -std::numeric_limits<float>::infinity();
 		return ;
 	}
 
-	if(value == "+inff")
+	if(value == "+inf")
 	{
 		_value = std::numeric_limits<float>::infinity();
 		return ;
 	}
 
-	if(value == "nanf")
+	if(value == "nan")
 	{
 		_impossible = true;
 		return ;
 	}
 	
-
 	_value = std::atof(value.c_str());
 }
 
-std::ostream &operator<<(std::ostream &out, ScalarFloat const &value)
+std::ostream &operator<<(std::ostream &out, ScalarDouble const &value)
 {
         out << "\x1b[33m" << value.toInt() << "\x1b[0m" << " " << std::endl;
         return out;

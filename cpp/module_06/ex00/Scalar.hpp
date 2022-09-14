@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
-
+#include <tgmath.h>
 
 class Scalar
 {

@@ -5,6 +5,7 @@
 #include "ScalarChar.hpp"
 #include "ScalarInt.hpp"
 #include "ScalarFloat.hpp"
+#include "ScalarDouble.hpp"
 
 #include <iostream>
 
@@ -27,7 +28,7 @@ public:
 		}
 	};
 
-	static const int scalar_length = 3;
+	static const int scalar_length = 4;
 
 protected:
 
