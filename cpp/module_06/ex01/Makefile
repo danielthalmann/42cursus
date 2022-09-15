@@ -1,7 +1,7 @@
 
 # https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html
 
-NAME=convert
+NAME=serialize
 
 SRCS=main.cpp serialize.cpp
 
