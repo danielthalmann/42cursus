@@ -2,16 +2,17 @@
 #define BASE_HPP
 
 #include <iostream>
+#include <cstdlib>
 
 class Base
 {
 public:
 	virtual ~Base();
 
-	Base * generate(void);
+	static Base * generate(void);
 	
-	void identify(Base* p);
-	void identify(Base& p);
+	static void identify(Base* p);
+	static void identify(Base& p);
 
 private:
 

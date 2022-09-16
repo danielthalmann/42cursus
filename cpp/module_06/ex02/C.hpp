@@ -6,10 +6,6 @@
 
 class C : public Base
 {
-public:
-	virtual ~C();
-
-private:
 
 };
 
