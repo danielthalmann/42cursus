@@ -111,7 +111,7 @@ void Scalar::print( void )
 			std::cout << "float: overflow" << std::endl;
 		else
 		{
-			if ( std::floorf(_value) != _value )
+			if ( floor(_value) != _value )
 				std::cout << "float: " << this->toFloat() << "f" << std::endl;
 			else
 				std::cout << "float: " << this->toFloat() << ".0f" << std::endl;
@@ -129,7 +129,7 @@ void Scalar::print( void )
 	}
 	else
 	{
-		if ( std::floor(_value) != _value )
+		if ( floor(_value) != _value )
 			std::cout << "double: " << this->toDouble() << "" << std::endl;
 		else
 			std::cout << "double: " << this->toDouble() << ".0" << std::endl;
