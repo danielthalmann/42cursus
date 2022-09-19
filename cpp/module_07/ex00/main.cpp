@@ -4,18 +4,17 @@
 
 void print (int &a, int &b)
 {
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
+	std::cout << "a : " << a << std::endl;
+	std::cout << "b : " << b << std::endl;
 	std::cout << std::endl;
 }
 
 int main ( void )
 {
 
-	int a = 5;
-	int b = 9;
+	int a = 4;
+	int b = 2;
 	
-
 	print (a, b);
 
 	std::cout << "swap<int>(a, b) " << std::endl;
