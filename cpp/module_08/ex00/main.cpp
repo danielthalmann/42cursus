@@ -15,7 +15,7 @@ int main ( void )
 
 	lst.push_back(2);
 
-	easyfind(lst, 5);
+	std::vector<int>::iterator found = easyfind(lst, 5);
 
 	return (0);
 }
