@@ -5,21 +5,19 @@
 #include <algorithm>
 #include <vector>
 #include <list>
+#include <map>
 
-template < typename  T>
-typename T::iterator easyfind(T &lst, int value)
-{
-	#ifdef DEBUG
-		std::cout << "\x1b[32m" << "easyfind " << "\x1b[0m" << std::endl;
-	#endif
-
-	typename T::iterator iterator = std::find(lst.begin(), lst.end(), value);
-
-	if (iterator == lst.end())
-		throw std::exception();
-
-	return (iterator);
+class NotFoundException : public std::exception {
+   const char * what () const throw () {
+      return "Value not found";
+   }
 };
 
+template < typename T>
+typename T::iterator easyfind(T &lst, int value);
+
+std::map<int, int>::iterator easyfind(std::map<int, int> &lst, int value);
+
+#include "easyfind.tpp"
 
 #endif
