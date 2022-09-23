@@ -64,6 +64,9 @@ void Span::addNumber (unsigned int n)
 
 unsigned int Span::shortestSpan( void )
 {
+	unsigned int min = std::numeric_limits<unsigned int>::max();
+	unsigned int val;
+
 	if (_array.size() < 2)	
 		throw std::domain_error("Size of list is not enought");
 
@@ -71,15 +74,24 @@ unsigned int Span::shortestSpan( void )
 		iter != _array.end(); 
 		++iter )
 	{
-		if (min > *iter)
-			min = *iter;
+		for (std::vector<unsigned int>::const_iterator iter2 = _array.begin(); 
+			iter2 != _array.end(); 
+			++iter2 )
+		{
+			if (iter != iter2)
+			{
+				if (*iter2 > *iter)
+					val = *iter2 - *iter;
+				else
+					val = *iter - *iter2;
 
-		if (max < *iter)
-			max = *iter;
+				if (min > val)
+					min = val;				
+			}
+		}
 	}
 
-
-	return 0;
+	return min;
 }
 
 unsigned int Span::longestSpan( void )

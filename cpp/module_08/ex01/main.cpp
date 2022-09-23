@@ -10,10 +10,11 @@ int main ( void )
 		Span span(3);
 
 		span.addNumber(1);
-	//	span.addNumber(13);
-	//	span.addNumber(5);
+		span.addNumber(13);
+		span.addNumber(5);
 
 		std::cout << "longestSpan : " << span.longestSpan() << std::endl;
+		std::cout << "shortestSpan : " << span.shortestSpan() << std::endl;
 
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
