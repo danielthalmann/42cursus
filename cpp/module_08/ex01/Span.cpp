@@ -7,7 +7,6 @@ Span::Span()
 	#ifdef DEBUG
 		std::cout << "\x1b[32m" << "Construct " << "\x1b[0m" << CLASSNAME << std::endl;
 	#endif
-	_size_limit = 0;
 }
 
 Span::Span(unsigned int size)
@@ -15,7 +14,8 @@ Span::Span(unsigned int size)
 	#ifdef DEBUG
 		std::cout << "\x1b[32m" << "Construct with size " << "\x1b[0m" << CLASSNAME << std::endl;
 	#endif
-	_size_limit = size;
+	_array.reserve(size);
+	//_size_limit = size;
 }
 
 
@@ -41,7 +41,7 @@ Span &Span::operator=(const Span &span)
 	#endif
 
 	_array.clear();
-	_size_limit = span._size_limit;
+	_array.reserve(_array.size());
 
 	for (std::vector<unsigned int>::const_iterator iter = span._array.begin(); 
 		iter != span._array.end(); 
@@ -55,7 +55,7 @@ Span &Span::operator=(const Span &span)
 
 void Span::addNumber (unsigned int n)
 {
-	if (_array.size() < _size_limit)
+	if (_array.size() < _array.capacity())
 		_array.push_back(n);
 	else
 		throw std::range_error("Limit exceeded");
