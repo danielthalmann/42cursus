@@ -15,22 +15,22 @@ public:
 	virtual ~Span();
 	Span &operator=(const Span &span);
 
-	void addNumber (unsigned int n);
+	void addNumber (int n);
 	template <class T>
 	void addNumber (T begin, T end);
 
-	unsigned int shortestSpan( void );
-	unsigned int longestSpan( void );
+	int shortestSpan( void );
+	int longestSpan( void );
 
 	class iterator {
-		std::vector<unsigned int>::iterator _iter;
+		std::vector<int>::iterator _iter;
     public:
-        explicit iterator(std::vector<unsigned int>::iterator iter) : _iter(iter) {}
+        explicit iterator(std::vector<int>::iterator iter) : _iter(iter) {}
         iterator& operator++() { _iter++; return *this; }
         iterator operator++(int) {iterator retval = *this; ++(*this); return retval; }
         bool operator==(iterator other) const {return _iter == other._iter;}
         bool operator!=(iterator other) const {return !(*this == other);}
-        unsigned int operator*() const {return *_iter;}
+        int operator*() const {return *_iter;}
         iterator& operator=(unsigned int value) { *_iter = value; return *this; }
     };
     iterator begin() {return iterator(_array.begin()); }
@@ -38,7 +38,7 @@ public:
 
 private:
 
-	std::vector<unsigned int> _array;
+	std::vector<int> _array;
 //	unsigned int _size_limit;
 
 };

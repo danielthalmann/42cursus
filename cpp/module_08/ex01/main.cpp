@@ -21,36 +21,78 @@ void displayContentSpan(Span &span)
 	std::cout << std::endl;
 }
 
-int main ( void )
+void normalTest(std::vector<int> &v)
 {
+	std::cout << std::endl;
 
 	try {
 
-		std::vector<int> v;
-		
-		v.push_back(2);
-		v.push_back(24);
-		v.push_back(42);
+		std::cout << "test :" << std::endl;
+		Span span(v.size());
+		span.addNumber(v.begin(), v.end());
 
-		Span spanA(2);
-
-		spanA.addNumber(v.begin(), v.end());
-
-		displayContentSpan(spanA);
-		displayLong(spanA);
-
-		Span spanB(3);
-
-		spanB.addNumber(1);
-		spanB.addNumber(13);
-		spanB.addNumber(5);
-
-		displayContentSpan(spanB);
-		displayLong(spanB);
+		displayContentSpan(span);
+		displayLong(span);
 
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
-	}
+	}	
+}
 
+void limitTest(std::vector<int> &v)
+{
+	std::cout << std::endl;
+
+	try {
+
+		std::cout << "test limit :" << std::endl;
+		Span span(2);
+		span.addNumber(v.begin(), v.end());
+
+		displayContentSpan(span);
+		displayLong(span);
+
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}	
+}
+
+void sizeTest()
+{
+	std::cout << std::endl;
+
+	try {
+		std::cout << "test size :" << std::endl;
+		Span span(2);
+		span.addNumber(99);
+
+		displayContentSpan(span);
+		displayLong(span);
+	
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}	
+}
+
+
+
+int main ( void )
+{
+	std::vector<int> v;
+	
+	v.push_back(2);
+	v.push_back(24);
+	v.push_back(42);
+
+	limitTest(v);
+	sizeTest();
+	normalTest(v);
+
+	v.push_back(-26);
+	v.push_back(-24);
+	normalTest(v);
+
+	std::cout << std::endl;
+	
 	return (0);
 }

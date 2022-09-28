@@ -43,7 +43,7 @@ Span &Span::operator=(const Span &span)
 	_array.clear();
 	_array.reserve(_array.size());
 
-	for (std::vector<unsigned int>::const_iterator iter = span._array.begin(); 
+	for (std::vector<int>::const_iterator iter = span._array.begin(); 
 		iter != span._array.end(); 
 		++iter )
 	{
@@ -53,7 +53,7 @@ Span &Span::operator=(const Span &span)
 	return (*this);
 }
 
-void Span::addNumber (unsigned int n)
+void Span::addNumber (int n)
 {
 	if (_array.size() < _array.capacity())
 		_array.push_back(n);
@@ -62,19 +62,19 @@ void Span::addNumber (unsigned int n)
 	
 }
 
-unsigned int Span::shortestSpan( void )
+int Span::shortestSpan( void )
 {
-	unsigned int min = std::numeric_limits<unsigned int>::max();
-	unsigned int val;
+	int min = std::numeric_limits<int>::max();
+	int val;
 
 	if (_array.size() < 2)	
 		throw std::domain_error("Size of list is not enought");
 
-	for (std::vector<unsigned int>::const_iterator iter = _array.begin(); 
+	for (std::vector<int>::const_iterator iter = _array.begin(); 
 		iter != _array.end(); 
 		++iter )
 	{
-		for (std::vector<unsigned int>::const_iterator iter2 = _array.begin(); 
+		for (std::vector<int>::const_iterator iter2 = _array.begin(); 
 			iter2 != _array.end(); 
 			++iter2 )
 		{
@@ -94,15 +94,15 @@ unsigned int Span::shortestSpan( void )
 	return min;
 }
 
-unsigned int Span::longestSpan( void )
+int Span::longestSpan( void )
 {
-	unsigned int min = std::numeric_limits<unsigned int>::max();
-	unsigned int max = std::numeric_limits<unsigned int>::min();
+	int min = std::numeric_limits<int>::max();
+	int max = std::numeric_limits<int>::min();
 
 	if (_array.size() < 2)	
 		throw std::domain_error("Size of list is not enought");
 
-	for (std::vector<unsigned int>::const_iterator iter = _array.begin(); 
+	for (std::vector<int>::const_iterator iter = _array.begin(); 
 		iter != _array.end(); 
 		++iter )
 	{
