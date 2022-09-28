@@ -23,9 +23,11 @@ Base *Base::generate(void)
 			return new A();
 		break;
 		case 1:
+			std::cout << "generate object " << "\x1b[34m" << "B" << "\x1b[0m" << std::endl;
 			return new B();
 		break;
 	}
+	std::cout << "generate object " << "\x1b[32m" << "C" << "\x1b[0m" << std::endl;
 	return new C();
 }
 
