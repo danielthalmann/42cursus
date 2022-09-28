@@ -10,10 +10,10 @@ class MutantStack : public std::stack < T >
 public:
 //	virtual ~MutantStack<T>() {};
 
- 	typename std::stack<T>::iterator iterator;
+ 	typedef typename std::stack<T>::container_type::iterator iterator;
 
-	iterator begin () { return c.begin(); };
-	iterator end () { return c.end(); };
+	iterator begin () { return this->c.begin(); };
+	iterator end () { return this->c.end(); };
 
 };
 
