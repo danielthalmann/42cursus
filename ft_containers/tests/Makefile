@@ -1,7 +1,7 @@
 
 # https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html
 
-NAME=mutant
+NAME=test
 
 SRCS=main.cpp
 
@@ -9,7 +9,7 @@ OBJS=$(SRCS:cpp=o)
 
 CXX=c++
 
-CXXFLAGS=-Wall -Wextra -Werror -std=c++98
+CXXFLAGS=-Wall -Wextra -Werror -std=c++98 -I../include
 
 LDFLAGS=-lstdc++ -lm
 
