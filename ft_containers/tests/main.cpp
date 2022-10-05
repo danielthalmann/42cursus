@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "allocator.hpp"
+#include "vector.hpp"
 #include <vector>
 
 
@@ -9,6 +9,9 @@ int main(int argc, char* argv[])
     (void) i;
     (void) argc;
     (void) argv;
+
+    ft::vector<int> v;
+   
 
     printf("Hello world\n");
     return 0;
