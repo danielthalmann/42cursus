@@ -5,8 +5,7 @@
 
 int main(int argc, char* argv[])
 {
-    allocator<int> i;
-    (void) i;
+ 
     (void) argc;
     (void) argv;
 
