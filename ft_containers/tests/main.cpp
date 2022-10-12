@@ -9,7 +9,9 @@ int main(int argc, char* argv[])
     (void) argc;
     (void) argv;
 
-    ft::vector<int> v;
+	std::vector<int> va;
+
+    ft::vector<int> vb;
    
 
     printf("Hello world\n");

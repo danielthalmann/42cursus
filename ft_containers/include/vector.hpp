@@ -52,13 +52,15 @@ namespace ft
 		iterator end()					{	return iterator(this->_end); }
 		const_iterator end() const		{	return const_iterator(this->_end); }
 
-		size_type size()				{ 	return size_type(this->_end - this->_start); }
-		
+		size_type size()				{ 	return size_type(this->_finish - this->_start); }
+
+		size_type capacity() const		{	return size_type(this->_end - this->_start); }
+
 		size_type max_size() const		{	return size_type(_allocator.max_size()); }
     	
 		void resize(size_type n, value_type v = value_type()) {
 			if (n > size())
-				fill_insert(end(), n - size(), v);
+				fill_insert(this->_start, n - size(), v);
 			else if (n < size())
 				erase_at_end(this->_start + n);
 		}
@@ -80,16 +82,32 @@ namespace ft
 		pointer data()							{	return this->_start; }
 		const_pointer data()	const			{	return this->_start; }
 
+	    void push_back(const value_type& v) {
+
+			if (this->_finish != this->_end) {
+				*this->_finish = v;
+				this->_finish++;
+			}
+			else {
+				realloc_insert(v);
+			}
+
+		}
+
+
 	protected:
 
 		void assign( size_type count, const T& value );
-		void allocate(size_type n) { _start = _allocator.allocate(n); _end = _start + n; }
-		void fill_insert(iterator end, size_type n, reference v) {	}
+		void allocate(size_type n) { _start = _allocator.allocate(n); this->_finish = this->_start; _end = this->_start + n; }
+		void fill_insert(iterator position, size_type n, reference v) {	
+			for (; __first != __last; ++__first, (void)++__cur)
+				_allocator.construct(__alloc, std::__addressof(*__cur), *__first);
+
+		}
 		void erase_at_end(pointer end) {	
 			_allocator.deallocate(this->_end - end);
 			this->_end = end;
 		}
-
 		void range_check(size_type n) const
 		{
 			if (n >= this->size())
@@ -100,6 +118,7 @@ namespace ft
 	private:
 		pointer			_start;
 		pointer			_end;
+		pointer			_finish;
 		size_type		_size;
 		allocator_type	_allocator;
 
