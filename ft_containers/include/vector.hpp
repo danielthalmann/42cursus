@@ -154,20 +154,11 @@ namespace ft
 
 
 		void swap( vector<T, Allocator>& other ) {
-			
-			Pointer temp;
 
-			temp = this->_start;
-			this->_start = other._start;
-			other._start = temp;
+			std::swap(this->_start, other._start);
+			std::swap(this->_end, other._end);
+			std::swap(this->_finish, other._finish);
 
-			temp = this->_end;
-			this->_end = other._end;
-			other._end = temp;
-
-			temp = this->_finish;
-			this->_finish = other._finish;
-			other._finish = temp;
 		}
 
 
@@ -231,8 +222,57 @@ namespace ft
 		pointer			_finish;
 		allocator_type	_allocator;
 
-
 	};
 
+	/* Relationnal operators */
+	template< class T, class allocator >
+	bool operator==(const vector< T, allocator > &lhs, const vector< T, allocator > &rhs)
+	{
+		if (lhs.size() != rhs.size()) 
+			return (false);
+		// TODO
+		return false;
+	}
+
+	template< class T, class allocator >
+	bool operator!=(const vector< T, allocator > &lhs, const vector< T, allocator > &rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	template< class T, class allocator >
+	bool operator<(const vector< T, allocator > &lhs, const vector< T, allocator > &rhs)
+	{
+		// TODO
+	}
+
+	template< class T, class allocator >
+	bool operator<=(const vector< T, allocator > &lhs, const vector< T, allocator > &rhs)
+	{
+		return !(rhs < lhs);
+	}
+
+	template< class T, class allocator >
+	bool operator>(const vector< T, allocator > &lhs, const vector< T, allocator > &rhs)
+	{
+		return rhs < lhs;
+	}
+
+	template< class T, class allocator >
+	bool operator>=(const vector< T, allocator > &lhs, const vector< T, allocator > &rhs)
+	{
+		return !(lhs < rhs);
+	}
+
+	template< class T, class allocator >
+	void swap( vector<T,allocator>& lhs, vector<T,allocator>& rhs )
+	{
+		lhs.swap(rhs);
+	}
+
 }
+
+
+
+
 #endif
