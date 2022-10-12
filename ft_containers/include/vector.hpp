@@ -35,18 +35,15 @@ namespace ft
 		 * @brief Construct a new vector object
 		 * 
 		 */
-		vector () {
-			// TODO
-		}
-		vector(size_type n, const_reference value, allocator_type a = allocator_type()) : _allocator(a), _size(n)
+		vector () : _first(0), _start(0), _end(0) { }
+		vector(size_type n, const_reference value, allocator_type a = allocator_type()) : _allocator(a)
 		{ 
+			init_allocate(n);
 			// TODO
-			(void) value;
-			allocate (n);
 		}
 
 		vector(vector &vector) {	
-			// TODO 
+			*this = vector;
 		}
 		
 		virtual ~vector() {
@@ -108,20 +105,7 @@ namespace ft
 		size_type max_size() const				{	return size_type(_allocator.max_size()); }
 		void reserve( size_type n )		{	
 		    if (n > capacity())
-			{
-				pointer oldstart = this->_start;
-				pointer oldend = this->_end;
-				size_type s = size();
-				this->_start = _allocator.allocate(n, this->_start);
-				for (size_type i = 0; i < s; ++i){
-					_allocator.construct(this->_start + i, *(oldstart + i));
-					_allocator.destroy(oldstart + i);
-				}
-				this->_end = this->_start + n;
-				this->_finish = this->_start + s;
-				if (oldend - oldstart > 0)
-					_allocator.dealocate(oldstart, oldend - oldstart);
-			}
+				grow(n);
 		}
 		size_type capacity() const				{	return size_type(this->_end - this->_start); }
 
@@ -135,6 +119,30 @@ namespace ft
 			// TODO
 		}
 
+		iterator erase (iterator position){
+			// TODO
+		}
+		iterator erase (iterator first, iterator last){
+			// TODO
+		}
+
+	    void push_back(const value_type& v) {
+			if (this->_finish == this->_end) {
+				grow(capacity() + 1);
+			}
+			*this->_finish = v;
+			this->_finish++;
+		}
+
+		void pop_back() {
+			
+			if (size() > 0)
+			{
+				this->_finish--;
+				_allocator.destroy(this->_finish);
+			}
+
+		}
 
 		void resize(size_type n, value_type v = value_type()) {
 			if (n > size())
@@ -143,17 +151,7 @@ namespace ft
 				erase_at_end(this->_start + n);
 		}
 
-	    void push_back(const value_type& v) {
 
-			if (this->_finish != this->_end) {
-				*this->_finish = v;
-				this->_finish++;
-			}
-			else {
-				realloc_insert(v);
-			}
-
-		}
 
 		void swap( vector<T, Allocator>& other ) {
 			
@@ -175,13 +173,34 @@ namespace ft
 
 	protected:
 
-		void assign( size_type count, const T& value );
-		void allocate(size_type n) { _start = _allocator.allocate(n); this->_finish = this->_start; _end = this->_start + n; }
+		void realloc_insert(const value_type& v) {
+			reserve(capacity() + 1);
+		}
+
+		void grow(size_type n) {			
+			pointer oldstart = this->_start;
+			pointer oldend = this->_end;
+			size_type s = size();
+			this->_start = _allocator.allocate(n, this->_start);
+			for (size_type i = 0; i < s; ++i){
+				_allocator.construct(this->_start + i, *(oldstart + i));
+				_allocator.destroy(oldstart + i);
+			}
+			this->_end = this->_start + n;
+			this->_finish = this->_start + s;
+			if (oldend - oldstart > 0)
+				_allocator.dealocate(oldstart, oldend - oldstart);
+		}
+
+		void init_allocate(size_type n) { 
+			_start = _allocator.allocate(n); 
+			this->_finish = this->_start; 
+			_end = this->_start + n; 
+		}
 		
 		void fill_insert(iterator position, size_type n, reference v) {	
 			for (; __first != __last; ++__first, (void)++__cur)
 				_allocator.construct(__alloc, std::__addressof(*__cur), *__first);
-
 		}
 
 		void destruct(pointer start, pointer end) {
