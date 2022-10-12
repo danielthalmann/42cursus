@@ -47,7 +47,8 @@ namespace ft
 		}
 		
 		virtual ~vector() {
-			// TODO
+			destruct(this->_start, this->_first);
+			erase_at_end(this->_start);
 		}
 		
 		vector &operator=(const vector &vector) {
@@ -195,13 +196,11 @@ namespace ft
 		}
 
 		void destruct(pointer start, pointer end) {
-			// TODO
-			while (/* condition */)
+			while (start != end)
 			{
-				/* code */
-			}
-			
-			
+				_allocator.destroy(start);
+				start++;
+			}	
 		}
 
 		void erase_at_end(pointer end) {	
