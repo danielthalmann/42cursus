@@ -35,9 +35,13 @@ namespace ft
 		 * @brief Construct a new vector object
 		 * 
 		 */
-		vector () : _first(0), _start(0), _end(0) { }
+		vector () : _finish(0), _start(0), _end(0)
+		{ 
+
+		}
 		vector(size_type n, const_reference value, allocator_type a = allocator_type()) : _allocator(a)
 		{ 
+
 			init_allocate(n);
 			// TODO
 		}
@@ -154,7 +158,7 @@ namespace ft
 
 
 
-		void swap( vector<T, Allocator>& other ) {
+		void swap( vector<T, allocator>& other ) {
 
 			std::swap(this->_start, other._start);
 			std::swap(this->_end, other._end);
@@ -169,7 +173,7 @@ namespace ft
 			reserve(capacity() + 1);
 		}
 
-		void grow(size_type n) {			
+		void grow(size_type n) {
 			pointer oldstart = this->_start;
 			pointer oldend = this->_end;
 			size_type s = size();
@@ -215,7 +219,9 @@ namespace ft
 		}
 
 
-	private:
+	protected:
+
+	
 		pointer			_start;
 		pointer			_end;
 		pointer			_finish;
