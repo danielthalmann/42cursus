@@ -129,10 +129,10 @@ namespace ft
 		/**
 		 *  Modifiers 
 		 */
-		void clear()							{	this->_finish = this->_start; }
+		void clear()							{	destruct(this->_start, this->_finish); this->_finish = this->_start; }
 
 		iterator insert( const_iterator pos, const T& value ) {
-
+			// TODO
 		}
 
 
@@ -155,6 +155,24 @@ namespace ft
 
 		}
 
+		void swap( vector<T, Allocator>& other ) {
+			
+			Pointer temp;
+
+			temp = this->_start;
+			this->_start = other._start;
+			other._start = temp;
+
+			temp = this->_end;
+			this->_end = other._end;
+			other._end = temp;
+
+			temp = this->_finish;
+			this->_finish = other._finish;
+			other._finish = temp;
+		}
+
+
 	protected:
 
 		void assign( size_type count, const T& value );
@@ -164,6 +182,16 @@ namespace ft
 			for (; __first != __last; ++__first, (void)++__cur)
 				_allocator.construct(__alloc, std::__addressof(*__cur), *__first);
 
+		}
+
+		void destruct(pointer start, pointer end) {
+			// TODO
+			while (/* condition */)
+			{
+				/* code */
+			}
+			
+			
 		}
 
 		void erase_at_end(pointer end) {	
