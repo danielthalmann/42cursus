@@ -113,11 +113,14 @@ namespace ft
 				pointer oldend = this->_end;
 				size_type s = size();
 				this->_start = _allocator.allocate(n, this->_start);
-				for (size_type i = 0; i < s; ++i)
+				for (size_type i = 0; i < s; ++i){
 					_allocator.construct(this->_start + i, *(oldstart + i));
+					_allocator.destroy(oldstart + i);
+				}
 				this->_end = this->_start + n;
 				this->_finish = this->_start + s;
-				_allocator.dealocate(oldstart, oldend - oldstart);
+				if (oldend - oldstart > 0)
+					_allocator.dealocate(oldstart, oldend - oldstart);
 			}
 		}
 		size_type capacity() const				{	return size_type(this->_end - this->_start); }
