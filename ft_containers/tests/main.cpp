@@ -1,20 +1,74 @@
+#include <iostream>
+#include <string>
+#include <deque>
+#ifdef COMPILE_LIB_STD
+	#include <vector>
+	namespace ft = std;
+#else
+	#include <vector.hpp>
+#endif
 
-#include <stdio.h>
-#include <vector>
-#include "vector.hpp"
+#include <stdlib.h>
 
-
-int main(int argc, char* argv[])
+#define MAX_RAM 4294967296
+#define BUFFER_SIZE 4096
+struct Buffer
 {
- 
-    (void) argc;
-    (void) argv;
+	int idx;
+	char buff[BUFFER_SIZE];
+};
 
-	std::vector<int> va;
 
-    ft::vector<int> vb;
-   
+#define COUNT (MAX_RAM / (int)sizeof(Buffer))
 
-    printf("Hello world\n");
-    return 0;
+
+int main(int argc, char** argv) {
+
+    #ifdef COMPILE_LIB_STD
+        std::cerr << "Lib std" << std::endl;
+    #else
+        std::cerr << "Lib ft" << std::endl;
+    #endif
+
+    int seed;
+
+	if (argc != 2)
+	{
+        seed = 340;
+	}
+    else
+	    seed = atoi(argv[1]);
+	srand(seed);
+
+	ft::vector<std::string> vector_str;
+	ft::vector<int> vector_int;
+	ft::vector<Buffer> vector_buffer;
+
+	for (int i = 0; i < COUNT; i++)
+	{
+		vector_buffer.push_back(Buffer());
+	}
+
+	for (int i = 0; i < COUNT; i++)
+	{
+		const int idx = rand() % COUNT;
+		vector_buffer[idx].idx = 5;
+	}
+	ft::vector<Buffer>().swap(vector_buffer);
+
+	try
+	{
+		for (int i = 0; i < COUNT; i++)
+		{
+			const int idx = rand() % COUNT;
+			vector_buffer.at(idx);
+			std::cerr << "Error: THIS VECTOR SHOULD BE EMPTY!!" <<std::endl;
+		}
+	}
+	catch(const std::exception& e)
+	{
+		//NORMAL ! :P
+	}
+
+	return (0);
 }

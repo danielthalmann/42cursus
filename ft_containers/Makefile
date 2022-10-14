@@ -1,5 +1,5 @@
 
 run :
-	$(MAKE) -C ./tests
+	$(MAKE) -C ./tests run
 
 .phony : run

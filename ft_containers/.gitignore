@@ -1,2 +1,2 @@
 *.o
-tests/test
+tests/test_*

@@ -110,7 +110,7 @@ namespace ft
 		 */
 
 		bool empty()							{	return begin() == end(); }
-		size_type size()						{ 	return size_type(this->_finish - this->_start); }
+		size_type size() const					{ 	return size_type(this->_finish - this->_start); }
 		size_type max_size() const				{	return size_type(_allocator.max_size()); }
 		void reserve( size_type n )		{	
 		    if (n > capacity())
@@ -189,7 +189,7 @@ namespace ft
 			this->_end = this->_start + n;
 			this->_finish = this->_start + s;
 			if (oldend - oldstart > 0)
-				_allocator.dealocate(oldstart, oldend - oldstart);
+				_allocator.deallocate(oldstart, oldend - oldstart);
 		}
 
 		void init_allocate(size_type n) { 
@@ -221,7 +221,7 @@ namespace ft
 
 		void range_check(size_type n) const
 		{
-			if (n >= this->size())
+			if (n >= size())
 				throw std::out_of_range("out of range");
 		}
 

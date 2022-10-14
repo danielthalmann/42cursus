@@ -3,6 +3,9 @@
 
 NAME=test
 
+NAMESTD=$(NAME)_std
+NAMEFT=$(NAME)_ft
+
 SRCS=main.cpp
 
 OBJS=$(SRCS:cpp=o)
@@ -13,7 +16,16 @@ CXXFLAGS=-Wall -Wextra -Werror -std=c++98 -I../include
 
 LDFLAGS=-lstdc++ -lm
 
-$(NAME) : $(OBJS)
+$(NAME) :
+	$(MAKE) $(NAMEFT)
+	$(MAKE) clean
+	$(MAKE) $(NAMESTD)
+
+$(NAMESTD) : CXXFLAGS += -DCOMPILE_LIB_STD
+$(NAMESTD) : $(OBJS)
+	$(CXX) $(OBJS) $(LDFLAGS) -o $@
+
+$(NAMEFT) : $(OBJS)
 	$(CXX) $(OBJS) $(LDFLAGS) -o $@
 
 all : $(NAME)
@@ -22,7 +34,8 @@ clean :
 	rm -f $(OBJS)
 
 fclean : clean
-	rm -f $(NAME)
+	rm -f $(NAMESTD)
+	rm -f $(NAMEFT)
 
 re : fclean all
 
@@ -30,4 +43,5 @@ debug : CXXFLAGS += -DDEBUG
 debug : re run
 
 run : $(NAME)
-	./$(NAME)
+	./$(NAMESTD)
+	./$(NAMEFT)
