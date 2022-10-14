@@ -22,7 +22,7 @@ struct Buffer
 #define COUNT (MAX_RAM / (int)sizeof(Buffer))
 
 
-int main(int argc, char** argv) {
+int main( void ) {
 
     #ifdef COMPILE_LIB_STD
         std::cerr << "Lib std" << std::endl;
@@ -30,25 +30,15 @@ int main(int argc, char** argv) {
         std::cerr << "Lib ft" << std::endl;
     #endif
 
-    int seed;
-
-	if (argc != 2)
-	{
-        seed = 340;
-	}
-    else
-	    seed = atoi(argv[1]);
-	srand(seed);
-
 	ft::vector<std::string> vector_str;
 	ft::vector<int> vector_int;
 	ft::vector<Buffer> vector_buffer;
 
-    vector_int.push_back(1);
-    vector_int.resize(5, 42);
-
-    std::cout << "front: " << vector_int.front() << std::endl;
-    std::cout << "back: " << vector_int.back() << std::endl;
+    // vector_int.push_back(1);
+    // vector_int.resize(5, 42);
+// 
+    // std::cout << "front: " << vector_int.front() << std::endl;
+    // std::cout << "back: " << vector_int.back() << std::endl;
 
 
 	for (int i = 0; i < COUNT; i++)

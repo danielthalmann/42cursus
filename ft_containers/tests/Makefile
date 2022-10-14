@@ -43,5 +43,5 @@ debug : CXXFLAGS += -DDEBUG
 debug : re run
 
 run : $(NAME)
-	./$(NAMESTD)
-	./$(NAMEFT)
+	time -p ./$(NAMESTD)
+	time -p ./$(NAMEFT)

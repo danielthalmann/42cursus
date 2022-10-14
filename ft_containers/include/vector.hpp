@@ -6,6 +6,8 @@
 #include <cstddef>
 #include <stdexcept>
 
+#define DEBUG_INFO(T) (std::cout << T << std::endl);
+
 namespace ft
 {
 	template <class T, class allocator = std::allocator<T> >
@@ -216,11 +218,16 @@ namespace ft
 		}
 		
 		void fill_insert(size_type n, reference v) {
-			if (n > capacity())
-				grow(n);
+			if (n > capacity()) {
+				if (this->_start)
+					grow(n);
+				else
+					init_allocate(n);
+			}
 			pointer start = this->_finish;
 			while (start != this->_end) {
 				_allocator.construct(start, v);
+				start++;
 			}
 		}
 
@@ -302,8 +309,6 @@ namespace ft
 	}
 
 }
-
-
 
 
 #endif
