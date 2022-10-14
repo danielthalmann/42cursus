@@ -1,2 +1,2 @@
 *.o
-tests/build/test
+tests/test

@@ -1,6 +1,7 @@
+
 #include <stdio.h>
-#include "vector.hpp"
 #include <vector>
+#include "vector.hpp"
 
 
 int main(int argc, char* argv[])

@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <memory>
+#include <cstddef>
+#include <stdexcept>
 
 namespace ft
 {
@@ -35,15 +37,17 @@ namespace ft
 		 * @brief Construct a new vector object
 		 * 
 		 */
-		vector () : _finish(0), _start(0), _end(0)
+		vector () : _start(0), _end(0), _finish(0)
 		{ 
 
 		}
-		vector(size_type n, const_reference value, allocator_type a = allocator_type()) : _allocator(a)
+		vector(size_type n, const_reference v, allocator_type a = allocator_type()) :  _start(0), _end(0), _finish(0), _allocator(a)
 		{ 
-
 			init_allocate(n);
-			// TODO
+			pointer start = this->_start + n;
+			while (start != this->_end) {
+				_allocator.construct(start, v);
+			}
 		}
 
 		vector(vector &vector) {	
@@ -51,7 +55,7 @@ namespace ft
 		}
 		
 		virtual ~vector() {
-			destruct(this->_start, this->_first);
+			destruct(this->_start, this->_finish);
 			erase_at_end(this->_start);
 		}
 		
@@ -151,7 +155,7 @@ namespace ft
 
 		void resize(size_type n, value_type v = value_type()) {
 			if (n > size())
-				fill_insert(this->_start, n - size(), v);
+				fill_insert(n - size(), v);
 			else if (n < size())
 				erase_at_end(this->_start + n);
 		}
@@ -191,12 +195,15 @@ namespace ft
 		void init_allocate(size_type n) { 
 			_start = _allocator.allocate(n); 
 			this->_finish = this->_start; 
-			_end = this->_start + n; 
+			_end = this->_start + n;
 		}
 		
-		void fill_insert(iterator position, size_type n, reference v) {	
-			for (; __first != __last; ++__first, (void)++__cur)
-				_allocator.construct(__alloc, std::__addressof(*__cur), *__first);
+		void fill_insert(size_type n, reference v) {	
+			grow(n);
+			pointer start = this->_start + n;
+			while (start != this->_end) {
+				_allocator.construct(start, v);
+			}
 		}
 
 		void destruct(pointer start, pointer end) {
@@ -215,7 +222,7 @@ namespace ft
 		void range_check(size_type n) const
 		{
 			if (n >= this->size())
-				throw std::out_of_range();
+				throw std::out_of_range("out of range");
 		}
 
 
@@ -249,6 +256,7 @@ namespace ft
 	bool operator<(const vector< T, allocator > &lhs, const vector< T, allocator > &rhs)
 	{
 		// TODO
+		return false;
 	}
 
 	template< class T, class allocator >
