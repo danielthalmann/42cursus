@@ -17,16 +17,32 @@ namespace ft
 		typedef const T*				const_pointer;
 		typedef T&						reference;
 		typedef const T&				const_reference;
-		typedef std::iterator<std::input_iterator_tag, 
-				value_type, 
-				value_type, 
-				pointer, 
-				reference> iterator;
-		typedef std::iterator<std::input_iterator_tag, 
-				value_type, 
-				value_type, 
-				const_pointer, 
-				reference> const_iterator;
+		
+		class iter: public std::iterator<
+                        std::input_iterator_tag,     // iterator_category
+                        value_type,                           // value_type
+                        value_type,                           // difference_type
+                        const_pointer,                    // pointer
+                        reference                            // reference
+                    > {
+			T* _cursor;
+		public:
+			iter() : _cursor(0) {}
+			iter(T* start) : _cursor(start) {}
+			iter& operator++() { _cursor++; return *this; }
+			iter operator++(int) {iter retval = *this; ++(*this); return retval; }
+			iter& operator=(iter other) const { _cursor = other._cursor; return *this; }
+			iter operator-(int value) const { return iter(_cursor - value); }
+			iter operator+(int value) const { return iter(_cursor + value); }
+			bool operator==(iter other) const {return _cursor == other._cursor;}
+			bool operator!=(iter other) const {return !(*this == other);}
+			reference operator*() const {return *_cursor;}
+		};
+
+		typedef iter					iterator;
+		
+		typedef const iter				const_iterator;
+		
 		typedef std::reverse_iterator<iterator>		reverse_iterator;
 		typedef std::reverse_iterator<const_iterator>	const_reverse_iterator;
 		typedef size_t					size_type;
@@ -136,8 +152,9 @@ namespace ft
 		}
 
 	    void push_back(const value_type& v) {
+			// std::cout << "push_back " << capacity() << std::endl;
 			if (this->_finish == this->_end) {
-				grow(capacity() + 1);
+				grow((capacity() * 2) + 1);
 			}
 			*this->_finish = v;
 			this->_finish++;
@@ -155,7 +172,7 @@ namespace ft
 
 		void resize(size_type n, value_type v = value_type()) {
 			if (n > size())
-				fill_insert(n - size(), v);
+				fill_insert(n, v);
 			else if (n < size())
 				erase_at_end(this->_start + n);
 		}
@@ -198,9 +215,10 @@ namespace ft
 			_end = this->_start + n;
 		}
 		
-		void fill_insert(size_type n, reference v) {	
-			grow(n);
-			pointer start = this->_start + n;
+		void fill_insert(size_type n, reference v) {
+			if (n > capacity())
+				grow(n);
+			pointer start = this->_finish;
 			while (start != this->_end) {
 				_allocator.construct(start, v);
 			}

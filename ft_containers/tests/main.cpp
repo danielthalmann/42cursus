@@ -44,6 +44,13 @@ int main(int argc, char** argv) {
 	ft::vector<int> vector_int;
 	ft::vector<Buffer> vector_buffer;
 
+    vector_int.push_back(1);
+    vector_int.resize(5, 42);
+
+    std::cout << "front: " << vector_int.front() << std::endl;
+    std::cout << "back: " << vector_int.back() << std::endl;
+
+
 	for (int i = 0; i < COUNT; i++)
 	{
 		vector_buffer.push_back(Buffer());
@@ -54,6 +61,7 @@ int main(int argc, char** argv) {
 		const int idx = rand() % COUNT;
 		vector_buffer[idx].idx = 5;
 	}
+
 	ft::vector<Buffer>().swap(vector_buffer);
 
 	try
