@@ -59,6 +59,7 @@ namespace ft
 		{ 
 
 		}
+
 		vector(size_type n, const_reference v, allocator_type a = allocator_type()) :  _start(0), _end(0), _finish(0), _allocator(a)
 		{ 
 			init_allocate(n);
@@ -73,25 +74,38 @@ namespace ft
 		}
 		
 		virtual ~vector() {
-			destruct(this->_start, this->_finish);
 			erase_at_end(this->_start);
 		}
 		
 		vector &operator=(const vector &vector) {
-			// TODO
+			assign( vector.begin(), vector.end() );
 		}
 
 		void assign(size_type n, const_reference v) {
-			// TODO
+			destruct(_start, _finish);
+			if (n < capacity())
+				grow(n);
+			_finish = _start + n;
+			while ( n-- ) {
+				_allocator.construct((_start + n), v);
+			}
 		}
 
-		template< class InputIt >
+		template < class InputIt >
 		void assign( InputIt first, InputIt last ) {
-			// TODO
+			const size_type n = std::distance(first, last);
+			destruct(_start, _finish);
+			if (n < capacity())
+				grow(n);
+			_finish = _start;
+			while (first != last) {
+				_allocator.construct(_finish, *(first));
+				++first;
+				++_finish;
+			}
 		}
 
 		allocator_type get_allocator() const	{	return this->_allocator; };
-
 
 		/**
 		 * Element access 
@@ -115,11 +129,11 @@ namespace ft
 
 		iterator begin() 						{	return iterator(this->_start); }
 		const_iterator begin() const			{	return const_iterator(this->_start); }
-		iterator end()							{	return iterator(this->_end); }
-		const_iterator end() const				{	return const_iterator(this->_end); }
+		iterator end()							{	return iterator(this->_finish); }
+		const_iterator end() const				{	return const_iterator(this->_finish); }
     
-		reverse_iterator       rbegin()			{	return reverse_iterator(this->_end); }
-		const_reverse_iterator rbegin()  const	{	return const_reverse_iterator(this->_end); }
+		reverse_iterator       rbegin()			{	return reverse_iterator(this->_finish); }
+		const_reverse_iterator rbegin()  const	{	return const_reverse_iterator(this->_finish); }
 		reverse_iterator       rend()			{	return reverse_iterator(this->_start); }
 		const_reverse_iterator rend() const 	{	return const_reverse_iterator(this->_start); }
 
@@ -140,21 +154,36 @@ namespace ft
 		/**
 		 *  Modifiers 
 		 */
+
 		void clear()							{	destruct(this->_start, this->_finish); this->_finish = this->_start; }
 
 		iterator insert( const_iterator pos, const T& value ) {
-			// TODO
+			if (size() + 1 > capacity())
+				grow(1);
+			iterator e = end();
+			if ( e == pos )
+				*e = value;
+			else {
+				while ( e != e )
+				// TODO
+
+			}
 		}
 
-		iterator erase (iterator position){
-			// TODO
+		iterator erase (iterator pos) {
+			iterator e = end() - 1;
+			while (pos != e) {
+				*pos = *(pos + 1);
+				pos++;
+			}
+			destruct( &(*(end()-1)), &(*(end())) );
 		}
-		iterator erase (iterator first, iterator last){
+		
+		iterator erase (iterator first, iterator last ) {
 			// TODO
 		}
 
 	    void push_back(const value_type& v) {
-			// std::cout << "push_back " << capacity() << std::endl;
 			if (this->_finish == this->_end) {
 				grow((capacity() * 2) + 1);
 			}
@@ -179,16 +208,11 @@ namespace ft
 				erase_at_end(this->_start + n);
 		}
 
-
-
 		void swap( vector<T, allocator>& other ) {
-
 			std::swap(this->_start, other._start);
 			std::swap(this->_end, other._end);
 			std::swap(this->_finish, other._finish);
-
 		}
-
 
 	protected:
 
@@ -197,6 +221,8 @@ namespace ft
 		}
 
 		void grow(size_type n) {
+			if(!this->_start)
+				return init_allocate(size_type n);
 			pointer oldstart = this->_start;
 			pointer oldend = this->_end;
 			size_type s = size();
@@ -239,13 +265,14 @@ namespace ft
 			}	
 		}
 
-		void erase_at_end(pointer end) {	
+		void erase_at_end(pointer end) {
+			if(end < _finish)
+				destruct(end, _finish);
 			_allocator.deallocate(end, this->_end - end);
 			this->_end = end;
 		}
 
-		void range_check(size_type n) const
-		{
+		void range_check(size_type n) const {
 			if (n >= size())
 				throw std::out_of_range("out of range");
 		}

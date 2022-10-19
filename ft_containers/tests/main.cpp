@@ -22,7 +22,12 @@ struct Buffer
 #define COUNT (MAX_RAM / (int)sizeof(Buffer))
 
 
-int main( void ) {
+int main( int argc, char **argv ) {
+
+	if (argc == 1)
+	{
+		
+	}
 
     #ifdef COMPILE_LIB_STD
         std::cerr << "Lib std" << std::endl;
