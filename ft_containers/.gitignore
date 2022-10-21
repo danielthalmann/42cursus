@@ -1,2 +1,3 @@
 *.o
-tests/test_*
+tests/test_ft
+tests/test_std

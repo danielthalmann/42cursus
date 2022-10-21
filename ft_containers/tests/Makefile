@@ -6,7 +6,7 @@ NAME=test
 NAMESTD=$(NAME)_std
 NAMEFT=$(NAME)_ft
 
-SRCS=main.cpp
+SRCS=main2.cpp test_vector.cpp
 
 OBJS=$(SRCS:cpp=o)
 
@@ -17,9 +17,9 @@ CXXFLAGS=-Wall -Wextra -Werror -std=c++98 -I../include
 LDFLAGS=-lstdc++ -lm
 
 $(NAME) :
-	$(MAKE) $(NAMEFT)
-	$(MAKE) clean
 	$(MAKE) $(NAMESTD)
+	$(MAKE) clean
+	$(MAKE) $(NAMEFT)
 
 $(NAMESTD) : CXXFLAGS += -DCOMPILE_LIB_STD
 $(NAMESTD) : $(OBJS)

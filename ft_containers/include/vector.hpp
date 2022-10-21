@@ -5,6 +5,8 @@
 #include <memory>
 #include <cstddef>
 #include <stdexcept>
+#include "algorithm.hpp"
+#include "type_traits.hpp"
 
 #define DEBUG_INFO(T) (std::cout << T << std::endl);
 
@@ -79,6 +81,7 @@ namespace ft
 		
 		vector &operator=(const vector &vector) {
 			assign( vector.begin(), vector.end() );
+			return *this;
 		}
 
 		void assign(size_type n, const_reference v) {
@@ -91,15 +94,15 @@ namespace ft
 			}
 		}
 
-		template < class InputIt >
-		void assign( InputIt first, InputIt last ) {
+		template < class InputIterator >
+		void assign( InputIterator first, InputIterator last, typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0) {
 			const size_type n = std::distance(first, last);
 			destruct(_start, _finish);
 			if (n < capacity())
 				grow(n);
 			_finish = _start;
 			while (first != last) {
-				_allocator.construct(_finish, *(first));
+				_allocator.construct(_finish, (*first));
 				++first;
 				++_finish;
 			}
@@ -150,7 +153,6 @@ namespace ft
 		}
 		size_type capacity() const				{	return size_type(this->_end - this->_start); }
 
-
 		/**
 		 *  Modifiers 
 		 */
@@ -161,26 +163,40 @@ namespace ft
 			if (size() + 1 > capacity())
 				grow(1);
 			iterator e = end();
-			if ( e == pos )
+			if ( e == pos ) {
 				*e = value;
-			else {
-				while ( e != e )
-				// TODO
-
+				return pos;
 			}
+			else {
+				while ( e-- != pos ){
+					*(e + 1) = *e;
+				}
+				*pos = value;
+			}
+			return pos;
 		}
 
 		iterator erase (iterator pos) {
+			if (pos == end())
+				return pos;
+
 			iterator e = end() - 1;
 			while (pos != e) {
 				*pos = *(pos + 1);
 				pos++;
 			}
 			destruct( &(*(end()-1)), &(*(end())) );
+			_finish--;
+			return pos;
 		}
-		
+
 		iterator erase (iterator first, iterator last ) {
-			// TODO
+			const size_type n = std::distance(first, last);
+			_finish -= n;
+			destruct( &(*(first)), &(*(last)) );
+			while (last != end()) {
+				*first = *last;
+			}
 		}
 
 	    void push_back(const value_type& v) {
@@ -221,8 +237,10 @@ namespace ft
 		}
 
 		void grow(size_type n) {
-			if(!this->_start)
-				return init_allocate(size_type n);
+			if(!this->_start) {
+				init_allocate(n);
+				return;
+			}
 			pointer oldstart = this->_start;
 			pointer oldend = this->_end;
 			size_type s = size();
@@ -258,11 +276,15 @@ namespace ft
 		}
 
 		void destruct(pointer start, pointer end) {
-			while (start != end)
+			std::cout << "ida:" << start;
+			if (start)
 			{
-				_allocator.destroy(start);
-				start++;
-			}	
+				while (start != end)
+				{
+					_allocator.destroy(start);
+					start++;
+				}	
+			}
 		}
 
 		void erase_at_end(pointer end) {
@@ -280,12 +302,18 @@ namespace ft
 
 	protected:
 
-	
+		/**
+		 *	_start     _finish       _end
+		 *	   │           │           │
+		 *	  ┌▼┌─┬─┬─┬─┬─┐▼──────────┐▼
+		 *	  │ │ │ │ │ │ │           │
+		 *	  └─┴─┴─┴─┴─┴─┴───────────┘
+		 * 
+		 */	
 		pointer			_start;
 		pointer			_end;
 		pointer			_finish;
 		allocator_type	_allocator;
-
 	};
 
 	/* Relationnal operators */
@@ -294,8 +322,7 @@ namespace ft
 	{
 		if (lhs.size() != rhs.size()) 
 			return (false);
-		// TODO
-		return false;
+		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 	}
 
 	template< class T, class allocator >
@@ -307,8 +334,7 @@ namespace ft
 	template< class T, class allocator >
 	bool operator<(const vector< T, allocator > &lhs, const vector< T, allocator > &rhs)
 	{
-		// TODO
-		return false;
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
 	}
 
 	template< class T, class allocator >
