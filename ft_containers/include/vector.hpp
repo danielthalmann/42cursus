@@ -29,13 +29,15 @@ namespace ft
                         const_pointer,                    // pointer
                         reference                            // reference
                     > {
+		private:
 			T* _cursor;
 		public:
 			iter() : _cursor(0) {}
 			iter(T* start) : _cursor(start) {}
 			iter& operator++() { _cursor++; return *this; }
 			iter operator++(int) {iter retval = *this; ++(*this); return retval; }
-			iter& operator=(iter other) const { _cursor = other._cursor; return *this; }
+			iter& operator--() { _cursor--; return *this; }
+			iter operator--(int) {iter retval = *this; --(*this); return retval; }
 			iter operator-(int value) const { return iter(_cursor - value); }
 			iter operator+(int value) const { return iter(_cursor + value); }
 			bool operator==(iter other) const {return _cursor == other._cursor;}
@@ -65,13 +67,14 @@ namespace ft
 		vector(size_type n, const_reference v, allocator_type a = allocator_type()) :  _start(0), _end(0), _finish(0), _allocator(a)
 		{ 
 			init_allocate(n);
-			pointer start = this->_start + n;
-			while (start != this->_end) {
-				_allocator.construct(start, v);
+			this->_finish = this->_start;
+			while (this->_finish != this->_end) {
+				_allocator.construct(this->_finish, v);
+				this->_finish++;
 			}
 		}
 
-		vector(vector &vector) {	
+		vector(vector &vector) :  _start(0), _end(0), _finish(0) {	
 			*this = vector;
 		}
 		
@@ -86,7 +89,7 @@ namespace ft
 
 		void assign(size_type n, const_reference v) {
 			destruct(_start, _finish);
-			if (n < capacity())
+			if (n > capacity())
 				grow(n);
 			_finish = _start + n;
 			while ( n-- ) {
@@ -98,13 +101,14 @@ namespace ft
 		void assign( InputIterator first, InputIterator last, typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0) {
 			const size_type n = std::distance(first, last);
 			destruct(_start, _finish);
-			if (n < capacity())
+			if (n > capacity())
 				grow(n);
 			_finish = _start;
 			while (first != last) {
 				_allocator.construct(_finish, (*first));
 				++first;
 				++_finish;
+
 			}
 		}
 
@@ -114,8 +118,8 @@ namespace ft
 		 * Element access 
 		 */
 
-    	reference at(size_type n) 				{	range_check(n); return (*this)[n]; }
-    	const_reference at(size_type n) const	{	range_check(n); return (*this)[n]; }
+		reference at(size_type n) 				{	range_check(n); return (*this)[n]; }
+		const_reference at(size_type n) const	{	range_check(n); return (*this)[n]; }
 		reference operator[](size_type n)		{	return *(this->_start + n); }
 		const_reference operator[](size_type n) const	{	return *(this->_start + n); }
 		reference front()						{	return *begin(); }
@@ -135,10 +139,10 @@ namespace ft
 		iterator end()							{	return iterator(this->_finish); }
 		const_iterator end() const				{	return const_iterator(this->_finish); }
     
-		reverse_iterator       rbegin()			{	return reverse_iterator(this->_finish); }
-		const_reverse_iterator rbegin()  const	{	return const_reverse_iterator(this->_finish); }
-		reverse_iterator       rend()			{	return reverse_iterator(this->_start); }
-		const_reverse_iterator rend() const 	{	return const_reverse_iterator(this->_start); }
+		reverse_iterator       rbegin()			{	return reverse_iterator(end()); }
+		const_reverse_iterator rbegin()  const	{	return const_reverse_iterator(end()); }
+		reverse_iterator       rend()			{	return reverse_iterator(begin()); }
+		const_reverse_iterator rend() const 	{	return const_reverse_iterator(begin()); }
 
 		/**
 		 * Capacity
@@ -196,7 +200,9 @@ namespace ft
 			destruct( &(*(first)), &(*(last)) );
 			while (last != end()) {
 				*first = *last;
+				last++;
 			}
+			return first;
 		}
 
 	    void push_back(const value_type& v) {
@@ -231,10 +237,6 @@ namespace ft
 		}
 
 	protected:
-
-		void realloc_insert(const value_type& v) {
-			reserve(capacity() + 1);
-		}
 
 		void grow(size_type n) {
 			if(!this->_start) {
@@ -276,7 +278,6 @@ namespace ft
 		}
 
 		void destruct(pointer start, pointer end) {
-			std::cout << "ida:" << start;
 			if (start)
 			{
 				while (start != end)

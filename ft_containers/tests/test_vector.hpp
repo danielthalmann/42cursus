@@ -10,6 +10,10 @@ typedef struct test_vector
 
 void test_constructor( void );
 void test_assign( void );
+void test_element_access ( void );
+void test_iterrator ( void );
+void test_capacity( void );
+void test_modifier( void );
 
 #endif
 
