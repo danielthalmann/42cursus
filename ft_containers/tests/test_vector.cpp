@@ -202,15 +202,15 @@ void test_modifier()
 	TEST_CASE(
 		"iterator insert( const_iterator pos, const T& value ) ", 
 		ft::vector<int>::iterator itr = v.begin(); v.insert(itr, 99),
-		v[0] != 99 || v[1] != 1, 
+		v[0] != 99 || v[1] != 1 || v.size() != 5, 
 		"invalid capacity" 
 		)
 
 	TEST_CASE(
-		"iterator erase (iterator pos)", 
+		"iterator erase (iterator pos) " <<  v.size(), 
 		ft::vector<int> v_(v); ft::vector<int>::iterator itr2 = v_.begin(); v_.erase(itr2),
-		v_[0] != 1 || v_[1] != 2 || v_.size() > 0, 
-		"invalid capacity size : " << v.size() << " last : "<< v.back() 
+		v_[0] != 1 || v_[1] != 2 || v_.size() != 4, 
+		"invalid capacity size : " << v_.size() << " last : "<< v_.back() << " v_[0] : "<< v_[0]
 		)
 
 	TEST_CASE(
@@ -230,7 +230,7 @@ void test_modifier()
 	TEST_CASE(
 		"void pop_back() size : " << v.size() << " last : "<< v.back(), 
 		v.pop_back(),
-		v[v.size() - 1] == 8, 
+		v[v.size() - 1] != 8, 
 		"invalid " << v[v.size() - 1] << " " << v.size()
 		)
 

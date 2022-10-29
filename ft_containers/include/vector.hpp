@@ -177,6 +177,7 @@ namespace ft
 				}
 				*pos = value;
 			}
+			_finish++;
 			return pos;
 		}
 
@@ -184,13 +185,13 @@ namespace ft
 			if (pos == end())
 				return pos;
 
-			iterator e = end() - 1;
-			while (pos != e) {
-				*pos = *(pos + 1);
-				pos++;
+			size_type i = size() - std::distance(pos, end());
+
+			while (i < size() - 1) {
+				this->_start[i] = this->_start[i + 1];
+				i++;
 			}
-			destruct( &(*(end()-1)), &(*(end())) );
-			_finish--;
+			pop_back();
 			return pos;
 		}
 
@@ -214,13 +215,11 @@ namespace ft
 		}
 
 		void pop_back() {
-			
 			if (size() > 0)
 			{
 				this->_finish--;
-				_allocator.destroy(this->_finish);
+				this->_allocator.destroy(this->_finish);
 			}
-
 		}
 
 		void resize(size_type n, value_type v = value_type()) {
