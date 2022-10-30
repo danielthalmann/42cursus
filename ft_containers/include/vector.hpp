@@ -8,6 +8,7 @@
 #include "algorithm.hpp"
 #include "type_traits.hpp"
 #include "iterator.hpp"
+#include "reverse_iterator.hpp"
 
 #define DEBUG_INFO(T) (std::cout << T << std::endl);
 
@@ -24,11 +25,11 @@ namespace ft
 		typedef const T&				const_reference;
 	
 		
-		typedef random_access_iterator< pointer > iterator;
-		typedef random_access_iterator< const_pointer >	const_iterator;
+		typedef ft::random_access_iterator< pointer > iterator;
+		typedef ft::random_access_iterator< const_pointer >	const_iterator;
 
-		typedef std::reverse_iterator<iterator>		reverse_iterator;
-		typedef std::reverse_iterator<const_iterator>	const_reverse_iterator;
+		typedef ft::reverse_iterator<iterator>		reverse_iterator;
+		typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 		typedef size_t					size_type;
 		typedef ptrdiff_t				difference_type;
 		typedef allocator				allocator_type;
