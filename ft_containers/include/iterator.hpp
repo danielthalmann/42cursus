@@ -93,8 +93,8 @@ namespace ft
 		iter operator++(int) {iter retval = *this; ++(*this); return retval; }
 		iter& operator--() { _cursor--; return *this; }
 		iter operator--(int) {iter retval = *this; --(*this); return retval; }
-		iter operator-(int value) const { return iter(_cursor - value); }
-		iter operator+(int value) const { return iter(_cursor + value); }
+		iter operator-(int n) const { return iter(_cursor - n); }
+		iter operator+(int n) const { return iter(_cursor + n); }
 		bool operator==(iter other) const {return _cursor == other._cursor;}
 		bool operator!=(iter other) const {return !(*this == other);}
 		bool operator<(iter other) const {return (_cursor < other._cursor);}
