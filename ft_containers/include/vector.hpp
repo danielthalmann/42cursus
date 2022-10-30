@@ -42,6 +42,7 @@ namespace ft
 			iter operator+(int value) const { return iter(_cursor + value); }
 			bool operator==(iter other) const {return _cursor == other._cursor;}
 			bool operator!=(iter other) const {return !(*this == other);}
+			bool operator<(iter other) const {return (_cursor < other._cursor);}
 			reference operator*() const {return *_cursor;}
 		};
 
@@ -164,21 +165,27 @@ namespace ft
 		void clear()							{	destruct(this->_start, this->_finish); this->_finish = this->_start; }
 
 		iterator insert( const_iterator pos, const T& value ) {
+
+			size_type i = std::distance(begin(), pos);
+
 			if (size() + 1 > capacity())
-				grow(1);
-			iterator e = end();
-			if ( e == pos ) {
-				*e = value;
-				return pos;
+				grow((capacity() ? capacity() * 2 : 1));
+
+			pointer elem = this->_start + i;
+
+			if ( elem == this->_finish ) {
+				*(this->_finish) = value;
 			}
 			else {
-				while ( e-- != pos ){
-					*(e + 1) = *e;
+				pointer cur = this->_finish;
+				while ( cur > elem ) {
+					*cur = *(cur - 1);
+					cur--;
 				}
-				*pos = value;
+				*elem = value;
 			}
-			_finish++;
-			return pos;
+			this->_finish++;
+			return iterator( elem );
 		}
 
 		iterator erase (iterator pos) {
@@ -196,19 +203,25 @@ namespace ft
 		}
 
 		iterator erase (iterator first, iterator last ) {
+			
 			const size_type n = std::distance(first, last);
-			_finish -= n;
+
 			destruct( &(*(first)), &(*(last)) );
-			while (last != end()) {
-				*first = *last;
+		
+			iterator f = first;
+			while (last < end()) {
+				*f = *last;
 				last++;
+				f++;
 			}
+			this->_finish -= n;
+
 			return first;
 		}
 
 	    void push_back(const value_type& v) {
 			if (this->_finish == this->_end) {
-				grow((capacity() * 2) + 1);
+				grow((capacity() ? capacity() * 2 : 1));
 			}
 			*this->_finish = v;
 			this->_finish++;
@@ -225,8 +238,10 @@ namespace ft
 		void resize(size_type n, value_type v = value_type()) {
 			if (n > size())
 				fill_insert(n, v);
-			else if (n < size())
-				erase_at_end(this->_start + n);
+			else if (n < size()) {
+				destruct(this->_start + n, this->_finish);
+				this->_finish = this->_start + n;
+			}
 		}
 
 		void swap( vector<T, allocator>& other ) {
@@ -269,10 +284,9 @@ namespace ft
 				else
 					init_allocate(n);
 			}
-			pointer start = this->_finish;
-			while (start != this->_end) {
-				_allocator.construct(start, v);
-				start++;
+			while (this->_finish != this->_end) {
+				_allocator.construct(this->_finish, v);
+				this->_finish++;
 			}
 		}
 
@@ -308,7 +322,9 @@ namespace ft
 		 *	  ┌▼┌─┬─┬─┬─┬─┐▼──────────┐▼
 		 *	  │ │ │ │ │ │ │           │
 		 *	  └─┴─┴─┴─┴─┴─┴───────────┘
-		 * 
+		 *  _start  : pointer of start of array
+		 *  _end    : pointer of end of array. he is 1 position after the last element capacity
+		 *  _finish : pointer of end of filled element. he is 1 position after the last element size
 		 */	
 		pointer			_start;
 		pointer			_end;
