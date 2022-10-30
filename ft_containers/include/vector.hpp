@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include "algorithm.hpp"
 #include "type_traits.hpp"
+#include "iterator.hpp"
 
 #define DEBUG_INFO(T) (std::cout << T << std::endl);
 
@@ -21,35 +22,11 @@ namespace ft
 		typedef const T*				const_pointer;
 		typedef T&						reference;
 		typedef const T&				const_reference;
+	
 		
-		class iter: public std::iterator<
-                        std::input_iterator_tag,     // iterator_category
-                        value_type,                           // value_type
-                        value_type,                           // difference_type
-                        const_pointer,                    // pointer
-                        reference                            // reference
-                    > {
-		private:
-			T* _cursor;
-		public:
-			iter() : _cursor(0) {}
-			iter(T* start) : _cursor(start) {}
-			iter& operator++() { _cursor++; return *this; }
-			iter operator++(int) {iter retval = *this; ++(*this); return retval; }
-			iter& operator--() { _cursor--; return *this; }
-			iter operator--(int) {iter retval = *this; --(*this); return retval; }
-			iter operator-(int value) const { return iter(_cursor - value); }
-			iter operator+(int value) const { return iter(_cursor + value); }
-			bool operator==(iter other) const {return _cursor == other._cursor;}
-			bool operator!=(iter other) const {return !(*this == other);}
-			bool operator<(iter other) const {return (_cursor < other._cursor);}
-			reference operator*() const {return *_cursor;}
-		};
+		typedef random_access_iterator< pointer > iterator;
+		typedef random_access_iterator< const_pointer >	const_iterator;
 
-		typedef iter					iterator;
-		
-		typedef const iter				const_iterator;
-		
 		typedef std::reverse_iterator<iterator>		reverse_iterator;
 		typedef std::reverse_iterator<const_iterator>	const_reverse_iterator;
 		typedef size_t					size_type;
@@ -100,7 +77,7 @@ namespace ft
 
 		template < class InputIterator >
 		void assign( InputIterator first, InputIterator last, typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0) {
-			const size_type n = std::distance(first, last);
+			const size_type n = ft::distance(first, last);
 			destruct(_start, _finish);
 			if (n > capacity())
 				grow(n);
@@ -164,9 +141,9 @@ namespace ft
 
 		void clear()							{	destruct(this->_start, this->_finish); this->_finish = this->_start; }
 
-		iterator insert( const_iterator pos, const T& value ) {
+		iterator insert( iterator pos, const T& value ) {
 
-			size_type i = std::distance(begin(), pos);
+			size_type i = ft::distance(begin(), pos);
 
 			if (size() + 1 > capacity())
 				grow((capacity() ? capacity() * 2 : 1));
@@ -192,7 +169,7 @@ namespace ft
 			if (pos == end())
 				return pos;
 
-			size_type i = size() - std::distance(pos, end());
+			size_type i = size() - ft::distance(pos, end());
 
 			while (i < size() - 1) {
 				this->_start[i] = this->_start[i + 1];
@@ -204,7 +181,7 @@ namespace ft
 
 		iterator erase (iterator first, iterator last ) {
 			
-			const size_type n = std::distance(first, last);
+			const size_type n = ft::distance(first, last);
 
 			destruct( &(*(first)), &(*(last)) );
 		
