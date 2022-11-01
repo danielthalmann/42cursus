@@ -7,6 +7,8 @@
 #include <stdexcept>
 #include "algorithm.hpp"
 #include "type_traits.hpp"
+#include "iterator.hpp"
+#include "reverse_iterator.hpp"
 
 #define DEBUG_INFO(T) (std::cout << T << std::endl);
 
@@ -21,36 +23,13 @@ namespace ft
 		typedef const T*				const_pointer;
 		typedef T&						reference;
 		typedef const T&				const_reference;
+	
 		
-		class iter: public std::iterator<
-                        std::input_iterator_tag,     // iterator_category
-                        value_type,                           // value_type
-                        value_type,                           // difference_type
-                        const_pointer,                    // pointer
-                        reference                            // reference
-                    > {
-		private:
-			T* _cursor;
-		public:
-			iter() : _cursor(0) {}
-			iter(T* start) : _cursor(start) {}
-			iter& operator++() { _cursor++; return *this; }
-			iter operator++(int) {iter retval = *this; ++(*this); return retval; }
-			iter& operator--() { _cursor--; return *this; }
-			iter operator--(int) {iter retval = *this; --(*this); return retval; }
-			iter operator-(int value) const { return iter(_cursor - value); }
-			iter operator+(int value) const { return iter(_cursor + value); }
-			bool operator==(iter other) const {return _cursor == other._cursor;}
-			bool operator!=(iter other) const {return !(*this == other);}
-			reference operator*() const {return *_cursor;}
-		};
+		typedef ft::random_access_iterator< pointer > iterator;
+		typedef ft::random_access_iterator< const_pointer >	const_iterator;
 
-		typedef iter					iterator;
-		
-		typedef const iter				const_iterator;
-		
-		typedef std::reverse_iterator<iterator>		reverse_iterator;
-		typedef std::reverse_iterator<const_iterator>	const_reverse_iterator;
+		typedef ft::reverse_iterator<iterator>		reverse_iterator;
+		typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 		typedef size_t					size_type;
 		typedef ptrdiff_t				difference_type;
 		typedef allocator				allocator_type;
@@ -99,7 +78,7 @@ namespace ft
 
 		template < class InputIterator >
 		void assign( InputIterator first, InputIterator last, typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0) {
-			const size_type n = std::distance(first, last);
+			const size_type n = ft::distance(first, last);
 			destruct(_start, _finish);
 			if (n > capacity())
 				grow(n);
@@ -163,71 +142,84 @@ namespace ft
 
 		void clear()							{	destruct(this->_start, this->_finish); this->_finish = this->_start; }
 
-		iterator insert( const_iterator pos, const T& value ) {
+		iterator insert( iterator pos, const T& value ) {
+
+			size_type i = ft::distance(begin(), pos);
+
 			if (size() + 1 > capacity())
-				grow(1);
-			iterator e = end();
-			if ( e == pos ) {
-				*e = value;
-				return pos;
+				grow((capacity() ? capacity() * 2 : 1));
+
+			pointer elem = this->_start + i;
+
+			if ( elem == this->_finish ) {
+				*(this->_finish) = value;
 			}
 			else {
-				while ( e-- != pos ){
-					*(e + 1) = *e;
+				pointer cur = this->_finish;
+				while ( cur > elem ) {
+					*cur = *(cur - 1);
+					cur--;
 				}
-				*pos = value;
+				*elem = value;
 			}
-			return pos;
+			this->_finish++;
+			return iterator( elem );
 		}
 
 		iterator erase (iterator pos) {
 			if (pos == end())
 				return pos;
 
-			iterator e = end() - 1;
-			while (pos != e) {
-				*pos = *(pos + 1);
-				pos++;
+			size_type i = size() - ft::distance(pos, end());
+
+			while (i < size() - 1) {
+				this->_start[i] = this->_start[i + 1];
+				i++;
 			}
-			destruct( &(*(end()-1)), &(*(end())) );
-			_finish--;
+			pop_back();
 			return pos;
 		}
 
 		iterator erase (iterator first, iterator last ) {
-			const size_type n = std::distance(first, last);
-			_finish -= n;
+			
+			const size_type n = ft::distance(first, last);
+
 			destruct( &(*(first)), &(*(last)) );
-			while (last != end()) {
-				*first = *last;
+		
+			iterator f = first;
+			while (last < end()) {
+				*f = *last;
 				last++;
+				f++;
 			}
+			this->_finish -= n;
+
 			return first;
 		}
 
 	    void push_back(const value_type& v) {
 			if (this->_finish == this->_end) {
-				grow((capacity() * 2) + 1);
+				grow((capacity() ? capacity() * 2 : 1));
 			}
 			*this->_finish = v;
 			this->_finish++;
 		}
 
 		void pop_back() {
-			
 			if (size() > 0)
 			{
 				this->_finish--;
-				_allocator.destroy(this->_finish);
+				this->_allocator.destroy(this->_finish);
 			}
-
 		}
 
 		void resize(size_type n, value_type v = value_type()) {
 			if (n > size())
 				fill_insert(n, v);
-			else if (n < size())
-				erase_at_end(this->_start + n);
+			else if (n < size()) {
+				destruct(this->_start + n, this->_finish);
+				this->_finish = this->_start + n;
+			}
 		}
 
 		void swap( vector<T, allocator>& other ) {
@@ -270,10 +262,9 @@ namespace ft
 				else
 					init_allocate(n);
 			}
-			pointer start = this->_finish;
-			while (start != this->_end) {
-				_allocator.construct(start, v);
-				start++;
+			while (this->_finish != this->_end) {
+				_allocator.construct(this->_finish, v);
+				this->_finish++;
 			}
 		}
 
@@ -309,7 +300,9 @@ namespace ft
 		 *	  ┌▼┌─┬─┬─┬─┬─┐▼──────────┐▼
 		 *	  │ │ │ │ │ │ │           │
 		 *	  └─┴─┴─┴─┴─┴─┴───────────┘
-		 * 
+		 *  _start  : pointer of start of array
+		 *  _end    : pointer of end of array. he is 1 position after the last element capacity
+		 *  _finish : pointer of end of filled element. he is 1 position after the last element size
 		 */	
 		pointer			_start;
 		pointer			_end;

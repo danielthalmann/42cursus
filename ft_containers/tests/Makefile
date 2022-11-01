@@ -12,7 +12,7 @@ OBJS=$(SRCS:cpp=o)
 
 CXX=c++
 
-CXXFLAGS=-Wall -Wextra -Werror -std=c++98 -I../include
+CXXFLAGS=-Wall -Wextra -Werror -g -std=c++98 -I../include
 
 LDFLAGS=-lstdc++ -lm
 
