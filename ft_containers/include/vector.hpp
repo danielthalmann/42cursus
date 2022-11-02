@@ -38,12 +38,12 @@ namespace ft
 		 * @brief Construct a new vector object
 		 * 
 		 */
-		vector () : _start(0), _end(0), _finish(0)
+		explicit vector (const allocator_type &a = allocator_type()) : _start(0), _end(0), _finish(0), _allocator(a)
 		{ 
 
 		}
 
-		vector(size_type n, const_reference v, allocator_type a = allocator_type()) :  _start(0), _end(0), _finish(0), _allocator(a)
+		explicit vector(size_type n, const_reference v = value_type(), const allocator_type &a = allocator_type()) :  _start(0), _end(0), _finish(0), _allocator(a)
 		{ 
 			init_allocate(n);
 			this->_finish = this->_start;
@@ -51,6 +51,15 @@ namespace ft
 				_allocator.construct(this->_finish, v);
 				this->_finish++;
 			}
+		}
+
+		template< typename InputIterator >
+		vector(InputIterator first, InputIterator last,
+			   const allocator_type &alloc = allocator_type(),
+			   typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0)
+			: _start(0), _end(0), _finish(0), _allocator(alloc)
+		{
+			assign( first, last );
 		}
 
 		vector(vector &vector) :  _start(0), _end(0), _finish(0) {	
@@ -79,10 +88,13 @@ namespace ft
 		template < class InputIterator >
 		void assign( InputIterator first, InputIterator last, typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0) {
 			const size_type n = ft::distance(first, last);
-			destruct(_start, _finish);
+
+			if (size()) {
+				destruct(this->_start, this->_finish);
+				_finish = _start;			
+			}
 			if (n > capacity())
 				grow(n);
-			_finish = _start;
 			while (first != last) {
 				_allocator.construct(_finish, (*first));
 				++first;
@@ -127,7 +139,7 @@ namespace ft
 		 * Capacity
 		 */
 
-		bool empty()							{	return begin() == end(); }
+		bool empty() const						{	return _start == _finish; }
 		size_type size() const					{ 	return size_type(this->_finish - this->_start); }
 		size_type max_size() const				{	return size_type(_allocator.max_size()); }
 		void reserve( size_type n )		{	
