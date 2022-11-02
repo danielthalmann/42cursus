@@ -90,6 +90,14 @@ namespace ft
 	template<typename _IteratorL, typename _IteratorR>
 	bool operator>=(const reverse_iterator<_IteratorL>& x,	const reverse_iterator<_IteratorR>& y)
 	{ return !(x < y); }
+	
+	template< class Iterator >
+	reverse_iterator< Iterator >
+	operator+(const int &lhs,
+			  const reverse_iterator< Iterator > &rhs)
+	{
+		return reverse_iterator< Iterator >(rhs.base() + lhs);
+	}
 
 	template<typename _Iterator>
 		inline typename reverse_iterator<_Iterator>::difference_type
