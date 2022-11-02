@@ -223,9 +223,9 @@ namespace ft
 		}
 
 		void swap( vector<T, allocator>& other ) {
-			std::swap(this->_start, other._start);
-			std::swap(this->_end, other._end);
-			std::swap(this->_finish, other._finish);
+			ft::swap(this->_start, other._start);
+			ft::swap(this->_end, other._end);
+			ft::swap(this->_finish, other._finish);
 		}
 
 	protected:

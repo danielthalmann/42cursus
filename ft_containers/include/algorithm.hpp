@@ -54,6 +54,15 @@ namespace ft
 	
 		return (first1 == last1) && (first2 != last2);
 	}
+
+	template< class T >
+	void swap( T& a, T& b )
+	{
+		T tmp;
+		tmp = a;
+		a = b;
+		b = tmp;
+	}
 	
 } // namespace ft
 
