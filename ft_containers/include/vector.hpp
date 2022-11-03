@@ -157,25 +157,65 @@ namespace ft
 		iterator insert( iterator pos, const T& value ) {
 
 			size_type i = ft::distance(begin(), pos);
+			insert (pos , 1, value);
+			return iterator(_start + i);
 
-			if (size() + 1 > capacity())
-				grow((capacity() ? capacity() * 2 : 1));
+		}
+
+		void insert (iterator pos, size_type n, const T& value)
+		{
+			if (n + size() > max_size())
+				throw std::length_error("Length error: vector::insert");
+
+			size_type i = ft::distance(begin(), pos);
+			
+			if (size() + n > capacity())
+				grow(size() + n);
 
 			pointer elem = this->_start + i;
 
-			if ( elem == this->_finish ) {
-				*(this->_finish) = value;
-			}
-			else {
-				pointer cur = this->_finish;
-				while ( cur > elem ) {
-					*cur = *(cur - 1);
+			if ( elem != this->_finish ) {
+				pointer cur = this->_finish - 1;
+				while ( cur >= elem ) {
+					*(cur + n) = *(cur);
 					cur--;
 				}
-				*elem = value;
 			}
-			this->_finish++;
-			return iterator( elem );
+			for (size_t i = 0; i < n; i++) {
+				*(elem) = value;
+				elem++;
+			}
+			this->_finish += n;
+		}
+
+		template < class InputIterator >
+		void insert( iterator pos, InputIterator first, InputIterator last, typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0) {
+			
+			const size_type n = ft::distance(first, last);
+			
+			if (n + size() > max_size())
+				throw std::length_error("Length error: vector::insert");
+
+			size_type i = ft::distance(begin(), pos);
+			
+			if (size() + n > capacity())
+				grow(size() + n);
+
+			pointer elem = this->_start + i;
+
+			if ( elem != this->_finish ) {
+				pointer cur = this->_finish - 1;
+				while ( cur >= elem ) {
+					*(cur + n) = *(cur);
+					cur--;
+				}
+			}
+			for (size_t i = 0; i < n; i++) {
+				*(elem) = *(first + i);
+				elem++;
+			}
+			this->_finish += n;
+
 		}
 
 		iterator erase (iterator pos) {

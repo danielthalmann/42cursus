@@ -27,7 +27,7 @@ namespace ft
 		template<typename _Iter>
 		reverse_iterator(const reverse_iterator<_Iter>& i) : current(i.base()) { }
 
-		iterator_type base() const { return current; }
+		iterator_type& base() const { return current; }
 
 		reference operator*() const	{	Iterator tmp = current;	return *--tmp; }
 		pointer	operator->() const { return &(operator*()); }
@@ -53,19 +53,19 @@ namespace ft
 
 	template<typename _Iterator>
 	bool operator!=(const reverse_iterator<_Iterator>& x,	const reverse_iterator<_Iterator>& y)
-	{ return !(x == y); }
+	{ return !(x.base() == y.base()); }
 
 	template<typename _Iterator>
 	bool operator>(const reverse_iterator<_Iterator>& x,	const reverse_iterator<_Iterator>& y)
-	{ return y < x; }
+	{ return y.base() < x.base(); }
 
 	template<typename _Iterator>
 	bool operator<=(const reverse_iterator<_Iterator>& x,	const reverse_iterator<_Iterator>& y)
-	{ return !(y < x); }
+	{ return !(y.base() < x.base()); }
 
 	template<typename _Iterator>
 	bool operator>=(const reverse_iterator<_Iterator>& x,	const reverse_iterator<_Iterator>& y)
-	{ return !(x < y); }
+	{ return !(x.base() < y.base()); }
 
 	template<typename _IteratorL, typename _IteratorR>
 	bool operator==(const reverse_iterator<_IteratorL>& x, const reverse_iterator<_IteratorR>& y)
@@ -77,19 +77,19 @@ namespace ft
 
 	template<typename _IteratorL, typename _IteratorR>
 	bool operator!=(const reverse_iterator<_IteratorL>& x,	const reverse_iterator<_IteratorR>& y)
-	{ return !(x == y); }
+	{ return !(x.base() == y.base()); }
 
 	template<typename _IteratorL, typename _IteratorR>
 	bool operator>(const reverse_iterator<_IteratorL>& x,	const reverse_iterator<_IteratorR>& y)
-	{ return y < x; }
+	{ return y.base() < x.base(); }
 
 	template<typename _IteratorL, typename _IteratorR>
 	bool operator<=(const reverse_iterator<_IteratorL>& x,	const reverse_iterator<_IteratorR>& y)
-	{ return !(y < x); }
+	{ return !(y.base() < x.base()); }
 
 	template<typename _IteratorL, typename _IteratorR>
 	bool operator>=(const reverse_iterator<_IteratorL>& x,	const reverse_iterator<_IteratorR>& y)
-	{ return !(x < y); }
+	{ return !(x.base() < y.base()); }
 	
 	template< class Iterator >
 	reverse_iterator< Iterator >
