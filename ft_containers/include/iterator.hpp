@@ -92,7 +92,7 @@ namespace ft
 		template< typename Iter >
 		random_access_iterator(const random_access_iterator< Iter > &it) : current(it.base()) {}
 
-		const Iterator& base() const { return current; }
+		const Iterator base() const { return current; }
 
 		reference operator*() const {return *current;}
 		pointer	operator->() const { return &(operator*()); }
@@ -137,14 +137,6 @@ namespace ft
 		return !(operator>(lhs, rhs));
 	}
 
-	template< class Iterator >
-	typename random_access_iterator< Iterator >::difference_type
-	operator-(const random_access_iterator< Iterator > &lhs,
-			  const random_access_iterator< Iterator > &rhs)
-	{
-		return (lhs.base() - rhs.base());
-	}
-		
 	template< class IteratorL, class IteratorR >
 	typename random_access_iterator< IteratorL >::difference_type
 	operator-(const random_access_iterator< IteratorL > &lhs,
@@ -152,6 +144,15 @@ namespace ft
 	{
 		return (lhs.base() - rhs.base());
 	}
+		
+	template< class Iterator >
+	random_access_iterator< Iterator >
+	operator-(const int &lhs,
+			  const random_access_iterator< Iterator > &rhs)
+	{
+		return rhs - lhs;
+	}
+
 
 	template< class Iterator >
 	typename random_access_iterator< Iterator >::difference_type
@@ -166,7 +167,7 @@ namespace ft
 	operator+(const int &lhs,
 			  const random_access_iterator< Iterator > &rhs)
 	{
-		return random_access_iterator< Iterator >(rhs.base() + lhs);
+		return rhs + lhs;
 	}
 
 	template< typename IteratorL, typename IteratorR >

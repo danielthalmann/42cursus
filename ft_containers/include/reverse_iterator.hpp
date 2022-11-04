@@ -27,7 +27,7 @@ namespace ft
 		template<typename _Iter>
 		reverse_iterator(const reverse_iterator<_Iter>& i) : current(i.base()) { }
 
-		iterator_type& base() const { return current; }
+		iterator_type base() const { return current; }
 
 		reference operator*() const	{	Iterator tmp = current;	return *--tmp; }
 		pointer	operator->() const { return &(operator*()); }
@@ -96,9 +96,16 @@ namespace ft
 	operator+(const int &lhs,
 			  const reverse_iterator< Iterator > &rhs)
 	{
-		return reverse_iterator< Iterator >(rhs.base() + lhs);
+		return rhs + lhs;
 	}
 
+	template< class Iterator >
+	reverse_iterator< Iterator >
+	operator-(const int &lhs,
+			  const reverse_iterator< Iterator > &rhs)
+	{
+		return rhs - lhs;
+	}
 	template<typename _Iterator>
 		inline typename reverse_iterator<_Iterator>::difference_type
 		operator-(const reverse_iterator<_Iterator>& x,
