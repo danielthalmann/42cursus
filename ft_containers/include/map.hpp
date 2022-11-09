@@ -10,15 +10,16 @@
 #include "iterator.hpp"
 #include "reverse_iterator.hpp"
 #include "utility.hpp"
+#include "tree.hpp"
 
 #define DEBUG_INFO(T) (std::cout << T << std::endl);
 
 namespace ft
 {
 	template <	class Key, 
-				class T,
+				class Val,
 				class Compare = std::less<Key>,
-				class Allocator = std::allocator<ft::pair<const Key, T> > >
+				class Allocator = std::allocator<ft::pair<const Key, Val> > >
 	class map
 	{
 	public:
@@ -36,10 +37,10 @@ namespace ft
 		typedef Allocator::pointer			pointer;
 		typedef Allocator::const_pointer	const_pointer;
 			
-		typedef ft::random_access_iterator< pointer > iterator;
+		typedef ft::random_access_iterator< pointer > 		iterator;
 		typedef ft::random_access_iterator< const_pointer >	const_iterator;
 
-		typedef ft::reverse_iterator<iterator>		reverse_iterator;
+		typedef ft::reverse_iterator<iterator>			reverse_iterator;
 		typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 
 		/**
