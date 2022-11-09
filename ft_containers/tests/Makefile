@@ -6,7 +6,7 @@ NAME=test
 NAMESTD=$(NAME)_std
 NAMEFT=$(NAME)_ft
 
-SRCS=main2.cpp test_vector.cpp
+SRCS=test_pair.cpp
 
 OBJS=$(SRCS:cpp=o)
 
