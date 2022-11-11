@@ -9,7 +9,7 @@
 namespace ft
 {
 
-	enum Tree_color { S_red = false, S_black = true };
+	enum Tree_color { tree_color_red = false, tree_color_black = true };
 
 	struct Tree_node_base
 	{
@@ -198,7 +198,15 @@ namespace ft
 
 	};
 
-	template<typename T, typename Alloc >
+/**
+ * @brief 
+ * 
+ * les feuilles sont noires,
+ * les fils d'un nœud rouge sont noirs,
+ * le nombre de nœuds noirs le long d'une branche de la racine à une feuille est indépendant de la branche.
+ * 
+ */
+ 	template<typename T, typename Alloc >
 	class Tree
 	{
 		typedef Alloc						allocate_type;
@@ -222,13 +230,9 @@ namespace ft
 		void prefix (void (*fn)(T &, size_t)) { prefix(_tree, 0, fn); }
 		void infix (void (*fn)(T &, size_t)) { infix(_tree, 0, fn); }
 		void postfix (void (*fn)(T &, size_t)) { postfix(_tree, 0, fn); }
+		void drawTree (size_t level) { draw (_tree, 0, level); }
 
-
-		void drawTree (size_t level) 
-		{
-			draw (_tree, 0, level);
-
-		}
+	private:
 
 		void draw (tree_pointer node, size_t curent_level, size_t level) 
 		{ 
@@ -245,8 +249,6 @@ namespace ft
 			draw (node->left, curent_level + 1, level);
 			draw (node->right, curent_level + 1, level);
 		}
-
-	private:
 
 		void prefix (tree_pointer node, size_t level, void (*fn)(T &, size_t)) 
 		{ 
@@ -375,8 +377,86 @@ namespace ft
 			_allocator.construct(static_cast<link_type>(node)->value, val);
 			node->left = NULL;
 			node->right = NULL;
+			node->color = tree_color_black;
 			node->parent = NULL;
 			return node;
+		}
+
+	public: 
+		/**
+		 * rotation à droite :
+		 * 
+		 *          t                         l
+		 *         / \                       / \
+		 *        l   z     ========>       x   t
+		 *       / \                           / \
+		 *      x   y                         y   z
+		 *
+		 *   t = node 
+		 *   l = node->left -> root
+		 *   z = node->right
+		 * 
+		 */
+		tree_pointer& rotateRight(tree_pointer node)
+		{
+			tree_pointer root = node->left;
+			
+			// déplacement de la référence du parent
+			if (node == _tree) {
+				_tree = root;
+				root->parent = NULL;
+			}
+			else {
+				tree_pointer& parent_link = (node->parent->left == node) ? node->parent->left : node->parent->right;
+				parent_link = root;
+				root->parent = node->parent;
+			}
+
+			// Rotation 
+			node->parent = root;
+			node->left = root->right;
+			node->left->parent = node;
+			root->right = node;
+
+			return root;
+		}
+
+		/**
+		 * rotation à gauche :
+		 * 
+		 *       l                     t   
+		 *      / \                   / \  
+		 *     x   t    ========>    l   z 
+		 *        / \               / \    
+		 *       y   z             x   y   
+		 *
+		 *   l = node 
+		 *   t = node->right -> root
+		 *   x = node->left
+		 * 
+		 */
+		tree_pointer& rotateLeft(tree_pointer node)
+		{
+			tree_pointer root = node->right;
+			
+			// déplacement de la référence du parent
+			if (node == _tree) {
+				_tree = root;
+				root->parent = NULL;
+			}
+			else {
+				tree_pointer& parent_link = (node->parent->left == node) ? node->parent->left : node->parent->right;
+				parent_link = root;
+				root->parent = node->parent;
+			}
+
+			// Rotation 
+			node->parent = root;
+			node->right = root->left;
+			node->right->parent = node;
+			root->left = node;
+
+			return root;
 		}
 
 	};
