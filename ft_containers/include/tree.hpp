@@ -1,6 +1,7 @@
 #ifndef TREE_HPP
 #define TREE_HPP
 
+#include <iostream>
 #include <cstddef>
 #include <memory>
 #include "iterator.hpp"
@@ -49,16 +50,19 @@ namespace ft
 		}
 	
 	};
+	
 	template<typename T>
 	struct Tree_node : public Tree_node_base
 	{
 		typedef Tree_node<T>* link_type;
+
 		T value;
 		T*	valptr() { return (&value); }
 		const T* valptr() const { return (&value); }
 	};
 
-	class Tree_header
+/*
+	struct Tree_header
 	{
 		Tree_node_base	header;
 		size_t			count;
@@ -89,7 +93,7 @@ namespace ft
 			count = 0;
 		}
 	};
-
+*/
 	static Tree_node_base* local_increment(Tree_node_base* node)
 	{
 		if (node->right != 0) 
@@ -197,26 +201,81 @@ namespace ft
 	template<typename T, typename Alloc >
 	class Tree
 	{
-		typedef Alloc			allocate_type;
-		typedef Tree_node<T*>	node_type;
-		typedef Tree_node<T*>*	node_pointer;
-		
+		typedef Alloc						allocate_type;
+		typedef Tree_node<T*>				node_type;
+		typedef Tree_node_base::pointer		tree_pointer;
+		typedef Tree_node<T*>*				link_type;
+
 	private:
-		node_pointer	_tree;
-		allocate_type	_allocator;
+		tree_pointer	_tree;
 		size_t			_count;
+		allocate_type	_allocator;
 
 	public:
 		Tree() :_tree(0), _count(0), _allocator() { }
-
+		virtual ~Tree() { destroy( _tree ); }
         void insert (const T& val) { insert (val, _tree, NULL); _count++; }
-        void destroy () { destroy( _tree ); _count = 0; }
-        void remove (const T& val);
-		node_pointer search (const T& val) const { return search (val, _tree);	}
+        void destroy (void) { destroy( _tree ); _count = 0; }
+        void remove (const T& val) { tree_pointer node = search (val); deleteNode (node) ; };
+		tree_pointer search (const T& val) const { return search (val, _tree);	}
+		size_t size(void) const { return _count; }
+		void prefix (void (*fn)(T &, size_t)) { prefix(_tree, 0, fn); }
+		void infix (void (*fn)(T &, size_t)) { infix(_tree, 0, fn); }
+		void postfix (void (*fn)(T &, size_t)) { postfix(_tree, 0, fn); }
+
+
+		void drawTree (size_t level) 
+		{
+			draw (_tree, 0, level);
+
+		}
+
+		void draw (tree_pointer node, size_t curent_level, size_t level) 
+		{ 
+			if(!node)
+				return ;
+
+			if (curent_level > level)
+				return ;
+
+			if (curent_level == level) {
+				std::cout << *(static_cast<link_type>(node)->value) << "\t";
+				return ;
+			}
+			draw (node->left, curent_level + 1, level);
+			draw (node->right, curent_level + 1, level);
+		}
 
 	private:
 
-		void destroy (node_pointer &node)
+		void prefix (tree_pointer node, size_t level, void (*fn)(T &, size_t)) 
+		{ 
+			if (!node) 
+				return;
+			fn(*(static_cast<link_type>(node)->value), level);
+			prefix (node->left, level + 1, fn);
+			prefix (node->right, level + 1, fn);
+		}
+
+		void infix (tree_pointer node, size_t level, void (*fn)(T &, size_t)) 
+		{ 
+			if (!node) 
+				return;
+			infix (node->left, level + 1, fn);
+			fn(*(static_cast<link_type>(node)->value), level);
+			infix (node->right, level + 1, fn);
+		}
+
+		void postfix (tree_pointer node, size_t level, void (*fn)(T &, size_t)) 
+		{ 
+			if (!node) 
+				return;
+			postfix (node->left, level + 1, fn);
+			postfix (node->right, level + 1, fn);
+			fn(*(static_cast<link_type>(node)->value), level);
+		}
+
+		void destroy (tree_pointer node)
 		{
 			if (node) {
 				destroy (node->left);
@@ -225,10 +284,10 @@ namespace ft
 			}
 		}
 		
-		void destroyNode (node_pointer &node)
+		void destroyNode (tree_pointer node)
 		{
-			_allocator.detroy(node->value);
-			_allocator.deallocate(node->value, 1);
+			_allocator.destroy(static_cast<link_type>(node)->value);
+			_allocator.deallocate(static_cast<link_type>(node)->value, 1);
 			_count--;
 			if (node->parent) {
 				if (node->parent->left == node)
@@ -241,23 +300,25 @@ namespace ft
 			delete node;
 		}
 
-		void deleteNode (node_pointer &node)
+		void deleteNode (tree_pointer &node)
 		{
 			if (node) {
 
-				node_pointer parent;
+				tree_pointer parent;
 
 				if (!node->left && !node->right) {
 					
-					destroyNode (node_pointer &node);
+					destroyNode(node);
 
 				} else if (node->left && node->right) {
 
-					node->maximum()
+					tree_pointer max_node = node->maximum(node);
+					if (max_node == 0)
+						max_node = 0;
 
 				} else {
 
-			        node_pointer child = (node->left) ? node->left : node->right;  
+			        tree_pointer child = (node->left) ? node->left : node->right;  
 					parent = node->parent;
 
 					if (parent)
@@ -270,19 +331,19 @@ namespace ft
 						}
 						child->parent = parent;
 					}
-					destroyNode (node_pointer &node);
+					destroyNode (node);
 				}
 			}
 		}
 
-		void insert (const T& val, node_pointer &node, node_pointer &parent)
+		void insert (const T& val, tree_pointer& node, tree_pointer parent)
 		{
 			if (!node) {
 				node = createNode(val);
 				node->parent = parent;
 			}
 			else {
-				if (val < node->value) {
+				if ( val < *static_cast<link_type>(node)->value ) {
 					insert (val, node->left, node);
 				}
 				else {
@@ -291,34 +352,34 @@ namespace ft
 			}
 		}
 
-		node_pointer search (const T& val, node_pointer ptr) const {
+		tree_pointer search (const T& val, tree_pointer node) const {
 			
-			if (!ptr) {
+			if (!node) {
 				return NULL;
 			}
-			else if ((ptr->value) == valeur){
-				return ptr;
+			else if (*(static_cast<link_type>(node)->value) == val){
+				return node;
 			}
-			else if (valeur < (ptr->value)){
-				return search (val, ptr->left);
+			else if (val < *(static_cast<link_type>(node)->value)){
+				return search (val, node->left);
 			}
 			else{
-				return search (val, ptr->right);
+				return search (val, node->right);
 			}
 		}
 
-		node_pointer createNode (const T& val) {
+		tree_pointer createNode (const T& val) {
 
-			node_pointer node = new node_type();
-			node->value = _allocator.allocate(1);
-			_allocator.construct(node->value, val);
+			tree_pointer node = new node_type();
+			static_cast<link_type>(node)->value = _allocator.allocate(1);
+			_allocator.construct(static_cast<link_type>(node)->value, val);
 			node->left = NULL;
 			node->right = NULL;
 			node->parent = NULL;
 			return node;
 		}
 
-	}
+	};
 
 }
 

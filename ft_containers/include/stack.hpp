@@ -22,7 +22,7 @@ namespace ft
 
 	public:
 		explicit stack(const container_type &ctnr = container_type()) : c(ctnr) {}
-        ~stack() { };
+        virtual ~stack() { };
 
         stack& operator=( const stack& other ) { c = other.c; }
 

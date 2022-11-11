@@ -12,7 +12,7 @@ OBJS=$(SRCS:cpp=o)
 
 CXX=c++
 
-CXXFLAGS=-Wall -Wextra -Werror -g -std=c++98 -I../include
+CXXFLAGS=-Wall -Wextra -Werror -g -std=c++98 -I../include -Wfatal-errors
 
 LDFLAGS=-lstdc++ -lm
 
@@ -45,3 +45,9 @@ debug : re run
 run : $(NAME)
 	time -p ./$(NAMESTD)
 	time -p ./$(NAMEFT)
+
+
+tree : test_tree.cpp ../include/tree.hpp
+	$(CXX) test_tree.cpp $(CXXFLAGS) $(LDFLAGS) -o $@
+
+.phony : tree
