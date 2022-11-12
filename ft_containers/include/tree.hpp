@@ -94,38 +94,6 @@ namespace ft
 		}
 	};
 */
-	static Tree_node_base* local_increment(Tree_node_base* node)
-	{
-		if (node->right != 0) 
-		{
-			node = node->right;
-			while (node->left != 0)
-				node = node->left;
-		}
-		else 
-		{
-			Tree_node_base* parent = node->parent;
-			while (node == parent->right) 
-			{
-				node = parent;
-				parent = parent->parent;
-			}
-			if (node->right != parent)
-					node = parent;
-		}
-		return node;
-	}
-
-	Tree_node_base* _Rb_tree_increment(Tree_node_base* __x) 
-	{
-		return local_increment(__x);
-	}
-
-	const Tree_node_base* _Rb_tree_increment(const Tree_node_base* __x) 
-	{
-		return local_increment(const_cast<Tree_node_base*>(__x));
-	}
-
 
 	template<typename _Tp>
 	struct Rb_tree_iterator
@@ -150,14 +118,78 @@ namespace ft
 		reference 	operator*() const 				{ return *static_cast<link_type>(_node)->valptr(); }
 		pointer		operator->() const				{ return static_cast<link_type> (_node)->valptr(); }
 		self&		operator++()					{ _node = tree_increment(_node); return *this; }
-		self		operator++(int)					{ self __tmp = *this; _node = _Rb_tree_increment(_node); return __tmp; }
+		self		operator++(int)					{ self __tmp = *this; _node = tree_increment(_node); return __tmp; }
 		self&		operator--()					{ _node = tree_decrement(_node); return *this; }
-		self		operator--(int)					{ self __tmp = *this; _node = _Rb_tree_decrement(_node); return __tmp; }
+		self		operator--(int)					{ self __tmp = *this; _node = tree_decrement(_node); return __tmp; }
 		bool		operator==(const self& x) const	{ return _node == x._node; }
 		bool		operator!=(const self& x) const	{ return _node != x._node; }
 	
 	private:
 
+		pointer tree_increment(pointer node)
+		{
+			if (node->right != 0) 
+			{
+				node = node->right;
+				while (node->left != 0)
+					node = node->left;
+			}
+			else 
+			{
+				Tree_node_base* parent = node->parent;
+				while (node == parent->right) 
+				{
+					node = parent;
+					parent = parent->parent;
+				}
+				if (node->right != parent)
+						node = parent;
+			}
+			return node;
+		}
+
+		pointer tree_increment(Tree_node_base* node) {
+			return local_increment(node);
+		}
+
+		const pointer tree_increment(const pointer node) {
+			return local_increment(const_cast<pointer>(node));
+		}
+
+
+		pointer local_decrement(pointer node) throw ()
+		{
+			if (node->_M_color == _S_red
+				&& node->_M_parent->_M_parent == node)
+			node = node->_M_right;
+			else if (node->_M_left != 0)
+			{
+				_Rb_pointer __y = node->_M_left;
+				while (__y->_M_right != 0)
+				__y = __y->_M_right;
+				node = __y;
+			}
+			else
+			{
+				_Rb_pointer __y = node->_M_parent;
+				while (node == __y->_M_left)
+				{
+					node = __y;
+					__y = __y->_M_parent;
+				}
+				node = __y;
+			}
+			return node;
+		}
+
+		pointer tree_decrement(pointer node) throw () {
+			return local_decrement(node);
+		}
+
+		const pointer tree_decrement(const pointer node) throw () {
+			return local_decrement(const_cast<pointer>(node));
+		}
+		
 
 	};
 	
