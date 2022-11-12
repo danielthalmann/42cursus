@@ -209,6 +209,7 @@ namespace ft
  	template<typename T, typename Alloc >
 	class Tree
 	{
+	public:
 		typedef Alloc						allocate_type;
 		typedef Tree_node<T*>				node_type;
 		typedef Tree_node_base::pointer		tree_pointer;
@@ -222,7 +223,7 @@ namespace ft
 	public:
 		Tree() :_tree(0), _count(0), _allocator() { }
 		virtual ~Tree() { destroy( _tree ); }
-        void insert (const T& val) { insert (val, _tree, NULL); _count++; }
+        void insert (const T& val) { tree_pointer node = insert (val, _tree, NULL); _count++; repareTree(node); }
         void destroy (void) { destroy( _tree ); _count = 0; }
         void remove (const T& val) { tree_pointer node = search (val); deleteNode (node) ; };
 		tree_pointer search (const T& val) const { return search (val, _tree);	}
@@ -314,9 +315,12 @@ namespace ft
 
 				} else if (node->left && node->right) {
 
-					tree_pointer max_node = node->maximum(node);
-					if (max_node == 0)
-						max_node = 0;
+					tree_pointer max_node = node->maximum(node->left);
+					T* temp = static_cast<link_type>(node)->value;
+					static_cast<link_type>(node)->value = static_cast<link_type>(max_node)->value;
+					static_cast<link_type>(max_node)->value = temp;
+
+					deleteNode (max_node);
 
 				} else {
 
@@ -338,18 +342,19 @@ namespace ft
 			}
 		}
 
-		void insert (const T& val, tree_pointer& node, tree_pointer parent)
+		tree_pointer insert (const T& val, tree_pointer& node, tree_pointer parent)
 		{
 			if (!node) {
 				node = createNode(val);
 				node->parent = parent;
+				return node;
 			}
 			else {
 				if ( val < *static_cast<link_type>(node)->value ) {
-					insert (val, node->left, node);
+					return insert (val, node->left, node);
 				}
 				else {
-					insert (val, node->right, node);
+					return insert (val, node->right, node);
 				}
 			}
 		}
@@ -377,7 +382,7 @@ namespace ft
 			_allocator.construct(static_cast<link_type>(node)->value, val);
 			node->left = NULL;
 			node->right = NULL;
-			node->color = tree_color_black;
+			node->color = tree_color_red;
 			node->parent = NULL;
 			return node;
 		}
@@ -397,7 +402,7 @@ namespace ft
 		 *   z = node->right
 		 * 
 		 */
-		tree_pointer& rotateRight(tree_pointer node)
+		tree_pointer rotateRight(tree_pointer node)
 		{
 			tree_pointer root = node->left;
 			
@@ -415,7 +420,8 @@ namespace ft
 			// Rotation 
 			node->parent = root;
 			node->left = root->right;
-			node->left->parent = node;
+			if (node->left)
+				node->left->parent = node;
 			root->right = node;
 
 			return root;
@@ -435,7 +441,7 @@ namespace ft
 		 *   x = node->left
 		 * 
 		 */
-		tree_pointer& rotateLeft(tree_pointer node)
+		tree_pointer rotateLeft(tree_pointer node)
 		{
 			tree_pointer root = node->right;
 			
@@ -453,11 +459,101 @@ namespace ft
 			// Rotation 
 			node->parent = root;
 			node->right = root->left;
-			node->right->parent = node;
+			if (node->right)
+				node->right->parent = node;
 			root->left = node;
 
 			return root;
 		}
+
+
+		tree_pointer parent(tree_pointer node) {
+			return node->parent;
+		}
+
+		tree_pointer grandparent(tree_pointer node) {
+			tree_pointer p = parent(node);
+			if (p == NULL)
+				return NULL; // Un noeud sans parent n'a pas de grand-parent
+			return parent(p);
+		}
+
+		tree_pointer brother(tree_pointer node) {
+			tree_pointer p = parent(node);
+			if (p == NULL)
+				return NULL; // Un noeud sans parent n'a pas de frere
+			if (node == p->left)
+				return p->right;
+			else
+				return p->left;
+		}
+
+		//Renvoie le frère du père
+		tree_pointer uncle(tree_pointer node) {
+			tree_pointer p = parent(node);
+			tree_pointer g = grandparent(node);
+			if (g == NULL)
+				return NULL; // Pas de grand parent, donc pas d'oncle
+			return brother(p);
+		}		
+
+		void repareTree(tree_pointer node) 
+		{
+			tree_pointer gp;
+			tree_pointer p;
+
+			if (node == _tree) {
+				node->color = tree_color_black;
+				return ;
+			}
+			if (node->parent->color == tree_color_black) {
+				/* Ne rien faire puisque l'arbre est bien un arbre rouge-noir */
+				return ;
+			}
+
+			tree_pointer u = uncle(node);
+
+			if ( u != NULL && u->color == tree_color_red) {
+				parent(node)->color = tree_color_black;
+   				uncle(node)->color = tree_color_black;
+
+				gp = grandparent(node);
+				gp->color = tree_color_red;
+				repareTree(gp);
+				return ;
+			}
+
+
+			p = parent(node);
+			gp = grandparent(node);
+
+			if (gp->left != NULL && node == gp->left->right) {
+				rotateLeft(p);
+				node = node->left;
+			} else if (gp->right != NULL && node == gp->right->left) {
+				rotateRight(p);
+				node = node->right; 
+			}
+		/*
+		 *       gp                    p   
+		 *      / \                   / \  
+		 *     p   u    ========>    n   gp 
+		 *    / \                         \ 
+		 *   n                             u
+		 */
+
+			p = parent(node);
+			gp = grandparent(node);
+
+			if (node == p->left)
+				rotateRight(gp);
+			else
+				rotateLeft(gp);
+			
+			p->color = tree_color_black;
+			gp->color = tree_color_red;
+
+		};
 
 	};
 

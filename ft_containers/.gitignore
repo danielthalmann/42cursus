@@ -1,3 +1,5 @@
 *.o
 tests/test_ft
 tests/test_std
+tests/tree
+tests/tree.exe

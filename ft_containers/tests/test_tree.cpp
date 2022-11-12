@@ -10,22 +10,45 @@ void printint(int &i, size_t level)
     std::cout << level << ":" << i << "\t" ;
 }
 
+void insert(int v, ft::Tree <int, std::allocator<int> > &arbre)
+{
+    arbre.insert(v);
+    arbre.infix(&printint); std::cout << " " << arbre.size() << '\n';
+}
 
 void  test ( )
 {
  
     // Instanciation d'un ABR
     ft::Tree <int, std::allocator<int> > arbre;
-    arbre.insert(40);
-    arbre.insert(50);
-    arbre.insert(14);
-    arbre.insert(16);
-    arbre.insert(5);
-    arbre.insert(3);
-    arbre.insert(7);
-    arbre.insert(55);
-    arbre.insert(45);
- 
+    arbre.infix(&printint); std::cout << " " << arbre.size() << '\n';
+    insert(0, arbre);
+    insert(1, arbre);
+    insert(2, arbre);
+    insert(3, arbre);
+    insert(7, arbre);
+    insert(14, arbre);
+    insert(9, arbre);
+    insert(19, arbre);
+    insert(10, arbre);
+    insert(17, arbre);
+    insert(28, arbre);
+    insert(54, arbre);
+    insert(32, arbre);
+    insert(29, arbre);
+    insert(42, arbre);
+    insert(44, arbre);
+    insert(79, arbre);
+    insert(76, arbre);
+    insert(65, arbre);
+    insert(77, arbre);
+    insert(60, arbre);
+    insert(78, arbre);
+    insert(81, arbre);
+    insert(80, arbre);
+    insert(97, arbre);
+    insert(82, arbre);
+ /*
     std::cout << '\n';
     std::cout << "Le parcours infixe de cet arbre est : "<< std::endl;
     arbre.infix(&printint);
@@ -69,7 +92,7 @@ void  test ( )
     arbre.infix(&printint);
     std::cout << std::endl;
 
-    for (size_t i = 0; i < 4; i++)
+    for (size_t i = 0; i < 6; i++)
     {
         std::cout << i << " : ";
         arbre.drawTree (i);
@@ -82,13 +105,51 @@ void  test ( )
     arbre.infix(&printint);
     std::cout << std::endl;
 
-    for (size_t i = 0; i < 4; i++)
+    for (size_t i = 0; i < 6; i++)
     {
         std::cout << i << " : ";
         arbre.drawTree (i);
         std::cout << '\n';
     }
- 
+
+
+    ft::Tree<int, std::allocator<int> >::tree_pointer p = arbre.search(14); 
+
+    p = arbre.rotateRight(p);
+    arbre.infix(&printint);
+    std::cout << std::endl;
+
+
+    for (size_t i = 0; i < 6; i++)
+    {
+        std::cout << i << " : ";
+        arbre.drawTree (i);
+        std::cout << '\n';
+    }
+
+    p = arbre.rotateLeft(p);
+    arbre.infix(&printint);
+    std::cout << std::endl;
+  
+*/
+
+    for (size_t i = 0; i < 8; i++)
+    {
+        std::cout << i << " : ";
+        arbre.drawTree (i);
+        std::cout << '\n';
+    }
+
+    arbre.remove(14);
+
+    for (size_t i = 0; i < 8; i++)
+    {
+        std::cout << i << " : ";
+        arbre.drawTree (i);
+        std::cout << '\n';
+    }
+
+
 }
 
 int main( void ) 
