@@ -95,28 +95,29 @@ namespace ft
 	};
 */
 
-	template<typename _Tp>
-	struct Rb_tree_iterator
+
+	template<typename T>
+	struct Tree_iterator
 	{
-		typedef _Tp 							value_type;
-		typedef _Tp&							reference;
-		typedef _Tp*							pointer;
+		typedef T 								value_type;
+		typedef T&								reference;
+		typedef T*								pointer;
 
 		typedef ft::bidirectional_iterator_tag	iterator_category;
 		typedef ptrdiff_t						difference_type;
 
-		typedef Rb_tree_iterator<_Tp>			self;
+		typedef Tree_iterator<T>				self;
 		typedef Tree_node_base::pointer			tree_pointer;
-		typedef Tree_node<_Tp>*					link_type;
+		typedef Tree_node<T*>*					link_type;
 
-		pointer _node;
+		tree_pointer _node;
 
-		Rb_tree_iterator() : _node() { }
+		Tree_iterator() : _node() { }
 
-		Rb_tree_iterator(pointer x) : _node(x) { }
+		Tree_iterator(tree_pointer x) : _node(x) { }
 
-		reference 	operator*() const 				{ return *static_cast<link_type>(_node)->valptr(); }
-		pointer		operator->() const				{ return static_cast<link_type> (_node)->valptr(); }
+		reference 	operator*() const 				{ return **static_cast<link_type>(_node)->valptr(); }
+		pointer		operator->() const				{ return *static_cast<link_type> (_node)->valptr(); }
 		self&		operator++()					{ _node = tree_increment(_node); return *this; }
 		self		operator++(int)					{ self __tmp = *this; _node = tree_increment(_node); return __tmp; }
 		self&		operator--()					{ _node = tree_decrement(_node); return *this; }
@@ -126,7 +127,7 @@ namespace ft
 	
 	private:
 
-		pointer tree_increment(pointer node)
+		tree_pointer tree_increment(tree_pointer node)
 		{
 			if (node->right != 0) 
 			{
@@ -136,7 +137,7 @@ namespace ft
 			}
 			else 
 			{
-				Tree_node_base* parent = node->parent;
+				tree_pointer parent = node->parent;
 				while (node == parent->right) 
 				{
 					node = parent;
@@ -148,58 +149,50 @@ namespace ft
 			return node;
 		}
 
-		pointer tree_increment(Tree_node_base* node) {
-			return local_increment(node);
-		}
-
-		const pointer tree_increment(const pointer node) {
-			return local_increment(const_cast<pointer>(node));
-		}
-
-
-		pointer local_decrement(pointer node) throw ()
+		tree_pointer tree_decrement(tree_pointer node) throw ()
 		{
-			if (node->_M_color == _S_red
-				&& node->_M_parent->_M_parent == node)
-			node = node->_M_right;
-			else if (node->_M_left != 0)
+			if (node->color == tree_color_red
+				&& node->parent->parent == node)
+			node = node->right;
+			else if (node->left != 0)
 			{
-				_Rb_pointer __y = node->_M_left;
-				while (__y->_M_right != 0)
-				__y = __y->_M_right;
-				node = __y;
+				tree_pointer node_left = node->left;
+				while (node_left->right != 0)
+					node_left = node_left->right;
+				node = node_left;
 			}
 			else
 			{
-				_Rb_pointer __y = node->_M_parent;
-				while (node == __y->_M_left)
+				tree_pointer parent = node->parent;
+				while (node == parent->left)
 				{
-					node = __y;
-					__y = __y->_M_parent;
+					node = parent;
+					parent = parent->parent;
 				}
-				node = __y;
+				node = parent;
 			}
 			return node;
 		}
 
-		pointer tree_decrement(pointer node) throw () {
-			return local_decrement(node);
-		}
-
-		const pointer tree_decrement(const pointer node) throw () {
-			return local_decrement(const_cast<pointer>(node));
-		}
-		
-
 	};
-	
+
+  template<typename _Val>
+    inline bool operator==(const Tree_iterator<_Val>& a, const Tree_iterator<_Val>& b)
+    { return a._node == b._node; }
+
+  template<typename _Val>
+    inline bool operator!=(const Tree_iterator<_Val>& a, const Tree_iterator<_Val>& b)
+    { return a._node != b._node; }
+
+
+/*	
 	template<typename _Tp>
 	struct Rb_tree_const_iterator
 	{
 		typedef _Tp	 								value_type;
 		typedef const _Tp& 							reference;
 		typedef const _Tp* 							pointer;
-		typedef Rb_tree_iterator<_Tp> 				iterator;
+		typedef Tree_iterator<_Tp> 					iterator;
 
 		typedef ft::bidirectional_iterator_tag 		iterator_category;
 		typedef ptrdiff_t			 				difference_type;
@@ -208,7 +201,7 @@ namespace ft
 		typedef Tree_node_base::const_pointer		tree_pointer;
 		typedef const Tree_node<_Tp>*				link_type;
 	
-		pointer _node;
+		tree_pointer _node;
 
 		Rb_tree_const_iterator() : _node() { }
 
@@ -219,16 +212,64 @@ namespace ft
 		reference	operator*() const					{ return *static_cast<link_type>(_node)->valptr(); }
 		pointer		operator->() const					{ return static_cast<link_type>(_node)->valptr(); }
 		self&		operator++()						{ _node = tree_increment(_node); return *this; }
-		self		operator++(int)						{ self __tmp = *this; _node = _Rb_tree_increment(_node); return __tmp; }
+		self		operator++(int)						{ self __tmp = *this; _node = tree_increment(_node); return __tmp; }
 		self&		operator--()						{ _node = tree_decrement(_node); return *this; }
-		self		operator--(int)						{ self __tmp = *this; _node = _Rb_tree_decrement(_node); return __tmp; }
+		self		operator--(int)						{ self __tmp = *this; _node = tree_decrement(_node); return __tmp; }
 		friend bool	operator==(const self& x, const self& y) { return x._node == y._node; }
 		friend bool	operator!=(const self& x, const self& y) { return x._node != y._node; }
 
 	private:
 
+		tree_pointer tree_increment(tree_pointer node)
+		{
+			if (node->right != 0) 
+			{
+				node = node->right;
+				while (node->left != 0)
+					node = node->left;
+			}
+			else 
+			{
+				tree_pointer parent = node->parent;
+				while (node == parent->right) 
+				{
+					node = parent;
+					parent = parent->parent;
+				}
+				if (node->right != parent)
+						node = parent;
+			}
+			return node;
+		}
+
+		tree_pointer tree_decrement(tree_pointer node) throw ()
+		{
+			if (node->color == tree_color_red
+				&& node->parent->parent == node)
+			node = node->right;
+			else if (node->left != 0)
+			{
+				tree_pointer node_left = node->left;
+				while (node_left->right != 0)
+					node_left = node_left->right;
+				node = node_left;
+			}
+			else
+			{
+				tree_pointer parent = node->parent;
+				while (node == parent->left)
+				{
+					node = parent;
+					parent = parent->parent;
+				}
+				node = parent;
+			}
+			return node;
+		}
 
 	};
+
+*/
 
 /**
  * @brief 
@@ -242,10 +283,15 @@ namespace ft
 	class Tree
 	{
 	public:
+		typedef T	 						value_type;
+		typedef const T& 					reference;
+		typedef const T* 					pointer;
 		typedef Alloc						allocate_type;
 		typedef Tree_node<T*>				node_type;
 		typedef Tree_node_base::pointer		tree_pointer;
 		typedef Tree_node<T*>*				link_type;
+
+		typedef Tree_iterator<T>			iterator;
 
 	private:
 		tree_pointer	_tree;
@@ -264,6 +310,8 @@ namespace ft
 		void infix (void (*fn)(T &, size_t)) { infix(_tree, 0, fn); }
 		void postfix (void (*fn)(T &, size_t)) { postfix(_tree, 0, fn); }
 		void drawTree (size_t level) { draw (_tree, 0, level); }
+		iterator  begin(void) const { return iterator(node_type::minimum(_tree)); }
+		iterator  end(void) const { return iterator(node_type::maximum(_tree)); }
 
 	private:
 

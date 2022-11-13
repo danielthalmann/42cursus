@@ -24,8 +24,8 @@ namespace ft
 	{
 	public:
 		typedef Key 						key_type;
-		typedef T							mapped_type;
-		typedef ft::pair<const Key, T>		value_type;
+		typedef Val							mapped_type;
+		typedef ft::pair<const Key, Val>	value_type;
 		typedef size_t						size_type;
 		typedef ptrdiff_t					difference_type;
 		typedef Compare						key_compare;
@@ -36,7 +36,8 @@ namespace ft
 
 		typedef Allocator::pointer			pointer;
 		typedef Allocator::const_pointer	const_pointer;
-			
+
+
 		typedef ft::random_access_iterator< pointer > 		iterator;
 		typedef ft::random_access_iterator< const_pointer >	const_iterator;
 
@@ -152,10 +153,9 @@ namespace ft
 
 	protected:
 
-		pointer			_start;
-		pointer			_end;
-		pointer			_finish;
-		allocator_type	_allocator;
+		Compare 		_comp;
+		Allocator 		_alloc;
+		Tree_			_tree;
 
 	};
 

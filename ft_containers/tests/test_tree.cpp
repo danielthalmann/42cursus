@@ -133,6 +133,8 @@ void  test ( )
   
 */
 
+     std::cout << " taille : " << arbre.size() << '\n';
+
     for (size_t i = 0; i < 8; i++)
     {
         std::cout << i << " : ";
@@ -149,6 +151,26 @@ void  test ( )
         std::cout << '\n';
     }
 
+    std::cout << " taille : " << arbre.size() << '\n';
+
+    ft::Tree <int, std::allocator<int> >::iterator start;
+    ft::Tree <int, std::allocator<int> >::iterator end;
+
+    start = arbre.begin();
+    
+    std::cout << " value : " << *start << std::endl;
+
+    end = arbre.end();
+    
+    std::cout << " value : " << *end << std::endl;
+
+    while (start != end)
+    {
+        start++;
+        std::cout << " value : " << *start << std::endl;
+
+    }
+    
 
 }
 
