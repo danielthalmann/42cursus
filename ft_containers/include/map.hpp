@@ -34,15 +34,30 @@ namespace ft
 		typedef value_type&					reference;
 		typedef const value_type&			const_reference;
 
-		typedef Allocator::pointer			pointer;
-		typedef Allocator::const_pointer	const_pointer;
+		typedef typename Allocator::pointer			pointer;
+		typedef typename Allocator::const_pointer	const_pointer;
 
+		typedef Tree<value_type, allocator_type> tree_type;
 
 		typedef ft::random_access_iterator< pointer > 		iterator;
 		typedef ft::random_access_iterator< const_pointer >	const_iterator;
 
 		typedef ft::reverse_iterator<iterator>			reverse_iterator;
 		typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
+
+		class value_compare : public std::binary_function<value_type, value_type, bool>
+		{
+			friend class map<Key, Val, Compare, Allocator>;
+      	protected:
+			_Compare comp;
+
+			value_compare(_Compare c) : comp(c) { }
+		public:
+			bool operator() (const value_type& x, const value_type& y) const
+			{ return comp(x.first, y.first); }
+      	
+		};
+
 
 		/**
 		 * @brief Construct a new vector object
@@ -85,9 +100,9 @@ namespace ft
 		 * Element access 
 		 */
 
-		T& at(size_type n) 					{	/* TODO */ }
-		const T& at(size_type n) const		{	/* TODO */ }
-		T& operator[]( const Key& key)		{	/* TODO */  }
+		Val& at(size_type n) 					{	/* TODO */ }
+		const Val& at(size_type n) const		{	/* TODO */ }
+		Val& operator[]( const Key& key)		{	/* TODO */  }
 
 		/**
 		 * Iterators
@@ -125,7 +140,7 @@ namespace ft
 
 		size_type erase( const Key& key ) {/* TODO */ }
 
-		void swap( vector<T, allocator>& other ) {/* TODO */ }
+		void swap( map<Key, Val, Allocator>& other ) {/* TODO */ }
 				
 		/**
 		 *  Lookup 
@@ -148,14 +163,14 @@ namespace ft
 		 *  Observers 
 		 */	
 		key_compare key_comp() const {/* TODO */ }
-		ft::map::value_compare value_comp() const {/* TODO */ }
+		value_compare value_comp() const { return value_compare(key_comp()); }
 	
 
 	protected:
 
 		Compare 		_comp;
 		Allocator 		_alloc;
-		Tree_			_tree;
+		tree_type		_tree;
 
 	};
 

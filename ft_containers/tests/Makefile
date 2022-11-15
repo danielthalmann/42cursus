@@ -50,4 +50,9 @@ run : $(NAME)
 tree : test_tree.cpp ../include/tree.hpp
 	$(CXX) test_tree.cpp $(CXXFLAGS) $(LDFLAGS) -o $@
 
-.phony : tree
+map : test_map.cpp ../include/map.hpp
+	$(CXX) test_map.cpp $(CXXFLAGS) $(LDFLAGS) -o $@
+
+.phony : tree map
+
+
