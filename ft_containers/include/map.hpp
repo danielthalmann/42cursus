@@ -76,7 +76,7 @@ namespace ft
 			   typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0)
 			   : _tree(), _comp(), _allocator(alloc)
 		{
-			assign(first, last);
+			_tree.assign(first, last);
 		}
 
 		map(map &other) {	*this = other;	}
@@ -86,19 +86,8 @@ namespace ft
 		map& operator=(const map &m) 
 		{
 			_comp = m._comp;
-			assign( m.begin(), m.end() );
+			_tree.assign( m.begin(), m.end() );
 			return *this;
-		}
-
-		template < class InputIterator >
-		void assign( InputIterator first, InputIterator last, typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0) {
-
-			_tree.clear();
-			while (first != last)
-			{
-				_tree.insert(*first);
-				first++;
-			}
 		}
 
 		allocator_type get_allocator() const	{	return this->_allocator; };
@@ -109,12 +98,15 @@ namespace ft
 
 		Val& at(size_type n) 					{	range_check(n); iterator i = begin(); while (n)	{ i++; n--; } return *i; }
 		const Val& at(size_type n) const		{	range_check(n); iterator i = begin(); while (n)	{ i++; n--; } return *i; }
+
+		/* TODO
 		Val& operator[]( const Key& key)		{	
 
-			value_type obj = value_type(k, mapped_type());
-			return (*(_value.insert(_comp, obj).first)).second;
+			value_type obj = value_type(key, mapped_type());
+			return (*(_tree.insert(_comp, obj).first)).second;
 
 		}
+		*/
 
 		/**
 		 * Iterators
@@ -144,15 +136,25 @@ namespace ft
 
 		void clear()							{	_tree.clear(); }
 
-		ft::pair<iterator, bool> insert( const value_type& value  ) {	/* TODO */ }
+		ft::pair<iterator, bool> insert( const value_type& value  ) { _tree.insert(value); }
 
-		iterator erase (iterator pos) { /* TODO */ }
-		
-		iterator erase (iterator first, iterator last ) {/* TODO */ }
+		/* TODO 
+		iterator erase (iterator pos) { _tree.search(*pos); }
+	
+		iterator erase (iterator first, iterator last ) { // TODO  }
 
-		size_type erase( const Key& key ) {/* TODO */ }
+		size_type erase( const Key& key ) { // TODO  }
+		*/
+		 
+		void swap( map<Key, Val, Allocator>& other ) 
+		{
+			tree_type temp;
 
-		void swap( map<Key, Val, Allocator>& other ) {/* TODO */ }
+			temp.assign(begin(), end());
+			_tree.assign(other.begin(), other.end());
+			other._tree.assign(temp.begin(), temp.end());
+
+		}
 				
 		/**
 		 *  Lookup 

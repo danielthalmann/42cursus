@@ -416,8 +416,20 @@ namespace ft
 		const_reverse_iterator	rbegin(void) const 	{ return reverse_iterator(end()); }
 		reverse_iterator 		rend(void) 	 		{ return reverse_iterator(begin()); }
 		const_reverse_iterator 	rend(void) const 	{ return reverse_iterator(begin()); }
+		
+		template < class InputIterator >
+		void assign( InputIterator first, InputIterator last) {
+			clear();
+			while (first != last)
+			{
+				insert(*first);
+				first++;
+			}
+		}
 
 	private:
+
+
 
 		void draw (tree_pointer node, size_t curent_level, size_t level) 
 		{ 
