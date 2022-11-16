@@ -159,8 +159,9 @@ namespace ft
 		/**
 		 *  Lookup 
 		 */
-		size_type count( const Key& key ) const {/* TODO */ }
-
+		/*
+		size_type count( const Key& key ) const { // TODO  }
+		*/
 		iterator find( const Key& key ) {/* TODO */ }
 		const_iterator find( const Key& key ) const {/* TODO */ }
 
