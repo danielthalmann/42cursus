@@ -39,7 +39,7 @@ namespace ft
 
 		typedef Tree<value_type, allocator_type> tree_type;
 
-		typedef ft::random_access_iterator< pointer > 		iterator;
+		typedef typename ft::Tree<value_type, allocator_type>::iterator 		iterator;
 		typedef ft::random_access_iterator< const_pointer >	const_iterator;
 
 		typedef ft::reverse_iterator<iterator>			reverse_iterator;
@@ -49,9 +49,9 @@ namespace ft
 		{
 			friend class map<Key, Val, Compare, Allocator>;
       	protected:
-			_Compare comp;
+			Compare comp;
 
-			value_compare(_Compare c) : comp(c) { }
+			value_compare(Compare c) : comp(c) { }
 		public:
 			bool operator() (const value_type& x, const value_type& y) const
 			{ return comp(x.first, y.first); }
@@ -63,7 +63,7 @@ namespace ft
 		 * @brief Construct a new vector object
 		 * 
 		 */
-		map() {  /* TODO */}
+		map() : _tree(), _comp(), _allocator(){  /* TODO */}
 
 		map(const Compare& comp, const Allocator& alloc = allocator_type())  { /* TODO */ }
 
@@ -81,17 +81,13 @@ namespace ft
 
 		template < class InputIterator >
 		void assign( InputIterator first, InputIterator last, typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0) {
-			const size_type n = ft::distance(first, last);
-			destruct(_start, _finish);
-			if (n > capacity())
-				grow(n);
-			_finish = _start;
-			while (first != last) {
-				_allocator.construct(_finish, (*first));
-				++first;
-				++_finish;
 
+			while (first != last)
+			{
+				first++;
 			}
+			
+
 		}
 
 		allocator_type get_allocator() const	{	return this->_allocator; };
@@ -122,9 +118,9 @@ namespace ft
 		 * Capacity
 		 */
 
-		bool empty() const						{	/* TODO */ }
-		size_type size() const					{	/* TODO */ }
-		size_type max_size() const				{	/* TODO */ }
+		bool empty() const						{	return (_tree.size() == 0); }
+		size_type size() const					{	return _tree.size(); }
+		size_type max_size() const				{	return size_type(_allocator.max_size()); }
 				
 		/**
 		 *  Modifiers 
@@ -168,9 +164,9 @@ namespace ft
 
 	protected:
 
-		Compare 		_comp;
-		Allocator 		_alloc;
 		tree_type		_tree;
+		Compare 		_comp;
+		Allocator 		_allocator;
 
 	};
 
