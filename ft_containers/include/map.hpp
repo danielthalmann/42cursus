@@ -39,12 +39,11 @@ namespace ft
 
 		typedef Tree<value_type, allocator_type> tree_type;
 
-		typedef typename ft::Tree<value_type, allocator_type>::iterator 		iterator;
-		typedef ft::random_access_iterator< const_pointer >	const_iterator;
+		typedef typename tree_type::iterator 		iterator;
+		typedef typename tree_type::const_iterator	const_iterator;
 
-		typedef ft::reverse_iterator<iterator>			reverse_iterator;
-		typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
-
+		typedef typename tree_type::reverse_iterator 		reverse_iterator;
+		typedef typename tree_type::const_reverse_iterator	const_reverse_iterator;
 		class value_compare : public std::binary_function<value_type, value_type, bool>
 		{
 			friend class map<Key, Val, Compare, Allocator>;
@@ -53,6 +52,10 @@ namespace ft
 
 			value_compare(Compare c) : comp(c) { }
 		public:
+			typedef bool result_type;
+			typedef value_type first_argument_type;
+			typedef value_type second_argument_type;
+
 			bool operator() (const value_type& x, const value_type& y) const
 			{ return comp(x.first, y.first); }
       	
@@ -65,29 +68,37 @@ namespace ft
 		 */
 		map() : _tree(), _comp(), _allocator(){  /* TODO */}
 
-		map(const Compare& comp, const Allocator& alloc = allocator_type())  { /* TODO */ }
+		map(const Compare& comp, const Allocator& alloc = allocator_type()) : _tree(), _comp(comp), _allocator(alloc) { /* TODO */ }
 
 		template< typename InputIterator >
 		map(InputIterator first, InputIterator last,
 			   const allocator_type &alloc = allocator_type(),
 			   typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0)
-		{	/* TODO */	}
+			   : _tree(), _comp(), _allocator(alloc)
+		{
+			assign(first, last);
+		}
 
-		map(map &other) {	/* TODO */	}
+		map(map &other) {	*this = other;	}
 		
-		virtual ~map() { /* TODO */	}
+		virtual ~map() { }
 		
-		map& operator=(const map &vector) { /* TODO */ }
+		map& operator=(const map &m) 
+		{
+			_comp = m._comp;
+			assign( m.begin(), m.end() );
+			return *this;
+		}
 
 		template < class InputIterator >
 		void assign( InputIterator first, InputIterator last, typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0) {
 
+			_tree.clear();
 			while (first != last)
 			{
+				_tree.insert(*first);
 				first++;
 			}
-			
-
 		}
 
 		allocator_type get_allocator() const	{	return this->_allocator; };
@@ -96,23 +107,28 @@ namespace ft
 		 * Element access 
 		 */
 
-		Val& at(size_type n) 					{	/* TODO */ }
-		const Val& at(size_type n) const		{	/* TODO */ }
-		Val& operator[]( const Key& key)		{	/* TODO */  }
+		Val& at(size_type n) 					{	range_check(n); iterator i = begin(); while (n)	{ i++; n--; } return *i; }
+		const Val& at(size_type n) const		{	range_check(n); iterator i = begin(); while (n)	{ i++; n--; } return *i; }
+		Val& operator[]( const Key& key)		{	
+
+			value_type obj = value_type(k, mapped_type());
+			return (*(_value.insert(_comp, obj).first)).second;
+
+		}
 
 		/**
 		 * Iterators
 		 */
 
-		iterator begin() 						{	/* TODO */ }
-		const_iterator begin() const			{	/* TODO */ }
-		iterator end()							{	/* TODO */ }
-		const_iterator end() const				{	/* TODO */ }
+		iterator begin() 						{	_tree.begin(); }
+		const_iterator begin() const			{	_tree.begin(); }
+		iterator end()							{	_tree.end(); }
+		const_iterator end() const				{	_tree.end(); }
     
-		reverse_iterator       rbegin()			{	/* TODO */ }
-		const_reverse_iterator rbegin()  const	{	/* TODO */ }
-		reverse_iterator       rend()			{	/* TODO */ }
-		const_reverse_iterator rend() const 	{	/* TODO */ }
+		reverse_iterator       rbegin()			{	_tree.rbegin(); }
+		const_reverse_iterator rbegin()  const	{	_tree.rbegin(); }
+		reverse_iterator       rend()			{	_tree.rend();  }
+		const_reverse_iterator rend() const 	{	_tree.rend();  }
 
 		/**
 		 * Capacity
@@ -126,7 +142,7 @@ namespace ft
 		 *  Modifiers 
 		 */
 
-		void clear()							{	/* TODO */ }
+		void clear()							{	_tree.clear(); }
 
 		ft::pair<iterator, bool> insert( const value_type& value  ) {	/* TODO */ }
 
@@ -167,6 +183,12 @@ namespace ft
 		tree_type		_tree;
 		Compare 		_comp;
 		Allocator 		_allocator;
+
+
+		void range_check(size_type n) const {
+			if (n >= size())
+				throw std::out_of_range("out of range");
+		}
 
 	};
 

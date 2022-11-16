@@ -1,6 +1,7 @@
 #include <iostream>
 #include "map.hpp"
 #include <memory>
+#include <map>
 
 #define TEST_CASE(_TITLE, _CMD, _TEST, _MSG)  std::cout << "TEST : " << _TITLE << std::endl; _CMD ; if (_TEST) { std::cout << "\x1b[31m" << "ERROR : " << "\x1b[0m" << _MSG << std::endl; /* return ;*/ }
  
