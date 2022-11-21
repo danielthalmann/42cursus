@@ -22,7 +22,9 @@ void  test ( )
 
 	ft::map<int, int> m;
 
-	
+	m[5] = 1;
+
+	std::cout << m[5] << std::endl;
     
 
 }

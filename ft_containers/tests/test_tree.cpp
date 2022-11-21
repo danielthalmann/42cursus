@@ -16,6 +16,17 @@ void insert(int v, ft::Tree <int, std::allocator<int> > &arbre)
     arbre.infix(&printint); std::cout << " " << arbre.size() << '\n';
 }
 
+template <class Compare, class T>
+class Comp {
+public:
+
+    Compare _comp;
+
+    Comp(Compare c) : _comp(c) {}
+
+    bool operator()(const T& x, const T& y) const { return _comp(x.first, y.first); }
+};
+
 void  test ( )
 {
  

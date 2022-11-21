@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <memory>
 #include "iterator.hpp"
+#include "reverse_iterator.hpp"
 
 namespace ft
 {
@@ -115,6 +116,8 @@ namespace ft
 		Tree_iterator() : _node() { }
 
 		Tree_iterator(tree_pointer x) : _node(x) { }
+
+		tree_pointer	base() const 				{ return _node; }
 
 		reference 	operator*() const 				{ return **static_cast<link_type>(_node)->valptr(); }
 		pointer		operator->() const				{ return *static_cast<link_type> (_node)->valptr(); }
@@ -372,7 +375,7 @@ namespace ft
  * le nombre de nœuds noirs le long d'une branche de la racine à une feuille est indépendant de la branche.
  * 
  */
- 	template<typename T, typename Alloc >
+ 	template<typename T, typename Alloc, typename Compare = std::less<T> >
 	class Tree
 	{
 	public:
@@ -393,14 +396,16 @@ namespace ft
 		tree_pointer	_tree;
 		size_t			_count;
 		allocate_type	_allocator;
+		Compare		    _comp;
 
 	public:
-		Tree() :_tree(0), _count(0), _allocator() { }
+		Tree() :_tree(0), _count(0), _allocator(), _comp() { }
 		virtual ~Tree() { destroy( _tree ); }
         tree_pointer insert (const T& val) { tree_pointer node = insert (val, _tree, NULL); _count++; repareTree(node); return node; }
         void clear (void) { destroy( _tree ); _count = 0; }
-        void remove (const T& val) { tree_pointer node = search (val); deleteNode (node) ; };
-		tree_pointer search (const T& val) const { return search (val, _tree);	}
+        void remove (const T& val) { tree_pointer node = find (val); deleteNode (node) ; };
+		void removeNode (const tree_pointer &node) { deleteNode (node) ; };
+		tree_pointer find (const T& val) const { return find (val, _tree);	}
 		size_t size(void) const { return _count; }
 		void prefix (void (*fn)(T &, size_t)) { prefix(_tree, 0, fn); }
 		void infix (void (*fn)(T &, size_t)) { infix(_tree, 0, fn); }
@@ -555,19 +560,20 @@ namespace ft
 			}
 		}
 
-		tree_pointer search (const T& val, tree_pointer node) const {
+		tree_pointer find (const T& val, tree_pointer node) const {
 			
 			if (!node) {
 				return NULL;
 			}
-			else if (*(static_cast<link_type>(node)->value) == val){
+
+			if (_comp(val, (*static_cast<link_type>(node)->value))) {
+				return find (val, node->left);
+			}
+			else if (_comp((*static_cast<link_type>(node)->value), val)) {
+				return find (val, node->right);
+			}
+			else {
 				return node;
-			}
-			else if (val < *(static_cast<link_type>(node)->value)){
-				return search (val, node->left);
-			}
-			else{
-				return search (val, node->right);
 			}
 		}
 
