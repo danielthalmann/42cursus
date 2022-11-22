@@ -12,7 +12,6 @@ void printint(int &i, size_t level)
 
 void insert(int v, ft::Tree <int, std::allocator<int> > &arbre)
 {
-    arbre.insert(v);
     arbre.infix(&printint); std::cout << " " << arbre.size() << '\n';
 }
 

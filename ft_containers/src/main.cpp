@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <deque>
-#if 1 //CREATE A REAL STL EXAMPLE
+#ifdef COMPILE_LIB_STD //CREATE A REAL STL EXAMPLE
 	#include <map>
 	#include <stack>
 	#include <vector>
@@ -45,6 +45,12 @@ public:
 };
 
 int main(int argc, char** argv) {
+	#ifdef COMPILE_LIB_STD
+	std::cout << "std lib" << std::endl;
+	#else
+	std::cout << "ft lib" << std::endl;
+	#endif
+
 	if (argc != 2)
 	{
 		std::cerr << "Usage: ./test seed" << std::endl;
@@ -62,10 +68,14 @@ int main(int argc, char** argv) {
 	ft::stack<Buffer, std::deque<Buffer> > stack_deq_buffer;
 	ft::map<int, int> map_int;
 
+	std::cerr << "vector_buffer.push_back(Buffer());" << std::endl;
+
 	for (int i = 0; i < COUNT; i++)
 	{
 		vector_buffer.push_back(Buffer());
 	}
+
+	std::cerr << "vector_buffer[idx].idx = 5" << std::endl;
 
 	for (int i = 0; i < COUNT; i++)
 	{
@@ -73,6 +83,8 @@ int main(int argc, char** argv) {
 		vector_buffer[idx].idx = 5;
 	}
 	ft::vector<Buffer>().swap(vector_buffer);
+
+	std::cerr << "try catch" << std::endl;
 
 	try
 	{
@@ -88,34 +100,30 @@ int main(int argc, char** argv) {
 		//NORMAL ! :P
 	}
 	
+	std::cerr << "map_int.insert(ft::make_pair(rand(), rand()))" << std::endl;
+
+
 	for (int i = 0; i < COUNT; ++i)
 	{
 		map_int.insert(ft::make_pair(rand(), rand()));
 	}
 
+	std::cerr << "sum += map_int[access]" << std::endl;
+
 	int sum = 0;
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 10000; i++)
 	{
 		int access = rand();
 		sum += map_int[access];
 	}
-
 	std::cout << "should be constant with the same seed: " << sum << std::endl;
+
 	{
 		ft::map<int, int> copy = map_int;
 	}
-
-	std::cout << "Alpha : " << sum << std::endl;
-
 	MutantStack<char> iterable_stack;
 	for (char letter = 'a'; letter <= 'z'; letter++)
-	{
-		std::cout << letter;
 		iterable_stack.push(letter);
-	}
-
-	std::cout << std::endl << "result : " << sum << std::endl;
-
 	for (MutantStack<char>::iterator it = iterable_stack.begin(); it != iterable_stack.end(); it++)
 	{
 		std::cout << *it;

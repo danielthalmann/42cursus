@@ -4,3 +4,7 @@ tests/test_std
 tests/tree
 tests/tree.exe
 containers_test
+ft_container
+std_container
+ft.out.txt
+std.out.txt

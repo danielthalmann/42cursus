@@ -1,5 +1,5 @@
-#ifndef VECTOR_HPP
-#define VECTOR_HPP
+#ifndef UTILITY_HPP
+#define UTILITY_HPP
 
 #include "algorithm.hpp"
 
