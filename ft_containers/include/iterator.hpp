@@ -120,14 +120,14 @@ namespace ft
 	bool operator>(const random_access_iterator< IteratorL > &lhs,
 					const random_access_iterator< IteratorR > &rhs)
 	{
-		return (rhs < lhs);
+		return (rhs.base() < lhs.base());
 	}
 	
 	template< typename IteratorL, typename IteratorR >
 	bool operator>=(const random_access_iterator< IteratorL > &lhs,
 					const random_access_iterator< IteratorR > &rhs)
 	{
-		return !(lhs < rhs);
+		return !(lhs.base() < rhs.base());
 	}
 	
 	template< typename IteratorL, typename IteratorR >

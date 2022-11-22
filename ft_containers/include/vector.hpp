@@ -27,7 +27,6 @@ namespace ft
 		
 		typedef ft::random_access_iterator< pointer > iterator;
 		typedef ft::random_access_iterator< const_pointer >	const_iterator;
-
 		typedef ft::reverse_iterator<iterator>		reverse_iterator;
 		typedef ft::reverse_iterator<const_iterator>	const_reverse_iterator;
 		typedef size_t					size_type;

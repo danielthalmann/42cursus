@@ -141,9 +141,17 @@ namespace ft
 
 		void clear()							{	_tree->clear(); }
 
-		ft::pair<iterator, bool> insert( const value_type& value  ) { _tree->insert(value); }
+		ft::pair<iterator, bool> insert( const value_type& value  ) { return ft::make_pair( iterator(_tree->insert(value, _comp)), true); }
 
-		
+		iterator  insert( iterator position, const value_type &value ) { return  iterator(_tree->insertAt(value, position.base(), _comp)); }
+
+		template< class InputIterator >
+		void insert(InputIterator first, InputIterator last, typename ft::enable_if< !ft::is_integral< InputIterator >::value, int >::type = 0)
+		{
+			for (; first != last; ++first) 
+				_tree->insert(*first, _comp);
+		}
+	
 		void erase (iterator pos) { _tree->remove(pos); }
 	
 		iterator erase (iterator first, iterator last ) { 
@@ -179,7 +187,7 @@ namespace ft
 		 */
 		
 		size_type count( const Key& key ) const { 
-			if(find( key ) )
+			if(find( key ) != end() )
 				return 1;
 			return 0;
 		}
@@ -198,7 +206,7 @@ namespace ft
 			node_pointer node = _tree->find(obj, _comp);
 			if(node)
 				return const_iterator(node);
-			return (end());		
+			return (end());
 		}
 
 		ft::pair<iterator,iterator> equal_range( const Key& key ) { return ft::make_pair(lower_bound(key), upper_bound(key));  }
