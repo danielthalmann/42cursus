@@ -118,12 +118,18 @@ int main(int argc, char** argv) {
 	}
 	std::cout << "should be constant with the same seed: " << sum << std::endl;
 
+
 	{
-		ft::map<int, int> copy = map_int;
+		//ft::map<int, int> copy = map_int;
+		ft::map<int, int> copy;
+		copy.insert(map_int.begin(), map_int.end());
+
 	}
+	
 	MutantStack<char> iterable_stack;
 	for (char letter = 'a'; letter <= 'z'; letter++)
 		iterable_stack.push(letter);
+
 	for (MutantStack<char>::iterator it = iterable_stack.begin(); it != iterable_stack.end(); it++)
 	{
 		std::cout << *it;

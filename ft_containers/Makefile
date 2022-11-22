@@ -14,7 +14,7 @@ CXXFLAGS=-Wall -Wextra -Werror -Wfatal-errors -std=c++98 -I./include
 
 LDFLAGS=-lstdc++ -lm
 
-$(NAME) : $(OBJS_FOLDER) $(OBJS)
+$(NAME) : clean $(OBJS_FOLDER) $(OBJS)
 	$(CXX) $(OBJS) $(LDFLAGS) -o $@
 
 $(STDNAME) : CXXFLAGS += -DCOMPILE_LIB_STD
