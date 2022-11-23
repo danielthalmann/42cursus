@@ -139,21 +139,18 @@ namespace ft
                 _container->_right = tmp;
             }
 
-            node_type *key_exists_recurse(node_type *node, key_type key) const 
+            node_type *key_exists_recurse(node_type *root, key_type key) const 
             {
-                if (!node) {
-                    return NULL;
-                }
+                node_type *found = get_root();
 
-                if (_comp(key, (node->_pair.first))) {
-                    return key_exists_recurse (node->_left, key);
-                }
-                else if (_comp((node->_pair.first), key)) {
-                    return key_exists_recurse (node->_right, key);
-                }
-                else {
-                    return node;
-                }
+                if (!root)
+                    return NULL;
+                found = key_exists_recurse(root->_left, key);
+                if (!_comp(root->_pair.first, key) && !_comp(key, root->_pair.first))
+                    found = root;
+                if (!found)
+                    found = key_exists_recurse(root->_right, key);
+                return found;
             }
 
             size_type key_count_recurse(node_type *root, key_type key) const 

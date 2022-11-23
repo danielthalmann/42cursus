@@ -14,7 +14,7 @@
 
 #include <stdlib.h>
 
-#define MAX_RAM 4294967296
+#define MAX_RAM 4294967
 #define BUFFER_SIZE 4096
 struct Buffer
 {
@@ -45,11 +45,6 @@ public:
 };
 
 int main(int argc, char** argv) {
-	#ifdef COMPILE_LIB_STD
-	std::cout << "std lib" << std::endl;
-	#else
-	std::cout << "ft lib" << std::endl;
-	#endif
 
 	if (argc != 2)
 	{
@@ -68,14 +63,14 @@ int main(int argc, char** argv) {
 	ft::stack<Buffer, std::deque<Buffer> > stack_deq_buffer;
 	ft::map<int, int> map_int;
 
-	std::cerr << "vector_buffer.push_back(Buffer());" << std::endl;
+	std::cout << "vector_buffer.push_back(Buffer());" << std::endl;
 
 	for (int i = 0; i < COUNT; i++)
 	{
 		vector_buffer.push_back(Buffer());
 	}
 
-	std::cerr << "vector_buffer[idx].idx = 5" << std::endl;
+	std::cout << "vector_buffer[idx].idx = 5" << std::endl;
 
 	for (int i = 0; i < COUNT; i++)
 	{
@@ -84,7 +79,7 @@ int main(int argc, char** argv) {
 	}
 	ft::vector<Buffer>().swap(vector_buffer);
 
-	std::cerr << "try catch" << std::endl;
+	std::cout << "try catch" << std::endl;
 
 	try
 	{
@@ -92,7 +87,7 @@ int main(int argc, char** argv) {
 		{
 			const int idx = rand() % COUNT;
 			vector_buffer.at(idx);
-			std::cerr << "Error: THIS VECTOR SHOULD BE EMPTY!!" <<std::endl;
+			std::cout << "Error: THIS VECTOR SHOULD BE EMPTY!!" <<std::endl;
 		}
 	}
 	catch(const std::exception& e)
@@ -100,7 +95,7 @@ int main(int argc, char** argv) {
 		//NORMAL ! :P
 	}
 	
-	std::cerr << "map_int.insert(ft::make_pair(rand(), rand()))" << std::endl;
+	std::cout << "map_int.insert(ft::make_pair(rand(), rand()))" << std::endl;
 
 
 	for (int i = 0; i < COUNT; ++i)
@@ -108,7 +103,7 @@ int main(int argc, char** argv) {
 		map_int.insert(ft::make_pair(rand(), rand()));
 	}
 
-	std::cerr << "sum += map_int[access]" << std::endl;
+	std::cout << "sum += map_int[access]" << std::endl;
 
 	int sum = 0;
 	for (int i = 0; i < 10000; i++)
@@ -120,10 +115,7 @@ int main(int argc, char** argv) {
 
 
 	{
-		//ft::map<int, int> copy = map_int;
-		ft::map<int, int> copy;
-		copy.insert(map_int.begin(), map_int.end());
-
+		ft::map<int, int> copy = map_int;
 	}
 	
 	MutantStack<char> iterable_stack;

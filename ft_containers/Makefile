@@ -29,8 +29,8 @@ all :
 	$(MAKE) $(NAME)
 	$(MAKE) clean
 	$(MAKE) $(STDNAME)
-	./$(NAME) > ft.out.txt
-	./$(STDNAME) > std.out.txt
+	./$(NAME) 10 > ft.out.txt
+	./$(STDNAME) 10 > std.out.txt
 	$ diff -c ft.out.txt std.out.txt
 
 
