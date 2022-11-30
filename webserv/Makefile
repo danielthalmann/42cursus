@@ -1,0 +1,37 @@
+
+# https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html
+
+NAME=webserv
+
+SRCS=src/main.cpp src/
+
+OBJS=$(SRCS:cpp=o)
+
+CXX=c++
+
+CXXFLAGS=-Wall -Wextra -Werror -Wfatal-errors -std=c++98 -I../include 
+
+LDFLAGS=-lstdc++ -lm
+
+$(NAME) : $(OBJS)
+	$(CXX) $(OBJS) $(LDFLAGS) -o $@
+
+all : $(NAME)
+
+clean :
+	rm -f $(OBJS)
+
+fclean : clean
+	rm -f $(NAME)
+
+re : fclean all
+
+debug : CXXFLAGS += -DDEBUG
+debug : re run
+
+run : $(NAME)
+	./$(NAME)
+
+.phony : run debug fclean clean all
+
+
