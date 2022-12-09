@@ -305,13 +305,12 @@ namespace ft
 		node_pointer	_tree;
 		size_t			_count;
 		allocate_type	_allocator;
-		node_type		_sentinel;
 
 	public:
-		Tree() :_tree(0), _count(0), _allocator() {  _tree = &_sentinel; }
+		Tree() :_tree(0), _count(0), _allocator() { }
 		virtual ~Tree() { destroy( _tree ); }
 		template< typename Compare >
-		node_pointer insert (const T& val, Compare comp) { node_pointer node = insert(val, _tree, comp, NULL); _count++; repareTree(node); return node; }
+		node_pointer insert (const T& val, Compare comp) { node_pointer node = insert (val, _tree, comp, NULL); _count++; repareTree(node); return node; }
 		template< typename Compare >
 		node_pointer insertAt (const T& val, node_pointer n, Compare comp) { node_pointer node = insert (val, n, comp, n->parent); _count++; repareTree(node); return node; }
         void clear (void) { destroy( _tree ); _count = 0; }

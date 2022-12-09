@@ -3,26 +3,7 @@
 #include <memory>
 
 #define TEST_CASE(_TITLE, _CMD, _TEST, _MSG)  std::cout << "TEST : " << _TITLE << std::endl; _CMD ; if (_TEST) { std::cout << "\x1b[31m" << "ERROR : " << "\x1b[0m" << _MSG << std::endl; /* return ;*/ }
-
-
-template <class value_type>
-class compare : public std::binary_function<value_type, value_type, bool>
-{
-    friend class map;
-    
-protected:
-    Compare _comp;
-
-    explicit value_compare(Compare c) : _comp(c) { }
-public:
-    typedef bool result_type;
-    typedef value_type first_argument_type;
-    typedef value_type second_argument_type;
-
-    bool operator() (const value_type& x, const value_type& y) const
-    { return _comp(x.first, y.first); }
-
-};
+ 
 
 void printint(int &i, size_t level)
 {
