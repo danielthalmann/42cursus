@@ -53,6 +53,15 @@ tree : test_tree.cpp ../include/tree.hpp
 map : test_map.cpp ../include/map.hpp
 	$(CXX) test_map.cpp $(CXXFLAGS) $(LDFLAGS) -o $@
 
+enable : test_enable.cpp
+	$(CXX) test_enable.cpp -Wall -Wextra -Werror -g -std=c++11 -Wfatal-errors $(LDFLAGS) -o $@
+
+enable2 : test_enable2.cpp
+	$(CXX) test_enable2.cpp -Wall -Wextra -Werror -g -std=c++11 -Wfatal-errors $(LDFLAGS) -o $@
+
+enable3 : test_enable3.cpp
+	$(CXX) test_enable3.cpp -Wall -Wextra -Werror -g -std=c++11 -Wfatal-errors $(LDFLAGS) -o $@
+
 .phony : tree map
 
 

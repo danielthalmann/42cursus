@@ -21,7 +21,7 @@ struct is_json_type
 
 
 template <typename T>
-int get(int, typename std::enable_if< is_json_type<T>::value, int>::type = 0 )
+int get(typename std::enable_if< is_json_type<T>::value, int>::type = 0 )
 {
     std::cout << "string";
     return 0;
@@ -29,7 +29,7 @@ int get(int, typename std::enable_if< is_json_type<T>::value, int>::type = 0 )
 
 
 template <typename T>
-int get(int, typename std::enable_if< !is_json_type<T>::value, int>::type = 0 )
+int get(typename std::enable_if< !is_json_type<T>::value, int>::type = 0 )
 {
     std::cout << "unknow";
     return 0;
@@ -39,8 +39,8 @@ int get(int, typename std::enable_if< !is_json_type<T>::value, int>::type = 0 )
 void  test ( )
 {
 
-    get<std::string>(0);
-    get<int>(0);
+    get<std::string>();
+    get<int>();
 
 }
 
