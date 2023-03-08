@@ -13,10 +13,10 @@ public:
     virtual ~ATarget();
     ATarget(const ATarget& other);
     ATarget &operator=(const ATarget& other);
+    virtual ATarget *clone() = 0;
 
 public:
     const std::string &getType() const;
-    ASpell *clone() = 0;
     
 private:
 
