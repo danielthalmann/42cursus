@@ -22,3 +22,8 @@ ASpell &ASpell::operator=(const ASpell& other);
     name = other.name;
     effects = other.effects;
 }
+
+void ASpell::launch(const ATarget &target)
+{
+    target.getHitBySpell(*this);
+}

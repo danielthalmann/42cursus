@@ -2,6 +2,7 @@
 #define ATARGET_HPP
 
 #include <iostream>
+#include "ASpell.hpp"
 
 class ATarget {
 
@@ -15,12 +16,13 @@ public:
     ATarget &operator=(const ATarget& other);
 
 public:
+    void getHitBySpell(const ASpell &spell);
     const std::string &getType() const;
-    ASpell *clone() = 0;
+    ASpell *clone() const = 0;
     
 private:
 
-    std::string type;
+    std::string _type;
 
 };
 
