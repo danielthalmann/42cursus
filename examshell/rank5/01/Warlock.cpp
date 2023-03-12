@@ -41,15 +41,21 @@ void Warlock::setTitle(const std::string &t)
 
 void Warlock::learnSpell(ASpell* spell)
 {
-
+    _spells[spell->getName()] = spell;
 }
 
 void Warlock::forgetSpell(std::string s)
 {
-
+    _spells.erase(s);
 }
 
 void Warlock::launchSpell(std::string s, ATarget &target)
 {
+    try {
+        ASpell * spell = _spells.at(s);
+        target.getHitBySpell(*spell);
+    } catch(...)
+    {
 
+    }
 }

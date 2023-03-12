@@ -2,6 +2,7 @@
 #define WARLOCK_HPP
 
 #include <iostream>
+#include <map>
 #include "ASpell.hpp"
 
 class Warlock {
@@ -31,6 +32,8 @@ private:
 
     std::string name;
     std::string title;
+
+    std::map<std::string, ASpell*> _spells;
 
 };
 

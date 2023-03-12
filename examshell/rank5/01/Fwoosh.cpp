@@ -1,7 +1,7 @@
 #include "Fwoosh.hpp"
 
 Fwoosh::Fwoosh()
-: ASpell("Fwoosh")
+: ASpell("Fwoosh", "Fwoosh")
 {
 
 }

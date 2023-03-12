@@ -18,7 +18,7 @@ public:
     ATarget &operator=(const ATarget& other);
 
 public:
-    void getHitBySpell(const ASpell &spell) const;
+    void getHitBySpell(const ASpell &spell);
     const std::string &getType() const;
     virtual ATarget *clone() const = 0;
     
