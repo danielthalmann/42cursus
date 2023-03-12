@@ -37,3 +37,19 @@ void Warlock::setTitle(const std::string &t)
 {
     title = t;
 }
+
+
+void Warlock::learnSpell(ASpell* spell)
+{
+
+}
+
+void Warlock::forgetSpell(std::string s)
+{
+
+}
+
+void Warlock::launchSpell(std::string s, ATarget &target)
+{
+
+}

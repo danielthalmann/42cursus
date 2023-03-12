@@ -13,7 +13,8 @@ public:
     Dummy(const Dummy &other);
     Dummy &operator=(const Dummy &other);
 
-
+public:
+    ATarget *clone() const;
 
 };
 

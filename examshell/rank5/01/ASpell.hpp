@@ -8,8 +8,6 @@ class ATarget;
 
 class ASpell {
 
-private:    
-
 public:
 
     ASpell(const std::string &n = "", const std::string &e = "");
@@ -20,8 +18,8 @@ public:
 public:
     const std::string &getName() const;
     const std::string &getEffects() const;
-    void launch(const ATarget &target);
-    ASpell *clone() const = 0;
+    void launch(ATarget &target);
+    virtual ASpell *clone() const = 0;
     
 private:
 

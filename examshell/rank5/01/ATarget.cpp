@@ -1,6 +1,6 @@
 #include "ATarget.hpp"
 
-ATarget::Aterget(const std::string t)
+ATarget::ATarget(const std::string &t)
 : _type(t)
 {
 

@@ -2,6 +2,7 @@
 #define WARLOCK_HPP
 
 #include <iostream>
+#include "ASpell.hpp"
 
 class Warlock {
 
@@ -20,6 +21,11 @@ public:
     const std::string &getName() const;
     void setTitle(const std::string &t);
     void introduce() const;
+  
+    void learnSpell(ASpell* spell);
+    void forgetSpell(std::string s);
+    void launchSpell(std::string s, ATarget &target);
+
     
 private:
 

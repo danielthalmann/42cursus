@@ -1,7 +1,7 @@
 
 
 NAME=warlock
-SRCS=main.cpp ASpell.cpp  ATarget.cpp  Dummy.cpp  Fwoosh.cpp  Warlock.cp
+SRCS=ASpell.cpp  ATarget.cpp  Dummy.cpp  Fwoosh.cpp  Warlock.cpp main.cpp
 OBJS=$(SRCS:cpp=o)
 
 $(NAME): $(OBJS)
@@ -9,3 +9,9 @@ $(NAME): $(OBJS)
 
 run:
 	./$(NAME) | cat -e
+
+clean:
+	rm -f ${OBJS}
+	rm -f ${NAME}
+
+re : clean $(NAME)
