@@ -2,54 +2,81 @@
 #include "Warlock.hpp"
 
 Warlock::Warlock()
-: name("noname"), title("notitle")
+: _name("noname"), _title("notitle")
 {
 
 }
 
 Warlock::Warlock(const std::string &n, const std::string &t)
-: name(n), title(t)
+: _name(n), _title(t)
 {
-    std::cout << name << ": This looks like another boring day." << std::endl;
+    std::cout << _name << ": This looks like another boring day." << std::endl;
+}
+
+Warlock::Warlock(const Warlock& other)
+{
+    *this = other;
+}
+
+void Warlock::free()
+{
+    for(std::map<std::string, ASpell*>::const_iterator i = _spells.begin(); i != _spells.end(); i++)
+        delete i->second;
+
+    _spells.clear();
+
+}
+
+Warlock &Warlock::operator=(const Warlock& other)
+{
+    _name = other._name;
+    _title = other._title;
+
+    free();
+    
+    for(std::map<std::string, ASpell*>::const_iterator i = other._spells.begin(); i != other._spells.end(); i++)
+        _spells[i->first] = i->second->clone();
+
+    return *this;
+
 }
 
 Warlock::~Warlock()
 {
-    std::cout << name << ": My job here is done!" << std::endl;
+    std::cout << _name << ": My job here is done!" << std::endl;
 }
 
 const std::string &Warlock::getTitle() const
 {
-    return title;
+    return _title;
 }
 
 const std::string &Warlock::getName() const
 {
-    return name;
+    return _name;
 }
 
 void Warlock::introduce() const
 {
-    std::cout << name << ": I am " << name << ", " << title << "!" << std::endl;
+    std::cout << _name << ": I am " << _name << ", " << _title << "!" << std::endl;
 }
 
 void Warlock::setTitle(const std::string &t)
 {
-    title = t;
+    _title = t;
 }
-
 
 void Warlock::learnSpell(ASpell* spell)
 {
-    _spells[spell->getName()] = spell;
+    _spells[spell->getName()] = spell->clone();
 }
 
-void Warlock::forgetSpell(std::string s)
+void Warlock::forgetSpell(const std::string &s)
 {
     _spells.erase(s);
 }
 
-void Warlock::launchSpell(std::string s, ATarget &target)
+void Warlock::launchSpell(const std::string &s, ATarget &target)
 {
     try {
         ASpell * spell = _spells.at(s);

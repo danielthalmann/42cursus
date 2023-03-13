@@ -9,13 +9,14 @@ class Warlock {
 
 private:    
     Warlock();
+    void free();
 
 public:
 
     Warlock(const std::string &n, const std::string &t);
     virtual ~Warlock();
-//    Warlock(const Warlock& other);
-//    Warlock &operator=(const Warlock& other);
+    Warlock(const Warlock& other);
+    Warlock &operator=(const Warlock& other);
 
 public:
     const std::string &getTitle() const;
@@ -24,14 +25,14 @@ public:
     void introduce() const;
   
     void learnSpell(ASpell* spell);
-    void forgetSpell(std::string s);
-    void launchSpell(std::string s, ATarget &target);
+    void forgetSpell(const std::string &s);
+    void launchSpell(const std::string &s, ATarget &target);
 
     
 private:
 
-    std::string name;
-    std::string title;
+    std::string _name;
+    std::string _title;
 
     std::map<std::string, ASpell*> _spells;
 

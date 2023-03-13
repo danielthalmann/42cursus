@@ -19,7 +19,7 @@ ATarget::ATarget(const ATarget &other)
 
 ATarget &ATarget::operator=(const ATarget &other)
 {
-
+    _type = other._type;
     return *this;
 }
 
@@ -28,7 +28,7 @@ const std::string &ATarget::getType() const
     return _type;
 }
 
-void ATarget::getHitBySpell(const ASpell &spell)
+void ATarget::getHitBySpell(const ASpell &spell) const
 {
     
     std::cout << 

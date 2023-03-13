@@ -2,7 +2,7 @@
 
 
 ASpell::ASpell(const std::string &n, const std::string &e)
-: name(n), effects(e)
+: _name(n), _effects(e)
 {
 
 }
@@ -19,8 +19,8 @@ ASpell::ASpell(const ASpell& other)
 
 ASpell &ASpell::operator=(const ASpell& other)
 {
-    name = other.name;
-    effects = other.effects;
+    _name = other._name;
+    _effects = other._effects;
     return *this;
 }
 
@@ -31,9 +31,9 @@ void ASpell::launch(ATarget &target)
 
 const std::string &ASpell::getName() const
 {
-    return name;
+    return _name;
 }
 const std::string &ASpell::getEffects() const
 {
-    return effects;
+    return _effects;
 }

@@ -10,7 +10,7 @@ class ASpell {
 
 public:
 
-    ASpell(const std::string &n = "", const std::string &e = "");
+    ASpell(const std::string &n, const std::string &e);
     virtual ~ASpell();
     ASpell(const ASpell& other);
     ASpell &operator=(const ASpell& other);
@@ -23,8 +23,8 @@ public:
     
 private:
 
-    std::string name;
-    std::string effects;
+    std::string _name;
+    std::string _effects;
 
 };
 

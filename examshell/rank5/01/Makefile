@@ -3,9 +3,10 @@
 NAME=warlock
 SRCS=ASpell.cpp  ATarget.cpp  Dummy.cpp  Fwoosh.cpp  Warlock.cpp main.cpp
 OBJS=$(SRCS:cpp=o)
+CXXFLAGS=-Wall -Werror -Wextra
 
 $(NAME): $(OBJS)
-	$(CXX) $? -o $@
+	$(CXX) $^ -o $@
 
 run:
 	./$(NAME) | cat -e

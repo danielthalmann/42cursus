@@ -19,6 +19,7 @@ Dummy::Dummy(const Dummy &other)
 
 Dummy &Dummy::operator=(const Dummy &other)
 {
+    ATarget::operator=(other);
     return *this;
 }
 
