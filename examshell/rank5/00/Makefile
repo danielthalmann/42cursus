@@ -5,7 +5,7 @@ SRCS=Warlock.cpp main.cpp
 OBJS=$(SRCS:cpp=o)
 
 $(NAME): $(OBJS)
-	$(CXX) $? -o $@
+	$(CXX) $^ -o $@
 
 run:
 	./$(NAME) | cat -e
