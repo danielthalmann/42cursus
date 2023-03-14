@@ -15,5 +15,7 @@ int main()
   richard.launchSpell("Fwoosh", bob);
 
   richard.forgetSpell("Fwoosh");
+  richard.forgetSpell("Fwoosh2");
+  
   richard.launchSpell("Fwoosh", bob);
 }
