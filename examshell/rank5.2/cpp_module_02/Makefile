@@ -5,7 +5,12 @@ SRCS=main.cpp \
      ASpell.cpp \
      ATarget.cpp \
      Fwoosh.cpp \
-     Dummy.cpp
+     Dummy.cpp \
+     Fireball.cpp \
+     Polymorph.cpp \
+     BrickWall.cpp \
+     SpellBook.cpp
+
 
 OBJS=${SRCS:cpp=o}
 

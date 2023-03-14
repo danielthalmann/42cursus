@@ -7,6 +7,7 @@
 #include <map>
 #include "ASpell.hpp"
 #include "ATarget.hpp"
+#include "SpellBook.hpp"
 
 class Warlock {
 
@@ -14,7 +15,7 @@ private:
 
 	std::string _name;
 	std::string _title;
-	std::map<std::string, ASpell*> _spells;
+	SpellBook _book;	
 
 public:
 	Warlock(std::string name, std::string title)
@@ -23,9 +24,6 @@ public:
 	       }
 	virtual ~Warlock() {
 		std::cout << _name << ": My job here is done!" << std::endl;
-		for(std::map<std::string, ASpell*>::const_iterator i = _spells.begin(); i != _spells.end();i++)
-			delete i->second;
-
 	}
 	Warlock(const Warlock &other)
 	{
@@ -33,12 +31,6 @@ public:
 	}
 	Warlock &operator=(const Warlock &other)
 	{ 
-		for(std::map<std::string, ASpell*>::const_iterator i = _spells.begin(); i != _spells.end();i++)
-			delete i->second;
-		_spells.clear();
-		for(std::map<std::string, ASpell*>::const_iterator i = other._spells.begin(); i != other._spells.end();i++)
-			_spells[i->first] = i->second->clone();
-
 		_name = other._name;
 		_title = other._title;
 		return *this;
@@ -57,33 +49,20 @@ public:
  
 	void learnSpell(ASpell *spell)
 	{
-		try{
-			_spells.at(spell->getName());
-		} catch (...)
-		{
-			_spells[spell->getName()] = spell->clone();
-		}
+		_book.learnSpell(spell);
 	}
 
 	void forgetSpell(const std::string name)
 	{
-		try{
-			ASpell *spell = _spells.at(name);
-			delete spell;
-			_spells.erase(name);
-		} catch (...)
-		{
-		}
+		_book.forgetSpell(name);
 	}
 
 	void launchSpell(const std::string name, ATarget& target)
 	{
-		try{
-			ASpell *spell = _spells.at(name);
+
+		ASpell *spell = _book.createSpell(name);
+		if (spell)
 			spell->launch(target);
-		} catch (...)
-		{
-		}
 
 	}
 
