@@ -9,12 +9,12 @@ SRCS=main.cpp \
      Fireball.cpp \
      Polymorph.cpp \
      BrickWall.cpp \
-     SpellBook.cpp
-
+     SpellBook.cpp \
+     TargetGenerator.cpp \
 
 OBJS=${SRCS:cpp=o}
 
-CXXFLAGS=-Wall -Wextra -Werror
+CXXFLAGS=-Wall -Wextra -Werror -g
 
 $(NAME): $(OBJS)
 	$(CXX) $^ -o $(NAME)

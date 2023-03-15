@@ -25,7 +25,7 @@ public:
 		ATarget::operator=(other);
 		return *this;
 	}
-	virtual ATarget *clone(){ return new Dummy(); }
+	virtual ATarget *clone(){ return new Dummy(*this); }
 };
 
 

@@ -25,7 +25,7 @@ public:
 		ASpell::operator=(other);
 		return *this;
 	}
-	virtual ASpell *clone(){ return new Fwoosh(); }
+	virtual ASpell *clone(){ return new Fwoosh(*this); }
 };
 
 
