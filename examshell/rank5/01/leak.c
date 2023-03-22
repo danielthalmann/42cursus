@@ -23,8 +23,8 @@ int main()
     if (pid == 0)
     {
         printf("Hello from the child process\n");
-        //pid = getpid();
-        //kill(pid, SIGQUIT);
+        pid = getpid();
+        kill(pid,  SIGUSR1);
         return (EXIT_SUCCESS);
     }
     printf("child : %d\n", pid);
@@ -34,7 +34,7 @@ int main()
         printf("Waitpid error\n");
         return (EXIT_FAILURE);
     }
-    kill(pid, SIGQUIT);
+    // kill(pid, SIGQUIT);
     printf("parent process finished\n");
     //while (1);
     return (0);
