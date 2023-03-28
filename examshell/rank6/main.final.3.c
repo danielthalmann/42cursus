@@ -1,10 +1,14 @@
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
+#ifdef _WIN32
+#include <winsock2.h>
+#else
 #include <netdb.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <sys/select.h>
+#endif
 #include <stdlib.h>
 #include <stdio.h>
 
